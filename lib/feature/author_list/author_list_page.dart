@@ -38,7 +38,7 @@ class _AuthorListPageState extends State<AuthorListPage> {
               )
             ],
           ),
-          body: _List()),
+          body: const _List()),
     );
   }
 }
@@ -76,6 +76,12 @@ class _List extends StatelessWidget {
     return BlocBuilder<AuthorsBloc, AuthorsState>(
       builder: (context, state) {
         final items = state.authors;
+        if (state.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
         return ListView.separated(
           itemCount: items.length,
           separatorBuilder: (context, index) => Divider(),

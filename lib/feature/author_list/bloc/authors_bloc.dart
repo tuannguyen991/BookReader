@@ -25,8 +25,9 @@ class AuthorsBloc extends Bloc<AuthorsEvent, AuthorsState> {
 
   FutureOr<void> _onLoaded(
       AuthorsLoaded event, Emitter<AuthorsState> emit) async {
+    emit(state.copyWith(isLoading: true, authors: []));
     final list = await _authorRepository.getAuthors();
-    emit(state.copyWith(authors: list));
+    emit(state.copyWith(authors: list, isLoading: false));
   }
 
   FutureOr<void> _onAdded(AuthorAdded event, Emitter<AuthorsState> emit) {

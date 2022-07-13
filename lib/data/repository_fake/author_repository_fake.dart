@@ -9,7 +9,7 @@ class AuthorRepositoryFake implements AuthorRepository {
 
   @override
   Future<List<AuthorModel>> getAuthors() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 3));
     return List.unmodifiable(authors);
   }
 

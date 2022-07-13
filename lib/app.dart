@@ -13,7 +13,27 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthorListPage(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Test"),
+          actions: [
+            Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return AuthorListPage();
+                        },
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.add));
+            }),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthorsState {
   List<AuthorModel> get authors => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthorsStateCopyWith<AuthorsState> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $AuthorsStateCopyWith<$Res> {
   factory $AuthorsStateCopyWith(
           AuthorsState value, $Res Function(AuthorsState) then) =
       _$AuthorsStateCopyWithImpl<$Res>;
-  $Res call({List<AuthorModel> authors});
+  $Res call({List<AuthorModel> authors, bool isLoading});
 }
 
 /// @nodoc
@@ -42,12 +43,17 @@ class _$AuthorsStateCopyWithImpl<$Res> implements $AuthorsStateCopyWith<$Res> {
   @override
   $Res call({
     Object? authors = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
       authors: authors == freezed
           ? _value.authors
           : authors // ignore: cast_nullable_to_non_nullable
               as List<AuthorModel>,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -59,7 +65,7 @@ abstract class _$$_AuthorsStateCopyWith<$Res>
           _$_AuthorsState value, $Res Function(_$_AuthorsState) then) =
       __$$_AuthorsStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<AuthorModel> authors});
+  $Res call({List<AuthorModel> authors, bool isLoading});
 }
 
 /// @nodoc
@@ -76,12 +82,17 @@ class __$$_AuthorsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? authors = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_$_AuthorsState(
       authors: authors == freezed
           ? _value._authors
           : authors // ignore: cast_nullable_to_non_nullable
               as List<AuthorModel>,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -89,7 +100,8 @@ class __$$_AuthorsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthorsState implements _AuthorsState {
-  const _$_AuthorsState({final List<AuthorModel> authors = const []})
+  const _$_AuthorsState(
+      {final List<AuthorModel> authors = const [], this.isLoading = false})
       : _authors = authors;
 
   final List<AuthorModel> _authors;
@@ -101,21 +113,13 @@ class _$_AuthorsState implements _AuthorsState {
   }
 
   @override
+  @JsonKey()
+  final bool isLoading;
+
+  @override
   String toString() {
-    return 'AuthorsState(authors: $authors)';
+    return 'AuthorsState(authors: $authors, isLoading: $isLoading)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AuthorsState &&
-            const DeepCollectionEquality().equals(other._authors, _authors));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_authors));
 
   @JsonKey(ignore: true)
   @override
@@ -124,11 +128,14 @@ class _$_AuthorsState implements _AuthorsState {
 }
 
 abstract class _AuthorsState implements AuthorsState {
-  const factory _AuthorsState({final List<AuthorModel> authors}) =
-      _$_AuthorsState;
+  const factory _AuthorsState(
+      {final List<AuthorModel> authors,
+      final bool isLoading}) = _$_AuthorsState;
 
   @override
   List<AuthorModel> get authors;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_AuthorsStateCopyWith<_$_AuthorsState> get copyWith =>
