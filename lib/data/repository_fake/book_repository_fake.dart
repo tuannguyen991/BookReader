@@ -16,8 +16,8 @@ class BookRepositoryFake implements BookRepository {
   }
 
   @override
-  Future<void> deleteBook(String name) async {
-    books.removeWhere((element) => element.name == name);
+  Future<void> deleteBook(String authorId) async {
+    books.removeWhere((element) => element.authorId == authorId);
   }
 
   @override
