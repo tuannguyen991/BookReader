@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 // verticalSpace
+const verticalSpace4 = SizedBox(height: double4);
 const verticalSpace8 = SizedBox(height: double8);
 const verticalSpace16 = SizedBox(height: double16);
 const verticalSpace32 = SizedBox(height: double32);
@@ -10,6 +11,7 @@ const horizontalSpace8 = SizedBox(width: double8);
 const horizontalSpace16 = SizedBox(width: double16);
 
 // double
+const double4 = 4.0;
 const double8 = 8.0;
 const double12 = 12.0;
 const double16 = 16.0;

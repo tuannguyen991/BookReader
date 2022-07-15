@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
+import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer_box_decoration.dart';
@@ -71,29 +72,6 @@ class _TabHomePageState extends State<TabHomePage> {
                     ),
                   ),
                   RecommendedCarousel(),
-                  // BlocBuilder<TabHomeBloc, TabHomeState>(
-                  //   builder: (context, state) {
-                  //     return Column(
-                  //       children: [
-                  //         TextButton(
-                  //           onPressed: () {
-                  //             context.read<TabHomeBloc>().add(TabHomeLoadedTest());
-                  //           },
-                  //           child: const Text('Click'),
-                  //         ),
-                  //         Text(state.hello),
-                  //         Image.network(state.hellotest),
-                  //       ],
-                  //     );
-                  //   },
-                  // ),
-                  // BookDetailCarousel(
-                  //   author: authors[_current],
-                  //   description: descriptions[_current],
-                  //   rating: ratings[_current],
-                  //   title: titles[_current],
-                  //   view: views[_current],
-                  // ),
                 ],
               ),
             ),
@@ -114,116 +92,120 @@ class RecommendedCarousel extends StatelessWidget {
     return BlocBuilder<TabHomeBloc, TabHomeState>(
       builder: (context, state) {
         final items = state.recommendedBooks;
-        final itemBook = items[state.indexCarousel];
+        final item = state.bookItem;
+
         return Column(
           children: [
             // Carousel
-            CarouselSlider(
-              options: CarouselOptions(
-                onPageChanged: ((index, reason) {
-                  context
-                      .read<TabHomeBloc>()
-                      .add(TabHomeIndexCarouselChange(index: index));
-                }),
-                aspectRatio: 2,
-                autoPlay: true,
-                enlargeCenterPage: true,
-                viewportFraction: 0.4,
-              ),
-              items: items
-                  .map(
-                    (item) => Container(
-                      margin: const EdgeInsets.only(top: double8),
-                      child: Image.network(item.image),
-                    ),
-                  )
-                  .toList(),
-            ),
+            _buildCarousel(context, items),
             verticalSpace16,
             // BookDetailCarousel
-            Container(
-              padding: const EdgeInsets.all(double8),
-              decoration: CustomerBoxDecoration.buildBoxDecoration(
-                color: AppColors.secondaryBackgroundColor,
-                borderRadius: double8,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    itemBook.name,
-                    style: const TextStyle(
-                      fontSize: double16,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '${itemBook.authorName} -',
-                        style: TextStyle(
-                          color: AppColors.secondaryColor,
-                        ),
-                      ),
-                      StarRating(
-                        rating: itemBook.ratingTotal / itemBook.ratingCount,
-                      ),
-                    ],
-                  ),
-                  verticalSpace8,
-                  Text(
-                    itemBook.decription,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    // maxLines: isReadMore ? 3 : null,
-                    // overflow: isReadMore
-                    //     ? TextOverflow.ellipsis
-                    //     : TextOverflow.visible,
-                    style: TextStyle(
-                      color: AppColors.secondaryColor,
-                    ),
-                  ),
-                  // const SizedBox(
-                  //   height: sizeBoxWidth,
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     const Icon(
-                  //       Icons.remove_red_eye_outlined,
-                  //       size: 16,
-                  //     ),
-                  //     const SizedBox(width: sizeBoxWidth),
-                  //     Expanded(
-                  //       child: Text(
-                  //         '${widget.view} lượt xem',
-                  //         style: const TextStyle(
-                  //           color: iconColor,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     TextButton(
-                  //       child: Text(
-                  //         textButton,
-                  //         style: const TextStyle(
-                  //           color: primaryAppColor,
-                  //           fontSize: sizeTitle * 0.8,
-                  //         ),
-                  //       ),
-                  //       onPressed: () {
-                  //         setState(() {
-                  //           isReadMore = !isReadMore;
-                  //           textButton = isReadMore ? 'Xem thêm' : 'Ẩn bớt';
-                  //         });
-                  //       },
-                  //     )
-                  //   ],
-                  // ),
-                ],
-              ),
-            )
+            _buildBookDetailCarousel(item),
           ],
         );
       },
+    );
+  }
+
+  Container _buildBookDetailCarousel(BookModel item) {
+    return Container(
+      padding: const EdgeInsets.only(left: double8, right: double8, top: double12),
+      decoration: CustomerBoxDecoration.buildBoxDecoration(
+        color: AppColors.secondaryBackgroundColor,
+        borderRadius: double8,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            item.name,
+            style: const TextStyle(
+              fontSize: double16,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Row(
+            children: [
+              Text(
+                '${item.authorName} -',
+                style: TextStyle(
+                  color: AppColors.secondaryColor,
+                ),
+              ),
+              StarRating(
+                rating: item.ratingTotal / item.ratingCount,
+              ),
+            ],
+          ),
+          verticalSpace4,
+          Text(
+            item.decription,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            // maxLines: isReadMore ? 3 : null,
+            // overflow: isReadMore
+            //     ? TextOverflow.ellipsis
+            //     : TextOverflow.visible,
+            style: TextStyle(
+              color: AppColors.secondaryColor,
+            ),
+          ),
+          // verticalSpace4,
+          Row(
+            children: [
+              const Icon(
+                Icons.remove_red_eye_outlined,
+                size: 16,
+              ),
+              horizontalSpace8,
+              Expanded(
+                child: Text(
+                  '${item.numberPage} lượt xem',
+                  style:  TextStyle(
+                    color: AppColors.secondaryColor,
+                  ),
+                ),
+              ),
+              TextButton(
+                child: Text(
+                  'Xem thêm',
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: double16,
+                  ),
+                ),
+                onPressed: () {
+              
+                },
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  CarouselSlider _buildCarousel(BuildContext context, List<BookModel> items) {
+    return CarouselSlider(
+      options: CarouselOptions(
+        onPageChanged: ((index, reason) {
+          context
+              .read<TabHomeBloc>()
+              .add(TabHomeIndexCarouselChange(index: index));
+        }),
+        aspectRatio: 2,
+        autoPlay: true,
+        enlargeCenterPage: true,
+        viewportFraction: 0.4,
+      ),
+      items: items
+          .map(
+            (item) => Container(
+              margin: const EdgeInsets.only(top: double8),
+              child: Image.network(item.image),
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -465,119 +447,3 @@ class BackGroundImage extends StatelessWidget {
     );
   }
 }
-
-// class BookDetailCarousel extends StatefulWidget {
-//   const BookDetailCarousel(
-//       {Key? key,
-//       required this.title,
-//       required this.author,
-//       required this.rating,
-//       required this.view,
-//       required this.description})
-//       : super(key: key);
-
-//   final String title;
-//   final String author;
-//   final double rating;
-//   final int view;
-//   final String description;
-
-//   @override
-//   State<BookDetailCarousel> createState() => _BookDetailCarouselState();
-// }
-
-// class _BookDetailState extends State<BookDetail> {
-//   bool isReadMore = true;
-//   String textButton = 'Xem thêm';
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.all(edgeInsets / 2),
-//       decoration: BoxDecoration(
-//         color: const Color(0xFFF8F9FB),
-//         borderRadius: BorderRadius.circular(borderRadius / 2.5),
-//       ),
-//       child: Column(
-//         children: [
-//           Row(
-//             children: [
-//               Expanded(
-//                 child: Text(
-//                   widget.title,
-//                   style: const TextStyle(
-//                     fontSize: sizeTitle,
-//                     overflow: TextOverflow.ellipsis,
-//                   ),
-//                 ),
-//               ),
-//               const Icon(Icons.more_horiz_outlined)
-//             ],
-//           ),
-//           Row(
-//             children: [
-//               Text(
-//                 '${widget.author} -',
-//                 style: const TextStyle(
-//                   color: iconColor,
-//                 ),
-//               ),
-//               StarRating(
-//                 rating: widget.rating,
-//               ),
-//             ],
-//           ),
-//           const SizedBox(
-//             height: sizeBoxWidth,
-//           ),
-//           Text(
-//             widget.description,
-//             maxLines: isReadMore ? 3 : null,
-//             overflow: isReadMore ? TextOverflow.ellipsis : TextOverflow.visible,
-//             style: const TextStyle(
-//               color: iconColor,
-//             ),
-//           ),
-//           const SizedBox(
-//             height: sizeBoxWidth,
-//           ),
-//           Row(
-//             children: [
-//               const Icon(
-//                 Icons.remove_red_eye_outlined,
-//                 size: 16,
-//               ),
-//               const SizedBox(width: sizeBoxWidth),
-//               Expanded(
-//                 child: Text(
-//                   '${widget.view} lượt xem',
-//                   style: const TextStyle(
-//                     color: iconColor,
-//                   ),
-//                 ),
-//               ),
-//               TextButton(
-//                 child: Text(
-//                   textButton,
-//                   style: const TextStyle(
-//                     color: primaryAppColor,
-//                     fontSize: sizeTitle * 0.8,
-//                   ),
-//                 ),
-//                 onPressed: () {
-//                   setState(() {
-//                     isReadMore = !isReadMore;
-//                     textButton = isReadMore ? 'Xem thêm' : 'Ẩn bớt';
-//                   });
-//                 },
-//               )
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
- 
- 
-//   }
-// }
-

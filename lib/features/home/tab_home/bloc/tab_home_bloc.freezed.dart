@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TabHomeState {
   List<BookModel> get recommendedBooks => throw _privateConstructorUsedError;
-  int get indexCarousel => throw _privateConstructorUsedError;
+  BookModel get bookItem => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TabHomeStateCopyWith<TabHomeState> get copyWith =>
@@ -29,7 +29,9 @@ abstract class $TabHomeStateCopyWith<$Res> {
   factory $TabHomeStateCopyWith(
           TabHomeState value, $Res Function(TabHomeState) then) =
       _$TabHomeStateCopyWithImpl<$Res>;
-  $Res call({List<BookModel> recommendedBooks, int indexCarousel});
+  $Res call({List<BookModel> recommendedBooks, BookModel bookItem});
+
+  $BookModelCopyWith<$Res> get bookItem;
 }
 
 /// @nodoc
@@ -43,18 +45,25 @@ class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
   @override
   $Res call({
     Object? recommendedBooks = freezed,
-    Object? indexCarousel = freezed,
+    Object? bookItem = freezed,
   }) {
     return _then(_value.copyWith(
       recommendedBooks: recommendedBooks == freezed
           ? _value.recommendedBooks
           : recommendedBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      indexCarousel: indexCarousel == freezed
-          ? _value.indexCarousel
-          : indexCarousel // ignore: cast_nullable_to_non_nullable
-              as int,
+      bookItem: bookItem == freezed
+          ? _value.bookItem
+          : bookItem // ignore: cast_nullable_to_non_nullable
+              as BookModel,
     ));
+  }
+
+  @override
+  $BookModelCopyWith<$Res> get bookItem {
+    return $BookModelCopyWith<$Res>(_value.bookItem, (value) {
+      return _then(_value.copyWith(bookItem: value));
+    });
   }
 }
 
@@ -65,7 +74,10 @@ abstract class _$$_TabHomeStateCopyWith<$Res>
           _$_TabHomeState value, $Res Function(_$_TabHomeState) then) =
       __$$_TabHomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<BookModel> recommendedBooks, int indexCarousel});
+  $Res call({List<BookModel> recommendedBooks, BookModel bookItem});
+
+  @override
+  $BookModelCopyWith<$Res> get bookItem;
 }
 
 /// @nodoc
@@ -82,17 +94,17 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? recommendedBooks = freezed,
-    Object? indexCarousel = freezed,
+    Object? bookItem = freezed,
   }) {
     return _then(_$_TabHomeState(
       recommendedBooks: recommendedBooks == freezed
           ? _value._recommendedBooks
           : recommendedBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      indexCarousel: indexCarousel == freezed
-          ? _value.indexCarousel
-          : indexCarousel // ignore: cast_nullable_to_non_nullable
-              as int,
+      bookItem: bookItem == freezed
+          ? _value.bookItem
+          : bookItem // ignore: cast_nullable_to_non_nullable
+              as BookModel,
     ));
   }
 }
@@ -102,7 +114,16 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
 class _$_TabHomeState implements _TabHomeState {
   const _$_TabHomeState(
       {final List<BookModel> recommendedBooks = const [],
-      this.indexCarousel = 0})
+      this.bookItem = const BookModel(
+          authorName: '',
+          categoryName: '',
+          decription: '',
+          id: 0,
+          image: '',
+          name: '',
+          numberPage: 0,
+          ratingCount: 0,
+          ratingTotal: 0)})
       : _recommendedBooks = recommendedBooks;
 
   final List<BookModel> _recommendedBooks;
@@ -115,11 +136,11 @@ class _$_TabHomeState implements _TabHomeState {
 
   @override
   @JsonKey()
-  final int indexCarousel;
+  final BookModel bookItem;
 
   @override
   String toString() {
-    return 'TabHomeState(recommendedBooks: $recommendedBooks, indexCarousel: $indexCarousel)';
+    return 'TabHomeState(recommendedBooks: $recommendedBooks, bookItem: $bookItem)';
   }
 
   @JsonKey(ignore: true)
@@ -131,12 +152,12 @@ class _$_TabHomeState implements _TabHomeState {
 abstract class _TabHomeState implements TabHomeState {
   const factory _TabHomeState(
       {final List<BookModel> recommendedBooks,
-      final int indexCarousel}) = _$_TabHomeState;
+      final BookModel bookItem}) = _$_TabHomeState;
 
   @override
   List<BookModel> get recommendedBooks;
   @override
-  int get indexCarousel;
+  BookModel get bookItem;
   @override
   @JsonKey(ignore: true)
   _$$_TabHomeStateCopyWith<_$_TabHomeState> get copyWith =>

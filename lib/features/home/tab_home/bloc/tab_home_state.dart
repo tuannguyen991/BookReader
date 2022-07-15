@@ -6,8 +6,21 @@ part of 'tab_home_bloc.dart';
 )
 class TabHomeState with _$TabHomeState {
   const factory TabHomeState({
-    @Default([]) List<BookModel> recommendedBooks,
-    @Default(0) int indexCarousel,
-    // @Default(false) bool isLoading,
+    @Default([])
+        List<BookModel> recommendedBooks,
+
+    @Default(BookModel(
+      authorName: '',
+      categoryName: '',
+      decription: '',
+      id: 0,
+      image: '',
+      name: '',
+      numberPage: 0,
+      ratingCount: 0,
+      ratingTotal: 0,
+    ))
+        BookModel bookItem,
+        
   }) = _TabHomeState;
 }
