@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+// verticalSpace
+const verticalSpace8 = SizedBox(height: double8);
+const verticalSpace16 = SizedBox(height: double16);
+const verticalSpace32 = SizedBox(height: double32);
+
+// horizontalSpace
+const horizontalSpace8 = SizedBox(width: double8);
+const horizontalSpace16 = SizedBox(width: double16);
+
+// double
+const double8 = 8.0;
+const double12 = 12.0;
+const double16 = 16.0;
+const double24 = 24.0;
+const double32 = 32.0;
+const double48 = 48.0;
+const double56 = 56.0;
+const double45 = 45.0;
+
+// string
+const titleApp = 'Book Reader';
+
+// Map Color to MaterialColor
+const Map<int, Color> colorCodes = {
+  50: Color.fromRGBO(147, 205, 72, .1),
+  100: Color.fromRGBO(147, 205, 72, .2),
+  200: Color.fromRGBO(147, 205, 72, .3),
+  300: Color.fromRGBO(147, 205, 72, .4),
+  400: Color.fromRGBO(147, 205, 72, .5),
+  500: Color.fromRGBO(147, 205, 72, .6),
+  600: Color.fromRGBO(147, 205, 72, .7),
+  700: Color.fromRGBO(147, 205, 72, .8),
+  800: Color.fromRGBO(147, 205, 72, .9),
+  900: Color.fromRGBO(147, 205, 72, 1),
+};

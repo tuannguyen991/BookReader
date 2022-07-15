@@ -1,8 +1,8 @@
 import 'package:demo_book_reader/data/repository/author_repository.dart';
-import 'package:demo_book_reader/data/repository_fake/author_repository_fake.dart';
+// import 'package:demo_book_reader/data/repository_fake/author_repository_fake.dart';
 import 'package:demo_book_reader/di/locator.dart';
-import 'package:demo_book_reader/feature/author_list/bloc/authors_bloc.dart';
-import 'package:demo_book_reader/models/author_model.dart';
+import 'package:demo_book_reader/features/home/author_list/bloc/authors_bloc.dart';
+import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +18,6 @@ class _AuthorListPageState extends State<AuthorListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _bloc.add(AuthorsLoaded());
@@ -29,23 +28,24 @@ class _AuthorListPageState extends State<AuthorListPage> {
     return BlocProvider<AuthorsBloc>.value(
       value: _bloc,
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Authors"),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.add),
-              )
-            ],
-          ),
-          body: const _List()),
+        appBar: AppBar(
+          title: const Text("Authors"),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+            )
+          ],
+        ),
+        body: const _List(),
+      ),
     );
   }
 }
 
 class _List extends StatelessWidget {
   const _List({Key? key}) : super(key: key);
-  void showAuthorMenu(BuildContext context, AuthorModel model) {
+  showAuthorMenu(BuildContext context, AuthorModel model) {
     showModalBottomSheet(
         context: context,
         builder: (_) {
@@ -57,7 +57,7 @@ class _List extends StatelessWidget {
                   title: Text("Xem chi tiết"),
                 ),
                 ListTile(
-                  title: Text("Xóa"),
+                  title: const Text("Xóa"),
                   onTap: () {
                     Navigator.pop(context);
                     context
@@ -84,7 +84,7 @@ class _List extends StatelessWidget {
 
         return ListView.separated(
           itemCount: items.length,
-          separatorBuilder: (context, index) => Divider(),
+          separatorBuilder: (context, index) => const Divider(),
           itemBuilder: (context, index) {
             final item = items[index];
             return ListTile(
