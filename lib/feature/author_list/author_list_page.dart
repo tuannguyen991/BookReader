@@ -1,5 +1,4 @@
 import 'package:demo_book_reader/data/repository/author_repository.dart';
-import 'package:demo_book_reader/data/repository_fake/author_repository_fake.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/feature/author_list/bloc/authors_bloc.dart';
 import 'package:demo_book_reader/models/author_model.dart';
@@ -38,7 +37,8 @@ class _AuthorListPageState extends State<AuthorListPage> {
               )
             ],
           ),
-          body: const _List()),
+          body: const _List()
+      ),
     );
   }
 }

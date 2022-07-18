@@ -1,7 +1,6 @@
 import 'package:demo_book_reader/data/repository/book_repository.dart';
-import 'package:demo_book_reader/data/repository_fake/book_repository_fake.dart';
 import 'package:demo_book_reader/di/locator.dart';
-//import 'package:demo_book_reader/feature/author_list/bloc/books_bloc.dart';
+import 'package:demo_book_reader/feature/book_list/bloc/books_bloc.dart';
 import 'package:demo_book_reader/models/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,34 +13,38 @@ class BookListPage extends StatefulWidget {
 }
 
 class _BookListPageState extends State<BookListPage> {
+  final _bloc = BooksBloc(bookRepository: locator<BookRepository>());
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _bloc.add(BooksLoaded());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Authors"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add),
+    return BlocProvider<BooksBloc>.value(
+        value: _bloc,
+        child:  Scaffold(
+          appBar: AppBar(
+            title: const Text("Books"),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: null,
+          body: _List(),
+        ),
     );
   }
 }
 
-/*
 class _List extends StatelessWidget {
   const _List({Key? key}) : super(key: key);
-  void showAuthorMenu(BuildContext context, AuthorModel model) {
+  void showBookMenu(BuildContext context, BookModel model) {
     showModalBottomSheet(
         context: context,
         builder: (_) {
@@ -57,8 +60,8 @@ class _List extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                     context
-                        .read<AuthorsBloc>()
-                        .add(AuthorsDeleteRequested(model.id));
+                        .read<BooksBloc>()
+                        .add(BooksDeleteRequested(model.authorId));
                   },
                 ),
               ],
@@ -69,9 +72,9 @@ class _List extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthorsBloc, AuthorsState>(
+    return BlocBuilder<BooksBloc, BooksState>(
       builder: (context, state) {
-        final items = state.authors;
+        final items = state.books;
         if (state.isLoading) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -85,9 +88,9 @@ class _List extends StatelessWidget {
             final item = items[index];
             return ListTile(
               title: Text(item.name),
-              subtitle: Text(item.gender),
+              subtitle: Text('${item.authorId}'),
               onTap: () {
-                showAuthorMenu(context, item);
+                showBookMenu(context, item);
               },
             );
           },
@@ -96,4 +99,3 @@ class _List extends StatelessWidget {
     );
   }
 }
- */
