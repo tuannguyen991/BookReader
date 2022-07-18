@@ -36,7 +36,7 @@ class _BookListPageState extends State<BookListPage> {
               ),
             ],
           ),
-          body: _List(),
+          body: const _List(),
         ),
     );
   }
@@ -88,7 +88,7 @@ class _List extends StatelessWidget {
             final item = items[index];
             return ListTile(
               title: Text(item.name),
-              subtitle: Text('${item.authorId}'),
+              subtitle: Text('${item.rating}'),
               onTap: () {
                 showBookMenu(context, item);
               },

@@ -7,6 +7,15 @@ class BookRepositoryFake implements BookRepository {
     BookModel(name: "Ios",authorId: "0002",rating: 5,bookUrl: "xxx.com"),
     BookModel(name: "Linux",authorId: "0003",rating: 5,bookUrl: "xxx.com"),
     BookModel(name: "Windows",authorId: "0004",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Saw",authorId: "0005",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Morden Family",authorId: "0006",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Dragon Heart",authorId: "0007",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Maximum Impact",authorId: "0008",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Diablo",authorId: "0009",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Starcraft",authorId: "0010",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Warcraft",authorId: "0011",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Overwatch",authorId: "00012",rating: 5,bookUrl: "xxx.com"),
+    BookModel(name: "Heartstone",authorId: "0013",rating: 5,bookUrl: "xxx.com"),
   ];
 
   @override

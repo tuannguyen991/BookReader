@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return BookListPage();
+                          return AuthorListPage();
                         },
                       ),
                     );
