@@ -4,10 +4,10 @@ import 'package:demo_book_reader/models/book_model.dart';
 class BookRepositoryFake implements BookRepository {
   final List<BookModel> books = [
     BookModel(name: "Android",authorId: "0001",rating: 5,bookUrl: "images/BigBook1.png"),
-    BookModel(name: "Ios",authorId: "0002",rating: 5,bookUrl: "images/BigBook1.png"),
-    BookModel(name: "Linux",authorId: "0003",rating: 5,bookUrl: "images/BigBook1.png"),
-    BookModel(name: "Windows",authorId: "0004",rating: 5,bookUrl: "images/BigBook1.png"),
-    BookModel(name: "Saw",authorId: "0005",rating: 5,bookUrl: "images/BigBook1.png"),
+    BookModel(name: "Ios",authorId: "0002",rating: 5,bookUrl: "images/BigBook2.png"),
+    BookModel(name: "Linux",authorId: "0003",rating: 5,bookUrl: "images/BigBook3.png"),
+    BookModel(name: "Windows",authorId: "0004",rating: 5,bookUrl: "images/BigBook4.png"),
+    BookModel(name: "Saw",authorId: "0005",rating: 5,bookUrl: "images/BigBook5.png"),
     BookModel(name: "Morden Family",authorId: "0006",rating: 5,bookUrl: "images/BigBook1.png"),
     BookModel(name: "Dragon Heart",authorId: "0007",rating: 5,bookUrl: "images/BigBook1.png"),
     BookModel(name: "Maximum Impact",authorId: "0008",rating: 5,bookUrl: "images/BigBook1.png"),

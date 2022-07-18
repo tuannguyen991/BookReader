@@ -35,12 +35,80 @@ class _BookListPageState extends State<BookListPage> {
                 icon: const Icon(Icons.add),
               ),
             ],
+            bottom:BookListChips(),
+            elevation: 0,
           ),
           body: _List(),
         ),
     );
   }
 }
+
+
+class BookListChips extends StatefulWidget implements PreferredSizeWidget{
+  const BookListChips({Key? key}) : super(key: key);
+
+  @override
+  State<BookListChips> createState() => _BookListChipsState();
+
+  @override
+  Size get preferredSize => const Size(double.infinity,56);
+}
+
+class _BookListChipsState extends State<BookListChips>{
+  int selectedIndex=0;
+  final List<IndexChips> _chipsList = [
+    IndexChips('Sách đang đọc'),
+    IndexChips('Sách yêu thích',),
+    IndexChips('Sách tải lên',),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 414,
+      color: Colors.white,
+      child:SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children:testChips(),
+        ),
+      ),
+    );
+  }
+
+  List<Widget>testChips(){
+    List<Widget> chips = [];
+    for (int i=0; i< _chipsList.length; i++) {
+      Widget item = Container(
+        height: 56,
+        padding: EdgeInsets.symmetric(horizontal: 8,vertical: 8),
+        child: ChoiceChip(
+          label: Text(_chipsList[i].label),
+          labelStyle: TextStyle(
+            color: selectedIndex==i? const Color(0xFFF0F1F3):const Color(0xFF6B7280),
+          ),
+          backgroundColor: const Color(0xFFF0F1F3),
+          selected: selectedIndex == i,
+          selectedColor: const Color(0xFF4F51B4),
+          onSelected: (bool value)
+          {
+            setState(() {
+              selectedIndex = i;
+            });
+          },
+        ),
+      );
+      chips.add(item);
+    }
+    return chips;
+  }
+}
+class IndexChips{
+  String label;
+  IndexChips(this.label);
+}
+
 
 class _List extends StatelessWidget {
   const _List({Key? key}) : super(key: key);
@@ -52,7 +120,7 @@ class _List extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const ListTile(
+                ListTile(
                   title: Text("Xem chi tiết"),
                 ),
                 ListTile(
@@ -104,65 +172,3 @@ class _List extends StatelessWidget {
     );
   }
 }
-
-/*
-class BookListChips extends StatefulWidget {
-  const BookListChips({Key? key}) : super(key: key);
-
-  @override
-  State<BookListChips> createState() => _BookListChipsState();
-}
-
-class _BookListChipsState extends State<BookListChips> {
-  int selectedIndex=0;
-  final List<IndexChips> _chipsList = [
-    IndexChips('Sách đang đọc'),
-    IndexChips('Sách yêu thích',),
-    IndexChips('Sách tải lên',),
-    IndexChips('Sách đang đọc',),
-    IndexChips('Sách yêu thích',),
-    IndexChips('Sách tải lên',),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children:testChips(),
-      ),
-    );
-  }
-
-  List<Widget>testChips(){
-    List<Widget> chips = [];
-    for (int i=0; i< _chipsList.length; i++) {
-      Widget item = Container(
-        height: 36,
-        padding: EdgeInsets.only(right: 8),
-        child: ChoiceChip(
-          label: Text(_chipsList[i].label),
-          labelStyle: TextStyle(
-            color: selectedIndex==i? const Color(0xFFF0F1F3):const Color(0xFF6B7280),
-          ),
-          backgroundColor: const Color(0xFFF0F1F3),
-          selected: selectedIndex == i,
-          selectedColor: const Color(0xFF4F51B4),
-          onSelected: (bool value)
-          {
-            setState(() {
-              selectedIndex = i;
-            });
-          },
-        ),
-      );
-      chips.add(item);
-    }
-    return chips;
-  }
-}
-class IndexChips{
-  String label;
-  IndexChips(this.label);
-}
-*/
