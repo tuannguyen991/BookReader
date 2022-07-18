@@ -52,7 +52,7 @@ class BookListChips extends StatefulWidget implements PreferredSizeWidget{
   State<BookListChips> createState() => _BookListChipsState();
 
   @override
-  Size get preferredSize => const Size(double.infinity,56);
+  Size get preferredSize => const Size(double.infinity,48);
 }
 
 class _BookListChipsState extends State<BookListChips>{
