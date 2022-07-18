@@ -89,7 +89,7 @@ class _List extends StatelessWidget {
             return ListTile(
               title: Text(item.name),
               subtitle: Text('${item.rating}'),
-              leading: Container(
+              leading: SizedBox(
                 width: 46,
                 height: 64,
                 child: Image(image:AssetImage(item.bookUrl),),
