@@ -36,7 +36,7 @@ class _BookListPageState extends State<BookListPage> {
               ),
             ],
           ),
-          body: const _List(),
+          body: _List(),
         ),
     );
   }
@@ -89,6 +89,11 @@ class _List extends StatelessWidget {
             return ListTile(
               title: Text(item.name),
               subtitle: Text('${item.rating}'),
+              leading: Container(
+                width: 46,
+                height: 64,
+                child: Image(image:AssetImage(item.bookUrl),),
+              ),
               onTap: () {
                 showBookMenu(context, item);
               },
@@ -99,3 +104,65 @@ class _List extends StatelessWidget {
     );
   }
 }
+
+/*
+class BookListChips extends StatefulWidget {
+  const BookListChips({Key? key}) : super(key: key);
+
+  @override
+  State<BookListChips> createState() => _BookListChipsState();
+}
+
+class _BookListChipsState extends State<BookListChips> {
+  int selectedIndex=0;
+  final List<IndexChips> _chipsList = [
+    IndexChips('Sách đang đọc'),
+    IndexChips('Sách yêu thích',),
+    IndexChips('Sách tải lên',),
+    IndexChips('Sách đang đọc',),
+    IndexChips('Sách yêu thích',),
+    IndexChips('Sách tải lên',),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children:testChips(),
+      ),
+    );
+  }
+
+  List<Widget>testChips(){
+    List<Widget> chips = [];
+    for (int i=0; i< _chipsList.length; i++) {
+      Widget item = Container(
+        height: 36,
+        padding: EdgeInsets.only(right: 8),
+        child: ChoiceChip(
+          label: Text(_chipsList[i].label),
+          labelStyle: TextStyle(
+            color: selectedIndex==i? const Color(0xFFF0F1F3):const Color(0xFF6B7280),
+          ),
+          backgroundColor: const Color(0xFFF0F1F3),
+          selected: selectedIndex == i,
+          selectedColor: const Color(0xFF4F51B4),
+          onSelected: (bool value)
+          {
+            setState(() {
+              selectedIndex = i;
+            });
+          },
+        ),
+      );
+      chips.add(item);
+    }
+    return chips;
+  }
+}
+class IndexChips{
+  String label;
+  IndexChips(this.label);
+}
+*/
