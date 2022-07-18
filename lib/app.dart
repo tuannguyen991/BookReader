@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'feature/author_list/author_list_page.dart';
+import 'feature/book_list/book_list_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return AuthorListPage();
+                          return BookListPage();
                         },
                       ),
                     );
