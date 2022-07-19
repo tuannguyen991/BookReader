@@ -5,6 +5,8 @@ import 'package:demo_book_reader/feature/book_list/bloc/books_bloc.dart';
 import 'package:demo_book_reader/models/book_model.dart';
 import 'package:demo_book_reader/feature/author_list/bloc/authors_bloc.dart';
 import 'package:demo_book_reader/models/author_model.dart';
+import 'package:demo_book_reader/theme/ui_constant.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -182,22 +184,81 @@ class _List extends StatelessWidget {
         return BlocBuilder<AuthorsBloc,AuthorsState>(
           builder: (context,state2){
             final authors = state2.authors;
-            return ListView.separated(
+            Widget starIcon=const Icon(Icons.star,color: Color(0xFFFFC107),size: 14,);
+            Widget starIconOff=const Icon(Icons.star,color: Color(0xFFD2D8E0),size: 14,);
+            return ListView.builder(
               itemCount: items.length,
-              separatorBuilder: (context, index) => Divider(),
               itemBuilder: (context, index) {
                 final item = items[index];
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text('${item.rating}'),
-                  leading: SizedBox(
-                    width: 46,
-                    height: 64,
-                    child: Image(image:AssetImage(item.bookUrl),),
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  width: 414,
+                  height: 93,
+                  child: Row(children: [
+                      Image(image: AssetImage(item.bookUrl),width: 46,height: 64,),
+                      size16,
+                      Column(
+                        children:[
+                          Text(
+                            item.name,
+                            style: TextStyle(
+                              fontSize: 14,
+                              height: 10/7,
+                              fontFamily: 'Intel',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            '${item.authorId}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              height: 4/3,
+                              fontFamily: 'Intel',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Row(children:[
+                            if(item.rating>=1)starIcon,
+                            if(item.rating<1)starIconOff,
+                            size4,
+                            if(item.rating>=2)starIcon,
+                            if(item.rating<2)starIconOff,
+                            size4,
+                            if(item.rating>=3)starIcon,
+                            if(item.rating<3)starIconOff,
+                            size4,
+                            if(item.rating>=4)starIcon,
+                            if(item.rating<4)starIconOff,
+                            size4,
+                            if(item.rating>=5)starIcon,
+                            if(item.rating<5)starIconOff,
+                        ],),
+                          Container(
+                            width: 175,
+                            padding: const EdgeInsets.only(top: 8),
+                            child:ClipRRect(
+                              borderRadius: BorderRadius.circular(3),
+                              child: LinearProgressIndicator(
+                                minHeight: 3,
+                                value: 0.5,
+                                backgroundColor: const Color(0xFFE9EDF2),
+                                valueColor: const AlwaysStoppedAnimation(Color(0xFF4F51B4)),
+                              ),
+                            ),
+                          ),
+                      ],
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                    Expanded(child: IconButton(
+                        alignment: Alignment.topRight,
+                        onPressed: (){},
+                        icon: Icon(Icons.more_horiz,color: Color(0xFF858F9B),)
+                    ),),
+                  ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
                   ),
-                  onTap: () {
-                    showBookMenu(context, item);
-                  },
                 );
               },
             );
@@ -207,8 +268,6 @@ class _List extends StatelessWidget {
       );
   }
 }
-
-
 /*
         return ListView.separated(
           itemCount: items.length,
@@ -229,4 +288,24 @@ class _List extends StatelessWidget {
             );
           },
         );
+ */
+/*
+return ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return ListTile(
+                  title: Text(item.name),
+                  subtitle: Text('${item.rating}'),
+                  leading: SizedBox(
+                    width: 46,
+                    height: 64,
+                    child: Image(image:AssetImage(item.bookUrl),),
+                  ),
+                  onTap: () {
+                    showBookMenu(context, item);
+                  },
+                );
+              },
+            );
  */
