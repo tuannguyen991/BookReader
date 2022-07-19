@@ -1,7 +1,10 @@
 import 'package:demo_book_reader/data/repository/book_repository.dart';
+import 'package:demo_book_reader/data/repository/author_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/feature/book_list/bloc/books_bloc.dart';
 import 'package:demo_book_reader/models/book_model.dart';
+import 'package:demo_book_reader/feature/author_list/bloc/authors_bloc.dart';
+import 'package:demo_book_reader/models/author_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,16 +17,43 @@ class BookListPage extends StatefulWidget {
 
 class _BookListPageState extends State<BookListPage> {
   final _bloc = BooksBloc(bookRepository: locator<BookRepository>());
+  final _bloc2= AuthorsBloc(authorRepository: locator<AuthorRepository>());
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _bloc.add(BooksLoaded());
+    _bloc2.add(AuthorsLoaded());
   }
 
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<BooksBloc>.value(
+            value: _bloc,
+          ),
+          BlocProvider<AuthorsBloc>.value(
+            value: _bloc2,
+          ),
+        ],
+      child:  Scaffold(
+        appBar: AppBar(
+          title: const Text("Books"),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+            ),
+          ],
+          bottom: const BookListChips(),
+          elevation: 0,
+        ),
+        body: const _List(),
+      ),
+    );
+    /*
     return BlocProvider<BooksBloc>.value(
         value: _bloc,
         child:  Scaffold(
@@ -35,12 +65,13 @@ class _BookListPageState extends State<BookListPage> {
                 icon: const Icon(Icons.add),
               ),
             ],
-            bottom:BookListChips(),
+            bottom: const BookListChips(),
             elevation: 0,
           ),
-          body: _List(),
+          body: const _List(),
         ),
     );
+     */
   }
 }
 
@@ -82,7 +113,7 @@ class _BookListChipsState extends State<BookListChips>{
     for (int i=0; i< _chipsList.length; i++) {
       Widget item = Container(
         height: 56,
-        padding: EdgeInsets.symmetric(horizontal: 8,vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
         child: ChoiceChip(
           label: Text(_chipsList[i].label),
           labelStyle: TextStyle(
@@ -148,7 +179,37 @@ class _List extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
+        return BlocBuilder<AuthorsBloc,AuthorsState>(
+          builder: (context,state2){
+            final authors = state2.authors;
+            return ListView.separated(
+              itemCount: items.length,
+              separatorBuilder: (context, index) => Divider(),
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return ListTile(
+                  title: Text(item.name),
+                  subtitle: Text('${item.rating}'),
+                  leading: SizedBox(
+                    width: 46,
+                    height: 64,
+                    child: Image(image:AssetImage(item.bookUrl),),
+                  ),
+                  onTap: () {
+                    showBookMenu(context, item);
+                  },
+                );
+              },
+            );
+          },
+        );
+      }
+      );
+  }
+}
 
+
+/*
         return ListView.separated(
           itemCount: items.length,
           separatorBuilder: (context, index) => Divider(),
@@ -168,7 +229,4 @@ class _List extends StatelessWidget {
             );
           },
         );
-      },
-    );
-  }
-}
+ */
