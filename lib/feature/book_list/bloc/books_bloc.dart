@@ -36,7 +36,7 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
 
   FutureOr<void> _onDeleteRequested(
       BooksDeleteRequested event, Emitter<BooksState> emit) {
-    _bookRepository.deleteBook(event.authorId);
+    _bookRepository.deleteBook(event.name);
     add(BooksLoaded());
   }
 }

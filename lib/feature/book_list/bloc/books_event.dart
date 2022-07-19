@@ -12,7 +12,7 @@ class BookAdded extends BooksEvent {
 }
 
 class BooksDeleteRequested extends BooksEvent {
-  final String authorId;
+  final String name;
 
-  BooksDeleteRequested(this.authorId);
+  BooksDeleteRequested(this.name);
 }

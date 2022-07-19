@@ -162,7 +162,7 @@ class _List extends StatelessWidget {
                     Navigator.pop(context);
                     context
                         .read<BooksBloc>()
-                        .add(BooksDeleteRequested(model.authorId));
+                        .add(BooksDeleteRequested(model.name));
                   },
                 ),
               ],
@@ -184,8 +184,6 @@ class _List extends StatelessWidget {
         return BlocBuilder<AuthorsBloc,AuthorsState>(
           builder: (context,state2){
             final authors = state2.authors;
-            Widget starIcon=const Icon(Icons.star,color: Color(0xFFFFC107),size: 14,);
-            Widget starIconOff=const Icon(Icons.star,color: Color(0xFFD2D8E0),size: 14,);
             return ListView.builder(
               itemCount: items.length,
               itemBuilder: (context, index) {
@@ -253,7 +251,9 @@ class _List extends StatelessWidget {
                       ),
                     Expanded(child: IconButton(
                         alignment: Alignment.topRight,
-                        onPressed: (){},
+                        onPressed: (){
+                          showBookMenu(context, item);
+                        },
                         icon: Icon(Icons.more_horiz,color: Color(0xFF858F9B),)
                     ),),
                   ],
@@ -268,6 +268,7 @@ class _List extends StatelessWidget {
       );
   }
 }
+
 /*
         return ListView.separated(
           itemCount: items.length,
@@ -308,4 +309,14 @@ return ListView.builder(
                 );
               },
             );
+ */
+/*
+for(var i=0;i<authors.length;i++){
+              for(var j=0;j<items.length;j++){
+                if(authors[i].id==items[j].authorId){
+                  var temp=authors[i].name;
+                  items[j].authorId=temp;
+                }
+              }
+            }
  */
