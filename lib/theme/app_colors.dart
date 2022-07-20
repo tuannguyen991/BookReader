@@ -1,8 +1,14 @@
+import 'package:demo_book_reader/theme/constant.dart';
 import 'package:flutter/material.dart';
 
-class AppColor {
-  AppColor._();
+class AppColors {
+  AppColors._();
 
-  static const Color primaryColor = Colors.blue;
-  static const Color backgroundColor = Colors.black12;
+  static MaterialColor primaryColor = const MaterialColor(0xFF4F51B4, colorCodes);
+  static MaterialColor secondaryColor = const MaterialColor(0xFFA1ACB8, colorCodes);
+  static Color secondaryBackgroundColor = secondaryColor.withOpacity(0.1);
+
+  static const starColor = Colors.yellow;
+  static const backgroundColor = Colors.white;
+  static const titleColor = Colors.black;
 }

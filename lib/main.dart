@@ -7,3 +7,4 @@ void main() {
   setupLocator();
   runApp(const MyApp());
 }
+ 
