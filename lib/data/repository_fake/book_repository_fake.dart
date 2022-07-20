@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:demo_book_reader/data/repository/book_repository.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
+
+import '../../models/book/book_model.dart';
 
 class BookRepositoryFake implements BookRepository {
   final List<BookModel> recommendedBooks = [
@@ -71,6 +72,167 @@ class BookRepositoryFake implements BookRepository {
       ratingTotal: 4.0,
     ),
   ];
+  final List<BookModel> books = [
+    BookModel(
+      name: "Android",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Ios",
+      image: "images/BigBook2.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Linux",
+      image: "images/BigBook3.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Windows",
+      image: "images/BigBook4.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Saw",
+      image: "images/BigBook5.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Morden Family",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Dragon Heart",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Maximum Impact",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Diablo",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Starcraft",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Warcraft",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Overwatch",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+    BookModel(
+      name: "Heartstone",
+      image: "images/BigBook1.png",
+      authorName: "",
+      categoryName: "",
+      numberPage: 1,
+      ratingCount: 0,
+      id: 1,
+      decription: "",
+      ratingTotal: 5,
+    ),
+  ];
+
+  @override
+  Future<List<BookModel>> getBooks() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return List.unmodifiable(books);
+  }
+
+  @override
+  Future<void> deleteBook(String name) async {
+    books.removeWhere((element) => element.name == name);
+  }
+
+  @override
+  Future<void> addBook(BookModel item) async {
+    books.add(item);
+  }
 
   @override
   Future<List<BookModel>> getRecommendedBook({required int userId}) async {

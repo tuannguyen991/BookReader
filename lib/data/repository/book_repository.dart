@@ -1,6 +1,8 @@
-import 'package:demo_book_reader/models/book/book_model.dart';
+import '../../models/book/book_model.dart';
 
 abstract class BookRepository {
-  // default get 5 books in book store
+  Future<List<BookModel>> getBooks();
+  Future<void> deleteBook(String id);
+  Future<void> addBook(BookModel item);
   Future<List<BookModel>> getRecommendedBook({required int userId});
 }
