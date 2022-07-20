@@ -1,7 +1,9 @@
+import 'package:demo_book_reader/theme/app_colors.dart';
+import 'package:demo_book_reader/theme/constant.dart';
 import 'package:flutter/material.dart';
 
-import 'feature/author_list/author_list_page.dart';
-import 'feature/book_list/book_list_page.dart';
+import 'features/home/author_list/author_list_page.dart';
+import 'features/onboarding/onboarding_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,29 +14,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Test"),
-          actions: [
-            Builder(builder: (context) {
-              return IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return AuthorListPage();
-                        },
-                      ),
-                    );
-                  },
-                  icon: Icon(Icons.add));
-            }),
-          ],
+        primarySwatch: AppColors.primaryColor,
+        scaffoldBackgroundColor: AppColors.backgroundColor,
+        // backgroundColor: AppColors.backgroundColor,
+        // dialogBackgroundColor: AppColors.backgroundColor,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all(
+              const Size.fromHeight(double48),
+            ),
+          ),
         ),
       ),
+      home: const OnboardingPage(),
     );
   }
 }

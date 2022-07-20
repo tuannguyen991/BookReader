@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
-import 'package:demo_book_reader/models/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
+
+import '../../../models/book/book_model.dart';
 
 part 'books_event.dart';
 part 'books_state.dart';
@@ -23,8 +24,7 @@ class BooksBloc extends Bloc<BooksEvent, BooksState> {
 
   final BookRepository _bookRepository;
 
-  FutureOr<void> _onLoaded(
-      BooksLoaded event, Emitter<BooksState> emit) async {
+  FutureOr<void> _onLoaded(BooksLoaded event, Emitter<BooksState> emit) async {
     emit(state.copyWith(isLoading: true, books: []));
     final list = await _bookRepository.getBooks();
     emit(state.copyWith(books: list, isLoading: false));

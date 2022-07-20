@@ -1,9 +1,10 @@
 import 'package:demo_book_reader/data/repository/author_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
-import 'package:demo_book_reader/feature/author_list/bloc/authors_bloc.dart';
-import 'package:demo_book_reader/models/author_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../models/author/author_model.dart';
+import 'bloc/authors_bloc.dart';
 
 class AuthorListPage extends StatefulWidget {
   const AuthorListPage({Key? key}) : super(key: key);
@@ -37,8 +38,7 @@ class _AuthorListPageState extends State<AuthorListPage> {
               )
             ],
           ),
-          body: const _List()
-      ),
+          body: const _List()),
     );
   }
 }
