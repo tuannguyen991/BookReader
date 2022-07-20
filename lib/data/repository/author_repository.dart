@@ -1,4 +1,4 @@
-import 'package:demo_book_reader/models/author_model.dart';
+import 'package:demo_book_reader/models/author/author_model.dart';
 
 abstract class AuthorRepository {
   Future<List<AuthorModel>> getAuthors();
