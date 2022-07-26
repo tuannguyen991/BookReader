@@ -22,7 +22,7 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
     bookRepository: locator<BookRepository>(),
   );
 
-  final libraryChoice = ["Sách đã đọc", "Sách yêu thích"];
+  final libraryChoice = ['Sách đã đọc', 'Sách yêu thích'];
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text("Thư viện"),
+          title: const Text('Thư viện'),
           actions: [
             IconButton(
               onPressed: () {

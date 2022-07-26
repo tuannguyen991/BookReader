@@ -198,8 +198,8 @@ class RecommendedCarousel extends StatelessWidget {
   }
 
   String limitCharacters({required List<dynamic> list, required int limit}) {
-    if (list.join(",").length <= limit) {
-      return list.join(", ");
+    if (list.join(',').length <= limit) {
+      return list.join(', ');
     } else {
       if (list.length == 1) {
         return '${list.first.toString().substring(0, limit)} ...';
