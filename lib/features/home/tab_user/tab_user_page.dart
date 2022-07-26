@@ -12,7 +12,7 @@ class _TabUserPageState extends State<TabUserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("User"),
+        title: const Text('User'),
       ),
     );
   }

@@ -11,13 +11,13 @@ class TabHomeState with _$TabHomeState {
     //
     @Default(
       BookModel(
-        id: "",
-        title: "",
-        description: "",
+        id: '',
+        title: '',
+        description: '',
         pageCount: 0,
         averageRating: 0,
         ratingsCount: 0,
-        imageLink: "",
+        imageLink: '',
         view: 0,
 
         // will remove
@@ -32,13 +32,13 @@ class TabHomeState with _$TabHomeState {
     //
     @Default(
       BookModel(
-        id: "",
-        title: "",
-        description: "",
+        id: '',
+        title: '',
+        description: '',
         pageCount: 0,
         averageRating: 0,
         ratingsCount: 0,
-        imageLink: "",
+        imageLink: '',
         view: 0,
 
         // will remove
