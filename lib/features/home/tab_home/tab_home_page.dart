@@ -1,14 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
+import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
+import 'package:demo_book_reader/extensions/build_context_extensions.dart';
+import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
-import 'package:demo_book_reader/widgets/customer_box_decoration.dart';
+import 'package:demo_book_reader/widgets/book_item.dart';
+import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
+import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
+import 'package:demo_book_reader/widgets/search_bar.dart';
 import 'package:demo_book_reader/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'package:demo_book_reader/features/home/tab_home/bloc/tab_home_bloc.dart';
 
@@ -20,7 +25,10 @@ class TabHomePage extends StatefulWidget {
 }
 
 class _TabHomePageState extends State<TabHomePage> {
-  final _bloc = TabHomeBloc(bookRepository: locator<BookRepository>());
+  final _bloc = TabHomeBloc(
+    bookRepository: locator<BookRepository>(),
+    userRepository: locator<UserRepository>(),
+  );
 
   @override
   void initState() {
@@ -59,10 +67,10 @@ class _TabHomePageState extends State<TabHomePage> {
                 children: const [
                   Greeting(),
                   verticalSpace32,
-                  SearchBar(),
+                  SearchBar(isTextInput: false),
                   verticalSpace16,
                   // Reading Box
-                  ReadingBookBox(percent: percent),
+                  ReadingBookBox(),
                   verticalSpace16,
                   Text(
                     'Gợi ý sách cho bạn',
@@ -89,123 +97,152 @@ class RecommendedCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Carousel
+        _buildCarousel(),
+        verticalSpace16,
+        // BookDetailCarousel
+        _buildBookDetailCarousel(),
+      ],
+    );
+    //   },
+    // );
+  }
+
+  Widget _buildBookDetailCarousel() {
     return BlocBuilder<TabHomeBloc, TabHomeState>(
       builder: (context, state) {
-        final items = state.recommendedBooks;
+        if (state.isLoading) {
+          return const CircularProgressIndicator();
+        }
+
         final item = state.bookItem;
 
-        return Column(
-          children: [
-            // Carousel
-            _buildCarousel(context, items),
-            verticalSpace16,
-            // BookDetailCarousel
-            _buildBookDetailCarousel(item),
-          ],
+        // limit number of authors
+        final String authors =
+            limitCharacters(list: item.authorList, limit: 32);
+
+        return Container(
+          padding: const EdgeInsets.only(
+              left: double8, right: double8, top: double12),
+          decoration: CustomerBoxDecoration.buildBoxDecoration(
+            color: AppColors.secondaryBackgroundColor,
+            borderRadius: double8,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item.title,
+                style: const TextStyle(
+                  fontSize: double16,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    '$authors - ',
+                    style: TextStyle(
+                      color: AppColors.secondaryColor,
+                    ),
+                  ),
+                  StarRating(
+                    rating: item.averageRating,
+                  ),
+                ],
+              ),
+              Text(
+                item.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: AppColors.secondaryColor,
+                ),
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.remove_red_eye_outlined,
+                    size: 16,
+                  ),
+                  horizontalSpace8,
+                  Expanded(
+                    child: Text(
+                      '${item.view} lượt xem',
+                      style: TextStyle(
+                        color: AppColors.secondaryColor,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Xem thêm',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: double16,
+                      ),
+                    ),
+                    onPressed: () {
+                      context.navigateTo(BookDetailPage(bookItem: item));
+                    },
+                  )
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
   }
 
-  Container _buildBookDetailCarousel(BookModel item) {
-    return Container(
-      padding: const EdgeInsets.only(left: double8, right: double8, top: double12),
-      decoration: CustomerBoxDecoration.buildBoxDecoration(
-        color: AppColors.secondaryBackgroundColor,
-        borderRadius: double8,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            item.name,
-            style: const TextStyle(
-              fontSize: double16,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Row(
-            children: [
-              Text(
-                '${item.authorName} -',
-                style: TextStyle(
-                  color: AppColors.secondaryColor,
-                ),
-              ),
-              StarRating(
-                rating: item.ratingTotal / item.ratingCount,
-              ),
-            ],
-          ),
-          verticalSpace4,
-          Text(
-            item.decription,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            // maxLines: isReadMore ? 3 : null,
-            // overflow: isReadMore
-            //     ? TextOverflow.ellipsis
-            //     : TextOverflow.visible,
-            style: TextStyle(
-              color: AppColors.secondaryColor,
-            ),
-          ),
-          // verticalSpace4,
-          Row(
-            children: [
-              const Icon(
-                Icons.remove_red_eye_outlined,
-                size: 16,
-              ),
-              horizontalSpace8,
-              Expanded(
-                child: Text(
-                  '${item.numberPage} lượt xem',
-                  style:  TextStyle(
-                    color: AppColors.secondaryColor,
-                  ),
-                ),
-              ),
-              TextButton(
-                child: Text(
-                  'Xem thêm',
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: double16,
-                  ),
-                ),
-                onPressed: () {
-              
-                },
-              )
-            ],
-          ),
-        ],
-      ),
-    );
+  String limitCharacters({required List<dynamic> list, required int limit}) {
+    if (list.join(",").length <= limit) {
+      return list.join(", ");
+    } else {
+      if (list.length == 1) {
+        return '${list.first.toString().substring(0, limit)} ...';
+      } else if (list.length == 2) {
+        return '${list.first.toString()}, ...';
+      } else if (list.getRange(0, 2).toList().join(', ').length < limit) {
+        return '${list.getRange(0, 2).toList().join(', ')}, ...';
+      } else {
+        return '${list.first.toString()}, ...';
+      }
+    }
   }
 
-  CarouselSlider _buildCarousel(BuildContext context, List<BookModel> items) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        onPageChanged: ((index, reason) {
-          context
-              .read<TabHomeBloc>()
-              .add(TabHomeIndexCarouselChange(index: index));
-        }),
-        aspectRatio: 2,
-        autoPlay: true,
-        enlargeCenterPage: true,
-        viewportFraction: 0.4,
-      ),
-      items: items
-          .map(
-            (item) => Container(
-              margin: const EdgeInsets.only(top: double8),
-              child: Image.network(item.image),
-            ),
-          )
-          .toList(),
+  Widget _buildCarousel() {
+    return BlocBuilder<TabHomeBloc, TabHomeState>(
+      buildWhen: (previous, current) {
+        return previous.recommendedBooks != current.recommendedBooks;
+      },
+      builder: (context, state) {
+        final items = state.recommendedBooks;
+        // print('carousel');
+        return CarouselSlider(
+          options: CarouselOptions(
+            onPageChanged: ((index, reason) {
+              context
+                  .read<TabHomeBloc>()
+                  .add(TabHomeIndexCarouselChange(index: index));
+            }),
+            aspectRatio: 2,
+            // autoPlay: true,
+            enlargeCenterPage: true,
+            viewportFraction: 0.4,
+          ),
+          items: items
+              .map(
+                (item) => Container(
+                  margin: const EdgeInsets.only(top: double8),
+                  child: CustomerClipRRect(image: item.imageLink),
+                ),
+              )
+              .toList(),
+        );
+      },
     );
   }
 }
@@ -213,156 +250,77 @@ class RecommendedCarousel extends StatelessWidget {
 class ReadingBookBox extends StatelessWidget {
   const ReadingBookBox({
     Key? key,
-    required this.percent,
   }) : super(key: key);
-
-  final double percent;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(double8),
-      decoration: CustomerBoxDecoration.buildBoxDecoration(
-        color: AppColors.backgroundColor,
-        borderRadius: double16,
-        isShadow: true,
-      ),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(double12),
-            decoration: CustomerBoxDecoration.buildBoxDecoration(
-              color: AppColors.secondaryBackgroundColor,
-              borderRadius: double16,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text:
-                              'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
-                          style: TextStyle(
-                            color: AppColors.secondaryColor,
-                          ),
-                        ),
-                        const TextSpan(
-                          text: 'date',
-                          style: TextStyle(
-                            color: AppColors.titleColor,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Đọc tiếp',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: double16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+    return BlocBuilder<TabHomeBloc, TabHomeState>(
+      builder: (context, state) {
+        final BookModel lastBook = state.lastBook;
+        return Container(
+          padding: const EdgeInsets.all(double8),
+          decoration: CustomerBoxDecoration.buildBoxDecoration(
+            color: AppColors.backgroundColor,
+            borderRadius: double16,
+            isShadow: true,
           ),
-          verticalSpace8,
-          Row(
+          child: Column(
             children: [
-              Flexible(
-                flex: 1,
-                child: Image.network(
-                  'https://vn-test-11.slatic.net/p/88c8fe011aa2683f66e43efe9922dafc.jpg',
-                  // scale: 2,
+              Container(
+                padding: const EdgeInsets.all(double12),
+                decoration: CustomerBoxDecoration.buildBoxDecoration(
+                  color: AppColors.secondaryBackgroundColor,
+                  borderRadius: double16,
                 ),
-              ),
-              horizontalSpace8,
-              Flexible(
-                flex: 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    const Text(
-                      'Harry Potter and the Philosopher\'s Stone',
-                      style: TextStyle(
-                        overflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.w400,
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text:
+                                  'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
+                              style: TextStyle(
+                                color: AppColors.secondaryColor,
+                              ),
+                            ),
+                            TextSpan(
+                              text: lastBook.lastDay,
+                              style: const TextStyle(
+                                color: AppColors.titleColor,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Text(
-                      'J.K. Rowling',
-                      style: TextStyle(
-                        color: AppColors.secondaryColor,
-                      ),
-                    ),
-                    const StarRating(rating: 4),
-                    LinearPercentIndicator(
-                      padding: const EdgeInsets.only(right: double8),
-                      trailing: Text('${(percent * 100).toInt()}%'),
-                      barRadius: const Radius.circular(double8),
-                      // lineHeight: double8,
-                      percent: percent,
-                      backgroundColor: AppColors.secondaryBackgroundColor,
-                      linearGradient: LinearGradient(
-                        colors: <Color>[
-                          AppColors.secondaryColor,
-                          AppColors.primaryColor,
-                        ],
+                    TextButton(
+                      onPressed: () {
+                        context.navigateTo(BookDetailPage(bookItem: lastBook));
+                      },
+                      child: Text(
+                        'Đọc tiếp',
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: double16,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+              verticalSpace8,
+              Builder(builder: (context) {
+                if (state.isLoading) {
+                  return const CircularProgressIndicator();
+                }
+                return BookItem(bookItem: lastBook);
+              }),
             ],
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class SearchBar extends StatelessWidget {
-  const SearchBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: CustomerBoxDecoration.buildBoxDecoration(
-        color: AppColors.secondaryBackgroundColor,
-        borderRadius: double24,
-      ),
-      child: Row(
-        children: [
-          horizontalSpace16,
-          Icon(
-            Icons.search,
-            color: AppColors.secondaryColor,
-          ),
-          Expanded(
-            child: TextField(
-              style: const TextStyle(
-                color: AppColors.backgroundColor,
-              ),
-              decoration: InputDecoration(
-                hintText: 'Tìm kiếm tên sách, chủ đề, tác giả',
-                border: const UnderlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                hintStyle: TextStyle(
-                  color: AppColors.secondaryColor,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -374,28 +332,30 @@ class Greeting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: const [
-        Text(
-          'Xin chào, Nguyen Van A',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: double24,
-            color: AppColors.backgroundColor,
+    return BlocBuilder<TabHomeBloc, TabHomeState>(builder: (context, state) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'Xin chào, ${state.firstName}',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: double24,
+              color: AppColors.backgroundColor,
+            ),
           ),
-        ),
-        verticalSpace8,
-        Text(
-          'Hôm nay bạn muốn đọc gì?',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: AppColors.backgroundColor,
+          verticalSpace8,
+          const Text(
+            'Hôm nay bạn muốn đọc gì?',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.backgroundColor,
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }
 

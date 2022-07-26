@@ -20,15 +20,19 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BookModel {
-  int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get decription => throw _privateConstructorUsedError;
-  double get ratingTotal => throw _privateConstructorUsedError;
-  double get ratingCount => throw _privateConstructorUsedError;
-  int get numberPage => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get authorName => throw _privateConstructorUsedError;
-  String get categoryName => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String? get subTitle => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  int get pageCount => throw _privateConstructorUsedError;
+  double get averageRating => throw _privateConstructorUsedError;
+  int get ratingsCount => throw _privateConstructorUsedError;
+  String get imageLink => throw _privateConstructorUsedError;
+  int get view => throw _privateConstructorUsedError;
+  List<AuthorModel> get authorList => throw _privateConstructorUsedError;
+  List<CategoryModel> get categoryList => throw _privateConstructorUsedError;
+  String? get lastDay => throw _privateConstructorUsedError;
+  int? get lastPage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,15 +45,19 @@ abstract class $BookModelCopyWith<$Res> {
   factory $BookModelCopyWith(BookModel value, $Res Function(BookModel) then) =
       _$BookModelCopyWithImpl<$Res>;
   $Res call(
-      {int id,
-      String name,
-      String decription,
-      double ratingTotal,
-      double ratingCount,
-      int numberPage,
-      String image,
-      String authorName,
-      String categoryName});
+      {String id,
+      String title,
+      String? subTitle,
+      String description,
+      int pageCount,
+      double averageRating,
+      int ratingsCount,
+      String imageLink,
+      int view,
+      List<AuthorModel> authorList,
+      List<CategoryModel> categoryList,
+      String? lastDay,
+      int? lastPage});
 }
 
 /// @nodoc
@@ -63,52 +71,72 @@ class _$BookModelCopyWithImpl<$Res> implements $BookModelCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
-    Object? decription = freezed,
-    Object? ratingTotal = freezed,
-    Object? ratingCount = freezed,
-    Object? numberPage = freezed,
-    Object? image = freezed,
-    Object? authorName = freezed,
-    Object? categoryName = freezed,
+    Object? title = freezed,
+    Object? subTitle = freezed,
+    Object? description = freezed,
+    Object? pageCount = freezed,
+    Object? averageRating = freezed,
+    Object? ratingsCount = freezed,
+    Object? imageLink = freezed,
+    Object? view = freezed,
+    Object? authorList = freezed,
+    Object? categoryList = freezed,
+    Object? lastDay = freezed,
+    Object? lastPage = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      subTitle: subTitle == freezed
+          ? _value.subTitle
+          : subTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      pageCount: pageCount == freezed
+          ? _value.pageCount
+          : pageCount // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      decription: decription == freezed
-          ? _value.decription
-          : decription // ignore: cast_nullable_to_non_nullable
-              as String,
-      ratingTotal: ratingTotal == freezed
-          ? _value.ratingTotal
-          : ratingTotal // ignore: cast_nullable_to_non_nullable
+      averageRating: averageRating == freezed
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
               as double,
-      ratingCount: ratingCount == freezed
-          ? _value.ratingCount
-          : ratingCount // ignore: cast_nullable_to_non_nullable
-              as double,
-      numberPage: numberPage == freezed
-          ? _value.numberPage
-          : numberPage // ignore: cast_nullable_to_non_nullable
+      ratingsCount: ratingsCount == freezed
+          ? _value.ratingsCount
+          : ratingsCount // ignore: cast_nullable_to_non_nullable
               as int,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      imageLink: imageLink == freezed
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
-      authorName: authorName == freezed
-          ? _value.authorName
-          : authorName // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryName: categoryName == freezed
-          ? _value.categoryName
-          : categoryName // ignore: cast_nullable_to_non_nullable
-              as String,
+      view: view == freezed
+          ? _value.view
+          : view // ignore: cast_nullable_to_non_nullable
+              as int,
+      authorList: authorList == freezed
+          ? _value.authorList
+          : authorList // ignore: cast_nullable_to_non_nullable
+              as List<AuthorModel>,
+      categoryList: categoryList == freezed
+          ? _value.categoryList
+          : categoryList // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+      lastDay: lastDay == freezed
+          ? _value.lastDay
+          : lastDay // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastPage: lastPage == freezed
+          ? _value.lastPage
+          : lastPage // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -120,15 +148,19 @@ abstract class _$$_BookModelCopyWith<$Res> implements $BookModelCopyWith<$Res> {
       __$$_BookModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
-      String name,
-      String decription,
-      double ratingTotal,
-      double ratingCount,
-      int numberPage,
-      String image,
-      String authorName,
-      String categoryName});
+      {String id,
+      String title,
+      String? subTitle,
+      String description,
+      int pageCount,
+      double averageRating,
+      int ratingsCount,
+      String imageLink,
+      int view,
+      List<AuthorModel> authorList,
+      List<CategoryModel> categoryList,
+      String? lastDay,
+      int? lastPage});
 }
 
 /// @nodoc
@@ -144,52 +176,72 @@ class __$$_BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
-    Object? decription = freezed,
-    Object? ratingTotal = freezed,
-    Object? ratingCount = freezed,
-    Object? numberPage = freezed,
-    Object? image = freezed,
-    Object? authorName = freezed,
-    Object? categoryName = freezed,
+    Object? title = freezed,
+    Object? subTitle = freezed,
+    Object? description = freezed,
+    Object? pageCount = freezed,
+    Object? averageRating = freezed,
+    Object? ratingsCount = freezed,
+    Object? imageLink = freezed,
+    Object? view = freezed,
+    Object? authorList = freezed,
+    Object? categoryList = freezed,
+    Object? lastDay = freezed,
+    Object? lastPage = freezed,
   }) {
     return _then(_$_BookModel(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      subTitle: subTitle == freezed
+          ? _value.subTitle
+          : subTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      pageCount: pageCount == freezed
+          ? _value.pageCount
+          : pageCount // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      decription: decription == freezed
-          ? _value.decription
-          : decription // ignore: cast_nullable_to_non_nullable
-              as String,
-      ratingTotal: ratingTotal == freezed
-          ? _value.ratingTotal
-          : ratingTotal // ignore: cast_nullable_to_non_nullable
+      averageRating: averageRating == freezed
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
               as double,
-      ratingCount: ratingCount == freezed
-          ? _value.ratingCount
-          : ratingCount // ignore: cast_nullable_to_non_nullable
-              as double,
-      numberPage: numberPage == freezed
-          ? _value.numberPage
-          : numberPage // ignore: cast_nullable_to_non_nullable
+      ratingsCount: ratingsCount == freezed
+          ? _value.ratingsCount
+          : ratingsCount // ignore: cast_nullable_to_non_nullable
               as int,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      imageLink: imageLink == freezed
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
-      authorName: authorName == freezed
-          ? _value.authorName
-          : authorName // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryName: categoryName == freezed
-          ? _value.categoryName
-          : categoryName // ignore: cast_nullable_to_non_nullable
-              as String,
+      view: view == freezed
+          ? _value.view
+          : view // ignore: cast_nullable_to_non_nullable
+              as int,
+      authorList: authorList == freezed
+          ? _value._authorList
+          : authorList // ignore: cast_nullable_to_non_nullable
+              as List<AuthorModel>,
+      categoryList: categoryList == freezed
+          ? _value._categoryList
+          : categoryList // ignore: cast_nullable_to_non_nullable
+              as List<CategoryModel>,
+      lastDay: lastDay == freezed
+          ? _value.lastDay
+          : lastDay // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastPage: lastPage == freezed
+          ? _value.lastPage
+          : lastPage // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -199,40 +251,64 @@ class __$$_BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
 class _$_BookModel implements _BookModel {
   const _$_BookModel(
       {required this.id,
-      required this.name,
-      required this.decription,
-      required this.ratingTotal,
-      required this.ratingCount,
-      required this.numberPage,
-      required this.image,
-      required this.authorName,
-      required this.categoryName});
+      required this.title,
+      this.subTitle,
+      required this.description,
+      required this.pageCount,
+      required this.averageRating,
+      required this.ratingsCount,
+      required this.imageLink,
+      required this.view,
+      required final List<AuthorModel> authorList,
+      required final List<CategoryModel> categoryList,
+      this.lastDay,
+      this.lastPage})
+      : _authorList = authorList,
+        _categoryList = categoryList;
 
   factory _$_BookModel.fromJson(Map<String, dynamic> json) =>
       _$$_BookModelFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
-  final String name;
+  final String title;
   @override
-  final String decription;
+  final String? subTitle;
   @override
-  final double ratingTotal;
+  final String description;
   @override
-  final double ratingCount;
+  final int pageCount;
   @override
-  final int numberPage;
+  final double averageRating;
   @override
-  final String image;
+  final int ratingsCount;
   @override
-  final String authorName;
+  final String imageLink;
   @override
-  final String categoryName;
+  final int view;
+  final List<AuthorModel> _authorList;
+  @override
+  List<AuthorModel> get authorList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_authorList);
+  }
+
+  final List<CategoryModel> _categoryList;
+  @override
+  List<CategoryModel> get categoryList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categoryList);
+  }
+
+  @override
+  final String? lastDay;
+  @override
+  final int? lastPage;
 
   @override
   String toString() {
-    return 'BookModel(id: $id, name: $name, decription: $decription, ratingTotal: $ratingTotal, ratingCount: $ratingCount, numberPage: $numberPage, image: $image, authorName: $authorName, categoryName: $categoryName)';
+    return 'BookModel(id: $id, title: $title, subTitle: $subTitle, description: $description, pageCount: $pageCount, averageRating: $averageRating, ratingsCount: $ratingsCount, imageLink: $imageLink, view: $view, authorList: $authorList, categoryList: $categoryList, lastDay: $lastDay, lastPage: $lastPage)';
   }
 
   @override
@@ -241,20 +317,23 @@ class _$_BookModel implements _BookModel {
         (other.runtimeType == runtimeType &&
             other is _$_BookModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.subTitle, subTitle) &&
             const DeepCollectionEquality()
-                .equals(other.decription, decription) &&
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.pageCount, pageCount) &&
             const DeepCollectionEquality()
-                .equals(other.ratingTotal, ratingTotal) &&
+                .equals(other.averageRating, averageRating) &&
             const DeepCollectionEquality()
-                .equals(other.ratingCount, ratingCount) &&
+                .equals(other.ratingsCount, ratingsCount) &&
+            const DeepCollectionEquality().equals(other.imageLink, imageLink) &&
+            const DeepCollectionEquality().equals(other.view, view) &&
             const DeepCollectionEquality()
-                .equals(other.numberPage, numberPage) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
+                .equals(other._authorList, _authorList) &&
             const DeepCollectionEquality()
-                .equals(other.authorName, authorName) &&
-            const DeepCollectionEquality()
-                .equals(other.categoryName, categoryName));
+                .equals(other._categoryList, _categoryList) &&
+            const DeepCollectionEquality().equals(other.lastDay, lastDay) &&
+            const DeepCollectionEquality().equals(other.lastPage, lastPage));
   }
 
   @JsonKey(ignore: true)
@@ -262,14 +341,18 @@ class _$_BookModel implements _BookModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(decription),
-      const DeepCollectionEquality().hash(ratingTotal),
-      const DeepCollectionEquality().hash(ratingCount),
-      const DeepCollectionEquality().hash(numberPage),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(authorName),
-      const DeepCollectionEquality().hash(categoryName));
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(subTitle),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(pageCount),
+      const DeepCollectionEquality().hash(averageRating),
+      const DeepCollectionEquality().hash(ratingsCount),
+      const DeepCollectionEquality().hash(imageLink),
+      const DeepCollectionEquality().hash(view),
+      const DeepCollectionEquality().hash(_authorList),
+      const DeepCollectionEquality().hash(_categoryList),
+      const DeepCollectionEquality().hash(lastDay),
+      const DeepCollectionEquality().hash(lastPage));
 
   @JsonKey(ignore: true)
   @override
@@ -284,37 +367,49 @@ class _$_BookModel implements _BookModel {
 
 abstract class _BookModel implements BookModel {
   const factory _BookModel(
-      {required final int id,
-      required final String name,
-      required final String decription,
-      required final double ratingTotal,
-      required final double ratingCount,
-      required final int numberPage,
-      required final String image,
-      required final String authorName,
-      required final String categoryName}) = _$_BookModel;
+      {required final String id,
+      required final String title,
+      final String? subTitle,
+      required final String description,
+      required final int pageCount,
+      required final double averageRating,
+      required final int ratingsCount,
+      required final String imageLink,
+      required final int view,
+      required final List<AuthorModel> authorList,
+      required final List<CategoryModel> categoryList,
+      final String? lastDay,
+      final int? lastPage}) = _$_BookModel;
 
   factory _BookModel.fromJson(Map<String, dynamic> json) =
       _$_BookModel.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
-  String get name;
+  String get title;
   @override
-  String get decription;
+  String? get subTitle;
   @override
-  double get ratingTotal;
+  String get description;
   @override
-  double get ratingCount;
+  int get pageCount;
   @override
-  int get numberPage;
+  double get averageRating;
   @override
-  String get image;
+  int get ratingsCount;
   @override
-  String get authorName;
+  String get imageLink;
   @override
-  String get categoryName;
+  int get view;
+  @override
+  List<AuthorModel> get authorList;
+  @override
+  List<CategoryModel> get categoryList;
+  @override
+  String? get lastDay;
+  @override
+  int? get lastPage;
   @override
   @JsonKey(ignore: true)
   _$$_BookModelCopyWith<_$_BookModel> get copyWith =>

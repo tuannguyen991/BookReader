@@ -10,4 +10,8 @@ extension BuildContextExtensions on BuildContext {
   Future<dynamic> navigateOff(Widget nextPage) {
     return NavigatorHelper.navigateOff(this, nextPage);
   }
+
+  Future<void> off() {
+    return NavigatorHelper.off(this);
+  }
 }

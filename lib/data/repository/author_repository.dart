@@ -1,7 +1,7 @@
 import 'package:demo_book_reader/models/author/author_model.dart';
 
 abstract class AuthorRepository {
-  Future<List<AuthorModel>> getAuthors();
-  Future<void> deleteAuthor(String id);
-  Future<void> addAuthor(AuthorModel item);
+  // default get 5 books in book store
+  Future<List<AuthorModel>> getAuthors({required String token});
+
 }
