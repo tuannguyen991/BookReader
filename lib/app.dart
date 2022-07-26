@@ -1,4 +1,3 @@
-// import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/onboarding/onboarding_page.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
@@ -25,31 +24,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const OnboardingPage(),
-      // home: Scaffold(
-      //   appBar: AppBar(
-      //     title: const Text(titleApp),
-      //     actions: [
-      //       Builder(
-      //         builder: (context) {
-      //           return IconButton(
-      //             onPressed: () {
-      //               context.navigateTo(const AuthorListPage());
-      //               // Navigator.push(
-      //               //   context,
-      //               //   MaterialPageRoute(
-      //               //     builder: (context) {
-      //               //       return const AuthorListPage();
-      //               //     },
-      //               //   ),
-      //               // );
-      //             },
-      //             icon: const Icon(Icons.add),
-      //           );
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
