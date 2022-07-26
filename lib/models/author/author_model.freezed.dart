@@ -22,7 +22,7 @@ AuthorModel _$AuthorModelFromJson(Map<String, dynamic> json) {
 mixin _$AuthorModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get gender => throw _privateConstructorUsedError;
+  String get imageLink => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $AuthorModelCopyWith<$Res> {
   factory $AuthorModelCopyWith(
           AuthorModel value, $Res Function(AuthorModel) then) =
       _$AuthorModelCopyWithImpl<$Res>;
-  $Res call({String id, String name, String gender});
+  $Res call({String id, String name, String imageLink});
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$AuthorModelCopyWithImpl<$Res> implements $AuthorModelCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? gender = freezed,
+    Object? imageLink = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -61,9 +61,9 @@ class _$AuthorModelCopyWithImpl<$Res> implements $AuthorModelCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
+      imageLink: imageLink == freezed
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -76,7 +76,7 @@ abstract class _$$_AuthorModelCopyWith<$Res>
           _$_AuthorModel value, $Res Function(_$_AuthorModel) then) =
       __$$_AuthorModelCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String gender});
+  $Res call({String id, String name, String imageLink});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class __$$_AuthorModelCopyWithImpl<$Res> extends _$AuthorModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? gender = freezed,
+    Object? imageLink = freezed,
   }) {
     return _then(_$_AuthorModel(
       id: id == freezed
@@ -104,9 +104,9 @@ class __$$_AuthorModelCopyWithImpl<$Res> extends _$AuthorModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
+      imageLink: imageLink == freezed
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -114,9 +114,10 @@ class __$$_AuthorModelCopyWithImpl<$Res> extends _$AuthorModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AuthorModel implements _AuthorModel {
+class _$_AuthorModel extends _AuthorModel {
   const _$_AuthorModel(
-      {required this.id, required this.name, required this.gender});
+      {required this.id, required this.name, required this.imageLink})
+      : super._();
 
   factory _$_AuthorModel.fromJson(Map<String, dynamic> json) =>
       _$$_AuthorModelFromJson(json);
@@ -126,12 +127,7 @@ class _$_AuthorModel implements _AuthorModel {
   @override
   final String name;
   @override
-  final String gender;
-
-  @override
-  String toString() {
-    return 'AuthorModel(id: $id, name: $name, gender: $gender)';
-  }
+  final String imageLink;
 
   @override
   bool operator ==(dynamic other) {
@@ -140,7 +136,7 @@ class _$_AuthorModel implements _AuthorModel {
             other is _$_AuthorModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.gender, gender));
+            const DeepCollectionEquality().equals(other.imageLink, imageLink));
   }
 
   @JsonKey(ignore: true)
@@ -149,7 +145,7 @@ class _$_AuthorModel implements _AuthorModel {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(gender));
+      const DeepCollectionEquality().hash(imageLink));
 
   @JsonKey(ignore: true)
   @override
@@ -162,11 +158,12 @@ class _$_AuthorModel implements _AuthorModel {
   }
 }
 
-abstract class _AuthorModel implements AuthorModel {
+abstract class _AuthorModel extends AuthorModel {
   const factory _AuthorModel(
       {required final String id,
       required final String name,
-      required final String gender}) = _$_AuthorModel;
+      required final String imageLink}) = _$_AuthorModel;
+  const _AuthorModel._() : super._();
 
   factory _AuthorModel.fromJson(Map<String, dynamic> json) =
       _$_AuthorModel.fromJson;
@@ -176,7 +173,7 @@ abstract class _AuthorModel implements AuthorModel {
   @override
   String get name;
   @override
-  String get gender;
+  String get imageLink;
   @override
   @JsonKey(ignore: true)
   _$$_AuthorModelCopyWith<_$_AuthorModel> get copyWith =>

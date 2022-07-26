@@ -15,7 +15,11 @@ class NavigatorHelper {
   }
 
   static Future<dynamic> navigateOff(BuildContext context, Widget nextPage) {
-    Navigator.pop(context);
+    NavigatorHelper.off(context);
     return NavigatorHelper.navigateTo(context, nextPage);
+  }
+
+  static Future<void> off(BuildContext context) async {
+    Navigator.pop(context);
   }
 }

@@ -1,5 +1,5 @@
-import 'package:demo_book_reader/features/home/author_list/author_list_page.dart';
 import 'package:demo_book_reader/features/home/tab_home/tab_home_page.dart';
+import 'package:demo_book_reader/features/home/tab_library/tab_library_page.dart';
 import 'package:demo_book_reader/features/home/tab_user/tab_user_page.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         return const TabHomePage();
       case 1:
         // return const TabLibraryPage();
-        return const AuthorListPage();
+        return const TabLibraryPage();
       default:
         return const TabUserPage();
     }

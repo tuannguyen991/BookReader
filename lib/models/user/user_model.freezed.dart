@@ -20,13 +20,16 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  String get lastName => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
   int get age => throw _privateConstructorUsedError;
-  String get avatar => throw _privateConstructorUsedError;
+  bool get gender => throw _privateConstructorUsedError;
+  String get imageLink => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,13 +42,16 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res>;
   $Res call(
-      {int id,
-      String name,
-      String username,
+      {String id,
+      String firstName,
+      String lastName,
+      String userName,
       String password,
       String email,
+      String phone,
       int age,
-      String avatar});
+      bool gender,
+      String imageLink});
 }
 
 /// @nodoc
@@ -59,25 +65,32 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
-    Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? userName = freezed,
     Object? password = freezed,
     Object? email = freezed,
+    Object? phone = freezed,
     Object? age = freezed,
-    Object? avatar = freezed,
+    Object? gender = freezed,
+    Object? imageLink = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -87,13 +100,21 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      phone: phone == freezed
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
       age: age == freezed
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int,
-      avatar: avatar == freezed
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
+      gender: gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as bool,
+      imageLink: imageLink == freezed
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -106,13 +127,16 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       __$$_UserModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
-      String name,
-      String username,
+      {String id,
+      String firstName,
+      String lastName,
+      String userName,
       String password,
       String email,
+      String phone,
       int age,
-      String avatar});
+      bool gender,
+      String imageLink});
 }
 
 /// @nodoc
@@ -128,25 +152,32 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
-    Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? userName = freezed,
     Object? password = freezed,
     Object? email = freezed,
+    Object? phone = freezed,
     Object? age = freezed,
-    Object? avatar = freezed,
+    Object? gender = freezed,
+    Object? imageLink = freezed,
   }) {
     return _then(_$_UserModel(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -156,13 +187,21 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      phone: phone == freezed
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
       age: age == freezed
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int,
-      avatar: avatar == freezed
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
+      gender: gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as bool,
+      imageLink: imageLink == freezed
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -173,34 +212,43 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 class _$_UserModel implements _UserModel {
   const _$_UserModel(
       {required this.id,
-      required this.name,
-      required this.username,
+      required this.firstName,
+      required this.lastName,
+      required this.userName,
       required this.password,
       required this.email,
+      required this.phone,
       required this.age,
-      required this.avatar});
+      required this.gender,
+      required this.imageLink});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
-  final String name;
+  final String firstName;
   @override
-  final String username;
+  final String lastName;
+  @override
+  final String userName;
   @override
   final String password;
   @override
   final String email;
   @override
+  final String phone;
+  @override
   final int age;
   @override
-  final String avatar;
+  final bool gender;
+  @override
+  final String imageLink;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, username: $username, password: $password, email: $email, age: $age, avatar: $avatar)';
+    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, userName: $userName, password: $password, email: $email, phone: $phone, age: $age, gender: $gender, imageLink: $imageLink)';
   }
 
   @override
@@ -209,12 +257,15 @@ class _$_UserModel implements _UserModel {
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.firstName, firstName) &&
+            const DeepCollectionEquality().equals(other.lastName, lastName) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.phone, phone) &&
             const DeepCollectionEquality().equals(other.age, age) &&
-            const DeepCollectionEquality().equals(other.avatar, avatar));
+            const DeepCollectionEquality().equals(other.gender, gender) &&
+            const DeepCollectionEquality().equals(other.imageLink, imageLink));
   }
 
   @JsonKey(ignore: true)
@@ -222,12 +273,15 @@ class _$_UserModel implements _UserModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(firstName),
+      const DeepCollectionEquality().hash(lastName),
+      const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(phone),
       const DeepCollectionEquality().hash(age),
-      const DeepCollectionEquality().hash(avatar));
+      const DeepCollectionEquality().hash(gender),
+      const DeepCollectionEquality().hash(imageLink));
 
   @JsonKey(ignore: true)
   @override
@@ -242,31 +296,40 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {required final int id,
-      required final String name,
-      required final String username,
+      {required final String id,
+      required final String firstName,
+      required final String lastName,
+      required final String userName,
       required final String password,
       required final String email,
+      required final String phone,
       required final int age,
-      required final String avatar}) = _$_UserModel;
+      required final bool gender,
+      required final String imageLink}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
-  String get name;
+  String get firstName;
   @override
-  String get username;
+  String get lastName;
+  @override
+  String get userName;
   @override
   String get password;
   @override
   String get email;
   @override
+  String get phone;
+  @override
   int get age;
   @override
-  String get avatar;
+  bool get gender;
+  @override
+  String get imageLink;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

@@ -16,8 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TabHomeState {
-  List<BookModel> get recommendedBooks => throw _privateConstructorUsedError;
-  BookModel get bookItem => throw _privateConstructorUsedError;
+//
+  List<BookModel> get recommendedBooks => throw _privateConstructorUsedError; //
+  BookModel get bookItem => throw _privateConstructorUsedError; //
+  String get firstName => throw _privateConstructorUsedError; //
+  BookModel get lastBook => throw _privateConstructorUsedError; //
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TabHomeStateCopyWith<TabHomeState> get copyWith =>
@@ -29,9 +33,15 @@ abstract class $TabHomeStateCopyWith<$Res> {
   factory $TabHomeStateCopyWith(
           TabHomeState value, $Res Function(TabHomeState) then) =
       _$TabHomeStateCopyWithImpl<$Res>;
-  $Res call({List<BookModel> recommendedBooks, BookModel bookItem});
+  $Res call(
+      {List<BookModel> recommendedBooks,
+      BookModel bookItem,
+      String firstName,
+      BookModel lastBook,
+      bool isLoading});
 
   $BookModelCopyWith<$Res> get bookItem;
+  $BookModelCopyWith<$Res> get lastBook;
 }
 
 /// @nodoc
@@ -46,6 +56,9 @@ class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
   $Res call({
     Object? recommendedBooks = freezed,
     Object? bookItem = freezed,
+    Object? firstName = freezed,
+    Object? lastBook = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
       recommendedBooks: recommendedBooks == freezed
@@ -56,6 +69,18 @@ class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastBook: lastBook == freezed
+          ? _value.lastBook
+          : lastBook // ignore: cast_nullable_to_non_nullable
+              as BookModel,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -63,6 +88,13 @@ class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
   $BookModelCopyWith<$Res> get bookItem {
     return $BookModelCopyWith<$Res>(_value.bookItem, (value) {
       return _then(_value.copyWith(bookItem: value));
+    });
+  }
+
+  @override
+  $BookModelCopyWith<$Res> get lastBook {
+    return $BookModelCopyWith<$Res>(_value.lastBook, (value) {
+      return _then(_value.copyWith(lastBook: value));
     });
   }
 }
@@ -74,10 +106,17 @@ abstract class _$$_TabHomeStateCopyWith<$Res>
           _$_TabHomeState value, $Res Function(_$_TabHomeState) then) =
       __$$_TabHomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<BookModel> recommendedBooks, BookModel bookItem});
+  $Res call(
+      {List<BookModel> recommendedBooks,
+      BookModel bookItem,
+      String firstName,
+      BookModel lastBook,
+      bool isLoading});
 
   @override
   $BookModelCopyWith<$Res> get bookItem;
+  @override
+  $BookModelCopyWith<$Res> get lastBook;
 }
 
 /// @nodoc
@@ -95,6 +134,9 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
   $Res call({
     Object? recommendedBooks = freezed,
     Object? bookItem = freezed,
+    Object? firstName = freezed,
+    Object? lastBook = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_$_TabHomeState(
       recommendedBooks: recommendedBooks == freezed
@@ -105,6 +147,18 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastBook: lastBook == freezed
+          ? _value.lastBook
+          : lastBook // ignore: cast_nullable_to_non_nullable
+              as BookModel,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -115,18 +169,34 @@ class _$_TabHomeState implements _TabHomeState {
   const _$_TabHomeState(
       {final List<BookModel> recommendedBooks = const [],
       this.bookItem = const BookModel(
-          authorName: '',
-          categoryName: '',
-          decription: '',
-          id: 0,
-          image: '',
-          name: '',
-          numberPage: 0,
-          ratingCount: 0,
-          ratingTotal: 0)})
+          id: "",
+          title: "",
+          description: "",
+          pageCount: 0,
+          averageRating: 0,
+          ratingsCount: 0,
+          imageLink: "",
+          view: 0,
+          authorList: [],
+          categoryList: []),
+      this.firstName = '',
+      this.lastBook = const BookModel(
+          id: "",
+          title: "",
+          description: "",
+          pageCount: 0,
+          averageRating: 0,
+          ratingsCount: 0,
+          imageLink: "",
+          view: 0,
+          authorList: [],
+          categoryList: []),
+      this.isLoading = true})
       : _recommendedBooks = recommendedBooks;
 
+//
   final List<BookModel> _recommendedBooks;
+//
   @override
   @JsonKey()
   List<BookModel> get recommendedBooks {
@@ -134,14 +204,49 @@ class _$_TabHomeState implements _TabHomeState {
     return EqualUnmodifiableListView(_recommendedBooks);
   }
 
+//
   @override
   @JsonKey()
   final BookModel bookItem;
+//
+  @override
+  @JsonKey()
+  final String firstName;
+//
+  @override
+  @JsonKey()
+  final BookModel lastBook;
+//
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'TabHomeState(recommendedBooks: $recommendedBooks, bookItem: $bookItem)';
+    return 'TabHomeState(recommendedBooks: $recommendedBooks, bookItem: $bookItem, firstName: $firstName, lastBook: $lastBook, isLoading: $isLoading)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TabHomeState &&
+            const DeepCollectionEquality()
+                .equals(other._recommendedBooks, _recommendedBooks) &&
+            const DeepCollectionEquality().equals(other.bookItem, bookItem) &&
+            const DeepCollectionEquality().equals(other.firstName, firstName) &&
+            const DeepCollectionEquality().equals(other.lastBook, lastBook) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_recommendedBooks),
+      const DeepCollectionEquality().hash(bookItem),
+      const DeepCollectionEquality().hash(firstName),
+      const DeepCollectionEquality().hash(lastBook),
+      const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -152,12 +257,21 @@ class _$_TabHomeState implements _TabHomeState {
 abstract class _TabHomeState implements TabHomeState {
   const factory _TabHomeState(
       {final List<BookModel> recommendedBooks,
-      final BookModel bookItem}) = _$_TabHomeState;
+      final BookModel bookItem,
+      final String firstName,
+      final BookModel lastBook,
+      final bool isLoading}) = _$_TabHomeState;
 
-  @override
+  @override //
   List<BookModel> get recommendedBooks;
-  @override
+  @override //
   BookModel get bookItem;
+  @override //
+  String get firstName;
+  @override //
+  BookModel get lastBook;
+  @override //
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_TabHomeStateCopyWith<_$_TabHomeState> get copyWith =>

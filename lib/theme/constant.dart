@@ -7,8 +7,10 @@ const verticalSpace16 = SizedBox(height: double16);
 const verticalSpace32 = SizedBox(height: double32);
 
 // horizontalSpace
+const horizontalSpace4 = SizedBox(width: double4);
 const horizontalSpace8 = SizedBox(width: double8);
 const horizontalSpace16 = SizedBox(width: double16);
+const horizontalSpace24 = SizedBox(width: double24);
 
 // double
 const double4 = 4.0;
@@ -20,6 +22,14 @@ const double32 = 32.0;
 const double48 = 48.0;
 const double56 = 56.0;
 const double45 = 45.0;
+const double64 = 64.0;
+const double80 = 80.0;
+const double88 = 88.0;
+
+// font Size
+const fontSize14 = 14.0;
+const fontSize16 = 16.0;
+const fontSize20 = 20.0;
 
 // string
 const titleApp = 'Book Reader';

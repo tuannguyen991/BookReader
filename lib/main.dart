@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'app.dart';
 
-void main() {
+Future<void> main() async {
   setupLocator();
   runApp(const MyApp());
 }
  
+
+// fvm flutter pub run build_runner build --delete-conflicting-outputs

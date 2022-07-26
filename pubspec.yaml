@@ -20,6 +20,9 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.17.1 <3.0.0"
 
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
 
 dependencies:
   flutter:
@@ -34,6 +37,7 @@ dependencies:
   json_annotation: ^4.6.0 
   percent_indicator: ^4.0.1
   carousel_slider: ^4.1.1
+  readmore: ^2.2.0
 
 
 dev_dependencies:
