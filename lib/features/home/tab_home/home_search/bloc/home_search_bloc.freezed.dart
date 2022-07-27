@@ -21,6 +21,7 @@ mixin _$HomeSearchState {
   List<CategoryModel> get listCategory => throw _privateConstructorUsedError;
   List<BookModel> get listBook => throw _privateConstructorUsedError;
   List<AuthorModel> get listAuthor => throw _privateConstructorUsedError;
+  List<dynamic> get listRecommendedByName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeSearchStateCopyWith<HomeSearchState> get copyWith =>
@@ -37,7 +38,8 @@ abstract class $HomeSearchStateCopyWith<$Res> {
       List<String> history,
       List<CategoryModel> listCategory,
       List<BookModel> listBook,
-      List<AuthorModel> listAuthor});
+      List<AuthorModel> listAuthor,
+      List<dynamic> listRecommendedByName});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$HomeSearchStateCopyWithImpl<$Res>
     Object? listCategory = freezed,
     Object? listBook = freezed,
     Object? listAuthor = freezed,
+    Object? listRecommendedByName = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -78,6 +81,10 @@ class _$HomeSearchStateCopyWithImpl<$Res>
           ? _value.listAuthor
           : listAuthor // ignore: cast_nullable_to_non_nullable
               as List<AuthorModel>,
+      listRecommendedByName: listRecommendedByName == freezed
+          ? _value.listRecommendedByName
+          : listRecommendedByName // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -94,7 +101,8 @@ abstract class _$$_HomeSearchStateCopyWith<$Res>
       List<String> history,
       List<CategoryModel> listCategory,
       List<BookModel> listBook,
-      List<AuthorModel> listAuthor});
+      List<AuthorModel> listAuthor,
+      List<dynamic> listRecommendedByName});
 }
 
 /// @nodoc
@@ -115,6 +123,7 @@ class __$$_HomeSearchStateCopyWithImpl<$Res>
     Object? listCategory = freezed,
     Object? listBook = freezed,
     Object? listAuthor = freezed,
+    Object? listRecommendedByName = freezed,
   }) {
     return _then(_$_HomeSearchState(
       isLoading: isLoading == freezed
@@ -137,6 +146,10 @@ class __$$_HomeSearchStateCopyWithImpl<$Res>
           ? _value._listAuthor
           : listAuthor // ignore: cast_nullable_to_non_nullable
               as List<AuthorModel>,
+      listRecommendedByName: listRecommendedByName == freezed
+          ? _value._listRecommendedByName
+          : listRecommendedByName // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -149,11 +162,13 @@ class _$_HomeSearchState implements _HomeSearchState {
       final List<String> history = const [],
       final List<CategoryModel> listCategory = const [],
       final List<BookModel> listBook = const [],
-      final List<AuthorModel> listAuthor = const []})
+      final List<AuthorModel> listAuthor = const [],
+      final List<dynamic> listRecommendedByName = const []})
       : _history = history,
         _listCategory = listCategory,
         _listBook = listBook,
-        _listAuthor = listAuthor;
+        _listAuthor = listAuthor,
+        _listRecommendedByName = listRecommendedByName;
 
   @override
   @JsonKey()
@@ -190,9 +205,17 @@ class _$_HomeSearchState implements _HomeSearchState {
     return EqualUnmodifiableListView(_listAuthor);
   }
 
+  final List<dynamic> _listRecommendedByName;
+  @override
+  @JsonKey()
+  List<dynamic> get listRecommendedByName {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listRecommendedByName);
+  }
+
   @override
   String toString() {
-    return 'HomeSearchState(isLoading: $isLoading, history: $history, listCategory: $listCategory, listBook: $listBook, listAuthor: $listAuthor)';
+    return 'HomeSearchState(isLoading: $isLoading, history: $history, listCategory: $listCategory, listBook: $listBook, listAuthor: $listAuthor, listRecommendedByName: $listRecommendedByName)';
   }
 
   @override
@@ -206,7 +229,9 @@ class _$_HomeSearchState implements _HomeSearchState {
                 .equals(other._listCategory, _listCategory) &&
             const DeepCollectionEquality().equals(other._listBook, _listBook) &&
             const DeepCollectionEquality()
-                .equals(other._listAuthor, _listAuthor));
+                .equals(other._listAuthor, _listAuthor) &&
+            const DeepCollectionEquality()
+                .equals(other._listRecommendedByName, _listRecommendedByName));
   }
 
   @override
@@ -216,7 +241,8 @@ class _$_HomeSearchState implements _HomeSearchState {
       const DeepCollectionEquality().hash(_history),
       const DeepCollectionEquality().hash(_listCategory),
       const DeepCollectionEquality().hash(_listBook),
-      const DeepCollectionEquality().hash(_listAuthor));
+      const DeepCollectionEquality().hash(_listAuthor),
+      const DeepCollectionEquality().hash(_listRecommendedByName));
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +256,8 @@ abstract class _HomeSearchState implements HomeSearchState {
       final List<String> history,
       final List<CategoryModel> listCategory,
       final List<BookModel> listBook,
-      final List<AuthorModel> listAuthor}) = _$_HomeSearchState;
+      final List<AuthorModel> listAuthor,
+      final List<dynamic> listRecommendedByName}) = _$_HomeSearchState;
 
   @override
   bool get isLoading;
@@ -242,6 +269,8 @@ abstract class _HomeSearchState implements HomeSearchState {
   List<BookModel> get listBook;
   @override
   List<AuthorModel> get listAuthor;
+  @override
+  List<dynamic> get listRecommendedByName;
   @override
   @JsonKey(ignore: true)
   _$$_HomeSearchStateCopyWith<_$_HomeSearchState> get copyWith =>

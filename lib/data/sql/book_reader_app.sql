@@ -10,7 +10,9 @@ INSERT INTO
         PHONE,
         AGE,
         GENDER,
-        IMAGE_LINK
+        IMAGE_LINK,
+        RANKING_ID,
+        READING_TIME,
     )
 VALUES
     (
@@ -24,6 +26,8 @@ VALUES
         21,
         true,
         "https://scontent.fsgn5-10.fna.fbcdn.net/v/t1.6435-9/163642920_2868459293419854_1511555735376202267_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=mm6pJg5Q9uUAX90B5W_&_nc_oc=AQnUiMSSqkqwEd0DdZW1DDvfMZaU9uV_Abup8CmlgAWUmtd1JXPTFaiyIgd08wQTcQ8&_nc_ht=scontent.fsgn5-10.fna&oh=00_AT81Tun19z_gOfcfuyKahzIEKs93mGQbITkBqopskaHtZQ&oe=6300FB61",
+        "1",
+        232123
     ),
     (
         "2",
@@ -35,7 +39,9 @@ VALUES
         "0912386591",
         21,
         true,
-        "https://scontent.fsgn5-15.fna.fbcdn.net/v/t1.18169-1/13620850_1740161942925271_5963677317775186740_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=7206a8&_nc_ohc=EsSxXt3jD94AX-MsvOT&_nc_ht=scontent.fsgn5-15.fna&oh=00_AT9zBRzhERe3PbIALe0pQ0oeqUL6axLY41DWgaZ1rEGE6w&oe=62FEC323"
+        "https://scontent.fsgn5-15.fna.fbcdn.net/v/t1.18169-1/13620850_1740161942925271_5963677317775186740_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=7206a8&_nc_ohc=EsSxXt3jD94AX-MsvOT&_nc_ht=scontent.fsgn5-15.fna&oh=00_AT9zBRzhERe3PbIALe0pQ0oeqUL6axLY41DWgaZ1rEGE6w&oe=62FEC323",
+        "3",
+        231
     ),
     (
         "3",
@@ -47,7 +53,9 @@ VALUES
         "0912128901",
         21,
         true,
-        "https://scontent.fsgn5'-3.fna.fbcdn.net/v/t1.6435-9/75435807_816844178772953_2805100865378058240_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Y9YO0vp3egoAX9Ihprr&_nc_ht=scontent.fsgn5-3.fna&oh=00_AT_OB5QmNfXS8cn1DKlBgStFPG-RhXX5n6QT1g22KR0JPg&oe=630123F9"
+        "https://scontent.fsgn5'-3.fna.fbcdn.net/v/t1.6435-9/75435807_816844178772953_2805100865378058240_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Y9YO0vp3egoAX9Ihprr&_nc_ht=scontent.fsgn5-3.fna&oh=00_AT_OB5QmNfXS8cn1DKlBgStFPG-RhXX5n6QT1g22KR0JPg&oe=630123F9",
+        "3",
+        341
     );
 
 -- TABLE BOOK
@@ -142,7 +150,7 @@ VALUES
     (
         "1",
         "J. K. Rowling",
-        "https://instagram.fsgn5-2.fna.fbcdn.net/v/t51.2885-19/139602632_1002634246809605_239709236590657798_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fsgn5-2.fna.fbcdn.net&_nc_cat=105&_nc_ohc=2U-zW6Wgzb8AX_-lAbV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT845LuW8AxTul5yZHCRQPtzaOUPZXi7v7ojiIrzMRYenQ&oe=62E0CA64&_nc_sid=8fd12b"
+        "https://scontent.fsgn5-14.fna.fbcdn.net/v/t1.6435-9/160623841_274437330713385_6140920492295108645_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=erqH9n-OxW4AX_4Yd3v&_nc_ht=scontent.fsgn5-14.fna&oh=00_AT-dtkKXnx7NRRf7WhmA4Z_qzC7TVmHwm5yabXJ1numf7A&oe=63050CA4"
     ),
     (
         "2",
@@ -279,3 +287,11 @@ VALUES
     ("0X1PxwEACAAJ", "4"),
     ("620pAgAAQBAJ", "3"),
     ("NNGXDwAAQBAJ", "4");
+
+-- TABLE RANKING
+INSERT INTO 
+    RANKING (ID, NAME, IMAGE_LINK) 
+VALUES 
+    ("1", "gold", "https://cdn3.iconfinder.com/data/icons/stars-5/512/gold_star-128.png"),
+    ("2", "silver", "https://cdn3.iconfinder.com/data/icons/stars-5/512/silver_star-128.png"),
+    ("3", "bronze", "https://cdn3.iconfinder.com/data/icons/stars-5/512/bronze_star-128.png");

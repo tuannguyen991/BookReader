@@ -5,6 +5,7 @@ import 'package:demo_book_reader/features/home/home_page.dart';
 import 'package:demo_book_reader/features/login/bloc/login_bloc.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/customer_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -65,10 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return const AlertDialog(
-                                    title: Text('Erorr login'),
-                                    content: Text('Please enter again'),
-                                  );
+                                  return const CustomerAlertDialog();
                                 },
                               );
                             },
@@ -84,17 +82,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
-
-  // Widget _buildChild() {
-  //   return Consumer<LoginViewModel>(
-  //     builder: (context, value, child) {
-  //       if (value.isLoading) {
-  //         return const CircularProgressIndicator();
-  //       }
-  //       return const Text('Login');
-  //     },
-  //   );
-  // }
 }
 
 class LoginField extends StatelessWidget {

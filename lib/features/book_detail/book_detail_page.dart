@@ -5,7 +5,7 @@ import 'package:demo_book_reader/features/book_detail/bloc/book_detail_bloc.dart
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
-import 'package:demo_book_reader/widgets/book_item.dart';
+import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/customer/customer_readmore.dart';
 import 'package:demo_book_reader/widgets/header_section.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +90,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ],
           ),
         ),
-        Align(
+        Align(  
           alignment: Alignment.bottomCenter,
           child: BottomButton(isRead: isRead, bookItem: bookItem),
         ),

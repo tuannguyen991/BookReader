@@ -30,6 +30,9 @@ mixin _$UserModel {
   int get age => throw _privateConstructorUsedError;
   bool get gender => throw _privateConstructorUsedError;
   String get imageLink => throw _privateConstructorUsedError;
+  String get imagaLinkRanking => throw _privateConstructorUsedError;
+  int get readingTime => throw _privateConstructorUsedError;
+  int get readBooks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +54,10 @@ abstract class $UserModelCopyWith<$Res> {
       String phone,
       int age,
       bool gender,
-      String imageLink});
+      String imageLink,
+      String imagaLinkRanking,
+      int readingTime,
+      int readBooks});
 }
 
 /// @nodoc
@@ -74,6 +80,9 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? age = freezed,
     Object? gender = freezed,
     Object? imageLink = freezed,
+    Object? imagaLinkRanking = freezed,
+    Object? readingTime = freezed,
+    Object? readBooks = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -116,6 +125,18 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
+      imagaLinkRanking: imagaLinkRanking == freezed
+          ? _value.imagaLinkRanking
+          : imagaLinkRanking // ignore: cast_nullable_to_non_nullable
+              as String,
+      readingTime: readingTime == freezed
+          ? _value.readingTime
+          : readingTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      readBooks: readBooks == freezed
+          ? _value.readBooks
+          : readBooks // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -136,7 +157,10 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String phone,
       int age,
       bool gender,
-      String imageLink});
+      String imageLink,
+      String imagaLinkRanking,
+      int readingTime,
+      int readBooks});
 }
 
 /// @nodoc
@@ -161,6 +185,9 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? age = freezed,
     Object? gender = freezed,
     Object? imageLink = freezed,
+    Object? imagaLinkRanking = freezed,
+    Object? readingTime = freezed,
+    Object? readBooks = freezed,
   }) {
     return _then(_$_UserModel(
       id: id == freezed
@@ -203,6 +230,18 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
+      imagaLinkRanking: imagaLinkRanking == freezed
+          ? _value.imagaLinkRanking
+          : imagaLinkRanking // ignore: cast_nullable_to_non_nullable
+              as String,
+      readingTime: readingTime == freezed
+          ? _value.readingTime
+          : readingTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      readBooks: readBooks == freezed
+          ? _value.readBooks
+          : readBooks // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -220,7 +259,10 @@ class _$_UserModel implements _UserModel {
       required this.phone,
       required this.age,
       required this.gender,
-      required this.imageLink});
+      required this.imageLink,
+      required this.imagaLinkRanking,
+      required this.readingTime,
+      required this.readBooks});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -245,10 +287,16 @@ class _$_UserModel implements _UserModel {
   final bool gender;
   @override
   final String imageLink;
+  @override
+  final String imagaLinkRanking;
+  @override
+  final int readingTime;
+  @override
+  final int readBooks;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, userName: $userName, password: $password, email: $email, phone: $phone, age: $age, gender: $gender, imageLink: $imageLink)';
+    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, userName: $userName, password: $password, email: $email, phone: $phone, age: $age, gender: $gender, imageLink: $imageLink, imagaLinkRanking: $imagaLinkRanking, readingTime: $readingTime, readBooks: $readBooks)';
   }
 
   @override
@@ -265,7 +313,12 @@ class _$_UserModel implements _UserModel {
             const DeepCollectionEquality().equals(other.phone, phone) &&
             const DeepCollectionEquality().equals(other.age, age) &&
             const DeepCollectionEquality().equals(other.gender, gender) &&
-            const DeepCollectionEquality().equals(other.imageLink, imageLink));
+            const DeepCollectionEquality().equals(other.imageLink, imageLink) &&
+            const DeepCollectionEquality()
+                .equals(other.imagaLinkRanking, imagaLinkRanking) &&
+            const DeepCollectionEquality()
+                .equals(other.readingTime, readingTime) &&
+            const DeepCollectionEquality().equals(other.readBooks, readBooks));
   }
 
   @JsonKey(ignore: true)
@@ -281,7 +334,10 @@ class _$_UserModel implements _UserModel {
       const DeepCollectionEquality().hash(phone),
       const DeepCollectionEquality().hash(age),
       const DeepCollectionEquality().hash(gender),
-      const DeepCollectionEquality().hash(imageLink));
+      const DeepCollectionEquality().hash(imageLink),
+      const DeepCollectionEquality().hash(imagaLinkRanking),
+      const DeepCollectionEquality().hash(readingTime),
+      const DeepCollectionEquality().hash(readBooks));
 
   @JsonKey(ignore: true)
   @override
@@ -305,7 +361,10 @@ abstract class _UserModel implements UserModel {
       required final String phone,
       required final int age,
       required final bool gender,
-      required final String imageLink}) = _$_UserModel;
+      required final String imageLink,
+      required final String imagaLinkRanking,
+      required final int readingTime,
+      required final int readBooks}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -330,6 +389,12 @@ abstract class _UserModel implements UserModel {
   bool get gender;
   @override
   String get imageLink;
+  @override
+  String get imagaLinkRanking;
+  @override
+  int get readingTime;
+  @override
+  int get readBooks;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

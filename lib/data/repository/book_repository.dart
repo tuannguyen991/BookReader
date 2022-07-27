@@ -18,5 +18,7 @@ abstract class BookRepository {
 
   Future<List<String>> getHistorySearch({required String token});
 
+  Future<List<BookModel>> getBookByName({required String token, required String name});
+
   Future<void> deleteHistory({required String token, required String name});
 }

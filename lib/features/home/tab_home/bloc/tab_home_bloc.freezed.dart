@@ -19,7 +19,7 @@ mixin _$TabHomeState {
 //
   List<BookModel> get recommendedBooks => throw _privateConstructorUsedError; //
   BookModel get bookItem => throw _privateConstructorUsedError; //
-  String get firstName => throw _privateConstructorUsedError; //
+  UserModel get user => throw _privateConstructorUsedError; //
   BookModel get lastBook => throw _privateConstructorUsedError; //
   bool get isLoading => throw _privateConstructorUsedError;
 
@@ -36,11 +36,12 @@ abstract class $TabHomeStateCopyWith<$Res> {
   $Res call(
       {List<BookModel> recommendedBooks,
       BookModel bookItem,
-      String firstName,
+      UserModel user,
       BookModel lastBook,
       bool isLoading});
 
   $BookModelCopyWith<$Res> get bookItem;
+  $UserModelCopyWith<$Res> get user;
   $BookModelCopyWith<$Res> get lastBook;
 }
 
@@ -56,7 +57,7 @@ class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
   $Res call({
     Object? recommendedBooks = freezed,
     Object? bookItem = freezed,
-    Object? firstName = freezed,
+    Object? user = freezed,
     Object? lastBook = freezed,
     Object? isLoading = freezed,
   }) {
@@ -69,10 +70,10 @@ class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
       lastBook: lastBook == freezed
           ? _value.lastBook
           : lastBook // ignore: cast_nullable_to_non_nullable
@@ -88,6 +89,13 @@ class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
   $BookModelCopyWith<$Res> get bookItem {
     return $BookModelCopyWith<$Res>(_value.bookItem, (value) {
       return _then(_value.copyWith(bookItem: value));
+    });
+  }
+
+  @override
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
     });
   }
 
@@ -109,12 +117,14 @@ abstract class _$$_TabHomeStateCopyWith<$Res>
   $Res call(
       {List<BookModel> recommendedBooks,
       BookModel bookItem,
-      String firstName,
+      UserModel user,
       BookModel lastBook,
       bool isLoading});
 
   @override
   $BookModelCopyWith<$Res> get bookItem;
+  @override
+  $UserModelCopyWith<$Res> get user;
   @override
   $BookModelCopyWith<$Res> get lastBook;
 }
@@ -134,7 +144,7 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
   $Res call({
     Object? recommendedBooks = freezed,
     Object? bookItem = freezed,
-    Object? firstName = freezed,
+    Object? user = freezed,
     Object? lastBook = freezed,
     Object? isLoading = freezed,
   }) {
@@ -147,10 +157,10 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
       lastBook: lastBook == freezed
           ? _value.lastBook
           : lastBook // ignore: cast_nullable_to_non_nullable
@@ -169,25 +179,38 @@ class _$_TabHomeState implements _TabHomeState {
   const _$_TabHomeState(
       {final List<BookModel> recommendedBooks = const [],
       this.bookItem = const BookModel(
-          id: "",
-          title: "",
-          description: "",
+          id: '',
+          title: '',
+          description: '',
           pageCount: 0,
           averageRating: 0,
           ratingsCount: 0,
-          imageLink: "",
+          imageLink: '',
           view: 0,
           authorList: [],
           categoryList: []),
-      this.firstName = '',
+      this.user = const UserModel(
+          id: '',
+          firstName: '',
+          lastName: '',
+          userName: '',
+          password: '',
+          email: '',
+          phone: '',
+          age: -1,
+          gender: false,
+          imageLink: '',
+          imagaLinkRanking: '',
+          readingTime: 0,
+          readBooks: 0),
       this.lastBook = const BookModel(
-          id: "",
-          title: "",
-          description: "",
+          id: '',
+          title: '',
+          description: '',
           pageCount: 0,
           averageRating: 0,
           ratingsCount: 0,
-          imageLink: "",
+          imageLink: '',
           view: 0,
           authorList: [],
           categoryList: []),
@@ -211,7 +234,7 @@ class _$_TabHomeState implements _TabHomeState {
 //
   @override
   @JsonKey()
-  final String firstName;
+  final UserModel user;
 //
   @override
   @JsonKey()
@@ -223,7 +246,7 @@ class _$_TabHomeState implements _TabHomeState {
 
   @override
   String toString() {
-    return 'TabHomeState(recommendedBooks: $recommendedBooks, bookItem: $bookItem, firstName: $firstName, lastBook: $lastBook, isLoading: $isLoading)';
+    return 'TabHomeState(recommendedBooks: $recommendedBooks, bookItem: $bookItem, user: $user, lastBook: $lastBook, isLoading: $isLoading)';
   }
 
   @override
@@ -234,7 +257,7 @@ class _$_TabHomeState implements _TabHomeState {
             const DeepCollectionEquality()
                 .equals(other._recommendedBooks, _recommendedBooks) &&
             const DeepCollectionEquality().equals(other.bookItem, bookItem) &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
+            const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.lastBook, lastBook) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
@@ -244,7 +267,7 @@ class _$_TabHomeState implements _TabHomeState {
       runtimeType,
       const DeepCollectionEquality().hash(_recommendedBooks),
       const DeepCollectionEquality().hash(bookItem),
-      const DeepCollectionEquality().hash(firstName),
+      const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(lastBook),
       const DeepCollectionEquality().hash(isLoading));
 
@@ -258,7 +281,7 @@ abstract class _TabHomeState implements TabHomeState {
   const factory _TabHomeState(
       {final List<BookModel> recommendedBooks,
       final BookModel bookItem,
-      final String firstName,
+      final UserModel user,
       final BookModel lastBook,
       final bool isLoading}) = _$_TabHomeState;
 
@@ -267,7 +290,7 @@ abstract class _TabHomeState implements TabHomeState {
   @override //
   BookModel get bookItem;
   @override //
-  String get firstName;
+  UserModel get user;
   @override //
   BookModel get lastBook;
   @override //

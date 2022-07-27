@@ -8,5 +8,4 @@ Future<void> main() async {
   runApp(const MyApp());
 }
  
-
 // fvm flutter pub run build_runner build --delete-conflicting-outputs

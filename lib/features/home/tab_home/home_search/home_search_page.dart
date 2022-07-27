@@ -5,9 +5,12 @@ import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_home/home_search/bloc/home_search_bloc.dart';
+import 'package:demo_book_reader/models/author/author_model.dart';
+import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
-import 'package:demo_book_reader/widgets/book_item.dart';
+import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/header_section.dart';
 import 'package:demo_book_reader/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -63,8 +66,8 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                     constraints: const BoxConstraints(),
                   ),
                   horizontalSpace8,
-                  const Flexible(
-                    child: SearchBar(),
+                  Flexible(
+                    child: SearchBar(isTextInput: true, bloc: _bloc),
                   ),
                 ],
               ),
@@ -98,9 +101,8 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                     child: Row(
                       children: List<Widget>.generate(
                         listCategory.length,
-                        (index) => CustomerCard(
-                            category: listCategory[index].name,
-                            imageLink: listCategory[index].imageLink),
+                        (index) =>
+                            CustomerCard(categoryItem: listCategory[index]),
                       ),
                     ),
                   );
@@ -130,11 +132,11 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                       (index) {
                         final bookItem = listBook[index];
                         return InkWell(
-                          child: BookItem(bookItem: bookItem, isGridView: true),
                           onTap: () {
                             context
                                 .navigateTo(BookDetailPage(bookItem: bookItem));
                           },
+                          child: BookItem(bookItem: bookItem, isGridView: true),
                         );
                       },
                     ),
@@ -155,9 +157,13 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: List<Widget>.generate(
                         listAuthor.length,
-                        (index) => AuthorItem(
-                            author: listAuthor[index].name,
-                            imageLink: listAuthor[index].imageLink),
+                        (index) => Padding(
+                          padding: const EdgeInsets.only(right: double8),
+                          child: InkWell(
+                            onTap: () {},
+                            child: AuthorItem(authorItem: listAuthor[index]),
+                          ),
+                        ),
                       ),
                     ),
                   );
@@ -168,38 +174,6 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
         ),
       );
     });
-  }
-}
-
-class AuthorItem extends StatelessWidget {
-  const AuthorItem({
-    Key? key,
-    required this.author,
-    required this.imageLink,
-  }) : super(key: key);
-
-  final String author;
-  final String imageLink;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        width: double88,
-        margin: const EdgeInsets.only(right: double8),
-        child: Column(
-          children: [
-            CircleAvatar(backgroundImage: NetworkImage(imageLink)),
-            verticalSpace8,
-            Text(
-              author,
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
 
@@ -230,12 +204,10 @@ class CustomerChip extends StatelessWidget {
 class CustomerCard extends StatelessWidget {
   const CustomerCard({
     Key? key,
-    required this.category,
-    required this.imageLink,
+    required this.categoryItem,
   }) : super(key: key);
 
-  final String category;
-  final String imageLink;
+  final CategoryModel categoryItem;
 
   @override
   Widget build(BuildContext context) {
@@ -244,23 +216,111 @@ class CustomerCard extends StatelessWidget {
       child: Card(
         child: InkWell(
           onTap: () {},
-          child: SizedBox(
-            height: double64,
-            child: Row(
-              children: [
-                horizontalSpace8,
-                CircleAvatar(backgroundImage: NetworkImage(imageLink)),
-                horizontalSpace8,
-                Text(
-                  category,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
-                ),
-                horizontalSpace24,
-              ],
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: double8,
+              right: double24,
+              top: double12,
+              bottom: double12,
             ),
+            child: CategoryItem(categoryItem: categoryItem),
           ),
         ),
       ),
+    );
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  final HomeSearchBloc bloc;
+
+  MySearchDelegate({required this.bloc});
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          if (query.isEmpty) {
+            close(context, null);
+          } else {
+            query = '';
+          }
+        },
+        icon: const Icon(Icons.clear),
+      ),
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () => close(context, null),
+      icon: const Icon(Icons.arrow_back),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    bloc.add(HomeSearchGetRecommendedByName(name: query));
+
+    return BlocBuilder<HomeSearchBloc, HomeSearchState>(
+      bloc: bloc,
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const CircularProgressIndicator();
+        }
+        final listRecommendedByName = state.listRecommendedByName;
+        return SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(
+              top: double16,
+              left: double16,
+              right: double16,
+            ),
+            child: Column(
+              children: List<Widget>.generate(
+                listRecommendedByName.length,
+                (index) {
+                  final item = listRecommendedByName[index];
+                  if (item is BookModel) {
+                    return InkWell(
+                      onTap: () {
+                        context.navigateTo(BookDetailPage(bookItem: item));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: double16),
+                        child: BookItem(bookItem: item, isLibrary: true),
+                      ),
+                    );
+                  }
+                  if (item is AuthorModel) {
+                    return InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: double16),
+                        child: AuthorItem(authorItem: item, isSearch: true),
+                      ),
+                    );
+                  }
+                  return InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: double16),
+                      child: CategoryItem(categoryItem: item, isSearch: true),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

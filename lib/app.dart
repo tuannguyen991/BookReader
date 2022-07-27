@@ -11,18 +11,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: titleApp,
       theme: ThemeData(
-        primarySwatch: AppColors.primaryColor,
-        scaffoldBackgroundColor: AppColors.backgroundColor,
-        // backgroundColor: AppColors.backgroundColor,
-        // dialogBackgroundColor: AppColors.backgroundColor,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all(
-              const Size.fromHeight(double48),
+          primarySwatch: AppColors.primaryColor,
+          scaffoldBackgroundColor: AppColors.backgroundColor,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              minimumSize: MaterialStateProperty.all(
+                const Size.fromHeight(double48),
+              ),
             ),
           ),
-        ),
-      ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: ButtonStyle(
+              minimumSize: MaterialStateProperty.all(
+                const Size.fromHeight(double48),
+              ),
+              side: MaterialStateProperty.all(
+                BorderSide(color: AppColors.primaryColor),
+              ),
+            ),
+          )),
       home: const OnboardingPage(),
     );
   }

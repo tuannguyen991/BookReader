@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -47,14 +48,14 @@ class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
     // emit(state.copyWith(lastBook: lastBook));
 
     // get Information of User
-    final username = await _userRepository.getInfor(token: token);
+    final user = await _userRepository.getInfor(token: token);
 
     // await Future.delayed(const Duration(seconds: 1));
 
     emit(state.copyWith(
       recommendedBooks: list,
       bookItem: item,
-      firstName: username.firstName,
+      user: user,
       lastBook: lastBook,
       isLoading: false,
     ));

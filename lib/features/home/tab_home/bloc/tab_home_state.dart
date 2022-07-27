@@ -19,16 +19,30 @@ class TabHomeState with _$TabHomeState {
         ratingsCount: 0,
         imageLink: '',
         view: 0,
-
-        // will remove
         authorList: [],
         categoryList: [],
       ),
     )
         BookModel bookItem,
     //
-    @Default('')
-        String firstName,
+    @Default(
+      UserModel(
+        id: '',
+        firstName: '',
+        lastName: '',
+        userName: '',
+        password: '',
+        email: '',
+        phone: '',
+        age: -1,
+        gender: false,
+        imageLink: '',
+        imagaLinkRanking: '',
+        readingTime: 0,
+        readBooks: 0,
+      ),
+    )
+        UserModel user,
     //
     @Default(
       BookModel(
@@ -40,8 +54,6 @@ class TabHomeState with _$TabHomeState {
         ratingsCount: 0,
         imageLink: '',
         view: 0,
-
-        // will remove
         authorList: [],
         categoryList: [],
       ),

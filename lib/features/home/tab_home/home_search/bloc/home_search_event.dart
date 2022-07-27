@@ -10,3 +10,9 @@ class HomeSearchDeleteHistoryItem extends HomeSearchEvent {
 
   HomeSearchDeleteHistoryItem({required this.name});
 }
+
+class HomeSearchGetRecommendedByName extends HomeSearchEvent {
+  final String name;
+
+  HomeSearchGetRecommendedByName({required this.name});
+}

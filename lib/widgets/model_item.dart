@@ -1,4 +1,6 @@
+import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
@@ -164,6 +166,122 @@ class BookItem extends StatelessWidget {
             ],
           ),
         ),
+      ],
+    );
+  }
+}
+
+class AuthorItem extends StatelessWidget {
+  const AuthorItem({
+    Key? key,
+    required this.authorItem,
+    this.isSearch = false,
+  }) : super(key: key);
+
+  final AuthorModel authorItem;
+  final bool isSearch;
+
+  @override
+  Widget build(BuildContext context) {
+    late final List<int> flexList;
+    late final SizedBox sizedBox;
+
+    if (isSearch) {
+      flexList = [1, 5];
+      sizedBox = horizontalSpace8;
+    } else {
+      flexList = [0, 0];
+      sizedBox = verticalSpace8;
+    }
+
+    if (isSearch) {
+      return Row(
+        children: [
+          Flexible(
+            flex: flexList[0],
+            fit: FlexFit.tight,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(authorItem.imageLink),
+            ),
+          ),
+          sizedBox,
+          Flexible(
+            flex: flexList[1],
+            fit: FlexFit.tight,
+            child: Text(
+              authorItem.name,
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ),
+        ],
+      );
+    }
+    return SizedBox(
+      width: double80,
+      child: Column(
+        children: [
+          CircleAvatar(backgroundImage: NetworkImage(authorItem.imageLink)),
+          sizedBox,
+          Text(
+            authorItem.name,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({
+    Key? key,
+    required this.categoryItem,
+    this.isSearch = false,
+  }) : super(key: key);
+
+  final CategoryModel categoryItem;
+  final bool isSearch;
+
+  @override
+  Widget build(BuildContext context) {
+    late final List<int> flexList;
+    late final SizedBox sizedBox;
+
+    sizedBox = horizontalSpace8;
+
+    if (isSearch) {
+      flexList = [1, 5];
+    } else {
+      flexList = [0, 0];
+    }
+
+    return Row(
+      children: [
+        isSearch
+            ? Flexible(
+                flex: flexList[0],
+                fit: FlexFit.tight,
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(categoryItem.imageLink),
+                ),
+              )
+            : CircleAvatar(
+                backgroundImage: NetworkImage(categoryItem.imageLink),
+              ),
+        sizedBox,
+        isSearch
+            ? Flexible(
+                flex: flexList[1],
+                fit: FlexFit.tight,
+                child: Text(
+                  categoryItem.name,
+                  style: const TextStyle(fontWeight: FontWeight.w500),
+                ),
+              )
+            : Text(
+                categoryItem.name,
+                style: const TextStyle(fontWeight: FontWeight.w500),
+              ),
       ],
     );
   }

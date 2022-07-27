@@ -17,6 +17,9 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       age: json['age'] as int,
       gender: json['gender'] as bool,
       imageLink: json['imageLink'] as String,
+      imagaLinkRanking: json['imagaLinkRanking'] as String,
+      readingTime: json['readingTime'] as int,
+      readBooks: json['readBooks'] as int,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -31,4 +34,7 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'age': instance.age,
       'gender': instance.gender,
       'imageLink': instance.imageLink,
+      'imagaLinkRanking': instance.imagaLinkRanking,
+      'readingTime': instance.readingTime,
+      'readBooks': instance.readBooks,
     };

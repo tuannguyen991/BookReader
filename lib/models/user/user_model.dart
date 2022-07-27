@@ -15,6 +15,9 @@ class UserModel with _$UserModel {
     required int age,
     required bool gender,
     required String imageLink,
+    required String imagaLinkRanking,
+    required int readingTime,
+    required int readBooks,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) =>

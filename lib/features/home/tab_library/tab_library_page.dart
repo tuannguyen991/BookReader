@@ -6,7 +6,8 @@ import 'package:demo_book_reader/features/home/tab_library/bloc/tab_library_bloc
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
-import 'package:demo_book_reader/widgets/book_item.dart';
+import 'package:demo_book_reader/widgets/model_item.dart';
+import 'package:demo_book_reader/widgets/modal_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -198,41 +199,6 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ModalItem extends StatelessWidget {
-  const ModalItem({
-    Key? key,
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  }) : super(key: key);
-
-  final IconData icon;
-  final String title;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: double8),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: AppColors.secondaryColor,
-            ),
-            horizontalSpace16,
-            Text(
-              title,
-              style: const TextStyle(fontSize: fontSize16),
-            ),
-          ],
-        ),
       ),
     );
   }

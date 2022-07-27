@@ -11,6 +11,7 @@ class HomeSearchState with _$HomeSearchState {
     @Default([]) List<CategoryModel> listCategory,
     @Default([]) List<BookModel> listBook,
     @Default([]) List<AuthorModel> listAuthor,
+    @Default([]) List<dynamic> listRecommendedByName,
 
   }) = _HomeSearchState;
 }

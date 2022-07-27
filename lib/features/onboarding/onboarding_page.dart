@@ -58,7 +58,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             // ),
             verticalSpace32,
             ElevatedButton(
-              onPressed: () => context.navigateTo(const LoginPage()),
+              onPressed: () => context.navigateOff(const LoginPage()),
               child: const Text('Login'),
             )
           ],

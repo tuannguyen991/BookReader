@@ -7,9 +7,12 @@ import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
-import 'package:demo_book_reader/widgets/book_item.dart';
+import 'package:demo_book_reader/widgets/backdrop.dart';
+import 'package:demo_book_reader/widgets/background_image.dart';
+import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
+import 'package:demo_book_reader/widgets/greeting.dart';
 import 'package:demo_book_reader/widgets/search_bar.dart';
 import 'package:demo_book_reader/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
@@ -52,8 +55,8 @@ class _TabHomePageState extends State<TabHomePage> {
     const percent = 0.35;
     return Stack(
       children: [
-        BackGroundImage(context: context),
-        BackDrop(context: context, percent: percent),
+        BackgroundImage(context: context),
+        Backdrop(context: context, percent: percent),
         SingleChildScrollView(
           child: SafeArea(
             child: Container(
@@ -64,22 +67,34 @@ class _TabHomePageState extends State<TabHomePage> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Greeting(),
+                children: [
+                  BlocBuilder<TabHomeBloc, TabHomeState>(
+                    builder: (context, state) {
+                      return Greeting(user: state.user);
+                    },
+                  ),
                   verticalSpace32,
-                  SearchBar(isTextInput: false),
+                  const SearchBar(isTextInput: false),
                   verticalSpace16,
                   // Reading Box
-                  ReadingBookBox(),
+                  BlocBuilder<TabHomeBloc, TabHomeState>(
+                    builder: (context, state) {
+                      if (state.isLoading) {
+                        return const CircularProgressIndicator();
+                      }
+                      final lastBook = state.lastBook;
+                      return ReadingBookBox(lastBook: lastBook);
+                    },
+                  ),
                   verticalSpace16,
-                  Text(
+                  const Text(
                     'Gợi ý sách cho bạn',
                     style: TextStyle(
                       fontSize: double16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  RecommendedCarousel(),
+                  const RecommendedCarousel(),
                 ],
               ),
             ),
@@ -250,159 +265,68 @@ class RecommendedCarousel extends StatelessWidget {
 class ReadingBookBox extends StatelessWidget {
   const ReadingBookBox({
     Key? key,
+    required this.lastBook,
   }) : super(key: key);
 
+  final BookModel lastBook;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TabHomeBloc, TabHomeState>(
-      builder: (context, state) {
-        final BookModel lastBook = state.lastBook;
-        return Container(
-          padding: const EdgeInsets.all(double8),
-          decoration: CustomerBoxDecoration.buildBoxDecoration(
-            color: AppColors.backgroundColor,
-            borderRadius: double16,
-            isShadow: true,
-          ),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(double12),
-                decoration: CustomerBoxDecoration.buildBoxDecoration(
-                  color: AppColors.secondaryBackgroundColor,
-                  borderRadius: double16,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text:
-                                  'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
-                              style: TextStyle(
-                                color: AppColors.secondaryColor,
-                              ),
-                            ),
-                            TextSpan(
-                              text: lastBook.lastDay,
-                              style: const TextStyle(
-                                color: AppColors.titleColor,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        context.navigateTo(BookDetailPage(bookItem: lastBook));
-                      },
-                      child: Text(
-                        'Đọc tiếp',
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: double16,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              verticalSpace8,
-              Builder(builder: (context) {
-                if (state.isLoading) {
-                  return const CircularProgressIndicator();
-                }
-                return BookItem(bookItem: lastBook);
-              }),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class Greeting extends StatelessWidget {
-  const Greeting({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TabHomeBloc, TabHomeState>(builder: (context, state) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Container(
+      padding: const EdgeInsets.all(double8),
+      decoration: CustomerBoxDecoration.buildBoxDecoration(
+        color: AppColors.backgroundColor,
+        borderRadius: double16,
+        isShadow: true,
+      ),
+      child: Column(
         children: [
-          Text(
-            'Xin chào, ${state.firstName}',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: double24,
-              color: AppColors.backgroundColor,
+          Container(
+            padding: const EdgeInsets.all(double12),
+            decoration: CustomerBoxDecoration.buildBoxDecoration(
+              color: AppColors.secondaryBackgroundColor,
+              borderRadius: double16,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text:
+                              'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
+                          style: TextStyle(
+                            color: AppColors.secondaryColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: lastBook.lastDay,
+                          style: const TextStyle(
+                            color: AppColors.titleColor,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.navigateTo(BookDetailPage(bookItem: lastBook));
+                  },
+                  child: Text(
+                    'Đọc tiếp',
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: double16,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           verticalSpace8,
-          const Text(
-            'Hôm nay bạn muốn đọc gì?',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.backgroundColor,
-            ),
-          ),
+          BookItem(bookItem: lastBook),
         ],
-      );
-    });
-  }
-}
-
-class BackDrop extends StatelessWidget {
-  const BackDrop({
-    Key? key,
-    required this.context,
-    required this.percent,
-  }) : super(key: key);
-
-  final BuildContext context;
-  final double percent;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: MediaQuery.of(context).size.height * percent,
-      left: 0,
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: CustomerBoxDecoration.buildBoxDecoration(
-          color: AppColors.backgroundColor,
-          borderRadius: double45,
-        ),
-      ),
-    );
-  }
-}
-
-class BackGroundImage extends StatelessWidget {
-  const BackGroundImage({
-    Key? key,
-    required this.context,
-  }) : super(key: key);
-
-  final BuildContext context;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Image.network(
-        'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
-        fit: BoxFit.fill,
-        color: AppColors.primaryColor.withOpacity(1),
-        colorBlendMode: BlendMode.modulate,
       ),
     );
   }

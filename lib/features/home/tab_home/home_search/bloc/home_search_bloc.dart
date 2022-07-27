@@ -27,6 +27,7 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
         super(const HomeSearchState()) {
     on<HomeSearchLoaded>(_onLoaded);
     on<HomeSearchDeleteHistoryItem>(_onDeleteHistory);
+    on<HomeSearchGetRecommendedByName>(_onGetRecommendedByName);
   }
 
   final BookRepository _bookRepository;
@@ -67,5 +68,24 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
     _bookRepository.deleteHistory(token: token, name: event.name);
 
     add(HomeSearchLoaded());
+  }
+
+  FutureOr<void> _onGetRecommendedByName(
+    HomeSearchGetRecommendedByName event,
+    Emitter<HomeSearchState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token')!;
+
+    emit(state.copyWith(isLoading: true));
+
+    final listRecommendedByName = [
+      ...await _bookRepository.getBookByName(token: token, name: event.name),
+      ...await _authorRepository.getAuthorByName(token: token, name: event.name),
+      ...await _categoryRepository.getCategoryByName(token: token, name: event.name),
+    ];
+
+    emit(state.copyWith(listRecommendedByName: listRecommendedByName, isLoading: false));
+
   }
 }
