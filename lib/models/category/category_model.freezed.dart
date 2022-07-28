@@ -117,18 +117,20 @@ class __$$_CategoryModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CategoryModel extends _CategoryModel {
-  const _$_CategoryModel(
-      {required this.id, required this.name, required this.imageLink})
+  const _$_CategoryModel({this.id = '', this.name = '', this.imageLink = ''})
       : super._();
 
   factory _$_CategoryModel.fromJson(Map<String, dynamic> json) =>
       _$$_CategoryModelFromJson(json);
 
   @override
+  @JsonKey()
   final String id;
   @override
+  @JsonKey()
   final String name;
   @override
+  @JsonKey()
   final String imageLink;
 
   @override
@@ -162,9 +164,9 @@ class _$_CategoryModel extends _CategoryModel {
 
 abstract class _CategoryModel extends CategoryModel {
   const factory _CategoryModel(
-      {required final String id,
-      required final String name,
-      required final String imageLink}) = _$_CategoryModel;
+      {final String id,
+      final String name,
+      final String imageLink}) = _$_CategoryModel;
   const _CategoryModel._() : super._();
 
   factory _CategoryModel.fromJson(Map<String, dynamic> json) =

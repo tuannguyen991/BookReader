@@ -7,18 +7,18 @@ part 'book_model.g.dart';
 @freezed
 class BookModel with _$BookModel {
   const factory BookModel({
-    required String id,
-    required String title,
+    @Default('') String id,
+    @Default('') String title,
     String? subTitle,
-    required String description,
-    required int pageCount,
-    required double averageRating,
-    required int ratingsCount,
-    required String imageLink,
-    required int view,
+    @Default('') String description,
+    @Default(0) int pageCount,
+    @Default(0) double averageRating,
+    @Default(0) int ratingsCount,
+    @Default('') String imageLink,
+    @Default(0) int view,
 
-    required List<AuthorModel> authorList,
-    required List<CategoryModel> categoryList,
+    @Default([]) List<AuthorModel> authorList,
+    @Default([]) List<CategoryModel> categoryList,
 
     String? lastDay,
     int? lastPage,

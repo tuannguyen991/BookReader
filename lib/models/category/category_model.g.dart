@@ -8,9 +8,9 @@ part of 'category_model.dart';
 
 _$_CategoryModel _$$_CategoryModelFromJson(Map<String, dynamic> json) =>
     _$_CategoryModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      imageLink: json['imageLink'] as String,
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      imageLink: json['imageLink'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CategoryModelToJson(_$_CategoryModel instance) =>

@@ -5,50 +5,21 @@ part 'user_model.g.dart';
 @freezed
 class UserModel with _$UserModel {
   const factory UserModel({
-    required String id,
-    required String firstName,
-    required String lastName,
-    required String userName,
-    required String password,
-    required String email,
-    required String phone,
-    required int age,
-    required bool gender,
-    required String imageLink,
-    required String imagaLinkRanking,
-    required int readingTime,
-    required int readBooks,
+    @Default('') String id,
+    @Default('') String firstName,
+    @Default('') String lastName,
+    @Default('') String userName,
+    @Default('') String password,
+    @Default('') String email,
+    @Default('') String phone,
+    @Default(0) int age,
+    @Default(false) bool gender,
+    @Default('') String imageLink,
+    @Default('') String imagaLinkRanking,
+    @Default(0) int readingTime,
+    @Default(0) int readBooks,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) =>
       _$UserModelFromJson(json);
 }
-
-// class UserModel {
-//   UserModel({required this.name, required this.email, required this.avatarUrl});
-//   final String name;
-//   final String email;
-//   final String avatarUrl;
-//
-//   factory UserModel.fromJson(Map<String, dynamic> json) {
-//     return UserModel(
-//         name: json['name'], email: json['email'], avatarUrl: json['avatarUrl']);
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final data = <String, dynamic>{};
-//     data['name'] = name;
-//     data['email'] = email;
-//     data['avatarUrl'] = avatarUrl;
-//
-//     return data;
-//   }
-//
-//   UserModel copyWith({String? name, String? email, String? avatarUrl}) {
-//     return UserModel(
-//         name: name ?? this.name,
-//         email: email ?? this.email,
-//         avatarUrl: avatarUrl ?? this.avatarUrl);
-//   }
-// }
-//

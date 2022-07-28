@@ -2,6 +2,7 @@ import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/bloc/book_detail_bloc.dart';
+import 'package:demo_book_reader/features/epub_view/epub_view_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
@@ -79,7 +80,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                         return InkWell(
                           child: BookItem(bookItem: bookItem, isGridView: true),
                           onTap: () {
-                            context.navigateTo(BookDetailPage(bookItem: bookItem));
+                            context
+                                .navigateTo(BookDetailPage(bookItem: bookItem));
                           },
                         );
                       },
@@ -90,7 +92,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ],
           ),
         ),
-        Align(  
+        Align(
           alignment: Alignment.bottomCenter,
           child: BottomButton(isRead: isRead, bookItem: bookItem),
         ),
@@ -124,7 +126,9 @@ class BottomButton extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.navigateTo(EpubViewPage(linkEpub: bookItem.id));
+                  },
                   child: Text(
                     isRead ? 'Đọc tiếp' : 'Đọc sách ngay',
                     style: const TextStyle(fontSize: fontSize16),
@@ -195,9 +199,6 @@ class CustomerAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false,
-      leading: const BackButton(),
-      leadingWidth: 24,
       foregroundColor: AppColors.secondaryColor,
       backgroundColor: Colors.transparent,
       elevation: 0.0,

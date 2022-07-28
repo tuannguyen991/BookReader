@@ -8,9 +8,9 @@ class AuthorModel with _$AuthorModel {
   const AuthorModel._();
 
   const factory AuthorModel({
-    required String id,
-    required String name,
-    required String imageLink,
+    @Default('') String id,
+    @Default('') String name,
+    @Default('') String imageLink,
   }) = _AuthorModel;
 
   factory AuthorModel.fromJson(Map<String, Object?> json) =>

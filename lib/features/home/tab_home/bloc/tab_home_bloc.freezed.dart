@@ -178,42 +178,9 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
 class _$_TabHomeState implements _TabHomeState {
   const _$_TabHomeState(
       {final List<BookModel> recommendedBooks = const [],
-      this.bookItem = const BookModel(
-          id: '',
-          title: '',
-          description: '',
-          pageCount: 0,
-          averageRating: 0,
-          ratingsCount: 0,
-          imageLink: '',
-          view: 0,
-          authorList: [],
-          categoryList: []),
-      this.user = const UserModel(
-          id: '',
-          firstName: '',
-          lastName: '',
-          userName: '',
-          password: '',
-          email: '',
-          phone: '',
-          age: -1,
-          gender: false,
-          imageLink: '',
-          imagaLinkRanking: '',
-          readingTime: 0,
-          readBooks: 0),
-      this.lastBook = const BookModel(
-          id: '',
-          title: '',
-          description: '',
-          pageCount: 0,
-          averageRating: 0,
-          ratingsCount: 0,
-          imageLink: '',
-          view: 0,
-          authorList: [],
-          categoryList: []),
+      this.bookItem = const BookModel(),
+      this.user = const UserModel(),
+      this.lastBook = const BookModel(),
       this.isLoading = true})
       : _recommendedBooks = recommendedBooks;
 

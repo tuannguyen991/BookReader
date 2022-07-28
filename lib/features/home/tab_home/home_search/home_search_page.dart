@@ -62,7 +62,7 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                     onPressed: () {
                       context.off();
                     },
-                    padding: EdgeInsets.zero,
+                    padding: const EdgeInsets.all(double4),
                     constraints: const BoxConstraints(),
                   ),
                   horizontalSpace8,

@@ -8,9 +8,9 @@ class CategoryModel with _$CategoryModel {
   const CategoryModel._();
 
   const factory CategoryModel({
-    required String id,
-    required String name,
-    required String imageLink,
+    @Default('') String id,
+    @Default('') String name,
+    @Default('') String imageLink,
   }) = _CategoryModel;
 
   factory CategoryModel.fromJson(Map<String, Object?> json) =>

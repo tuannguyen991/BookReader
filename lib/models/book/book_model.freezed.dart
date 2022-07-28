@@ -250,17 +250,17 @@ class __$$_BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BookModel implements _BookModel {
   const _$_BookModel(
-      {required this.id,
-      required this.title,
+      {this.id = '',
+      this.title = '',
       this.subTitle,
-      required this.description,
-      required this.pageCount,
-      required this.averageRating,
-      required this.ratingsCount,
-      required this.imageLink,
-      required this.view,
-      required final List<AuthorModel> authorList,
-      required final List<CategoryModel> categoryList,
+      this.description = '',
+      this.pageCount = 0,
+      this.averageRating = 0,
+      this.ratingsCount = 0,
+      this.imageLink = '',
+      this.view = 0,
+      final List<AuthorModel> authorList = const [],
+      final List<CategoryModel> categoryList = const [],
       this.lastDay,
       this.lastPage})
       : _authorList = authorList,
@@ -270,25 +270,34 @@ class _$_BookModel implements _BookModel {
       _$$_BookModelFromJson(json);
 
   @override
+  @JsonKey()
   final String id;
   @override
+  @JsonKey()
   final String title;
   @override
   final String? subTitle;
   @override
+  @JsonKey()
   final String description;
   @override
+  @JsonKey()
   final int pageCount;
   @override
+  @JsonKey()
   final double averageRating;
   @override
+  @JsonKey()
   final int ratingsCount;
   @override
+  @JsonKey()
   final String imageLink;
   @override
+  @JsonKey()
   final int view;
   final List<AuthorModel> _authorList;
   @override
+  @JsonKey()
   List<AuthorModel> get authorList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_authorList);
@@ -296,6 +305,7 @@ class _$_BookModel implements _BookModel {
 
   final List<CategoryModel> _categoryList;
   @override
+  @JsonKey()
   List<CategoryModel> get categoryList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_categoryList);
@@ -367,17 +377,17 @@ class _$_BookModel implements _BookModel {
 
 abstract class _BookModel implements BookModel {
   const factory _BookModel(
-      {required final String id,
-      required final String title,
+      {final String id,
+      final String title,
       final String? subTitle,
-      required final String description,
-      required final int pageCount,
-      required final double averageRating,
-      required final int ratingsCount,
-      required final String imageLink,
-      required final int view,
-      required final List<AuthorModel> authorList,
-      required final List<CategoryModel> categoryList,
+      final String description,
+      final int pageCount,
+      final double averageRating,
+      final int ratingsCount,
+      final String imageLink,
+      final int view,
+      final List<AuthorModel> authorList,
+      final List<CategoryModel> categoryList,
       final String? lastDay,
       final int? lastPage}) = _$_BookModel;
 

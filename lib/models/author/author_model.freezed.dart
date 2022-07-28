@@ -115,18 +115,20 @@ class __$$_AuthorModelCopyWithImpl<$Res> extends _$AuthorModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AuthorModel extends _AuthorModel {
-  const _$_AuthorModel(
-      {required this.id, required this.name, required this.imageLink})
+  const _$_AuthorModel({this.id = '', this.name = '', this.imageLink = ''})
       : super._();
 
   factory _$_AuthorModel.fromJson(Map<String, dynamic> json) =>
       _$$_AuthorModelFromJson(json);
 
   @override
+  @JsonKey()
   final String id;
   @override
+  @JsonKey()
   final String name;
   @override
+  @JsonKey()
   final String imageLink;
 
   @override
@@ -160,9 +162,9 @@ class _$_AuthorModel extends _AuthorModel {
 
 abstract class _AuthorModel extends AuthorModel {
   const factory _AuthorModel(
-      {required final String id,
-      required final String name,
-      required final String imageLink}) = _$_AuthorModel;
+      {final String id,
+      final String name,
+      final String imageLink}) = _$_AuthorModel;
   const _AuthorModel._() : super._();
 
   factory _AuthorModel.fromJson(Map<String, dynamic> json) =

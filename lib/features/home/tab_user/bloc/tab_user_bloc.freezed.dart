@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TabUserState {
-  bool get isLoading => throw _privateConstructorUsedError; //
+  bool get isLoading => throw _privateConstructorUsedError;
   UserModel get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -112,27 +112,11 @@ class __$$_TabUserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TabUserState implements _TabUserState {
-  const _$_TabUserState(
-      {this.isLoading = true,
-      this.user = const UserModel(
-          id: '',
-          firstName: '',
-          lastName: '',
-          userName: '',
-          password: '',
-          email: '',
-          phone: '',
-          age: -1,
-          gender: false,
-          imageLink: '',
-          imagaLinkRanking: '',
-          readingTime: 0,
-          readBooks: 0)});
+  const _$_TabUserState({this.isLoading = true, this.user = const UserModel()});
 
   @override
   @JsonKey()
   final bool isLoading;
-//
   @override
   @JsonKey()
   final UserModel user;
@@ -169,7 +153,7 @@ abstract class _TabUserState implements TabUserState {
 
   @override
   bool get isLoading;
-  @override //
+  @override
   UserModel get user;
   @override
   @JsonKey(ignore: true)

@@ -250,48 +250,61 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   const _$_UserModel(
-      {required this.id,
-      required this.firstName,
-      required this.lastName,
-      required this.userName,
-      required this.password,
-      required this.email,
-      required this.phone,
-      required this.age,
-      required this.gender,
-      required this.imageLink,
-      required this.imagaLinkRanking,
-      required this.readingTime,
-      required this.readBooks});
+      {this.id = '',
+      this.firstName = '',
+      this.lastName = '',
+      this.userName = '',
+      this.password = '',
+      this.email = '',
+      this.phone = '',
+      this.age = 0,
+      this.gender = false,
+      this.imageLink = '',
+      this.imagaLinkRanking = '',
+      this.readingTime = 0,
+      this.readBooks = 0});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
   @override
+  @JsonKey()
   final String id;
   @override
+  @JsonKey()
   final String firstName;
   @override
+  @JsonKey()
   final String lastName;
   @override
+  @JsonKey()
   final String userName;
   @override
+  @JsonKey()
   final String password;
   @override
+  @JsonKey()
   final String email;
   @override
+  @JsonKey()
   final String phone;
   @override
+  @JsonKey()
   final int age;
   @override
+  @JsonKey()
   final bool gender;
   @override
+  @JsonKey()
   final String imageLink;
   @override
+  @JsonKey()
   final String imagaLinkRanking;
   @override
+  @JsonKey()
   final int readingTime;
   @override
+  @JsonKey()
   final int readBooks;
 
   @override
@@ -352,19 +365,19 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {required final String id,
-      required final String firstName,
-      required final String lastName,
-      required final String userName,
-      required final String password,
-      required final String email,
-      required final String phone,
-      required final int age,
-      required final bool gender,
-      required final String imageLink,
-      required final String imagaLinkRanking,
-      required final int readingTime,
-      required final int readBooks}) = _$_UserModel;
+      {final String id,
+      final String firstName,
+      final String lastName,
+      final String userName,
+      final String password,
+      final String email,
+      final String phone,
+      final int age,
+      final bool gender,
+      final String imageLink,
+      final String imagaLinkRanking,
+      final int readingTime,
+      final int readBooks}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
