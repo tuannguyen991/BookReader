@@ -36,7 +36,6 @@ class _EpubViewPageState extends State<EpubViewPage> {
           builder: (chapterValue) {
             return Text(
               chapterValue?.chapter?.Title?.replaceAll('\n', '').trim() ?? '',
-              textAlign: TextAlign.start,
             );
           },
         ),

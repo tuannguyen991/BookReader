@@ -9,6 +9,8 @@ import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/backdrop.dart';
 import 'package:demo_book_reader/widgets/background_image.dart';
+import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
@@ -87,12 +89,10 @@ class _TabHomePageState extends State<TabHomePage> {
                     },
                   ),
                   verticalSpace16,
-                  const Text(
+                  const CustomerText(
                     'Gợi ý sách cho bạn',
-                    style: TextStyle(
-                      fontSize: double16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    fontSize: fontSize16,
+                    fontWeight: FontWeight.w500,
                   ),
                   const RecommendedCarousel(),
                 ],
@@ -148,33 +148,25 @@ class RecommendedCarousel extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              CustomerText(
                 item.title,
-                style: const TextStyle(
-                  fontSize: double16,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                fontSize: fontSize16,
               ),
               Row(
                 children: [
-                  Text(
+                  CustomerText(
                     '$authors - ',
-                    style: TextStyle(
-                      color: AppColors.secondaryColor,
-                    ),
+                    color: AppColors.secondaryColor,
                   ),
                   StarRating(
                     rating: item.averageRating,
                   ),
                 ],
               ),
-              Text(
+              CustomerText(
                 item.description,
                 maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: AppColors.secondaryColor,
-                ),
+                color: AppColors.secondaryColor,
               ),
               Row(
                 children: [
@@ -184,20 +176,16 @@ class RecommendedCarousel extends StatelessWidget {
                   ),
                   horizontalSpace8,
                   Expanded(
-                    child: Text(
+                    child: CustomerText(
                       '${item.view} lượt xem',
-                      style: TextStyle(
-                        color: AppColors.secondaryColor,
-                      ),
+                      color: AppColors.secondaryColor,
                     ),
                   ),
                   TextButton(
-                    child: Text(
+                    child: CustomerText(
                       'Xem thêm',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: double16,
-                      ),
+                      color: AppColors.primaryColor,
+                      fontSize: fontSize16,
                     ),
                     onPressed: () {
                       context.navigateTo(BookDetailPage(bookItem: item));
@@ -289,36 +277,22 @@ class ReadingBookBox extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text:
-                              'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
-                          style: TextStyle(
-                            color: AppColors.secondaryColor,
-                          ),
-                        ),
-                        TextSpan(
-                          text: lastBook.lastDay,
-                          style: const TextStyle(
-                            color: AppColors.titleColor,
-                          ),
-                        )
-                      ],
-                    ),
+                  child: CustomerRichText(
+                    text:
+                        'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
+                    subText: lastBook.lastDay!,
+                    color: AppColors.secondaryColor,
+                    subColor: AppColors.titleColor,
                   ),
                 ),
                 TextButton(
                   onPressed: () {
                     context.navigateTo(BookDetailPage(bookItem: lastBook));
                   },
-                  child: Text(
+                  child: CustomerText(
                     'Đọc tiếp',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: double16,
-                    ),
+                    color: AppColors.primaryColor,
+                    fontSize: fontSize16,
                   ),
                 ),
               ],

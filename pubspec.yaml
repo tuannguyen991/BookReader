@@ -38,6 +38,8 @@ dependencies:
   carousel_slider: ^4.1.1
   readmore: ^2.2.0
   epub_view: ^3.0.0
+  syncfusion_flutter_charts: ^20.2.40
+  intl: ^0.17.0
 
 
 dev_dependencies:
@@ -53,6 +55,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/epub/
+    - assets/image/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

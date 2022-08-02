@@ -6,6 +6,7 @@ import 'package:demo_book_reader/features/epub_view/epub_view_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/customer/customer_readmore.dart';
 import 'package:demo_book_reader/widgets/header_section.dart';
@@ -129,10 +130,10 @@ class BottomButton extends StatelessWidget {
                   onPressed: () {
                     context.navigateTo(EpubViewPage(linkEpub: bookItem.id));
                   },
-                  child: Text(
+                  child: CustomerText(
                     isRead ? 'Đọc tiếp' : 'Đọc sách ngay',
-                    style: const TextStyle(fontSize: fontSize16),
-                  ),
+                    fontSize: fontSize16,
+                  )
                 ),
               ),
               horizontalSpace8,

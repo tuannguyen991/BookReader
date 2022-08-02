@@ -1,6 +1,7 @@
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
 
 class Greeting extends StatelessWidget {
@@ -42,6 +43,7 @@ class Greeting extends StatelessWidget {
                             width: double80,
                             child: Image.network(
                               user.imagaLinkRanking,
+                              
                             ),
                           ),
                         ),
@@ -49,7 +51,11 @@ class Greeting extends StatelessWidget {
                     ),
                     verticalSpace16,
                     verticalSpace8,
-                    CustomerText(text: '${user.lastName} ${user.firstName}'),
+                    CustomerText( 
+                      '${user.lastName} ${user.firstName}',
+                      isCenter: true,
+                      color: AppColors.backgroundColor,
+                    ),
                   ],
                 ),
               ),
@@ -58,39 +64,22 @@ class Greeting extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Column(children: [
-                  CustomerText(text: 'Xin chào, ${user.firstName}'),
+                  CustomerText(
+                    'Xin chào, ${user.firstName}',
+                    isCenter: true,
+                    color: AppColors.backgroundColor,
+                  ),
                   verticalSpace8,
                   const CustomerText(
-                    text: 'Hôm nay bạn muốn đọc gì?',
-                    isTitle: false,
+                    'Hôm nay bạn muốn đọc gì?',
+                    isCenter: true,
+                    color: AppColors.backgroundColor,
+                    fontSize: double24,
+                    fontWeight: FontWeight.w500,
                   ),
                 ]),
               ),
             ],
-    );
-  }
-}
-
-class CustomerText extends StatelessWidget {
-  const CustomerText({
-    Key? key,
-    required this.text,
-    this.isTitle = true,
-  }) : super(key: key);
-
-  final String text;
-  final bool isTitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontWeight: isTitle ? FontWeight.w500 : null,
-        fontSize: isTitle ? double24 : null,
-        color: AppColors.backgroundColor,
-      ),
     );
   }
 }

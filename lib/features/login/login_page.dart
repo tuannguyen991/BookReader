@@ -6,6 +6,9 @@ import 'package:demo_book_reader/features/login/bloc/login_bloc.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_alert_dialog.dart';
+import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
+import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,20 +38,48 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildBody() {
     return Builder(
       builder: (context) {
+        const percent = 0.2;
+        final height = MediaQuery.of(context).size.height * percent;
         return SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(double16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  titleApp,
-                  style: TextStyle(
-                    fontSize: double56,
-                    color: AppColors.primaryColor,
-                    fontWeight: FontWeight.bold,
+                SizedBox(
+                  height: height,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: double45,
+                        child: CustomerClipRRect(
+                          image: 'assets/image/logo.png',
+                          isAssets: true,
+                        ),
+                      ),
+                      horizontalSpace16,
+                      CustomerText(
+                        titleApp,
+                        fontSize: fontSize32,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor,
+                      ),
+                    ],
                   ),
                 ),
-                verticalSpace32,
+                const CustomerText(
+                  'Đăng nhập',
+                  fontSize: fontSize32,
+                  fontWeight: FontWeight.bold,
+                ),
+                verticalSpace8,
+                CustomerText(
+                  'Nhập tài khoản email của TMT đã cung cấp cho bạn',
+                  color: AppColors.secondaryColor,
+                ),
+                verticalSpace16,
+                verticalSpace8,
                 LoginField(controller: _usernameController, isPassword: false),
                 verticalSpace8,
                 LoginField(controller: _passwordController, isPassword: true),
@@ -74,6 +105,14 @@ class _LoginPageState extends State<LoginPage> {
                         );
                   },
                   child: const Text('Login'),
+                ),
+                verticalSpace16,
+                CustomerRichText(
+                  text: 'Lưu ý: ',
+                  subText:
+                      'Tài khoản email của TMT cung cấp chỉ dành riêng cho nhân viên không dành cho người ngoài',
+                  color: AppColors.primaryColor,
+                  subColor: AppColors.secondaryColor,
                 ),
               ],
             ),
@@ -105,7 +144,7 @@ class LoginField extends StatelessWidget {
           decoration: InputDecoration(
             labelText: isPassword ? 'Password' : 'Username',
             hintText: isPassword ? 'Enter password' : 'Enter user name',
-            border: const OutlineInputBorder(),
+            // border: const OutlineInputBorder(),
             suffixIcon: isPassword
                 ? IconButton(
                     icon: Icon(

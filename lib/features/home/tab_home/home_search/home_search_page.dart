@@ -62,6 +62,7 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                     onPressed: () {
                       context.off();
                     },
+                    color: AppColors.secondaryColor,
                     padding: const EdgeInsets.all(double4),
                     constraints: const BoxConstraints(),
                   ),

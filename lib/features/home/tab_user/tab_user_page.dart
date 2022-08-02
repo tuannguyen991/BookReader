@@ -1,6 +1,9 @@
+import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
+import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/home/tab_user/bloc/tab_user_bloc.dart';
+import 'package:demo_book_reader/features/home/tab_user/user_history_page.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
@@ -8,6 +11,7 @@ import 'package:demo_book_reader/widgets/backdrop.dart';
 import 'package:demo_book_reader/widgets/background_image.dart';
 import 'package:demo_book_reader/widgets/customer/customer_alert_dialog.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/greeting.dart';
 import 'package:demo_book_reader/widgets/modal_item.dart';
 import 'package:flutter/material.dart';
@@ -17,27 +21,27 @@ final List<Map<String, dynamic>> listModalItem = [
   {
     'icon': Icons.timer_rounded,
     'title': 'Lịch sử đọc sách',
-    'onTap': () {},
+    'onTap': 1,
   },
   {
     'icon': Icons.people,
     'title': 'Thông tin cá nhân',
-    'onTap': () {},
+    'onTap': 2,
   },
   {
     'icon': Icons.timer_rounded,
     'title': 'Nhắc nhở đọc sách',
-    'onTap': () {},
+    'onTap': 3,
   },
   {
     'icon': Icons.timer_outlined,
     'title': 'Góp ý',
-    'onTap': () {},
+    'onTap': 4,
   },
   {
     'icon': Icons.settings,
     'title': 'Cài đặt',
-    'onTap': () {},
+    'onTap': 5,
   },
 ];
 
@@ -51,6 +55,7 @@ class TabUserPage extends StatefulWidget {
 class _TabUserPageState extends State<TabUserPage> {
   final _bloc = TabUserBloc(
     userRepository: locator<UserRepository>(),
+    bookRepository: locator<BookRepository>(),
   );
 
   @override
@@ -85,45 +90,66 @@ class _TabUserPageState extends State<TabUserPage> {
                 left: double16,
                 right: double16,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...[
-                    BlocBuilder<TabUserBloc, TabUserState>(
-                      builder: (context, state) {
-                        if (state.isLoading) {
-                          return const CircularProgressIndicator();
-                        }
-                        return Greeting(user: state.user, isUserTab: true);
-                      },
-                    ),
-                    verticalSpace16,
-                    BlocBuilder<TabUserBloc, TabUserState>(
-                      builder: (context, state) {
-                        if (state.isLoading) {
-                          return const CircularProgressIndicator();
-                        }
-                        return UserBox(user: state.user);
-                      },
-                    ),
-                    verticalSpace32,
-                  ],
-                  ...List<Widget>.generate(
-                    listModalItem.length,
-                    (index) {
-                      final item = listModalItem[index];
-                      return Column(
-                        children: [
-                          ModalItem(
-                              icon: item['icon'],
-                              title: item['title'],
-                              onTap: item['onTap']),
-                          if (index < listModalItem.length - 1) const Divider(),
-                        ],
-                      );
-                    },
-                  ),
-                ],
+              child: BlocBuilder<TabUserBloc, TabUserState>(
+                builder: (context, state) {
+                  if (state.isLoading) {
+                    return const CircularProgressIndicator();
+                  }
+                  final user = state.user;
+                  final readBooks = state.readBooks;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...[
+                        Greeting(user: user, isUserTab: true),
+                        verticalSpace16,
+                        UserBox(user: user),
+                        verticalSpace32,
+                      ],
+                      ...List<Widget>.generate(
+                        listModalItem.length,
+                        (index) {
+                          final item = listModalItem[index];
+                          late final VoidCallback onTap;
+                          switch (item['onTap']) {
+                            case 1:
+                              onTap = () {
+                                context.navigateTo(UserHistoryPage(
+                                  user: user,
+                                  readBooks: readBooks,
+                                ));
+                              };
+                              break;
+                            case 2:
+                              onTap = () {};
+                              break;
+                            case 3:
+                              onTap = () {};
+                              break;
+                            case 4:
+                              onTap = () {};
+                              break;
+                            default:
+                              onTap = () {};
+                              break;
+                          }
+
+                          return Column(
+                            children: [
+                              ModalItem(
+                                icon: item['icon'],
+                                title: item['title'],
+                                onTap: onTap,
+                              ),
+                              if (index < listModalItem.length - 1)
+                                const Divider(),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ),
@@ -139,12 +165,10 @@ class _TabUserPageState extends State<TabUserPage> {
                   children: const [
                     Icon(Icons.logout),
                     horizontalSpace8,
-                    Text(
+                    CustomerText(
                       'Đăng xuất',
-                      style: TextStyle(
-                        fontSize: fontSize16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      fontSize: fontSize16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ],
                 ),
@@ -232,20 +256,16 @@ class UserBoxItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              CustomerText(
                 title,
-                style: TextStyle(
-                  fontSize: fontSize12,
-                  color: AppColors.secondaryColor,
-                ),
+                fontSize: fontSize12,
+                color: AppColors.secondaryColor,
               ),
               verticalSpace8,
-              Text(
+              CustomerText(
                 content,
-                style: const TextStyle(
-                  fontSize: double16,
-                  fontWeight: FontWeight.w600,
-                ),
+                fontSize: fontSize16,
+                fontWeight: FontWeight.w600,
               ),
             ],
           ),

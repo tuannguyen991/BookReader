@@ -5,6 +5,7 @@ import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
 import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indicator.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +16,14 @@ class BookItem extends StatelessWidget {
     this.isBookDetail = false,
     this.isGridView = false,
     this.isLibrary = false,
+    this.isHistory = false,
   }) : super(key: key);
 
   final BookModel bookItem;
   final bool isBookDetail;
   final bool isGridView;
   final bool isLibrary;
+  final bool isHistory;
 
   @override
   Widget build(BuildContext context) {
@@ -58,20 +61,14 @@ class BookItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                CustomerText(
                   bookItem.title,
                   maxLines: 2,
-                  style: const TextStyle(
-                    overflow: TextOverflow.ellipsis,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  fontWeight: FontWeight.w500,
                 ),
-                // verticalSpace4,
-                Text(
+                CustomerText(
                   bookItem.authorList.first.name,
-                  style: TextStyle(
-                    color: AppColors.secondaryColor,
-                  ),
+                  color: AppColors.secondaryColor,
                 ),
                 StarRating(rating: bookItem.averageRating),
               ],
@@ -90,6 +87,11 @@ class BookItem extends StatelessWidget {
       flexList = [3, 7];
       sizedBox = horizontalSpace4;
       maxLines = 2;
+      fontSize = fontSize14;
+    } else if (isHistory) {
+      flexList = [1, 6];
+      sizedBox = horizontalSpace8;
+      maxLines = 1;
       fontSize = fontSize14;
     } else if (isLibrary) {
       flexList = [1, 5];
@@ -120,24 +122,20 @@ class BookItem extends StatelessWidget {
                 ? MainAxisAlignment.start
                 : MainAxisAlignment.center,
             children: [
-              Text(
+              CustomerText(
                 bookItem.title,
                 maxLines: maxLines,
-                style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: fontSize,
-                  fontWeight: FontWeight.w500,
-                ),
+                fontSize: fontSize,
+                fontWeight: FontWeight.w500,
               ),
               verticalSpace4,
-              Text(
+              CustomerText(
                 bookItem.authorList.first.name,
-                style: TextStyle(
-                  color: AppColors.secondaryColor,
-                ),
+                color: AppColors.secondaryColor,
               ),
               verticalSpace4,
-              if (!isGridView) StarRating(rating: bookItem.averageRating),
+              if (!isGridView && !isHistory)
+                StarRating(rating: bookItem.averageRating),
               verticalSpace4,
               if (isBookDetail)
                 Row(
@@ -148,21 +146,24 @@ class BookItem extends StatelessWidget {
                       size: 16,
                     ),
                     horizontalSpace4,
-                    Text(
+                    CustomerText(
                       '${bookItem.view} lượt xem',
-                      style: TextStyle(
-                        color: AppColors.secondaryColor,
-                      ),
+                      color: AppColors.secondaryColor,
                     ),
                   ],
                 ),
-              if (!isGridView && (bookItem.lastPage != null)) ...[
+              if (!isGridView && !isHistory && (bookItem.lastPage != null)) ...[
                 // verticalSpace4,
                 // ask toward until meet ancestor has fixed size
                 CustomerLinearPercentIndicator(
                   percent: bookItem.lastPage! / bookItem.pageCount,
                 ),
               ],
+              if (isHistory)
+                CustomerText(
+                  bookItem.lastDay!,
+                  color: AppColors.secondaryColor,
+                )
             ],
           ),
         ),
@@ -208,10 +209,7 @@ class AuthorItem extends StatelessWidget {
           Flexible(
             flex: flexList[1],
             fit: FlexFit.tight,
-            child: Text(
-              authorItem.name,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
+            child: CustomerText(authorItem.name, fontWeight: FontWeight.w500),
           ),
         ],
       );
@@ -222,9 +220,9 @@ class AuthorItem extends StatelessWidget {
         children: [
           CircleAvatar(backgroundImage: NetworkImage(authorItem.imageLink)),
           sizedBox,
-          Text(
+          CustomerText(
             authorItem.name,
-            textAlign: TextAlign.center,
+            isCenter: true,
           ),
         ],
       ),
@@ -273,14 +271,14 @@ class CategoryItem extends StatelessWidget {
             ? Flexible(
                 flex: flexList[1],
                 fit: FlexFit.tight,
-                child: Text(
+                child: CustomerText(
                   categoryItem.name,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w500,
                 ),
               )
-            : Text(
+            : CustomerText(
                 categoryItem.name,
-                style: const TextStyle(fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w500,
               ),
       ],
     );

@@ -6,19 +6,26 @@ class CustomerClipRRect extends StatelessWidget {
     Key? key,
     required this.image,
     this.borderRadius = double8,
+    this.isAssets = false,
   }) : super(key: key);
 
   final String image;
   final double borderRadius;
+  final bool isAssets;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: Image.network(
-        image,
-        fit: BoxFit.cover,
-      ),
+      child: isAssets
+          ? Image.asset(
+              image,
+              fit: BoxFit.cover,
+            )
+          : Image.network(
+              image,
+              fit: BoxFit.cover,
+            ),
     );
   }
 }

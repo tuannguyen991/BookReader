@@ -6,6 +6,7 @@ import 'package:demo_book_reader/features/home/tab_library/bloc/tab_library_bloc
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/modal_item.dart';
 import 'package:flutter/material.dart';
@@ -79,12 +80,10 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const Center(
-                    child: Text(
+                    child: CustomerText(
                       'Cài đặt',
-                      style: TextStyle(
-                        fontSize: fontSize20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      fontSize: fontSize20,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   verticalSpace32,

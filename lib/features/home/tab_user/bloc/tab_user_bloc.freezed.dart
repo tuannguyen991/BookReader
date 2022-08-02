@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TabUserState {
   bool get isLoading => throw _privateConstructorUsedError;
   UserModel get user => throw _privateConstructorUsedError;
+  List<BookModel> get readBooks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TabUserStateCopyWith<TabUserState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $TabUserStateCopyWith<$Res> {
   factory $TabUserStateCopyWith(
           TabUserState value, $Res Function(TabUserState) then) =
       _$TabUserStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, UserModel user});
+  $Res call({bool isLoading, UserModel user, List<BookModel> readBooks});
 
   $UserModelCopyWith<$Res> get user;
 }
@@ -46,6 +47,7 @@ class _$TabUserStateCopyWithImpl<$Res> implements $TabUserStateCopyWith<$Res> {
   $Res call({
     Object? isLoading = freezed,
     Object? user = freezed,
+    Object? readBooks = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -56,6 +58,10 @@ class _$TabUserStateCopyWithImpl<$Res> implements $TabUserStateCopyWith<$Res> {
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
+      readBooks: readBooks == freezed
+          ? _value.readBooks
+          : readBooks // ignore: cast_nullable_to_non_nullable
+              as List<BookModel>,
     ));
   }
 
@@ -74,7 +80,7 @@ abstract class _$$_TabUserStateCopyWith<$Res>
           _$_TabUserState value, $Res Function(_$_TabUserState) then) =
       __$$_TabUserStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isLoading, UserModel user});
+  $Res call({bool isLoading, UserModel user, List<BookModel> readBooks});
 
   @override
   $UserModelCopyWith<$Res> get user;
@@ -95,6 +101,7 @@ class __$$_TabUserStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? user = freezed,
+    Object? readBooks = freezed,
   }) {
     return _then(_$_TabUserState(
       isLoading: isLoading == freezed
@@ -105,6 +112,10 @@ class __$$_TabUserStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
+      readBooks: readBooks == freezed
+          ? _value._readBooks
+          : readBooks // ignore: cast_nullable_to_non_nullable
+              as List<BookModel>,
     ));
   }
 }
@@ -112,7 +123,11 @@ class __$$_TabUserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TabUserState implements _TabUserState {
-  const _$_TabUserState({this.isLoading = true, this.user = const UserModel()});
+  const _$_TabUserState(
+      {this.isLoading = true,
+      this.user = const UserModel(),
+      final List<BookModel> readBooks = const []})
+      : _readBooks = readBooks;
 
   @override
   @JsonKey()
@@ -120,10 +135,17 @@ class _$_TabUserState implements _TabUserState {
   @override
   @JsonKey()
   final UserModel user;
+  final List<BookModel> _readBooks;
+  @override
+  @JsonKey()
+  List<BookModel> get readBooks {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_readBooks);
+  }
 
   @override
   String toString() {
-    return 'TabUserState(isLoading: $isLoading, user: $user)';
+    return 'TabUserState(isLoading: $isLoading, user: $user, readBooks: $readBooks)';
   }
 
   @override
@@ -132,14 +154,17 @@ class _$_TabUserState implements _TabUserState {
         (other.runtimeType == runtimeType &&
             other is _$_TabUserState &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality()
+                .equals(other._readBooks, _readBooks));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(user));
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(_readBooks));
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +173,17 @@ class _$_TabUserState implements _TabUserState {
 }
 
 abstract class _TabUserState implements TabUserState {
-  const factory _TabUserState({final bool isLoading, final UserModel user}) =
-      _$_TabUserState;
+  const factory _TabUserState(
+      {final bool isLoading,
+      final UserModel user,
+      final List<BookModel> readBooks}) = _$_TabUserState;
 
   @override
   bool get isLoading;
   @override
   UserModel get user;
+  @override
+  List<BookModel> get readBooks;
   @override
   @JsonKey(ignore: true)
   _$$_TabUserStateCopyWith<_$_TabUserState> get copyWith =>
