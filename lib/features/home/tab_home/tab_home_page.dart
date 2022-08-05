@@ -4,6 +4,7 @@ import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
+import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
@@ -198,22 +199,6 @@ class RecommendedCarousel extends StatelessWidget {
         );
       },
     );
-  }
-
-  String limitCharacters({required List<dynamic> list, required int limit}) {
-    if (list.join(',').length <= limit) {
-      return list.join(', ');
-    } else {
-      if (list.length == 1) {
-        return '${list.first.toString().substring(0, limit)} ...';
-      } else if (list.length == 2) {
-        return '${list.first.toString()}, ...';
-      } else if (list.getRange(0, 2).toList().join(', ').length < limit) {
-        return '${list.getRange(0, 2).toList().join(', ')}, ...';
-      } else {
-        return '${list.first.toString()}, ...';
-      }
-    }
   }
 
   Widget _buildCarousel() {

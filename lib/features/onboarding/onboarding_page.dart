@@ -22,38 +22,54 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _buildBody() {
     return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(double16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CustomerText(
-              titleApp,
-              fontSize: fontSize56,
-              fontWeight: FontWeight.bold,
-              isCenter: true,
-              color: AppColors.primaryColor,
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              verticalSpace16,
+              CustomerText(
+                titleApp,
+                fontSize: fontSize56,
+                fontWeight: FontWeight.bold,
+                isCenter: true,
+                color: AppColors.primaryColor,
+              ),
+              CustomerText(
+                'Onboarding',
+                fontSize: fontSize32,
+                fontWeight: FontWeight.bold,
+                isCenter: true,
+                color: AppColors.secondaryColor,
+              ),
+              verticalSpace32,
+              verticalSpace32,
+              Image.network(
+                'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
+              ),
+              Image.network(
+                'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
+              ),
+
+              /// will be implemented as big logo is provided
+              ///
+              // const CustomerClipRRect(
+              //   image: 'assets/image/logo.png',
+              //   isAssets: true,
+              // ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(double16),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: () => context.navigateOff(const LoginPage()),
+                child: const Text('Login'),
+              ),
             ),
-            CustomerText(
-              'Onboarding',
-              fontSize: fontSize32,
-              fontWeight: FontWeight.bold,
-              isCenter: true,
-              color: AppColors.primaryColor.shade100,
-            ),
-            Image.network(
-              'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
-            ),
-            Image.network(
-              'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
-            ),
-            verticalSpace32,
-            ElevatedButton(
-              onPressed: () => context.navigateOff(const LoginPage()),
-              child: const Text('Login'),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

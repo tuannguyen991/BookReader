@@ -6,30 +6,44 @@ class CustomerAlertDialog extends StatelessWidget {
   const CustomerAlertDialog({
     Key? key,
     this.isLogin = true,
+    this.isUpload = false,
   }) : super(key: key);
 
   final bool isLogin;
+  final bool isUpload;
 
   @override
   Widget build(BuildContext context) {
+    final title = isUpload
+        ? 'Successful Upload'
+        : (isLogin ? 'Erorr login' : 'Do you want to exit this application?');
     return AlertDialog(
-      title: Text(isLogin ? 'Erorr login' : 'Do you want to exit this application?'),
-      content: isLogin ? const Text('Please enter again') : null,
-      actions: isLogin ? null : [
-        TextButton(
-          onPressed: () {
-            context.off();
-          },
-          child: const Text('No'),
-        ),
-        TextButton(
-          onPressed: () {
-            context.off();
-            context.navigateOff(const OnboardingPage());
-          },
-          child: const Text('Yes'),
-        ),
-      ],
+      title: Text(title),
+      content: (isLogin && !isUpload) ? const Text('Please enter again') : null,
+      actions: isLogin || isUpload
+          ? [
+              TextButton(
+                onPressed: () {
+                  context.off();
+                },
+                child: const Text('OK'),
+              ),
+            ]
+          : [
+              TextButton(
+                onPressed: () {
+                  context.off();
+                },
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () {
+                  context.off();
+                  context.navigateOff(const OnboardingPage());
+                },
+                child: const Text('Yes'),
+              ),
+            ],
     );
   }
 }

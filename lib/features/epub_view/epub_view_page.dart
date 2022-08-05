@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:epub_view/epub_view.dart';
 import 'package:flutter/material.dart';
 
 class EpubViewPage extends StatefulWidget {
-  const EpubViewPage({Key? key, required this.linkEpub}) : super(key: key);
+  const EpubViewPage({Key? key, required this.linkEpub, required this.isFile}) : super(key: key);
   final String linkEpub;
+  final bool isFile;
 
   @override
   State<EpubViewPage> createState() => _EpubViewPageState();
@@ -17,7 +20,10 @@ class _EpubViewPageState extends State<EpubViewPage> {
   void initState() {
     super.initState();
     _epubReaderController = EpubController(
-      document: EpubDocument.openAsset('assets/epub/${widget.linkEpub}.epub'),
+      document: 
+        widget.isFile 
+        ? EpubDocument.openFile(File(widget.linkEpub))
+        : EpubDocument.openAsset('assets/epub/${widget.linkEpub}.epub'),
     );
   }
 

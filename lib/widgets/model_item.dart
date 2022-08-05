@@ -1,3 +1,4 @@
+import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
@@ -129,9 +130,14 @@ class BookItem extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
               verticalSpace4,
-              CustomerText(
-                bookItem.authorList.first.name,
-                color: AppColors.secondaryColor,
+              Builder(
+                builder: (context) {
+                  final list = limitCharacters(list: bookItem.authorList, limit: 32);
+                  return CustomerText(
+                    (list.isNotEmpty) ? list : 'No author',
+                    color: AppColors.secondaryColor,
+                  );
+                }
               ),
               verticalSpace4,
               if (!isGridView && !isHistory)
@@ -215,7 +221,7 @@ class AuthorItem extends StatelessWidget {
       );
     }
     return SizedBox(
-      width: double80,
+      width: double88,
       child: Column(
         children: [
           CircleAvatar(backgroundImage: NetworkImage(authorItem.imageLink)),

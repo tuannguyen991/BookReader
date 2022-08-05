@@ -9,7 +9,10 @@ class TabLibraryState with _$TabLibraryState {
     @Default(0) int indexChoice,
     @Default([]) List<BookModel> favoriteBooks,
     @Default([]) List<BookModel> readBooks,
+    @Default([]) List<BookModel> uploadBooks,
     @Default(false) bool isGridShow,
 
+    // just test
+    @Default('') String url,
   }) = _TabLibraryState;
 }

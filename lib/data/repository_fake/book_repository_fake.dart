@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const List<BookModel> bookList = [
   BookModel(
@@ -1127,6 +1130,24 @@ class BookRepositoryFake implements BookRepository {
   }
 
   @override
+  Future<List<BookModel>> getUploadBooks({required String token}) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getString('uploadBooks') == null) {
+      prefs.setString('uploadBooks', '[]');
+      return [];
+    }
+
+    final uploadBooksJsonString = prefs.getString('uploadBooks')!;
+
+    final uploadBooksJson = jsonDecode(uploadBooksJsonString);
+
+    return List<BookModel>.from(
+      uploadBooksJson.map((e) => BookModel.fromJson(e)),
+    );
+  }
+
+  @override
   Future<bool> getIsFavorite({
     required String token,
     required BookModel bookItem,
@@ -1151,5 +1172,23 @@ class BookRepositoryFake implements BookRepository {
         return result.contains(input);
       },
     ).toList();
+  }
+
+  @override
+  Future<void> addUploadBook({
+    required String token,
+    required BookModel bookItem,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final uploadBooks = await getUploadBooks(token: token);
+
+    uploadBooks.add(bookItem);
+
+    final uploadBooksJson = uploadBooks.map((e) => e.toJson()).toList();
+
+    final uploadBooksJsonString = jsonEncode(uploadBooksJson);
+
+    await prefs.setString('uploadBooks', uploadBooksJsonString);
   }
 }

@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
-import 'package:freezed_annotation/freezed_annotation.dart'; 
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'tab_library_event.dart';
@@ -39,21 +39,19 @@ class TabLibraryBloc extends Bloc<TabLibraryEvent, TabLibraryState> {
     final favoriteBooks = await _bookRepository.getFavoriteBook(token: token);
     emit(state.copyWith(favoriteBooks: favoriteBooks));
 
-    // final listBook = await _bookRepository.getTopBook(token: token);
-    // emit(state.copyWith(listBook: listBook));
-
-    // final listAuthor = await _authorRepository.getAuthors(token: token);
-    // emit(state.copyWith(listAuthor: listAuthor));
+    final uploadBooks = await _bookRepository.getUploadBooks(token: token);
+    emit(state.copyWith(uploadBooks: uploadBooks));
 
     emit(state.copyWith(isLoading: false));
   }
 
-  FutureOr<void> _onChangeIndexChoice(TabLibraryChangeIndexChoice event, Emitter<TabLibraryState> emit) {
+  FutureOr<void> _onChangeIndexChoice(
+      TabLibraryChangeIndexChoice event, Emitter<TabLibraryState> emit) async {
     emit(state.copyWith(indexChoice: event.index));
   }
 
-  FutureOr<void> _onChangeModelShow(TabLibraryChangeModelShow event, Emitter<TabLibraryState> emit) {
+  FutureOr<void> _onChangeModelShow(
+      TabLibraryChangeModelShow event, Emitter<TabLibraryState> emit) {
     emit(state.copyWith(isGridShow: event.isGrid));
-    
   }
 }

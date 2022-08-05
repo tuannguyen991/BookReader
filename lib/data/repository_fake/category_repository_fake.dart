@@ -30,6 +30,7 @@ const List<CategoryModel> categoryList = [
 class CategoryRepositoryFake implements CategoryRepository {
   @override
   Future<List<CategoryModel>> getCategories({required String token}) async {
+    // await Future.delayed(const Duration(seconds: 1));
     return categoryList;
   }
 

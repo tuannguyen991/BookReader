@@ -29,10 +29,12 @@ mixin _$BookModel {
   int get ratingsCount => throw _privateConstructorUsedError;
   String get imageLink => throw _privateConstructorUsedError;
   int get view => throw _privateConstructorUsedError;
+  @JsonKey(toJson: BookModel._authorListToJson)
   List<AuthorModel> get authorList => throw _privateConstructorUsedError;
   List<CategoryModel> get categoryList => throw _privateConstructorUsedError;
   String? get lastDay => throw _privateConstructorUsedError;
   int? get lastPage => throw _privateConstructorUsedError;
+  bool get isFile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,10 +56,12 @@ abstract class $BookModelCopyWith<$Res> {
       int ratingsCount,
       String imageLink,
       int view,
-      List<AuthorModel> authorList,
+      @JsonKey(toJson: BookModel._authorListToJson)
+          List<AuthorModel> authorList,
       List<CategoryModel> categoryList,
       String? lastDay,
-      int? lastPage});
+      int? lastPage,
+      bool isFile});
 }
 
 /// @nodoc
@@ -83,6 +87,7 @@ class _$BookModelCopyWithImpl<$Res> implements $BookModelCopyWith<$Res> {
     Object? categoryList = freezed,
     Object? lastDay = freezed,
     Object? lastPage = freezed,
+    Object? isFile = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -137,6 +142,10 @@ class _$BookModelCopyWithImpl<$Res> implements $BookModelCopyWith<$Res> {
           ? _value.lastPage
           : lastPage // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFile: isFile == freezed
+          ? _value.isFile
+          : isFile // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -157,10 +166,12 @@ abstract class _$$_BookModelCopyWith<$Res> implements $BookModelCopyWith<$Res> {
       int ratingsCount,
       String imageLink,
       int view,
-      List<AuthorModel> authorList,
+      @JsonKey(toJson: BookModel._authorListToJson)
+          List<AuthorModel> authorList,
       List<CategoryModel> categoryList,
       String? lastDay,
-      int? lastPage});
+      int? lastPage,
+      bool isFile});
 }
 
 /// @nodoc
@@ -188,6 +199,7 @@ class __$$_BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
     Object? categoryList = freezed,
     Object? lastDay = freezed,
     Object? lastPage = freezed,
+    Object? isFile = freezed,
   }) {
     return _then(_$_BookModel(
       id: id == freezed
@@ -242,6 +254,10 @@ class __$$_BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
           ? _value.lastPage
           : lastPage // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFile: isFile == freezed
+          ? _value.isFile
+          : isFile // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -251,18 +267,20 @@ class __$$_BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
 class _$_BookModel implements _BookModel {
   const _$_BookModel(
       {this.id = '',
-      this.title = '',
+      this.title = 'No title',
       this.subTitle,
-      this.description = '',
+      this.description = 'No description',
       this.pageCount = 0,
       this.averageRating = 0,
       this.ratingsCount = 0,
-      this.imageLink = '',
+      this.imageLink = 'https://truyentr.org/assets/images/default.jpg',
       this.view = 0,
-      final List<AuthorModel> authorList = const [],
+      @JsonKey(toJson: BookModel._authorListToJson)
+          final List<AuthorModel> authorList = const [],
       final List<CategoryModel> categoryList = const [],
       this.lastDay,
-      this.lastPage})
+      this.lastPage,
+      this.isFile = false})
       : _authorList = authorList,
         _categoryList = categoryList;
 
@@ -297,7 +315,7 @@ class _$_BookModel implements _BookModel {
   final int view;
   final List<AuthorModel> _authorList;
   @override
-  @JsonKey()
+  @JsonKey(toJson: BookModel._authorListToJson)
   List<AuthorModel> get authorList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_authorList);
@@ -315,10 +333,13 @@ class _$_BookModel implements _BookModel {
   final String? lastDay;
   @override
   final int? lastPage;
+  @override
+  @JsonKey()
+  final bool isFile;
 
   @override
   String toString() {
-    return 'BookModel(id: $id, title: $title, subTitle: $subTitle, description: $description, pageCount: $pageCount, averageRating: $averageRating, ratingsCount: $ratingsCount, imageLink: $imageLink, view: $view, authorList: $authorList, categoryList: $categoryList, lastDay: $lastDay, lastPage: $lastPage)';
+    return 'BookModel(id: $id, title: $title, subTitle: $subTitle, description: $description, pageCount: $pageCount, averageRating: $averageRating, ratingsCount: $ratingsCount, imageLink: $imageLink, view: $view, authorList: $authorList, categoryList: $categoryList, lastDay: $lastDay, lastPage: $lastPage, isFile: $isFile)';
   }
 
   @override
@@ -343,7 +364,8 @@ class _$_BookModel implements _BookModel {
             const DeepCollectionEquality()
                 .equals(other._categoryList, _categoryList) &&
             const DeepCollectionEquality().equals(other.lastDay, lastDay) &&
-            const DeepCollectionEquality().equals(other.lastPage, lastPage));
+            const DeepCollectionEquality().equals(other.lastPage, lastPage) &&
+            const DeepCollectionEquality().equals(other.isFile, isFile));
   }
 
   @JsonKey(ignore: true)
@@ -362,7 +384,8 @@ class _$_BookModel implements _BookModel {
       const DeepCollectionEquality().hash(_authorList),
       const DeepCollectionEquality().hash(_categoryList),
       const DeepCollectionEquality().hash(lastDay),
-      const DeepCollectionEquality().hash(lastPage));
+      const DeepCollectionEquality().hash(lastPage),
+      const DeepCollectionEquality().hash(isFile));
 
   @JsonKey(ignore: true)
   @override
@@ -386,10 +409,12 @@ abstract class _BookModel implements BookModel {
       final int ratingsCount,
       final String imageLink,
       final int view,
-      final List<AuthorModel> authorList,
+      @JsonKey(toJson: BookModel._authorListToJson)
+          final List<AuthorModel> authorList,
       final List<CategoryModel> categoryList,
       final String? lastDay,
-      final int? lastPage}) = _$_BookModel;
+      final int? lastPage,
+      final bool isFile}) = _$_BookModel;
 
   factory _BookModel.fromJson(Map<String, dynamic> json) =
       _$_BookModel.fromJson;
@@ -413,6 +438,7 @@ abstract class _BookModel implements BookModel {
   @override
   int get view;
   @override
+  @JsonKey(toJson: BookModel._authorListToJson)
   List<AuthorModel> get authorList;
   @override
   List<CategoryModel> get categoryList;
@@ -420,6 +446,8 @@ abstract class _BookModel implements BookModel {
   String? get lastDay;
   @override
   int? get lastPage;
+  @override
+  bool get isFile;
   @override
   @JsonKey(ignore: true)
   _$$_BookModelCopyWith<_$_BookModel> get copyWith =>

@@ -16,9 +16,13 @@ abstract class BookRepository {
 
   Future<List<BookModel>> getFavoriteBook({required String token});
 
+  Future<List<BookModel>> getUploadBooks({required String token});
+
   Future<List<String>> getHistorySearch({required String token});
 
   Future<List<BookModel>> getBookByName({required String token, required String name});
+
+  Future<void> addUploadBook({required String token, required BookModel bookItem});
 
   Future<void> deleteHistory({required String token, required String name});
 }

@@ -52,6 +52,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
           padding: const EdgeInsets.only(
               top: double88, left: double16, right: double16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BookItem(bookItem: bookItem, isBookDetail: true),
               verticalSpace16,
@@ -128,7 +129,7 @@ class BottomButton extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    context.navigateTo(EpubViewPage(linkEpub: bookItem.id));
+                    context.navigateTo(EpubViewPage(linkEpub: bookItem.id, isFile: bookItem.isFile));
                   },
                   child: CustomerText(
                     isRead ? 'Đọc tiếp' : 'Đọc sách ngay',

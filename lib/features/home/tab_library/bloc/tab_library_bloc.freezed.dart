@@ -20,7 +20,9 @@ mixin _$TabLibraryState {
   int get indexChoice => throw _privateConstructorUsedError;
   List<BookModel> get favoriteBooks => throw _privateConstructorUsedError;
   List<BookModel> get readBooks => throw _privateConstructorUsedError;
-  bool get isGridShow => throw _privateConstructorUsedError;
+  List<BookModel> get uploadBooks => throw _privateConstructorUsedError;
+  bool get isGridShow => throw _privateConstructorUsedError; // just test
+  String get url => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TabLibraryStateCopyWith<TabLibraryState> get copyWith =>
@@ -37,7 +39,9 @@ abstract class $TabLibraryStateCopyWith<$Res> {
       int indexChoice,
       List<BookModel> favoriteBooks,
       List<BookModel> readBooks,
-      bool isGridShow});
+      List<BookModel> uploadBooks,
+      bool isGridShow,
+      String url});
 }
 
 /// @nodoc
@@ -55,7 +59,9 @@ class _$TabLibraryStateCopyWithImpl<$Res>
     Object? indexChoice = freezed,
     Object? favoriteBooks = freezed,
     Object? readBooks = freezed,
+    Object? uploadBooks = freezed,
     Object? isGridShow = freezed,
+    Object? url = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -74,10 +80,18 @@ class _$TabLibraryStateCopyWithImpl<$Res>
           ? _value.readBooks
           : readBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
+      uploadBooks: uploadBooks == freezed
+          ? _value.uploadBooks
+          : uploadBooks // ignore: cast_nullable_to_non_nullable
+              as List<BookModel>,
       isGridShow: isGridShow == freezed
           ? _value.isGridShow
           : isGridShow // ignore: cast_nullable_to_non_nullable
               as bool,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -94,7 +108,9 @@ abstract class _$$_TabLibraryStateCopyWith<$Res>
       int indexChoice,
       List<BookModel> favoriteBooks,
       List<BookModel> readBooks,
-      bool isGridShow});
+      List<BookModel> uploadBooks,
+      bool isGridShow,
+      String url});
 }
 
 /// @nodoc
@@ -114,7 +130,9 @@ class __$$_TabLibraryStateCopyWithImpl<$Res>
     Object? indexChoice = freezed,
     Object? favoriteBooks = freezed,
     Object? readBooks = freezed,
+    Object? uploadBooks = freezed,
     Object? isGridShow = freezed,
+    Object? url = freezed,
   }) {
     return _then(_$_TabLibraryState(
       isLoading: isLoading == freezed
@@ -133,10 +151,18 @@ class __$$_TabLibraryStateCopyWithImpl<$Res>
           ? _value._readBooks
           : readBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
+      uploadBooks: uploadBooks == freezed
+          ? _value._uploadBooks
+          : uploadBooks // ignore: cast_nullable_to_non_nullable
+              as List<BookModel>,
       isGridShow: isGridShow == freezed
           ? _value.isGridShow
           : isGridShow // ignore: cast_nullable_to_non_nullable
               as bool,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -149,9 +175,12 @@ class _$_TabLibraryState implements _TabLibraryState {
       this.indexChoice = 0,
       final List<BookModel> favoriteBooks = const [],
       final List<BookModel> readBooks = const [],
-      this.isGridShow = false})
+      final List<BookModel> uploadBooks = const [],
+      this.isGridShow = false,
+      this.url = ''})
       : _favoriteBooks = favoriteBooks,
-        _readBooks = readBooks;
+        _readBooks = readBooks,
+        _uploadBooks = uploadBooks;
 
   @override
   @JsonKey()
@@ -175,13 +204,25 @@ class _$_TabLibraryState implements _TabLibraryState {
     return EqualUnmodifiableListView(_readBooks);
   }
 
+  final List<BookModel> _uploadBooks;
+  @override
+  @JsonKey()
+  List<BookModel> get uploadBooks {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_uploadBooks);
+  }
+
   @override
   @JsonKey()
   final bool isGridShow;
+// just test
+  @override
+  @JsonKey()
+  final String url;
 
   @override
   String toString() {
-    return 'TabLibraryState(isLoading: $isLoading, indexChoice: $indexChoice, favoriteBooks: $favoriteBooks, readBooks: $readBooks, isGridShow: $isGridShow)';
+    return 'TabLibraryState(isLoading: $isLoading, indexChoice: $indexChoice, favoriteBooks: $favoriteBooks, readBooks: $readBooks, uploadBooks: $uploadBooks, isGridShow: $isGridShow, url: $url)';
   }
 
   @override
@@ -197,7 +238,10 @@ class _$_TabLibraryState implements _TabLibraryState {
             const DeepCollectionEquality()
                 .equals(other._readBooks, _readBooks) &&
             const DeepCollectionEquality()
-                .equals(other.isGridShow, isGridShow));
+                .equals(other._uploadBooks, _uploadBooks) &&
+            const DeepCollectionEquality()
+                .equals(other.isGridShow, isGridShow) &&
+            const DeepCollectionEquality().equals(other.url, url));
   }
 
   @override
@@ -207,7 +251,9 @@ class _$_TabLibraryState implements _TabLibraryState {
       const DeepCollectionEquality().hash(indexChoice),
       const DeepCollectionEquality().hash(_favoriteBooks),
       const DeepCollectionEquality().hash(_readBooks),
-      const DeepCollectionEquality().hash(isGridShow));
+      const DeepCollectionEquality().hash(_uploadBooks),
+      const DeepCollectionEquality().hash(isGridShow),
+      const DeepCollectionEquality().hash(url));
 
   @JsonKey(ignore: true)
   @override
@@ -221,7 +267,9 @@ abstract class _TabLibraryState implements TabLibraryState {
       final int indexChoice,
       final List<BookModel> favoriteBooks,
       final List<BookModel> readBooks,
-      final bool isGridShow}) = _$_TabLibraryState;
+      final List<BookModel> uploadBooks,
+      final bool isGridShow,
+      final String url}) = _$_TabLibraryState;
 
   @override
   bool get isLoading;
@@ -232,7 +280,11 @@ abstract class _TabLibraryState implements TabLibraryState {
   @override
   List<BookModel> get readBooks;
   @override
+  List<BookModel> get uploadBooks;
+  @override
   bool get isGridShow;
+  @override // just test
+  String get url;
   @override
   @JsonKey(ignore: true)
   _$$_TabLibraryStateCopyWith<_$_TabLibraryState> get copyWith =>

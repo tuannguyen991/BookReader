@@ -1,59 +1,85 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
+import 'package:demo_book_reader/data/repository/category_repository.dart';
+import 'package:demo_book_reader/data/repository_fake/book_repository_fake.dart';
+import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
-import 'package:freezed_annotation/freezed_annotation.dart'; 
+import 'package:demo_book_reader/models/category/category_model.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'tab_library_event.dart';
-part 'tab_library_state.dart';
-part 'tab_library_bloc.freezed.dart';
+part 'library_upload_event.dart';
+part 'library_upload_state.dart';
+part 'library_upload_bloc.freezed.dart';
 
-class TabLibraryBloc extends Bloc<TabLibraryEvent, TabLibraryState> {
-  TabLibraryBloc({
+class LibraryUploadBloc extends Bloc<LibraryUploadEvent, LibraryUploadState> {
+  LibraryUploadBloc({
+    required CategoryRepository categoryRepository,
     required BookRepository bookRepository,
-  })  : _bookRepository = bookRepository,
-        super(const TabLibraryState()) {
-    on<TabLibraryLoaded>(_onLoaded);
-    on<TabLibraryChangeIndexChoice>(_onChangeIndexChoice);
-    on<TabLibraryChangeModelShow>(_onChangeModelShow);
+  })  : _categoryRepository = categoryRepository,
+        _bookRepository = bookRepository,
+        super(const LibraryUploadState()) {
+    on<LibraryUploadLoaded>(_onLoaded);
+    on<LibraryUploadSave>(_onSave);
+    on<LibraryUploadEpub>(_onEpub);
   }
-
+  final CategoryRepository _categoryRepository;
   final BookRepository _bookRepository;
 
   FutureOr<void> _onLoaded(
-    TabLibraryLoaded event,
-    Emitter<TabLibraryState> emit,
+    LibraryUploadLoaded event,
+    Emitter<LibraryUploadState> emit,
   ) async {
     emit(state.copyWith(isLoading: true));
 
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
 
-    final readBooks = await _bookRepository.getReadBook(token: token);
-    emit(state.copyWith(readBooks: readBooks));
-
-    final favoriteBooks = await _bookRepository.getFavoriteBook(token: token);
-    emit(state.copyWith(favoriteBooks: favoriteBooks));
-
-    // final listBook = await _bookRepository.getTopBook(token: token);
-    // emit(state.copyWith(listBook: listBook));
-
-    // final listAuthor = await _authorRepository.getAuthors(token: token);
-    // emit(state.copyWith(listAuthor: listAuthor));
-
-    emit(state.copyWith(isLoading: false));
+    final categories = await _categoryRepository.getCategories(token: token);
+    emit(state.copyWith(categories: categories, isLoading: false));
   }
 
-  FutureOr<void> _onChangeIndexChoice(TabLibraryChangeIndexChoice event, Emitter<TabLibraryState> emit) {
-    emit(state.copyWith(indexChoice: event.index));
+  FutureOr<void> _onSave(
+    LibraryUploadSave event,
+    Emitter<LibraryUploadState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token')!;
+
+    if (event.title.isNotEmpty) {
+      emit(state.copyWith(
+          bookItem: state.bookItem.copyWith(title: event.title)));
+    }
+
+    if (event.author.isNotEmpty) {
+      emit(state.copyWith(
+          bookItem: state.bookItem.copyWith(
+              authorList: state.bookItem.authorList +
+                  [AuthorModel(name: event.author)])));
+    }
+
+    if (event.description.isNotEmpty) {
+      emit(state.copyWith(
+          bookItem: state.bookItem.copyWith(description: event.description)));
+    }
+
+    await _bookRepository.addUploadBook(token: token, bookItem: state.bookItem);
   }
 
-  FutureOr<void> _onChangeModelShow(TabLibraryChangeModelShow event, Emitter<TabLibraryState> emit) {
-    emit(state.copyWith(isGridShow: event.isGrid));
-    
+  FutureOr<void> _onEpub(
+    LibraryUploadEpub event,
+    Emitter<LibraryUploadState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        bookItem: state.bookItem.copyWith(
+          id: event.linkEpub,
+          isFile: true,
+        ),
+      ),
+    );
   }
 }

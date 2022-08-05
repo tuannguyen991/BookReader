@@ -3,6 +3,7 @@ import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_library/bloc/tab_library_bloc.dart';
+import 'package:demo_book_reader/features/home/tab_library/library_upload/library_upload_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
@@ -24,7 +25,7 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
     bookRepository: locator<BookRepository>(),
   );
 
-  final libraryChoice = ['Sách đã đọc', 'Sách yêu thích'];
+  final libraryChoice = ['Sách đã đọc', 'Sách yêu thích', 'Sách tải lên'];
 
   @override
   void initState() {
@@ -107,6 +108,14 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
                           .add(TabLibraryChangeModelShow(isGrid: true));
                     },
                   ),
+                  ModalItem(
+                    icon: Icons.upload,
+                    title: 'Tải sách lên',
+                    onTap: () {
+                      context.off();
+                      context.navigateTo(const LibraryUploadPage());
+                    },
+                  ),
                 ],
               ),
             );
@@ -119,85 +128,92 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
   Widget _buildBody() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: double16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          BlocBuilder<TabLibraryBloc, TabLibraryState>(
-            builder: (context, state) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List<Widget>.generate(
-                    libraryChoice.length,
-                    (index) {
-                      final isSelected = (index == state.indexChoice);
-                      return CustomerChoiceChip(
-                        libraryChoice: libraryChoice,
-                        isSelected: isSelected,
-                        index: index,
-                      );
-                    },
-                  ),
-                ),
-              );
-            },
-          ),
-          verticalSpace8,
-          BlocBuilder<TabLibraryBloc, TabLibraryState>(
-            builder: (context, state) {
-              late final List<BookModel> books;
-              if (state.indexChoice == 0) {
-                books = state.readBooks;
-              } else {
-                books = state.favoriteBooks;
-              }
-              final isGridShow = state.isGridShow;
-              if (isGridShow) {
-                return GridView.count(
-                  padding: EdgeInsets.zero,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.5,
-                  children: List.generate(
-                    books.length,
-                    (index) {
-                      final bookItem = books[index];
-                      return InkWell(
-                        child: BookItem(
-                          bookItem: bookItem,
-                          isGridView: true,
-                          isLibrary: true,
-                        ),
-                        onTap: () {
-                          context
-                              .navigateTo(BookDetailPage(bookItem: bookItem));
-                        },
-                      );
-                    },
-                  ),
-                );
-              }
-              return Column(
-                children: List<Widget>.generate(
-                  books.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(bottom: double8),
-                    child: InkWell(
-                      child: BookItem(bookItem: books[index], isLibrary: true),
-                      onTap: () {
-                        context
-                            .navigateTo(BookDetailPage(bookItem: books[index]));
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BlocBuilder<TabLibraryBloc, TabLibraryState>(
+              builder: (context, state) {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List<Widget>.generate(
+                      libraryChoice.length,
+                      (index) {
+                        final isSelected = (index == state.indexChoice);
+                        return CustomerChoiceChip(
+                          libraryChoice: libraryChoice,
+                          isSelected: isSelected,
+                          index: index,
+                        );
                       },
                     ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                );
+              },
+            ),
+            verticalSpace8,
+            BlocBuilder<TabLibraryBloc, TabLibraryState>(
+              builder: (context, state) {
+                late final List<BookModel> books;
+                if (state.indexChoice == 0) {
+                  books = state.readBooks;
+                } else if (state.indexChoice == 1) {
+                  books = state.favoriteBooks;
+                }
+                else {
+                  books = state.uploadBooks;
+                }
+                final isGridShow = state.isGridShow;
+      
+                if (isGridShow) {
+                  return GridView.count(
+                    padding: EdgeInsets.zero,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.5,
+                    children: List.generate(
+                      books.length,
+                      (index) {
+                        final bookItem = books[index];
+                        return InkWell(
+                          child: BookItem(
+                            bookItem: bookItem,
+                            isGridView: true,
+                            isLibrary: true,
+                          ),
+                          onTap: () {
+                            context
+                                .navigateTo(BookDetailPage(bookItem: bookItem));
+                          },
+                        );
+                      },
+                    ),
+                  );
+                }
+      
+                return Column(
+                  children: List<Widget>.generate(
+                    books.length,
+                    (index) => Padding(
+                      padding: const EdgeInsets.only(bottom: double8),
+                      child: InkWell(
+                        child: BookItem(bookItem: books[index], isLibrary: true),
+                        onTap: () {
+                          context
+                              .navigateTo(BookDetailPage(bookItem: books[index]));
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
