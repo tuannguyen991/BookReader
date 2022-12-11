@@ -228,7 +228,7 @@ class UserBox extends StatelessWidget {
                 verticalSpace8,
                 CustomerRichText(
                   text:
-                      'Chúc mừng ${user.lastName} ${user.firstName} đã nhận được huy hiệu Mọt sách tháng 12 nhờ đọc ',
+                      'Chúc mừng ${user.lastName} ${user.firstName} đã đạt được HẠNG VÀNG tháng 12 nhờ đọc ',
                   subText: '2000 phút',
                   color: AppColors.titleColor,
                   subColor: AppColors.primaryColor,

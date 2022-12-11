@@ -3,13 +3,12 @@ import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_library/bloc/tab_library_bloc.dart';
-import 'package:demo_book_reader/features/home/tab_library/library_upload/library_upload_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
-import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/modal_item.dart';
+import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +24,7 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
     bookRepository: locator<BookRepository>(),
   );
 
-  final libraryChoice = ['Sách đã đọc', 'Sách yêu thích', 'Sách tải lên'];
+  final libraryChoice = ['Sách đang đọc', 'Sách yêu thích'];
 
   @override
   void initState() {
@@ -108,14 +107,14 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
                           .add(TabLibraryChangeModelShow(isGrid: true));
                     },
                   ),
-                  ModalItem(
-                    icon: Icons.upload,
-                    title: 'Tải sách lên',
-                    onTap: () {
-                      context.off();
-                      context.navigateTo(const LibraryUploadPage());
-                    },
-                  ),
+                  // ModalItem(
+                  //   icon: Icons.upload,
+                  //   title: 'Tải sách lên',
+                  //   onTap: () {
+                  //     context.off();
+                  //     context.navigateTo(const LibraryUploadPage());
+                  //   },
+                  // ),
                 ],
               ),
             );

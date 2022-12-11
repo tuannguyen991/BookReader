@@ -35,13 +35,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 isCenter: true,
                 color: AppColors.primaryColor,
               ),
-              CustomerText(
-                'Onboarding',
-                fontSize: fontSize32,
-                fontWeight: FontWeight.bold,
-                isCenter: true,
-                color: AppColors.secondaryColor,
-              ),
+              // CustomerText(
+              //   'Onboarding',
+              //   fontSize: fontSize32,
+              //   fontWeight: FontWeight.bold,
+              //   isCenter: true,
+              //   color: AppColors.secondaryColor,
+              // ),
               verticalSpace32,
               verticalSpace32,
               Image.network(
@@ -65,7 +65,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () => context.navigateOff(const LoginPage()),
-                child: const Text('Login'),
+                child: const Text('Đăng nhập'),
               ),
             ),
           )

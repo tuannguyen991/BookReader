@@ -36,7 +36,7 @@ const fontSize32 = 32.0;
 const fontSize56 = 56.0;
 
 // string
-const titleApp = 'TBook';
+const titleApp = 'BookReader';
 
 // Map Color to MaterialColor
 const Map<int, Color> colorCodes = {

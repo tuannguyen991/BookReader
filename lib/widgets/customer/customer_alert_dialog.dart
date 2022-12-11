@@ -16,10 +16,12 @@ class CustomerAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final title = isUpload
         ? 'Successful Upload'
-        : (isLogin ? 'Erorr login' : 'Do you want to exit this application?');
+        : (isLogin
+            ? 'Lỗi đăng nhập'
+            : 'Bạn chắc chắn muốn đăng xuất khỏi tài khoản này?');
     return AlertDialog(
       title: Text(title),
-      content: (isLogin && !isUpload) ? const Text('Please enter again') : null,
+      content: (isLogin && !isUpload) ? const Text('Vui lòng nhập lại') : null,
       actions: isLogin || isUpload
           ? [
               TextButton(
@@ -34,14 +36,14 @@ class CustomerAlertDialog extends StatelessWidget {
                 onPressed: () {
                   context.off();
                 },
-                child: const Text('No'),
+                child: const Text('Hủy'),
               ),
               TextButton(
                 onPressed: () {
                   context.off();
                   context.navigateOff(const OnboardingPage());
                 },
-                child: const Text('Yes'),
+                child: const Text('Đồng ý'),
               ),
             ],
     );

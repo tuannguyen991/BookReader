@@ -68,14 +68,13 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const CustomerText(
-                  'Đăng nhập',
-                  fontSize: fontSize32,
-                  fontWeight: FontWeight.bold,
-                ),
+                const CustomerText('Đăng nhập',
+                    fontSize: fontSize32,
+                    fontWeight: FontWeight.bold,
+                    isCenter: true),
                 verticalSpace8,
                 CustomerText(
-                  'Nhập tài khoản email của TMT đã cung cấp cho bạn',
+                  'Nhập tên đăng nhập và mật khẩu đã đăng ký',
                   color: AppColors.secondaryColor,
                 ),
                 verticalSpace16,
@@ -83,6 +82,18 @@ class _LoginPageState extends State<LoginPage> {
                 LoginField(controller: _usernameController, isPassword: false),
                 verticalSpace8,
                 LoginField(controller: _passwordController, isPassword: true),
+                verticalSpace16,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Bỏ qua đăng nhập',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
                 verticalSpace32,
                 ElevatedButton(
                   onPressed: () {
@@ -104,15 +115,19 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                   },
-                  child: const Text('Login'),
+                  child: const Text('Đăng nhập'),
                 ),
                 verticalSpace16,
-                CustomerRichText(
-                  text: 'Lưu ý: ',
-                  subText:
-                      'Tài khoản email của TMT cung cấp chỉ dành riêng cho nhân viên không dành cho người ngoài',
-                  color: AppColors.primaryColor,
-                  subColor: AppColors.secondaryColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomerRichText(
+                      text: 'Bạn chưa có tài khoản?  ',
+                      subText: 'Đăng ký',
+                      color: AppColors.secondaryColor,
+                      subColor: AppColors.primaryColor,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -142,8 +157,10 @@ class LoginField extends StatelessWidget {
           obscureText: isPassword ? (state.isObscure ? true : false) : false,
           controller: _controller,
           decoration: InputDecoration(
-            labelText: isPassword ? 'Password' : 'Username',
-            hintText: isPassword ? 'Enter password' : 'Enter user name',
+            labelText: isPassword ? 'Mật khẩu' : 'Tên đăng nhập',
+            hintText: isPassword
+                ? 'Vui lòng nhập mật khẩu'
+                : 'Vui lòng nhập tên đăng nhập',
             // border: const OutlineInputBorder(),
             suffixIcon: isPassword
                 ? IconButton(

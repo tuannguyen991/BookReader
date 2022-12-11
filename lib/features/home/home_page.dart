@@ -21,9 +21,11 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.backgroundColor,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.library_books), label: 'Library'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'User'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.library_books), label: 'Thư viện'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.people), label: 'Người dùng'),
         ],
         onTap: (index) => setState(
           () => _index = index,
