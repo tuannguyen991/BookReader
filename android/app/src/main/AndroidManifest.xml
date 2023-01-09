@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="asia.tmtco.demo_book_rader.demo_book_reader">
+
+    <!-- Required to fetch data from the internet. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="demo_book_reader"
         android:name="${applicationName}"
