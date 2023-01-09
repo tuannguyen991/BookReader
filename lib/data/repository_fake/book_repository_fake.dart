@@ -471,7 +471,7 @@ const Map<String, BookModel> lastBookMap = {
     ],
 
     lastPage: 10,
-    lastDay: '20/07/2022',
+    lastDay: '20/12/2022',
   ),
   'tu_ha': BookModel(
     id: '0X1PxwEACAAJ',
@@ -615,7 +615,7 @@ const Map<String, List<BookModel>> readBookMap = {
       ],
 
       lastPage: 10,
-      lastDay: '20/07/2022',
+      lastDay: '20/12/2022',
     ),
     BookModel(
       id: '0X1PxwEACAAJ',
@@ -659,7 +659,7 @@ const Map<String, List<BookModel>> readBookMap = {
       ],
 
       lastPage: 56,
-      lastDay: '07/05/2022',
+      lastDay: '07/12/2022',
     ),
   ],
   'tu_ha': [
@@ -868,7 +868,7 @@ const Map<String, List<BookModel>> favoriteBookMap = {
       ],
 
       lastPage: 10,
-      lastDay: '20/07/2022',
+      lastDay: '20/12/2022',
     ),
     BookModel(
       id: 'HEmJngEACAAJ',

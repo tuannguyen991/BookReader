@@ -220,7 +220,7 @@ class UserBox extends StatelessWidget {
                     ),
                     horizontalSpace8,
                     CustomerText(
-                      'Tháng 12/2021',
+                      'Tháng 12/2022',
                       color: AppColors.secondaryColor,
                     ),
                   ],

@@ -13,8 +13,7 @@ class UserRepositoryFake implements UserRepository {
       phone: '0912341297',
       age: 21,
       gender: true,
-      imageLink:
-          'https://scontent.fsgn5-10.fna.fbcdn.net/v/t1.6435-9/163642920_2868459293419854_1511555735376202267_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=mm6pJg5Q9uUAX90B5W_&_nc_oc=AQnUiMSSqkqwEd0DdZW1DDvfMZaU9uV_Abup8CmlgAWUmtd1JXPTFaiyIgd08wQTcQ8&_nc_ht=scontent.fsgn5-10.fna&oh=00_AT81Tun19z_gOfcfuyKahzIEKs93mGQbITkBqopskaHtZQ&oe=6300FB61',
+      imageLink: 'https://www.dropbox.com/s/jseijks3wxb1jmp/avatarTuan.jpg?raw=1',
       imagaLinkRanking: 'https://cdn3.iconfinder.com/data/icons/stars-5/512/gold_star-128.png',
       readingTime: 232123,
       readBooks: 2,

@@ -12,7 +12,7 @@ const List<CategoryModel> categoryList = [
     id: '2',
     name: 'Juvenile Fiction',
     imageLink:
-        'https://scontent.fsgn5-15.fna.fbcdn.net/v/t1.18169-9/548913_593033844041426_625302973_n.png?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lP9Tg-AGCyUAX-CXenw&_nc_ht=scontent.fsgn5-15.fna&oh=00_AT_5NPs_HS7gQGp80zkAgMPA4gkONK8LTv7wJdDrrJt4yA&oe=63009351',
+        'https://www.dropbox.com/s/fwce7e0lgtv8mwl/fiction.jpg?raw=1',
   ),
   CategoryModel(
     id: '3',
