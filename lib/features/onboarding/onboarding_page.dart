@@ -35,28 +35,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 isCenter: true,
                 color: AppColors.primaryColor,
               ),
-              // CustomerText(
-              //   'Onboarding',
-              //   fontSize: fontSize32,
-              //   fontWeight: FontWeight.bold,
-              //   isCenter: true,
-              //   color: AppColors.secondaryColor,
-              // ),
               verticalSpace32,
               verticalSpace32,
-              Image.network(
-                'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
+              Image.asset(
+                'assets/image/onboarding.jpg',
               ),
-              Image.network(
-                'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
+              Image.asset(
+                'assets/image/onboarding.jpg',
               ),
-
-              /// will be implemented as big logo is provided
-              ///
-              // const CustomerClipRRect(
-              //   image: 'assets/image/logo.png',
-              //   isAssets: true,
-              // ),
             ],
           ),
           Padding(
