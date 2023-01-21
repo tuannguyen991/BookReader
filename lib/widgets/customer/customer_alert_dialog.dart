@@ -15,7 +15,7 @@ class CustomerAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = isUpload
-        ? 'Successful Upload'
+        ? 'Tải lên thành công'
         : (isLogin
             ? 'Lỗi đăng nhập'
             : 'Bạn chắc chắn muốn đăng xuất khỏi tài khoản này?');
