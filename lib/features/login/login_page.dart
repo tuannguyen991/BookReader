@@ -7,7 +7,6 @@ import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_alert_dialog.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
-import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,10 +67,11 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const CustomerText('Đăng nhập',
-                    fontSize: fontSize32,
-                    fontWeight: FontWeight.bold,
-                    isCenter: true),
+                const CustomerText(
+                  'Đăng nhập',
+                  fontSize: fontSize32,
+                  fontWeight: FontWeight.bold,
+                ),
                 verticalSpace8,
                 CustomerText(
                   'Nhập tên đăng nhập và mật khẩu đã đăng ký',
@@ -86,11 +86,9 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
+                    CustomerText(
                       'Bỏ qua đăng nhập',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                      ),
+                      color: AppColors.primaryColor,
                     ),
                   ],
                 ),
@@ -117,15 +115,19 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: const Text('Đăng nhập'),
                 ),
-                verticalSpace16,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomerRichText(
-                      text: 'Bạn chưa có tài khoản?  ',
-                      subText: 'Đăng ký',
+                    CustomerText(
+                      'Bạn chưa có tài khoản?',
                       color: AppColors.secondaryColor,
-                      subColor: AppColors.primaryColor,
+                    ),
+                    TextButton(
+                      child: CustomerText(
+                        'Đăng ký',
+                        color: AppColors.primaryColor,
+                      ),
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -161,7 +163,6 @@ class LoginField extends StatelessWidget {
             hintText: isPassword
                 ? 'Vui lòng nhập mật khẩu'
                 : 'Vui lòng nhập tên đăng nhập',
-            // border: const OutlineInputBorder(),
             suffixIcon: isPassword
                 ? IconButton(
                     icon: Icon(

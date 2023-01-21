@@ -22,22 +22,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository _userRepository;
 
   FutureOr<void> _onLogin(Login event, Emitter<LoginState> emit) async {
-    String result = await _userRepository.login(
-      username: event.username,
-      password: event.password,
-    );
-    if (result != '') {
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('token', result);
-      // print(result);
-      event.onSuccess();
-      return;
-    }
+    try {
+      
+      String id = await _userRepository.login(
+        username: event.username,
+        password: event.password,
+      );
 
-    event.onFailed();
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', id);
+      event.onSuccess();
+
+    } catch (e) {
+      event.onFailed();
+    }
   }
 
-  FutureOr<void> _onObscure(LoginChangeObscure event, Emitter<LoginState> emit) {
+  FutureOr<void> _onObscure(
+      LoginChangeObscure event, Emitter<LoginState> emit) {
     emit(state.copyWith(isObscure: !state.isObscure));
   }
 }
