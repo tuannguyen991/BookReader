@@ -4,6 +4,7 @@ import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_library/bloc/tab_library_bloc.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
@@ -154,15 +155,15 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
             verticalSpace8,
             BlocBuilder<TabLibraryBloc, TabLibraryState>(
               builder: (context, state) {
-                late final List<BookModel> books;
+                late final List<UserBookModel> books;
                 if (state.indexChoice == 0) {
                   books = state.readBooks;
                 } else if (state.indexChoice == 1) {
                   books = state.favoriteBooks;
                 }
-                else {
-                  books = state.uploadBooks;
-                }
+                // else {
+                //   books = state.uploadBooks;
+                // }
                 final isGridShow = state.isGridShow;
       
                 if (isGridShow) {
@@ -211,6 +212,7 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
                 );
               },
             ),
+     
           ],
         ),
       ),

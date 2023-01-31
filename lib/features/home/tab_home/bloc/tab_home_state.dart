@@ -5,14 +5,14 @@ part of 'tab_home_bloc.dart';
 )
 class TabHomeState with _$TabHomeState {
   const factory TabHomeState({
-    //
+    /// 
     @Default([]) List<BookModel> recommendedBooks,
     //
     @Default(BookModel()) BookModel bookItem,
     //
     @Default(UserModel()) UserModel user,
     //
-    @Default(BookModel()) BookModel lastBook,
+    @Default(UserBookModel()) UserBookModel lastBook,
     //
     @Default(true) bool isLoading,
   }) = _TabHomeState;

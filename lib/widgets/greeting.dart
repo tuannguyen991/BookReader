@@ -1,4 +1,5 @@
 import 'package:demo_book_reader/models/user/user_model.dart';
+import 'package:demo_book_reader/share/enum/ranking.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
@@ -41,17 +42,14 @@ class Greeting extends StatelessWidget {
                           bottom: -double32,
                           child: SizedBox(
                             width: double80,
-                            child: Image.network(
-                              user.imagaLinkRanking,
-                              
-                            ),
+                            child: Image.asset(user.ranking.image),
                           ),
                         ),
                       ],
                     ),
                     verticalSpace16,
                     verticalSpace8,
-                    CustomerText( 
+                    CustomerText(
                       '${user.lastName} ${user.firstName}',
                       isCenter: true,
                       color: AppColors.backgroundColor,

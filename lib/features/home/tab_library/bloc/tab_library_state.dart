@@ -7,8 +7,8 @@ class TabLibraryState with _$TabLibraryState {
   const factory TabLibraryState({
     @Default(true) bool isLoading,
     @Default(0) int indexChoice,
-    @Default([]) List<BookModel> favoriteBooks,
-    @Default([]) List<BookModel> readBooks,
+    @Default([]) List<UserBookModel> favoriteBooks,
+    @Default([]) List<UserBookModel> readBooks,
     @Default([]) List<BookModel> uploadBooks,
     @Default(false) bool isGridShow,
 

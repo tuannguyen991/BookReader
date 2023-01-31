@@ -10,7 +10,8 @@ class CategoryModel with _$CategoryModel {
   const factory CategoryModel({
     @Default('') String id,
     @Default('') String name,
-    @Default('') String imageLink,
+    @Default('https://www.dropbox.com/s/mu7nxkamwq949fv/default.jpg?raw=1')
+        String imageLink,
   }) = _CategoryModel;
 
   factory CategoryModel.fromJson(Map<String, Object?> json) =>

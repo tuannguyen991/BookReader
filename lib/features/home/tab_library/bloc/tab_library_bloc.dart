@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,8 +40,8 @@ class TabLibraryBloc extends Bloc<TabLibraryEvent, TabLibraryState> {
     final favoriteBooks = await _bookRepository.getFavoriteBook(token: token);
     emit(state.copyWith(favoriteBooks: favoriteBooks));
 
-    final uploadBooks = await _bookRepository.getUploadBooks(token: token);
-    emit(state.copyWith(uploadBooks: uploadBooks));
+    // final uploadBooks = await _bookRepository.getUploadBooks(token: token);
+    // emit(state.copyWith(uploadBooks: uploadBooks));
 
     emit(state.copyWith(isLoading: false));
   }

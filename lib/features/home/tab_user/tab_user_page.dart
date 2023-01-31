@@ -209,7 +209,7 @@ class UserBox extends StatelessWidget {
               child: UserBoxItem(
                 icon: Icons.timer_rounded,
                 title: 'Số phút đọc sách',
-                content: '${user.readingTime}',
+                content: '${user.totalReadingTime}',
               ),
             ),
             VerticalDivider(color: AppColors.secondaryColor),
@@ -217,7 +217,7 @@ class UserBox extends StatelessWidget {
               child: UserBoxItem(
                 icon: Icons.book,
                 title: 'Sách đã đọc',
-                content: '${user.readBooks}',
+                content: '${user.totalReadingBooks}',
               ),
             ),
           ],

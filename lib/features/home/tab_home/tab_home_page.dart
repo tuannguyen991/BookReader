@@ -6,6 +6,7 @@ import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/backdrop.dart';
@@ -22,6 +23,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:demo_book_reader/features/home/tab_home/bloc/tab_home_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class TabHomePage extends StatefulWidget {
   const TabHomePage({Key? key}) : super(key: key);
@@ -54,8 +57,7 @@ class _TabHomePageState extends State<TabHomePage> {
   }
 
   Widget _buildBody() {
-    // percent distance from Top_Screen to Back_Drop
-    const percent = 0.35;
+    const percent = 0.35; // percent distance from Top_Screen to Back_Drop
     return Stack(
       children: [
         BackgroundImage(context: context),
@@ -79,7 +81,8 @@ class _TabHomePageState extends State<TabHomePage> {
                   verticalSpace32,
                   const SearchBar(isTextInput: false),
                   verticalSpace16,
-                  // Reading Box
+
+                  /// Reading Box
                   BlocBuilder<TabHomeBloc, TabHomeState>(
                     builder: (context, state) {
                       if (state.isLoading) {
@@ -115,29 +118,27 @@ class RecommendedCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Carousel
+        /// Carousel
         _buildCarousel(),
         verticalSpace16,
-        // BookDetailCarousel
+
+        /// BookDetailCarousel
         _buildBookDetailCarousel(),
       ],
     );
-    //   },
-    // );
   }
 
   Widget _buildBookDetailCarousel() {
     return BlocBuilder<TabHomeBloc, TabHomeState>(
       builder: (context, state) {
         if (state.isLoading) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
 
         final item = state.bookItem;
 
-        // limit number of authors
-        final String authors =
-            limitCharacters(list: item.authorList, limit: 32);
+        /// limit number of authors
+        final String authors = limitCharacters(list: item.authors, limit: 32);
 
         return Container(
           padding: const EdgeInsets.only(
@@ -171,14 +172,15 @@ class RecommendedCarousel extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Icon(
-                    Icons.remove_red_eye_outlined,
-                    size: 16,
-                  ),
+                  // const Icon(
+                  //   Icons.remove_red_eye_outlined,
+                  //   size: 16,
+                  // ),
                   horizontalSpace8,
                   Expanded(
                     child: CustomerText(
-                      '${item.view} lượt xem',
+                      // '${'item.view'} lượt xem',
+                      ' ',
                       color: AppColors.secondaryColor,
                     ),
                   ),
@@ -189,7 +191,10 @@ class RecommendedCarousel extends StatelessWidget {
                       fontSize: fontSize16,
                     ),
                     onPressed: () {
-                      context.navigateTo(BookDetailPage(bookItem: item));
+                      context.navigateTo(
+                        BookDetailPage(
+                            bookItem: UserBookModel.fromBookModel(item)),
+                      );
                     },
                   )
                 ],
@@ -208,7 +213,6 @@ class RecommendedCarousel extends StatelessWidget {
       },
       builder: (context, state) {
         final items = state.recommendedBooks;
-        // print('carousel');
         return CarouselSlider(
           options: CarouselOptions(
             onPageChanged: ((index, reason) {
@@ -217,7 +221,6 @@ class RecommendedCarousel extends StatelessWidget {
                   .add(TabHomeIndexCarouselChange(index: index));
             }),
             aspectRatio: 2,
-            // autoPlay: true,
             enlargeCenterPage: true,
             viewportFraction: 0.4,
           ),
@@ -241,7 +244,7 @@ class ReadingBookBox extends StatelessWidget {
     required this.lastBook,
   }) : super(key: key);
 
-  final BookModel lastBook;
+  final UserBookModel lastBook;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -265,14 +268,17 @@ class ReadingBookBox extends StatelessWidget {
                   child: CustomerRichText(
                     text:
                         'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
-                    subText: lastBook.lastDay!,
+                    subText:
+                        DateFormat('dd/MM/yyyy').format(lastBook.lastRead!),
                     color: AppColors.secondaryColor,
                     subColor: AppColors.titleColor,
                   ),
                 ),
                 TextButton(
                   onPressed: () {
-                    context.navigateTo(BookDetailPage(bookItem: lastBook));
+                    context.navigateTo(BookDetailPage(
+                      bookItem: lastBook,
+                    ));
                   },
                   child: CustomerText(
                     'Đọc tiếp',

@@ -79,13 +79,21 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
 
     emit(state.copyWith(isLoading: true));
 
+    if (event.name == '') {
+      emit(state.copyWith(
+          listRecommendedByName: [], isLoading: false));
+      return;
+    }
+
     final listRecommendedByName = [
-      ...await _bookRepository.getBookByName(token: token, name: event.name),
-      ...await _authorRepository.getAuthorByName(token: token, name: event.name),
-      ...await _categoryRepository.getCategoryByName(token: token, name: event.name),
+      ...await _bookRepository.getBooksByName(token: token, name: event.name),
+      ...await _authorRepository.getAuthorsByName(
+          token: token, name: event.name),
+      ...await _categoryRepository.getCategoriesByName(
+          token: token, name: event.name),
     ];
 
-    emit(state.copyWith(listRecommendedByName: listRecommendedByName, isLoading: false));
-
+    emit(state.copyWith(
+        listRecommendedByName: listRecommendedByName, isLoading: false));
   }
 }

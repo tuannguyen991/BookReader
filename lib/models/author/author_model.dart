@@ -10,13 +10,15 @@ class AuthorModel with _$AuthorModel {
   const factory AuthorModel({
     @Default('') String id,
     @Default('') String name,
-    @Default('') String imageLink,
+    @Default('') String shortBio,
+    @Default('https://www.dropbox.com/s/rv4616h4p501p6k/default.jpg?raw=1')
+        String imageLink,
   }) = _AuthorModel;
 
   factory AuthorModel.fromJson(Map<String, Object?> json) =>
       _$AuthorModelFromJson(json);
 
-  @override 
+  @override
   String toString() {
     return name;
   }

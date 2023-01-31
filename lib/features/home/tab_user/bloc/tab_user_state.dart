@@ -7,6 +7,6 @@ class TabUserState with _$TabUserState {
   const factory TabUserState({
     @Default(true) bool isLoading,
     @Default(UserModel()) UserModel user,
-    @Default([]) List<BookModel> readBooks,
+    @Default([]) List<UserBookModel> readBooks,
   }) = _TabUserState;
 }

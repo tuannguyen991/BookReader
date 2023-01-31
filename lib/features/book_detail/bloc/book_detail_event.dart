@@ -4,7 +4,7 @@ part of 'book_detail_bloc.dart';
 abstract class BookDetailEvent {}
 
 class BookDetailLoaded extends BookDetailEvent {
-  final BookModel bookItem;
+  final UserBookModel bookItem;
 
   BookDetailLoaded({required this.bookItem});
 }

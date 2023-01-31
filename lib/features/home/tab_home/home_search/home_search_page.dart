@@ -8,6 +8,7 @@ import 'package:demo_book_reader/features/home/tab_home/home_search/bloc/home_se
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
@@ -134,10 +135,13 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                         final bookItem = listBook[index];
                         return InkWell(
                           onTap: () {
-                            context
-                                .navigateTo(BookDetailPage(bookItem: bookItem));
+                            context.navigateTo(BookDetailPage(
+                                bookItem:
+                                    UserBookModel.fromBookModel(bookItem)));
                           },
-                          child: BookItem(bookItem: bookItem, isGridView: true),
+                          child: BookItem(
+                              bookItem: UserBookModel.fromBookModel(bookItem),
+                              isGridView: true),
                         );
                       },
                     ),
@@ -292,11 +296,11 @@ class MySearchDelegate extends SearchDelegate {
                   if (item is BookModel) {
                     return InkWell(
                       onTap: () {
-                        context.navigateTo(BookDetailPage(bookItem: item));
+                        context.navigateTo(BookDetailPage(bookItem: UserBookModel.fromBookModel(item)));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: double16),
-                        child: BookItem(bookItem: item, isLibrary: true),
+                        child: BookItem(bookItem: UserBookModel.fromBookModel(item), isLibrary: true),
                       ),
                     );
                   }

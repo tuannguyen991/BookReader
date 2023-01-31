@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tab_home_bloc.dart';
 
@@ -16,11 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TabHomeState {
-//
+  ///
   List<BookModel> get recommendedBooks => throw _privateConstructorUsedError; //
   BookModel get bookItem => throw _privateConstructorUsedError; //
   UserModel get user => throw _privateConstructorUsedError; //
-  BookModel get lastBook => throw _privateConstructorUsedError; //
+  UserBookModel get lastBook => throw _privateConstructorUsedError; //
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,77 +32,84 @@ mixin _$TabHomeState {
 abstract class $TabHomeStateCopyWith<$Res> {
   factory $TabHomeStateCopyWith(
           TabHomeState value, $Res Function(TabHomeState) then) =
-      _$TabHomeStateCopyWithImpl<$Res>;
+      _$TabHomeStateCopyWithImpl<$Res, TabHomeState>;
+  @useResult
   $Res call(
       {List<BookModel> recommendedBooks,
       BookModel bookItem,
       UserModel user,
-      BookModel lastBook,
+      UserBookModel lastBook,
       bool isLoading});
 
   $BookModelCopyWith<$Res> get bookItem;
   $UserModelCopyWith<$Res> get user;
-  $BookModelCopyWith<$Res> get lastBook;
+  $UserBookModelCopyWith<$Res> get lastBook;
 }
 
 /// @nodoc
-class _$TabHomeStateCopyWithImpl<$Res> implements $TabHomeStateCopyWith<$Res> {
+class _$TabHomeStateCopyWithImpl<$Res, $Val extends TabHomeState>
+    implements $TabHomeStateCopyWith<$Res> {
   _$TabHomeStateCopyWithImpl(this._value, this._then);
 
-  final TabHomeState _value;
   // ignore: unused_field
-  final $Res Function(TabHomeState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recommendedBooks = freezed,
-    Object? bookItem = freezed,
-    Object? user = freezed,
-    Object? lastBook = freezed,
-    Object? isLoading = freezed,
+    Object? recommendedBooks = null,
+    Object? bookItem = null,
+    Object? user = null,
+    Object? lastBook = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      recommendedBooks: recommendedBooks == freezed
+      recommendedBooks: null == recommendedBooks
           ? _value.recommendedBooks
           : recommendedBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      bookItem: bookItem == freezed
+      bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      lastBook: lastBook == freezed
+      lastBook: null == lastBook
           ? _value.lastBook
           : lastBook // ignore: cast_nullable_to_non_nullable
-              as BookModel,
-      isLoading: isLoading == freezed
+              as UserBookModel,
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $BookModelCopyWith<$Res> get bookItem {
     return $BookModelCopyWith<$Res>(_value.bookItem, (value) {
-      return _then(_value.copyWith(bookItem: value));
+      return _then(_value.copyWith(bookItem: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res> get user {
     return $UserModelCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 
   @override
-  $BookModelCopyWith<$Res> get lastBook {
-    return $BookModelCopyWith<$Res>(_value.lastBook, (value) {
-      return _then(_value.copyWith(lastBook: value));
+  @pragma('vm:prefer-inline')
+  $UserBookModelCopyWith<$Res> get lastBook {
+    return $UserBookModelCopyWith<$Res>(_value.lastBook, (value) {
+      return _then(_value.copyWith(lastBook: value) as $Val);
     });
   }
 }
@@ -114,11 +121,12 @@ abstract class _$$_TabHomeStateCopyWith<$Res>
           _$_TabHomeState value, $Res Function(_$_TabHomeState) then) =
       __$$_TabHomeStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<BookModel> recommendedBooks,
       BookModel bookItem,
       UserModel user,
-      BookModel lastBook,
+      UserBookModel lastBook,
       bool isLoading});
 
   @override
@@ -126,46 +134,44 @@ abstract class _$$_TabHomeStateCopyWith<$Res>
   @override
   $UserModelCopyWith<$Res> get user;
   @override
-  $BookModelCopyWith<$Res> get lastBook;
+  $UserBookModelCopyWith<$Res> get lastBook;
 }
 
 /// @nodoc
 class __$$_TabHomeStateCopyWithImpl<$Res>
-    extends _$TabHomeStateCopyWithImpl<$Res>
+    extends _$TabHomeStateCopyWithImpl<$Res, _$_TabHomeState>
     implements _$$_TabHomeStateCopyWith<$Res> {
   __$$_TabHomeStateCopyWithImpl(
       _$_TabHomeState _value, $Res Function(_$_TabHomeState) _then)
-      : super(_value, (v) => _then(v as _$_TabHomeState));
+      : super(_value, _then);
 
-  @override
-  _$_TabHomeState get _value => super._value as _$_TabHomeState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recommendedBooks = freezed,
-    Object? bookItem = freezed,
-    Object? user = freezed,
-    Object? lastBook = freezed,
-    Object? isLoading = freezed,
+    Object? recommendedBooks = null,
+    Object? bookItem = null,
+    Object? user = null,
+    Object? lastBook = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_TabHomeState(
-      recommendedBooks: recommendedBooks == freezed
+      recommendedBooks: null == recommendedBooks
           ? _value._recommendedBooks
           : recommendedBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      bookItem: bookItem == freezed
+      bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      lastBook: lastBook == freezed
+      lastBook: null == lastBook
           ? _value.lastBook
           : lastBook // ignore: cast_nullable_to_non_nullable
-              as BookModel,
-      isLoading: isLoading == freezed
+              as UserBookModel,
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -180,16 +186,19 @@ class _$_TabHomeState implements _TabHomeState {
       {final List<BookModel> recommendedBooks = const [],
       this.bookItem = const BookModel(),
       this.user = const UserModel(),
-      this.lastBook = const BookModel(),
+      this.lastBook = const UserBookModel(),
       this.isLoading = true})
       : _recommendedBooks = recommendedBooks;
 
-//
+  ///
   final List<BookModel> _recommendedBooks;
-//
+
+  ///
   @override
   @JsonKey()
   List<BookModel> get recommendedBooks {
+    if (_recommendedBooks is EqualUnmodifiableListView)
+      return _recommendedBooks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_recommendedBooks);
   }
@@ -205,7 +214,7 @@ class _$_TabHomeState implements _TabHomeState {
 //
   @override
   @JsonKey()
-  final BookModel lastBook;
+  final UserBookModel lastBook;
 //
   @override
   @JsonKey()
@@ -223,23 +232,27 @@ class _$_TabHomeState implements _TabHomeState {
             other is _$_TabHomeState &&
             const DeepCollectionEquality()
                 .equals(other._recommendedBooks, _recommendedBooks) &&
-            const DeepCollectionEquality().equals(other.bookItem, bookItem) &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(other.lastBook, lastBook) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.bookItem, bookItem) ||
+                other.bookItem == bookItem) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.lastBook, lastBook) ||
+                other.lastBook == lastBook) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_recommendedBooks),
-      const DeepCollectionEquality().hash(bookItem),
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(lastBook),
-      const DeepCollectionEquality().hash(isLoading));
+      bookItem,
+      user,
+      lastBook,
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TabHomeStateCopyWith<_$_TabHomeState> get copyWith =>
       __$$_TabHomeStateCopyWithImpl<_$_TabHomeState>(this, _$identity);
 }
@@ -249,17 +262,19 @@ abstract class _TabHomeState implements TabHomeState {
       {final List<BookModel> recommendedBooks,
       final BookModel bookItem,
       final UserModel user,
-      final BookModel lastBook,
+      final UserBookModel lastBook,
       final bool isLoading}) = _$_TabHomeState;
 
-  @override //
+  @override
+
+  ///
   List<BookModel> get recommendedBooks;
   @override //
   BookModel get bookItem;
   @override //
   UserModel get user;
   @override //
-  BookModel get lastBook;
+  UserBookModel get lastBook;
   @override //
   bool get isLoading;
   @override

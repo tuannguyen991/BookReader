@@ -7,43 +7,17 @@ part 'book_model.g.dart';
 @freezed
 class BookModel with _$BookModel {
   const factory BookModel({
-    @Default('')
-        String id,
-    @Default('No title')
-        String title,
+    @Default('') String id,
+    @Default('No title') String title,
     String? subTitle,
-    @Default('No description')
-        String description,
-    @Default(0)
-        int pageCount,
-    @Default(0)
-        double averageRating,
-    @Default(0)
-        int ratingsCount,
-    @Default('https://truyentr.org/assets/images/default.jpg')
-        String imageLink,
-    @Default(0)
-        int view,
-    @Default([])
-    // ignore: invalid_annotation_target
-    @JsonKey(
-      // fromJson: BookModel._AuthorModelFromJson,
-      toJson: BookModel._authorListToJson,
-    )
-        List<AuthorModel> authorList,
-    @Default([])
-        List<CategoryModel> categoryList,
-    String? lastDay,
-    int? lastPage,
-    @Default(false)
-        bool isFile,
+    @Default(0) int numberOfPages,
+    @Default('') String epubLink,
+    @Default('https://www.dropbox.com/s/jcaex2p7zxcj8vf/default.jpg?raw=1') String imageLink,
+    @Default(0) double averageRating,
+    @Default('No description') String description,
+    @Default([]) List<AuthorModel> authors,
+    @Default([]) List<CategoryModel> categories,
   }) = _BookModel;
-
-  static List<Map<String, dynamic>>? _authorListToJson(List<AuthorModel>? authorList) {
-    // if (authorList == null) return null;
-
-    return authorList!.map((e) => e.toJson()).toList();
-  }
 
   factory BookModel.fromJson(Map<String, Object?> json) =>
       _$BookModelFromJson(json);

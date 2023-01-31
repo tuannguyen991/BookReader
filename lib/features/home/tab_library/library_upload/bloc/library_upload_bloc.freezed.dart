@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'library_upload_bloc.dart';
 
@@ -29,7 +29,8 @@ mixin _$LibraryUploadState {
 abstract class $LibraryUploadStateCopyWith<$Res> {
   factory $LibraryUploadStateCopyWith(
           LibraryUploadState value, $Res Function(LibraryUploadState) then) =
-      _$LibraryUploadStateCopyWithImpl<$Res>;
+      _$LibraryUploadStateCopyWithImpl<$Res, LibraryUploadState>;
+  @useResult
   $Res call(
       {bool isLoading, List<CategoryModel> categories, BookModel bookItem});
 
@@ -37,40 +38,43 @@ abstract class $LibraryUploadStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LibraryUploadStateCopyWithImpl<$Res>
+class _$LibraryUploadStateCopyWithImpl<$Res, $Val extends LibraryUploadState>
     implements $LibraryUploadStateCopyWith<$Res> {
   _$LibraryUploadStateCopyWithImpl(this._value, this._then);
 
-  final LibraryUploadState _value;
   // ignore: unused_field
-  final $Res Function(LibraryUploadState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
-    Object? categories = freezed,
-    Object? bookItem = freezed,
+    Object? isLoading = null,
+    Object? categories = null,
+    Object? bookItem = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      categories: categories == freezed
+      categories: null == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
-      bookItem: bookItem == freezed
+      bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $BookModelCopyWith<$Res> get bookItem {
     return $BookModelCopyWith<$Res>(_value.bookItem, (value) {
-      return _then(_value.copyWith(bookItem: value));
+      return _then(_value.copyWith(bookItem: value) as $Val);
     });
   }
 }
@@ -82,6 +86,7 @@ abstract class _$$_LibraryUploadStateCopyWith<$Res>
           $Res Function(_$_LibraryUploadState) then) =
       __$$_LibraryUploadStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isLoading, List<CategoryModel> categories, BookModel bookItem});
 
@@ -91,31 +96,29 @@ abstract class _$$_LibraryUploadStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_LibraryUploadStateCopyWithImpl<$Res>
-    extends _$LibraryUploadStateCopyWithImpl<$Res>
+    extends _$LibraryUploadStateCopyWithImpl<$Res, _$_LibraryUploadState>
     implements _$$_LibraryUploadStateCopyWith<$Res> {
   __$$_LibraryUploadStateCopyWithImpl(
       _$_LibraryUploadState _value, $Res Function(_$_LibraryUploadState) _then)
-      : super(_value, (v) => _then(v as _$_LibraryUploadState));
+      : super(_value, _then);
 
-  @override
-  _$_LibraryUploadState get _value => super._value as _$_LibraryUploadState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
-    Object? categories = freezed,
-    Object? bookItem = freezed,
+    Object? isLoading = null,
+    Object? categories = null,
+    Object? bookItem = null,
   }) {
     return _then(_$_LibraryUploadState(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      categories: categories == freezed
+      categories: null == categories
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
-      bookItem: bookItem == freezed
+      bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
               as BookModel,
@@ -139,6 +142,7 @@ class _$_LibraryUploadState implements _LibraryUploadState {
   @override
   @JsonKey()
   List<CategoryModel> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_categories);
   }
@@ -157,21 +161,21 @@ class _$_LibraryUploadState implements _LibraryUploadState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LibraryUploadState &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
-            const DeepCollectionEquality().equals(other.bookItem, bookItem));
+            (identical(other.bookItem, bookItem) ||
+                other.bookItem == bookItem));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(_categories),
-      const DeepCollectionEquality().hash(bookItem));
+  int get hashCode => Object.hash(runtimeType, isLoading,
+      const DeepCollectionEquality().hash(_categories), bookItem);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LibraryUploadStateCopyWith<_$_LibraryUploadState> get copyWith =>
       __$$_LibraryUploadStateCopyWithImpl<_$_LibraryUploadState>(
           this, _$identity);

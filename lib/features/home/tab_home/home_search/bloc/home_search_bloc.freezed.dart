@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_search_bloc.dart';
 
@@ -32,7 +32,8 @@ mixin _$HomeSearchState {
 abstract class $HomeSearchStateCopyWith<$Res> {
   factory $HomeSearchStateCopyWith(
           HomeSearchState value, $Res Function(HomeSearchState) then) =
-      _$HomeSearchStateCopyWithImpl<$Res>;
+      _$HomeSearchStateCopyWithImpl<$Res, HomeSearchState>;
+  @useResult
   $Res call(
       {bool isLoading,
       List<String> history,
@@ -43,49 +44,51 @@ abstract class $HomeSearchStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HomeSearchStateCopyWithImpl<$Res>
+class _$HomeSearchStateCopyWithImpl<$Res, $Val extends HomeSearchState>
     implements $HomeSearchStateCopyWith<$Res> {
   _$HomeSearchStateCopyWithImpl(this._value, this._then);
 
-  final HomeSearchState _value;
   // ignore: unused_field
-  final $Res Function(HomeSearchState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
-    Object? history = freezed,
-    Object? listCategory = freezed,
-    Object? listBook = freezed,
-    Object? listAuthor = freezed,
-    Object? listRecommendedByName = freezed,
+    Object? isLoading = null,
+    Object? history = null,
+    Object? listCategory = null,
+    Object? listBook = null,
+    Object? listAuthor = null,
+    Object? listRecommendedByName = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      history: history == freezed
+      history: null == history
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      listCategory: listCategory == freezed
+      listCategory: null == listCategory
           ? _value.listCategory
           : listCategory // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
-      listBook: listBook == freezed
+      listBook: null == listBook
           ? _value.listBook
           : listBook // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      listAuthor: listAuthor == freezed
+      listAuthor: null == listAuthor
           ? _value.listAuthor
           : listAuthor // ignore: cast_nullable_to_non_nullable
               as List<AuthorModel>,
-      listRecommendedByName: listRecommendedByName == freezed
+      listRecommendedByName: null == listRecommendedByName
           ? _value.listRecommendedByName
           : listRecommendedByName // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +99,7 @@ abstract class _$$_HomeSearchStateCopyWith<$Res>
           _$_HomeSearchState value, $Res Function(_$_HomeSearchState) then) =
       __$$_HomeSearchStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isLoading,
       List<String> history,
@@ -107,46 +111,44 @@ abstract class _$$_HomeSearchStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_HomeSearchStateCopyWithImpl<$Res>
-    extends _$HomeSearchStateCopyWithImpl<$Res>
+    extends _$HomeSearchStateCopyWithImpl<$Res, _$_HomeSearchState>
     implements _$$_HomeSearchStateCopyWith<$Res> {
   __$$_HomeSearchStateCopyWithImpl(
       _$_HomeSearchState _value, $Res Function(_$_HomeSearchState) _then)
-      : super(_value, (v) => _then(v as _$_HomeSearchState));
+      : super(_value, _then);
 
-  @override
-  _$_HomeSearchState get _value => super._value as _$_HomeSearchState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
-    Object? history = freezed,
-    Object? listCategory = freezed,
-    Object? listBook = freezed,
-    Object? listAuthor = freezed,
-    Object? listRecommendedByName = freezed,
+    Object? isLoading = null,
+    Object? history = null,
+    Object? listCategory = null,
+    Object? listBook = null,
+    Object? listAuthor = null,
+    Object? listRecommendedByName = null,
   }) {
     return _then(_$_HomeSearchState(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      history: history == freezed
+      history: null == history
           ? _value._history
           : history // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      listCategory: listCategory == freezed
+      listCategory: null == listCategory
           ? _value._listCategory
           : listCategory // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
-      listBook: listBook == freezed
+      listBook: null == listBook
           ? _value._listBook
           : listBook // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      listAuthor: listAuthor == freezed
+      listAuthor: null == listAuthor
           ? _value._listAuthor
           : listAuthor // ignore: cast_nullable_to_non_nullable
               as List<AuthorModel>,
-      listRecommendedByName: listRecommendedByName == freezed
+      listRecommendedByName: null == listRecommendedByName
           ? _value._listRecommendedByName
           : listRecommendedByName // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
@@ -177,6 +179,7 @@ class _$_HomeSearchState implements _HomeSearchState {
   @override
   @JsonKey()
   List<String> get history {
+    if (_history is EqualUnmodifiableListView) return _history;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_history);
   }
@@ -185,6 +188,7 @@ class _$_HomeSearchState implements _HomeSearchState {
   @override
   @JsonKey()
   List<CategoryModel> get listCategory {
+    if (_listCategory is EqualUnmodifiableListView) return _listCategory;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_listCategory);
   }
@@ -193,6 +197,7 @@ class _$_HomeSearchState implements _HomeSearchState {
   @override
   @JsonKey()
   List<BookModel> get listBook {
+    if (_listBook is EqualUnmodifiableListView) return _listBook;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_listBook);
   }
@@ -201,6 +206,7 @@ class _$_HomeSearchState implements _HomeSearchState {
   @override
   @JsonKey()
   List<AuthorModel> get listAuthor {
+    if (_listAuthor is EqualUnmodifiableListView) return _listAuthor;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_listAuthor);
   }
@@ -209,6 +215,8 @@ class _$_HomeSearchState implements _HomeSearchState {
   @override
   @JsonKey()
   List<dynamic> get listRecommendedByName {
+    if (_listRecommendedByName is EqualUnmodifiableListView)
+      return _listRecommendedByName;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_listRecommendedByName);
   }
@@ -223,7 +231,8 @@ class _$_HomeSearchState implements _HomeSearchState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_HomeSearchState &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other._history, _history) &&
             const DeepCollectionEquality()
                 .equals(other._listCategory, _listCategory) &&
@@ -237,7 +246,7 @@ class _$_HomeSearchState implements _HomeSearchState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isLoading),
+      isLoading,
       const DeepCollectionEquality().hash(_history),
       const DeepCollectionEquality().hash(_listCategory),
       const DeepCollectionEquality().hash(_listBook),
@@ -246,6 +255,7 @@ class _$_HomeSearchState implements _HomeSearchState {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_HomeSearchStateCopyWith<_$_HomeSearchState> get copyWith =>
       __$$_HomeSearchStateCopyWithImpl<_$_HomeSearchState>(this, _$identity);
 }

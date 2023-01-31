@@ -7,34 +7,46 @@ part of 'user_model.dart';
 // **************************************************************************
 
 _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
-      id: json['id'] as String? ?? '',
       firstName: json['firstName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
-      userName: json['userName'] as String? ?? '',
-      password: json['password'] as String? ?? '',
       email: json['email'] as String? ?? '',
-      phone: json['phone'] as String? ?? '',
-      age: json['age'] as int? ?? 0,
-      gender: json['gender'] as bool? ?? false,
-      imageLink: json['imageLink'] as String? ?? '',
-      imagaLinkRanking: json['imagaLinkRanking'] as String? ?? '',
-      readingTime: json['readingTime'] as int? ?? 0,
-      readBooks: json['readBooks'] as int? ?? 0,
+      birthDate: json['birthDate'] == null
+          ? null
+          : DateTime.parse(json['birthDate'] as String),
+      imageLink: json['imageLink'] as String? ??
+          'https://www.dropbox.com/s/a97pyp9m32gvqe6/default.jpg?raw=1',
+      totalReadingTime: json['totalReadingTime'] as int? ?? 0,
+      ranking: $enumDecodeNullable(_$RankingEnumMap, json['ranking']) ??
+          Ranking.bronze,
+      currentPackage: json['currentPackage'] == null
+          ? const UserReadingPackageModel()
+          : UserReadingPackageModel.fromJson(
+              json['currentPackage'] as Map<String, dynamic>),
+      recentlyHistories: (json['recentlyHistories'] as List<dynamic>?)
+              ?.map((e) => UserHistoryModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      totalReadingBooks: json['totalReadingBooks'] as int? ?? 0,
+      id: json['id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
-      'userName': instance.userName,
-      'password': instance.password,
       'email': instance.email,
-      'phone': instance.phone,
-      'age': instance.age,
-      'gender': instance.gender,
+      'birthDate': instance.birthDate?.toIso8601String(),
       'imageLink': instance.imageLink,
-      'imagaLinkRanking': instance.imagaLinkRanking,
-      'readingTime': instance.readingTime,
-      'readBooks': instance.readBooks,
+      'totalReadingTime': instance.totalReadingTime,
+      'ranking': _$RankingEnumMap[instance.ranking]!,
+      'currentPackage': instance.currentPackage,
+      'recentlyHistories': instance.recentlyHistories,
+      'totalReadingBooks': instance.totalReadingBooks,
+      'id': instance.id,
     };
+
+const _$RankingEnumMap = {
+  Ranking.gold: 1,
+  Ranking.silver: 2,
+  Ranking.bronze: 3,
+};

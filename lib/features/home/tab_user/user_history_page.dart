@@ -2,6 +2,9 @@ import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
+import 'package:demo_book_reader/models/user_history/user_history_model.dart';
+import 'package:demo_book_reader/share/enum/ranking.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
@@ -21,7 +24,7 @@ class UserHistoryPage extends StatelessWidget {
   }) : super(key: key);
 
   final UserModel user;
-  final List<BookModel> readBooks;
+  final List<UserBookModel> readBooks;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,7 @@ class UserHistoryPage extends StatelessWidget {
   }
 
   Widget _buildBody() {
+    var x = user;
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(double16),
@@ -59,7 +63,7 @@ class UserHistoryPage extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             verticalSpace8,
-            const MySfCartesianChart(),
+            MySfCartesianChart(chartData: user.recentlyHistories),
             verticalSpace16,
             const CustomerText(
               'Sách đã đọc',
@@ -96,19 +100,27 @@ class UserHistoryPage extends StatelessWidget {
 }
 
 class MySfCartesianChart extends StatefulWidget {
-  const MySfCartesianChart({Key? key}) : super(key: key);
+  const MySfCartesianChart({
+    Key? key,
+    required this.chartData,
+  }) : super(key: key);
+
+  final List<UserHistoryModel> chartData;
 
   @override
   State<MySfCartesianChart> createState() => _MySfCartesianChartState();
 }
 
 class _MySfCartesianChartState extends State<MySfCartesianChart> {
-  late List<ReadingTime> _chartData;
+  late List<UserHistoryModel> _chartData;
   TrackballBehavior? _trackballBehavior;
 
   @override
   void initState() {
-    _chartData = getChartData();
+    _chartData = widget.chartData;
+
+    // _bloc.add(UserHistoryLoaded());
+
     _trackballBehavior = TrackballBehavior(
         enable: true,
         // tooltipAlignment: ChartAlignment.near,
@@ -123,7 +135,7 @@ class _MySfCartesianChartState extends State<MySfCartesianChart> {
           String? dateFormat;
           for (int i = 0; i < _chartData.length; i++) {
             if (trackballDetails.pointIndex == i) {
-              dateFormat = DateFormat('dd/MM/yyyy').format(_chartData[i].date);
+              dateFormat = DateFormat('dd/MM/yyyy').format(_chartData[i].date!);
             }
           }
           return Container(
@@ -167,14 +179,14 @@ class _MySfCartesianChartState extends State<MySfCartesianChart> {
       },
       trackballBehavior: _trackballBehavior,
       series: <ChartSeries>[
-        SplineSeries<ReadingTime, double>(
+        SplineSeries<UserHistoryModel, double>(
           color: AppColors.primaryColor,
           splineType: SplineType.natural,
           name: 'Reading Time',
           dataSource: _chartData,
-          xValueMapper: (ReadingTime data, _) =>
-              double.parse(DateFormat('dd').format(data.date)),
-          yValueMapper: (ReadingTime data, _) => data.time,
+          xValueMapper: (UserHistoryModel data, _) =>
+              double.parse(DateFormat('dd').format(data.date!)),
+          yValueMapper: (UserHistoryModel data, _) => data.readingTime,
           enableTooltip: true,
           markerSettings: const MarkerSettings(
             isVisible: true,
@@ -206,7 +218,7 @@ class UserBox extends StatelessWidget {
         children: [
           Flexible(
             flex: 4,
-            child: Image.network(user.imagaLinkRanking),
+            child: Image.asset(user.ranking.image),
           ),
           Flexible(
             flex: 9,
@@ -220,7 +232,7 @@ class UserBox extends StatelessWidget {
                     ),
                     horizontalSpace8,
                     CustomerText(
-                      'Tháng 12/2021',
+                      'Tháng 12/2022',
                       color: AppColors.secondaryColor,
                     ),
                   ],
@@ -254,18 +266,18 @@ class UserBox extends StatelessWidget {
   }
 }
 
-List<ReadingTime> getChartData() {
-  final List<ReadingTime> chartData = [
-    ReadingTime(80, DateTime(2022, 12, 12)),
-    ReadingTime(70, DateTime(2022, 12, 13)),
-    ReadingTime(60, DateTime(2022, 12, 14)),
-    ReadingTime(90, DateTime(2022, 12, 15)),
-    ReadingTime(20, DateTime(2022, 12, 16)),
-    ReadingTime(20, DateTime(2022, 12, 17)),
-    ReadingTime(60, DateTime(2022, 12, 18)),
-    ReadingTime(90, DateTime(2022, 12, 19)),
-    ReadingTime(20, DateTime(2022, 12, 20)),
-    ReadingTime(20, DateTime(2022, 12, 21)),
+List<UserHistoryModel> getChartData() {
+  final List<UserHistoryModel> chartData = [
+    UserHistoryModel(readingTime: 90, date: DateTime(2022, 12, 12)),
+    UserHistoryModel(readingTime: 70, date: DateTime(2022, 12, 13)),
+    UserHistoryModel(readingTime: 60, date: DateTime(2022, 12, 14)),
+    UserHistoryModel(readingTime: 90, date: DateTime(2022, 12, 15)),
+    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 16)),
+    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 17)),
+    UserHistoryModel(readingTime: 60, date: DateTime(2022, 12, 18)),
+    UserHistoryModel(readingTime: 90, date: DateTime(2022, 12, 19)),
+    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 20)),
+    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 21)),
   ];
   return chartData;
 }

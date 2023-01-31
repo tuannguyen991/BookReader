@@ -57,7 +57,7 @@ class LibraryUploadBloc extends Bloc<LibraryUploadEvent, LibraryUploadState> {
     if (event.author.isNotEmpty) {
       emit(state.copyWith(
           bookItem: state.bookItem.copyWith(
-              authorList: state.bookItem.authorList +
+              authors: state.bookItem.authors +
                   [AuthorModel(name: event.author)])));
     }
 
@@ -77,7 +77,7 @@ class LibraryUploadBloc extends Bloc<LibraryUploadEvent, LibraryUploadState> {
       state.copyWith(
         bookItem: state.bookItem.copyWith(
           id: event.linkEpub,
-          isFile: true,
+          // isFile: true,
         ),
       ),
     );

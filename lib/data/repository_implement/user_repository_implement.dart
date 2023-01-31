@@ -7,9 +7,25 @@ import 'package:http/http.dart' as http;
 
 class UserRepositoryImplement implements UserRepository {
   @override
-  Future<UserModel> getInfor({required String token}) {
-    // TODO: implement getInfor
-    throw UnimplementedError();
+  Future<UserModel> getInfor({required String token}) async {
+    var servicePath = '/$token';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final user = UserModel.fromJson(json.decode(response.body));
+      return user;
+    }
+
+    throw Exception('');
   }
 
   @override
@@ -18,6 +34,7 @@ class UserRepositoryImplement implements UserRepository {
     required String password,
   }) async {
     const servicePath = '/verify';
+
     final uri = Uri.https(
       Remote.authority,
       '${Remote.pathUsers}$servicePath',
@@ -33,6 +50,7 @@ class UserRepositoryImplement implements UserRepository {
       final id = json.decode(response.body);
       return id;
     }
+
     throw Exception('');
   }
 }

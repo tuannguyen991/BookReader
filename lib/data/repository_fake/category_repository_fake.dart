@@ -9,11 +9,9 @@ const List<CategoryModel> categoryList = [
         'https://img.freepik.com/premium-vector/little-cute-group-three-children-reading-books-sitting-sofa-flat-vector_627350-473.jpg?w=360',
   ),
   CategoryModel(
-    id: '2',
-    name: 'Juvenile Fiction',
-    imageLink:
-        'https://scontent.fsgn5-15.fna.fbcdn.net/v/t1.18169-9/548913_593033844041426_625302973_n.png?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lP9Tg-AGCyUAX-CXenw&_nc_ht=scontent.fsgn5-15.fna&oh=00_AT_5NPs_HS7gQGp80zkAgMPA4gkONK8LTv7wJdDrrJt4yA&oe=63009351',
-  ),
+      id: '2',
+      name: 'Juvenile Fiction',
+      imageLink: 'https://www.dropbox.com/s/fwce7e0lgtv8mwl/fiction.jpg?raw=1'),
   CategoryModel(
     id: '3',
     name: 'Business',
@@ -35,7 +33,7 @@ class CategoryRepositoryFake implements CategoryRepository {
   }
 
   @override
-  Future<List<CategoryModel>> getCategoryByName({
+  Future<List<CategoryModel>> getCategoriesByName({
     required String token,
     required String name,
   }) async {

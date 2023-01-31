@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'book_detail_bloc.dart';
 
@@ -29,7 +29,8 @@ mixin _$BookDetailState {
 abstract class $BookDetailStateCopyWith<$Res> {
   factory $BookDetailStateCopyWith(
           BookDetailState value, $Res Function(BookDetailState) then) =
-      _$BookDetailStateCopyWithImpl<$Res>;
+      _$BookDetailStateCopyWithImpl<$Res, BookDetailState>;
+  @useResult
   $Res call(
       {List<BookModel> sameCategoryBooks,
       dynamic isLoading,
@@ -37,34 +38,36 @@ abstract class $BookDetailStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BookDetailStateCopyWithImpl<$Res>
+class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
     implements $BookDetailStateCopyWith<$Res> {
   _$BookDetailStateCopyWithImpl(this._value, this._then);
 
-  final BookDetailState _value;
   // ignore: unused_field
-  final $Res Function(BookDetailState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sameCategoryBooks = freezed,
+    Object? sameCategoryBooks = null,
     Object? isLoading = freezed,
     Object? isFavorite = freezed,
   }) {
     return _then(_value.copyWith(
-      sameCategoryBooks: sameCategoryBooks == freezed
+      sameCategoryBooks: null == sameCategoryBooks
           ? _value.sameCategoryBooks
           : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      isLoading: isLoading == freezed
+      isLoading: freezed == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isFavorite: isFavorite == freezed
+      isFavorite: freezed == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as dynamic,
-    ));
+    ) as $Val);
   }
 }
 
@@ -75,6 +78,7 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
           _$_BookDetailState value, $Res Function(_$_BookDetailState) then) =
       __$$_BookDetailStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<BookModel> sameCategoryBooks,
       dynamic isLoading,
@@ -83,28 +87,26 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_BookDetailStateCopyWithImpl<$Res>
-    extends _$BookDetailStateCopyWithImpl<$Res>
+    extends _$BookDetailStateCopyWithImpl<$Res, _$_BookDetailState>
     implements _$$_BookDetailStateCopyWith<$Res> {
   __$$_BookDetailStateCopyWithImpl(
       _$_BookDetailState _value, $Res Function(_$_BookDetailState) _then)
-      : super(_value, (v) => _then(v as _$_BookDetailState));
+      : super(_value, _then);
 
-  @override
-  _$_BookDetailState get _value => super._value as _$_BookDetailState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sameCategoryBooks = freezed,
+    Object? sameCategoryBooks = null,
     Object? isLoading = freezed,
     Object? isFavorite = freezed,
   }) {
     return _then(_$_BookDetailState(
-      sameCategoryBooks: sameCategoryBooks == freezed
+      sameCategoryBooks: null == sameCategoryBooks
           ? _value._sameCategoryBooks
           : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
-      isLoading: isLoading == freezed ? _value.isLoading : isLoading,
-      isFavorite: isFavorite == freezed ? _value.isFavorite : isFavorite,
+      isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isFavorite: freezed == isFavorite ? _value.isFavorite! : isFavorite,
     ));
   }
 }
@@ -122,6 +124,8 @@ class _$_BookDetailState implements _BookDetailState {
   @override
   @JsonKey()
   List<BookModel> get sameCategoryBooks {
+    if (_sameCategoryBooks is EqualUnmodifiableListView)
+      return _sameCategoryBooks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_sameCategoryBooks);
   }
@@ -159,6 +163,7 @@ class _$_BookDetailState implements _BookDetailState {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BookDetailStateCopyWith<_$_BookDetailState> get copyWith =>
       __$$_BookDetailStateCopyWithImpl<_$_BookDetailState>(this, _$identity);
 }

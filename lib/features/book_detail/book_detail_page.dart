@@ -4,6 +4,7 @@ import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/bloc/book_detail_bloc.dart';
 import 'package:demo_book_reader/features/epub_view/epub_view_page.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
@@ -14,9 +15,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookDetailPage extends StatefulWidget {
-  const BookDetailPage({Key? key, required this.bookItem}) : super(key: key);
+  const BookDetailPage({
+    Key? key,
+    required this.bookItem,
+  }) : super(key: key);
 
-  final BookModel bookItem;
+  final UserBookModel bookItem;
 
   @override
   State<BookDetailPage> createState() => _BookDetailPageState();
@@ -44,7 +48,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
 
   Widget _buildBody() {
     final bookItem = widget.bookItem;
-    final isRead = bookItem.lastPage != null ? true : false;
+
     return Stack(
       children: <Widget>[
         ImageBackground(context: context, bookItem: bookItem),
@@ -80,10 +84,16 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       (index) {
                         final bookItem = state.sameCategoryBooks[index];
                         return InkWell(
-                          child: BookItem(bookItem: bookItem, isGridView: true),
+                          child: BookItem(
+                            bookItem: UserBookModel.fromBookModel(bookItem),
+                            isGridView: true,
+                          ),
                           onTap: () {
-                            context
-                                .navigateTo(BookDetailPage(bookItem: bookItem));
+                            context.navigateTo(
+                              BookDetailPage(
+                                bookItem: UserBookModel.fromBookModel(bookItem),
+                              ),
+                            );
                           },
                         );
                       },
@@ -96,13 +106,15 @@ class _BookDetailPageState extends State<BookDetailPage> {
         ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: BottomButton(isRead: isRead, bookItem: bookItem),
+          child: BottomButton(bookItem: bookItem),
         ),
-        Positioned(
+        const Positioned(
           top: 0.0,
           left: 0.0,
           right: 0.0,
-          child: CustomerAppBar(bookItem: widget.bookItem),
+          child: CustomerAppBar(
+            // bookItem: widget.bookItem,
+          ),
         ),
       ],
     );
@@ -112,14 +124,15 @@ class _BookDetailPageState extends State<BookDetailPage> {
 class BottomButton extends StatelessWidget {
   const BottomButton({
     Key? key,
-    required this.isRead,
+    // required this.isRead,
     required this.bookItem,
   }) : super(key: key);
 
-  final bool isRead;
-  final BookModel bookItem;
+  // final bool isRead;
+  final UserBookModel bookItem;
   @override
   Widget build(BuildContext context) {
+    final isRead = bookItem.numberOfReadPages != 0;
     return BlocBuilder<BookDetailBloc, BookDetailState>(
       builder: (context, state) {
         return Container(
@@ -128,14 +141,15 @@ class BottomButton extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    context.navigateTo(EpubViewPage(linkEpub: bookItem.id, isFile: bookItem.isFile));
-                  },
-                  child: CustomerText(
-                    isRead ? 'Đọc tiếp' : 'Đọc sách ngay',
-                    fontSize: fontSize16,
-                  )
-                ),
+                    onPressed: () {
+                      // context.navigateTo(
+                      //     EpubViewPage(linkEpub: bookItem.id, isFile: true));
+                      // context.navigateTo(EpubViewPage(linkEpub: bookItem.id, isFile: bookItem.isFile));
+                    },
+                    child: CustomerText(
+                      isRead ? 'Đọc tiếp' : 'Đọc sách ngay',
+                      fontSize: fontSize16,
+                    )),
               ),
               horizontalSpace8,
               Container(
@@ -151,9 +165,9 @@ class BottomButton extends StatelessWidget {
                     color: AppColors.primaryColor,
                   ),
                   onPressed: () {
-                    context.read<BookDetailBloc>().add(
-                          BookDetailFavoriteChange(bookItem: bookItem),
-                        );
+                    // context.read<BookDetailBloc>().add(
+                    //       BookDetailFavoriteChange(bookItem: bookItem),
+                    //     );
                   },
                 ),
               ),
@@ -173,7 +187,7 @@ class ImageBackground extends StatelessWidget {
   }) : super(key: key);
 
   final BuildContext context;
-  final BookModel bookItem;
+  final UserBookModel bookItem;
 
   @override
   Widget build(BuildContext context) {
@@ -193,10 +207,10 @@ class ImageBackground extends StatelessWidget {
 class CustomerAppBar extends StatelessWidget {
   const CustomerAppBar({
     Key? key,
-    required this.bookItem,
+    // required this.bookItem,
   }) : super(key: key);
 
-  final BookModel bookItem;
+  // final BookModel bookItem;
 
   @override
   Widget build(BuildContext context) {

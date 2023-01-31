@@ -2,6 +2,7 @@ import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
@@ -9,6 +10,7 @@ import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indica
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BookItem extends StatelessWidget {
   const BookItem({
@@ -20,7 +22,7 @@ class BookItem extends StatelessWidget {
     this.isHistory = false,
   }) : super(key: key);
 
-  final BookModel bookItem;
+  final UserBookModel bookItem;
   final bool isBookDetail;
   final bool isGridView;
   final bool isLibrary;
@@ -42,13 +44,14 @@ class BookItem extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 CustomerClipRRect(image: bookItem.imageLink),
-                if (bookItem.lastPage != null)
+                if (bookItem.numberOfReadPages != 0)
                   Padding(
                     padding: const EdgeInsets.only(bottom: double8),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: CustomerLinearPercentIndicator(
-                        percent: bookItem.lastPage! / bookItem.pageCount,
+                        percent:
+                            bookItem.numberOfReadPages / bookItem.numberOfPages,
                         isLibrary: true,
                       ),
                     ),
@@ -68,7 +71,7 @@ class BookItem extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 CustomerText(
-                  bookItem.authorList.first.name,
+                  bookItem.authors.first.name,
                   color: AppColors.secondaryColor,
                 ),
                 StarRating(rating: bookItem.averageRating),
@@ -130,46 +133,46 @@ class BookItem extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
               verticalSpace4,
-              Builder(
-                builder: (context) {
-                  final list = limitCharacters(list: bookItem.authorList, limit: 32);
-                  return CustomerText(
-                    (list.isNotEmpty) ? list : 'No author',
-                    color: AppColors.secondaryColor,
-                  );
-                }
-              ),
+              Builder(builder: (context) {
+                final list = limitCharacters(list: bookItem.authors, limit: 32);
+                return CustomerText(
+                  (list.isNotEmpty) ? list : 'No author',
+                  color: AppColors.secondaryColor,
+                );
+              }),
               verticalSpace4,
               if (!isGridView && !isHistory)
                 StarRating(rating: bookItem.averageRating),
               verticalSpace4,
               if (isBookDetail)
                 Row(
-                  children: [
-                    Icon(
-                      Icons.remove_red_eye_outlined,
-                      color: AppColors.secondaryColor,
-                      size: 16,
-                    ),
+                  children: const [
+                    // Icon(
+                    //   Icons.remove_red_eye_outlined,
+                    //   color: AppColors.secondaryColor,
+                    //   size: 16,
+                    // ),
                     horizontalSpace4,
-                    CustomerText(
-                      '${bookItem.view} lượt xem',
-                      color: AppColors.secondaryColor,
-                    ),
+                    // CustomerText(
+                    //   '${'bookItem.view'} lượt xem',
+                    //   color: AppColors.secondaryColor,
+                    // ),
                   ],
                 ),
-              if (!isGridView && !isHistory && (bookItem.lastPage != null)) ...[
+              if (!isGridView &&
+                  !isHistory &&
+                  (bookItem.numberOfReadPages != 0)) ...[
                 // verticalSpace4,
                 // ask toward until meet ancestor has fixed size
                 CustomerLinearPercentIndicator(
-                  percent: bookItem.lastPage! / bookItem.pageCount,
+                  percent: bookItem.numberOfReadPages / bookItem.numberOfPages,
                 ),
               ],
-              if (isHistory)
-                CustomerText(
-                  bookItem.lastDay!,
-                  color: AppColors.secondaryColor,
-                )
+              // if (isHistory)
+              //   CustomerText(
+              //     DateFormat('dd/MM/yyyy').format(bookItem.lastRead!),
+              //     color: AppColors.secondaryColor,
+              //   )
             ],
           ),
         ),

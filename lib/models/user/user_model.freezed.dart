@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_model.dart';
 
@@ -20,19 +20,19 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  String get id => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
-  int get age => throw _privateConstructorUsedError;
-  bool get gender => throw _privateConstructorUsedError;
+  DateTime? get birthDate => throw _privateConstructorUsedError;
   String get imageLink => throw _privateConstructorUsedError;
-  String get imagaLinkRanking => throw _privateConstructorUsedError;
-  int get readingTime => throw _privateConstructorUsedError;
-  int get readBooks => throw _privateConstructorUsedError;
+  int get totalReadingTime => throw _privateConstructorUsedError;
+  Ranking get ranking => throw _privateConstructorUsedError;
+  UserReadingPackageModel get currentPackage =>
+      throw _privateConstructorUsedError;
+  List<UserHistoryModel> get recentlyHistories =>
+      throw _privateConstructorUsedError;
+  int get totalReadingBooks => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,101 +43,104 @@ mixin _$UserModel {
 /// @nodoc
 abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
-      _$UserModelCopyWithImpl<$Res>;
+      _$UserModelCopyWithImpl<$Res, UserModel>;
+  @useResult
   $Res call(
-      {String id,
-      String firstName,
+      {String firstName,
       String lastName,
-      String userName,
-      String password,
       String email,
-      String phone,
-      int age,
-      bool gender,
+      DateTime? birthDate,
       String imageLink,
-      String imagaLinkRanking,
-      int readingTime,
-      int readBooks});
+      int totalReadingTime,
+      Ranking ranking,
+      UserReadingPackageModel currentPackage,
+      List<UserHistoryModel> recentlyHistories,
+      int totalReadingBooks,
+      String id});
+
+  $UserReadingPackageModelCopyWith<$Res> get currentPackage;
 }
 
 /// @nodoc
-class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
+class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
+    implements $UserModelCopyWith<$Res> {
   _$UserModelCopyWithImpl(this._value, this._then);
 
-  final UserModel _value;
   // ignore: unused_field
-  final $Res Function(UserModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? userName = freezed,
-    Object? password = freezed,
-    Object? email = freezed,
-    Object? phone = freezed,
-    Object? age = freezed,
-    Object? gender = freezed,
-    Object? imageLink = freezed,
-    Object? imagaLinkRanking = freezed,
-    Object? readingTime = freezed,
-    Object? readBooks = freezed,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? email = null,
+    Object? birthDate = freezed,
+    Object? imageLink = null,
+    Object? totalReadingTime = null,
+    Object? ranking = null,
+    Object? currentPackage = null,
+    Object? recentlyHistories = null,
+    Object? totalReadingBooks = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      age: age == freezed
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int,
-      gender: gender == freezed
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as bool,
-      imageLink: imageLink == freezed
+      birthDate: freezed == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      imageLink: null == imageLink
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
-      imagaLinkRanking: imagaLinkRanking == freezed
-          ? _value.imagaLinkRanking
-          : imagaLinkRanking // ignore: cast_nullable_to_non_nullable
+      totalReadingTime: null == totalReadingTime
+          ? _value.totalReadingTime
+          : totalReadingTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      ranking: null == ranking
+          ? _value.ranking
+          : ranking // ignore: cast_nullable_to_non_nullable
+              as Ranking,
+      currentPackage: null == currentPackage
+          ? _value.currentPackage
+          : currentPackage // ignore: cast_nullable_to_non_nullable
+              as UserReadingPackageModel,
+      recentlyHistories: null == recentlyHistories
+          ? _value.recentlyHistories
+          : recentlyHistories // ignore: cast_nullable_to_non_nullable
+              as List<UserHistoryModel>,
+      totalReadingBooks: null == totalReadingBooks
+          ? _value.totalReadingBooks
+          : totalReadingBooks // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      readingTime: readingTime == freezed
-          ? _value.readingTime
-          : readingTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      readBooks: readBooks == freezed
-          ? _value.readBooks
-          : readBooks // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserReadingPackageModelCopyWith<$Res> get currentPackage {
+    return $UserReadingPackageModelCopyWith<$Res>(_value.currentPackage,
+        (value) {
+      return _then(_value.copyWith(currentPackage: value) as $Val);
+    });
   }
 }
 
@@ -147,101 +150,92 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
           _$_UserModel value, $Res Function(_$_UserModel) then) =
       __$$_UserModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {String id,
-      String firstName,
+      {String firstName,
       String lastName,
-      String userName,
-      String password,
       String email,
-      String phone,
-      int age,
-      bool gender,
+      DateTime? birthDate,
       String imageLink,
-      String imagaLinkRanking,
-      int readingTime,
-      int readBooks});
+      int totalReadingTime,
+      Ranking ranking,
+      UserReadingPackageModel currentPackage,
+      List<UserHistoryModel> recentlyHistories,
+      int totalReadingBooks,
+      String id});
+
+  @override
+  $UserReadingPackageModelCopyWith<$Res> get currentPackage;
 }
 
 /// @nodoc
-class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
+class __$$_UserModelCopyWithImpl<$Res>
+    extends _$UserModelCopyWithImpl<$Res, _$_UserModel>
     implements _$$_UserModelCopyWith<$Res> {
   __$$_UserModelCopyWithImpl(
       _$_UserModel _value, $Res Function(_$_UserModel) _then)
-      : super(_value, (v) => _then(v as _$_UserModel));
+      : super(_value, _then);
 
-  @override
-  _$_UserModel get _value => super._value as _$_UserModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? userName = freezed,
-    Object? password = freezed,
-    Object? email = freezed,
-    Object? phone = freezed,
-    Object? age = freezed,
-    Object? gender = freezed,
-    Object? imageLink = freezed,
-    Object? imagaLinkRanking = freezed,
-    Object? readingTime = freezed,
-    Object? readBooks = freezed,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? email = null,
+    Object? birthDate = freezed,
+    Object? imageLink = null,
+    Object? totalReadingTime = null,
+    Object? ranking = null,
+    Object? currentPackage = null,
+    Object? recentlyHistories = null,
+    Object? totalReadingBooks = null,
+    Object? id = null,
   }) {
     return _then(_$_UserModel(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      age: age == freezed
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int,
-      gender: gender == freezed
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as bool,
-      imageLink: imageLink == freezed
+      birthDate: freezed == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      imageLink: null == imageLink
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
-      imagaLinkRanking: imagaLinkRanking == freezed
-          ? _value.imagaLinkRanking
-          : imagaLinkRanking // ignore: cast_nullable_to_non_nullable
+      totalReadingTime: null == totalReadingTime
+          ? _value.totalReadingTime
+          : totalReadingTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      ranking: null == ranking
+          ? _value.ranking
+          : ranking // ignore: cast_nullable_to_non_nullable
+              as Ranking,
+      currentPackage: null == currentPackage
+          ? _value.currentPackage
+          : currentPackage // ignore: cast_nullable_to_non_nullable
+              as UserReadingPackageModel,
+      recentlyHistories: null == recentlyHistories
+          ? _value._recentlyHistories
+          : recentlyHistories // ignore: cast_nullable_to_non_nullable
+              as List<UserHistoryModel>,
+      totalReadingBooks: null == totalReadingBooks
+          ? _value.totalReadingBooks
+          : totalReadingBooks // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      readingTime: readingTime == freezed
-          ? _value.readingTime
-          : readingTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      readBooks: readBooks == freezed
-          ? _value.readBooks
-          : readBooks // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -250,26 +244,23 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   const _$_UserModel(
-      {this.id = '',
-      this.firstName = '',
+      {this.firstName = '',
       this.lastName = '',
-      this.userName = '',
-      this.password = '',
       this.email = '',
-      this.phone = '',
-      this.age = 0,
-      this.gender = false,
-      this.imageLink = '',
-      this.imagaLinkRanking = '',
-      this.readingTime = 0,
-      this.readBooks = 0});
+      this.birthDate,
+      this.imageLink =
+          'https://www.dropbox.com/s/a97pyp9m32gvqe6/default.jpg?raw=1',
+      this.totalReadingTime = 0,
+      this.ranking = Ranking.bronze,
+      this.currentPackage = const UserReadingPackageModel(),
+      final List<UserHistoryModel> recentlyHistories = const [],
+      this.totalReadingBooks = 0,
+      this.id = ''})
+      : _recentlyHistories = recentlyHistories;
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
-  @override
-  @JsonKey()
-  final String id;
   @override
   @JsonKey()
   final String firstName;
@@ -278,38 +269,41 @@ class _$_UserModel implements _UserModel {
   final String lastName;
   @override
   @JsonKey()
-  final String userName;
-  @override
-  @JsonKey()
-  final String password;
-  @override
-  @JsonKey()
   final String email;
   @override
-  @JsonKey()
-  final String phone;
-  @override
-  @JsonKey()
-  final int age;
-  @override
-  @JsonKey()
-  final bool gender;
+  final DateTime? birthDate;
   @override
   @JsonKey()
   final String imageLink;
   @override
   @JsonKey()
-  final String imagaLinkRanking;
+  final int totalReadingTime;
   @override
   @JsonKey()
-  final int readingTime;
+  final Ranking ranking;
   @override
   @JsonKey()
-  final int readBooks;
+  final UserReadingPackageModel currentPackage;
+  final List<UserHistoryModel> _recentlyHistories;
+  @override
+  @JsonKey()
+  List<UserHistoryModel> get recentlyHistories {
+    if (_recentlyHistories is EqualUnmodifiableListView)
+      return _recentlyHistories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_recentlyHistories);
+  }
+
+  @override
+  @JsonKey()
+  final int totalReadingBooks;
+  @override
+  @JsonKey()
+  final String id;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, userName: $userName, password: $password, email: $email, phone: $phone, age: $age, gender: $gender, imageLink: $imageLink, imagaLinkRanking: $imagaLinkRanking, readingTime: $readingTime, readBooks: $readBooks)';
+    return 'UserModel(firstName: $firstName, lastName: $lastName, email: $email, birthDate: $birthDate, imageLink: $imageLink, totalReadingTime: $totalReadingTime, ranking: $ranking, currentPackage: $currentPackage, recentlyHistories: $recentlyHistories, totalReadingBooks: $totalReadingBooks, id: $id)';
   }
 
   @override
@@ -317,97 +311,96 @@ class _$_UserModel implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
-            const DeepCollectionEquality().equals(other.lastName, lastName) &&
-            const DeepCollectionEquality().equals(other.userName, userName) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality().equals(other.age, age) &&
-            const DeepCollectionEquality().equals(other.gender, gender) &&
-            const DeepCollectionEquality().equals(other.imageLink, imageLink) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.birthDate, birthDate) ||
+                other.birthDate == birthDate) &&
+            (identical(other.imageLink, imageLink) ||
+                other.imageLink == imageLink) &&
+            (identical(other.totalReadingTime, totalReadingTime) ||
+                other.totalReadingTime == totalReadingTime) &&
+            (identical(other.ranking, ranking) || other.ranking == ranking) &&
+            (identical(other.currentPackage, currentPackage) ||
+                other.currentPackage == currentPackage) &&
             const DeepCollectionEquality()
-                .equals(other.imagaLinkRanking, imagaLinkRanking) &&
-            const DeepCollectionEquality()
-                .equals(other.readingTime, readingTime) &&
-            const DeepCollectionEquality().equals(other.readBooks, readBooks));
+                .equals(other._recentlyHistories, _recentlyHistories) &&
+            (identical(other.totalReadingBooks, totalReadingBooks) ||
+                other.totalReadingBooks == totalReadingBooks) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(userName),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(age),
-      const DeepCollectionEquality().hash(gender),
-      const DeepCollectionEquality().hash(imageLink),
-      const DeepCollectionEquality().hash(imagaLinkRanking),
-      const DeepCollectionEquality().hash(readingTime),
-      const DeepCollectionEquality().hash(readBooks));
+      firstName,
+      lastName,
+      email,
+      birthDate,
+      imageLink,
+      totalReadingTime,
+      ranking,
+      currentPackage,
+      const DeepCollectionEquality().hash(_recentlyHistories),
+      totalReadingBooks,
+      id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
       __$$_UserModelCopyWithImpl<_$_UserModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserModelToJson(this);
+    return _$$_UserModelToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {final String id,
-      final String firstName,
+      {final String firstName,
       final String lastName,
-      final String userName,
-      final String password,
       final String email,
-      final String phone,
-      final int age,
-      final bool gender,
+      final DateTime? birthDate,
       final String imageLink,
-      final String imagaLinkRanking,
-      final int readingTime,
-      final int readBooks}) = _$_UserModel;
+      final int totalReadingTime,
+      final Ranking ranking,
+      final UserReadingPackageModel currentPackage,
+      final List<UserHistoryModel> recentlyHistories,
+      final int totalReadingBooks,
+      final String id}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
 
   @override
-  String get id;
-  @override
   String get firstName;
   @override
   String get lastName;
   @override
-  String get userName;
-  @override
-  String get password;
-  @override
   String get email;
   @override
-  String get phone;
-  @override
-  int get age;
-  @override
-  bool get gender;
+  DateTime? get birthDate;
   @override
   String get imageLink;
   @override
-  String get imagaLinkRanking;
+  int get totalReadingTime;
   @override
-  int get readingTime;
+  Ranking get ranking;
   @override
-  int get readBooks;
+  UserReadingPackageModel get currentPackage;
+  @override
+  List<UserHistoryModel> get recentlyHistories;
+  @override
+  int get totalReadingBooks;
+  @override
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
