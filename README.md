@@ -1,5 +1,5 @@
 Prerequisite:
-- Flutter: hhttps://docs.flutter.dev/get-started/install
+- Flutter: https://docs.flutter.dev/get-started/install
 - Flutter Version Management (Optional, but highly recommend): https://fvm.app/docs/getting_started/installation
     + Chocolatey: https://chocolatey.org/install
 - Git bash (Optional): https://github.com/git-for-windows/git/releases/download/v2.37.3.windows.1/Git-2.37.3-64-bit.exe
