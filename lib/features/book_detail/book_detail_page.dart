@@ -1,9 +1,9 @@
+import 'dart:convert';
+
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/bloc/book_detail_bloc.dart';
-import 'package:demo_book_reader/features/epub_view/epub_view_page.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
@@ -13,6 +13,7 @@ import 'package:demo_book_reader/widgets/customer/customer_readmore.dart';
 import 'package:demo_book_reader/widgets/header_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vocsy_epub_viewer/epub_viewer.dart';
 
 class BookDetailPage extends StatefulWidget {
   const BookDetailPage({
@@ -113,8 +114,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
           left: 0.0,
           right: 0.0,
           child: CustomerAppBar(
-            // bookItem: widget.bookItem,
-          ),
+              // bookItem: widget.bookItem,
+              ),
         ),
       ],
     );
@@ -141,10 +142,28 @@ class BottomButton extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                    onPressed: () {
-                      // context.navigateTo(
-                      //     EpubViewPage(linkEpub: bookItem.id, isFile: true));
-                      // context.navigateTo(EpubViewPage(linkEpub: bookItem.id, isFile: bookItem.isFile));
+                    onPressed: () async {
+                      VocsyEpub.setConfig(
+                        themeColor: AppColors.primaryColor,
+                        identifier: 'iosBook',
+                        scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+                        allowSharing: true,
+                        enableTts: true,
+                        nightMode: false,
+                      );
+                      // get current locator
+                      VocsyEpub.locatorStream.listen((locator) {
+                        print('LOCATOR Rick: ${locator}');
+                      });
+                      await VocsyEpub.openAsset('assets/epub/0X1PxwEACAAJ.epub',
+                          // lastLocation: locator
+                          lastLocation: EpubLocator.fromJson({
+                            'bookId': 'http://www.gutenberg.org/ebooks/768',
+                            'href': '/OEBPS/@public@vhost@g@gutenberg@html@files@768@768-h@768-h-0.htm.html',
+                            'created': 1676811241622,
+                            'locations': {'cfi': 'epubcfi(/0!/4/42/1:0)'}
+                          }),
+                          );
                     },
                     child: CustomerText(
                       isRead ? 'Đọc tiếp' : 'Đọc sách ngay',
