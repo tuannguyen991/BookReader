@@ -153,17 +153,19 @@ class BottomButton extends StatelessWidget {
                       );
                       // get current locator
                       VocsyEpub.locatorStream.listen((locator) {
-                        print('LOCATOR Rick: ${locator}');
+                        context.read<BookDetailBloc>().add(
+                              BookDetailSaveLocator(locatorString: locator),
+                            );
                       });
-                      await VocsyEpub.openAsset('assets/epub/0X1PxwEACAAJ.epub',
-                          // lastLocation: locator
-                          lastLocation: EpubLocator.fromJson({
-                            'bookId': 'http://www.gutenberg.org/ebooks/768',
-                            'href': '/OEBPS/@public@vhost@g@gutenberg@html@files@768@768-h@768-h-0.htm.html',
-                            'created': 1676811241622,
-                            'locations': {'cfi': 'epubcfi(/0!/4/42/1:0)'}
-                          }),
-                          );
+
+                      var locator = state.locatorString != null
+                          ? EpubLocator.fromJson(
+                              jsonDecode(state.locatorString!))
+                          : null;
+                      await VocsyEpub.openAsset(
+                        'assets/epub/0X1PxwEACAAJ.epub',
+                        lastLocation: locator,
+                      );
                     },
                     child: CustomerText(
                       isRead ? 'Đọc tiếp' : 'Đọc sách ngay',

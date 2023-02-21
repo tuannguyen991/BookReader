@@ -19,16 +19,21 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
         super(const BookDetailState()) {
     on<BookDetailLoaded>(_onLoaded);
     on<BookDetailFavoriteChange>(_onFavoriteChange);
+    on<BookDetailSaveLocator>(_onSaveLocator);
   }
 
   final BookRepository _bookRepository;
 
   Future<FutureOr<void>> _onLoaded(
-      BookDetailLoaded event, Emitter<BookDetailState> emit) async {
+    BookDetailLoaded event,
+    Emitter<BookDetailState> emit,
+  ) async {
     emit(state.copyWith(isLoading: true, isFavorite: false));
 
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
+
+    final locator = prefs.getString('locator');
 
     // get sameCategoryBook
     final list = await _bookRepository.getSameCategoryBook(
@@ -42,11 +47,25 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     );
 
     emit(state.copyWith(
-        sameCategoryBooks: list, isFavorite: isFavorite, isLoading: false));
+      sameCategoryBooks: list,
+      isFavorite: isFavorite,
+      isLoading: false,
+      locatorString: locator,
+    ));
   }
 
   FutureOr<void> _onFavoriteChange(
       BookDetailFavoriteChange event, Emitter<BookDetailState> emit) {
     emit(state.copyWith(isFavorite: !state.isFavorite));
+  }
+
+  FutureOr<void> _onSaveLocator(
+    BookDetailSaveLocator event,
+    Emitter<BookDetailState> emit,
+  ) async {
+    emit(state.copyWith(locatorString: event.locatorString));
+
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('locator', event.locatorString);
   }
 }

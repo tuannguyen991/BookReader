@@ -19,6 +19,7 @@ mixin _$BookDetailState {
   List<BookModel> get sameCategoryBooks => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
   dynamic get isFavorite => throw _privateConstructorUsedError;
+  String? get locatorString => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookDetailStateCopyWith<BookDetailState> get copyWith =>
@@ -34,7 +35,8 @@ abstract class $BookDetailStateCopyWith<$Res> {
   $Res call(
       {List<BookModel> sameCategoryBooks,
       dynamic isLoading,
-      dynamic isFavorite});
+      dynamic isFavorite,
+      String? locatorString});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
     Object? sameCategoryBooks = null,
     Object? isLoading = freezed,
     Object? isFavorite = freezed,
+    Object? locatorString = freezed,
   }) {
     return _then(_value.copyWith(
       sameCategoryBooks: null == sameCategoryBooks
@@ -67,6 +70,10 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      locatorString: freezed == locatorString
+          ? _value.locatorString
+          : locatorString // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -82,7 +89,8 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
   $Res call(
       {List<BookModel> sameCategoryBooks,
       dynamic isLoading,
-      dynamic isFavorite});
+      dynamic isFavorite,
+      String? locatorString});
 }
 
 /// @nodoc
@@ -99,6 +107,7 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
     Object? sameCategoryBooks = null,
     Object? isLoading = freezed,
     Object? isFavorite = freezed,
+    Object? locatorString = freezed,
   }) {
     return _then(_$_BookDetailState(
       sameCategoryBooks: null == sameCategoryBooks
@@ -107,6 +116,10 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
               as List<BookModel>,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
       isFavorite: freezed == isFavorite ? _value.isFavorite! : isFavorite,
+      locatorString: freezed == locatorString
+          ? _value.locatorString
+          : locatorString // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -117,7 +130,8 @@ class _$_BookDetailState implements _BookDetailState {
   const _$_BookDetailState(
       {final List<BookModel> sameCategoryBooks = const [],
       this.isLoading = true,
-      this.isFavorite = false})
+      this.isFavorite = false,
+      this.locatorString = null})
       : _sameCategoryBooks = sameCategoryBooks;
 
   final List<BookModel> _sameCategoryBooks;
@@ -136,10 +150,13 @@ class _$_BookDetailState implements _BookDetailState {
   @override
   @JsonKey()
   final dynamic isFavorite;
+  @override
+  @JsonKey()
+  final String? locatorString;
 
   @override
   String toString() {
-    return 'BookDetailState(sameCategoryBooks: $sameCategoryBooks, isLoading: $isLoading, isFavorite: $isFavorite)';
+    return 'BookDetailState(sameCategoryBooks: $sameCategoryBooks, isLoading: $isLoading, isFavorite: $isFavorite, locatorString: $locatorString)';
   }
 
   @override
@@ -151,7 +168,9 @@ class _$_BookDetailState implements _BookDetailState {
                 .equals(other._sameCategoryBooks, _sameCategoryBooks) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
-                .equals(other.isFavorite, isFavorite));
+                .equals(other.isFavorite, isFavorite) &&
+            (identical(other.locatorString, locatorString) ||
+                other.locatorString == locatorString));
   }
 
   @override
@@ -159,7 +178,8 @@ class _$_BookDetailState implements _BookDetailState {
       runtimeType,
       const DeepCollectionEquality().hash(_sameCategoryBooks),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(isFavorite));
+      const DeepCollectionEquality().hash(isFavorite),
+      locatorString);
 
   @JsonKey(ignore: true)
   @override
@@ -172,7 +192,8 @@ abstract class _BookDetailState implements BookDetailState {
   const factory _BookDetailState(
       {final List<BookModel> sameCategoryBooks,
       final dynamic isLoading,
-      final dynamic isFavorite}) = _$_BookDetailState;
+      final dynamic isFavorite,
+      final String? locatorString}) = _$_BookDetailState;
 
   @override
   List<BookModel> get sameCategoryBooks;
@@ -180,6 +201,8 @@ abstract class _BookDetailState implements BookDetailState {
   dynamic get isLoading;
   @override
   dynamic get isFavorite;
+  @override
+  String? get locatorString;
   @override
   @JsonKey(ignore: true)
   _$$_BookDetailStateCopyWith<_$_BookDetailState> get copyWith =>

@@ -8,5 +8,6 @@ class BookDetailState with _$BookDetailState {
     @Default([]) List<BookModel> sameCategoryBooks,
     @Default(true) isLoading,
     @Default(false) isFavorite,
+    @Default(null) String? locatorString
   }) = _BookDetailState;
 }

@@ -14,3 +14,9 @@ class BookDetailFavoriteChange extends BookDetailEvent {
 
   BookDetailFavoriteChange({required this.bookItem});
 }
+
+class BookDetailSaveLocator extends BookDetailEvent {
+  final String locatorString;
+
+  BookDetailSaveLocator({required this.locatorString});
+}
