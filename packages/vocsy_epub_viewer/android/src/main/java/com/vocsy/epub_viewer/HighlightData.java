@@ -83,4 +83,9 @@ public class HighlightData implements HighLight {
     public String getNote() {
         return note;
     }
+
+    @Override
+    public NoteOption getNoteOption() {
+        return NoteOption.NONE;
+    }
 }
