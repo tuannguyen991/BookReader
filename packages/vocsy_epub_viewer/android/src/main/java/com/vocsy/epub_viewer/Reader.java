@@ -2,6 +2,14 @@ package com.vocsy.epub_viewer;
 
 import android.content.Context;
 import android.util.Log;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +18,7 @@ import com.folioreader.FolioReader;
 import com.folioreader.model.HighLight;
 import com.folioreader.model.locators.ReadLocator;
 import com.folioreader.ui.base.OnSaveHighlight;
+import com.folioreader.util.AppUtil;
 import com.folioreader.util.OnHighlightListener;
 import com.folioreader.util.ReadLocatorListener;
 
@@ -24,7 +33,8 @@ import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel;
 
-public class Reader implements OnHighlightListener, ReadLocatorListener, FolioReader.OnClosedListener {
+public class Reader extends AppCompatActivity
+        implements OnHighlightListener, ReadLocatorListener, FolioReader.OnClosedListener {
 
     private ReaderConfig readerConfig;
     public FolioReader folioReader;
@@ -77,8 +87,7 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
     }
 
     private void setPageHandler(BinaryMessenger messenger) {
-//        final MethodChannel channel = new MethodChannel(registrar.messenger(), "page");
-//        channel.setMethodCallHandler(new EpubKittyPlugin());
+
         Log.i("event sink is", "in set page handler:");
         eventChannel = new EventChannel(messenger, PAGE_CHANNEL);
 
@@ -134,7 +143,6 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
         }).start();
     }
 
-
     private String loadAssetTextAsString(String name) {
         BufferedReader in = null;
         try {
@@ -184,6 +192,4 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
     public void saveReadLocator(ReadLocator readLocator) {
         read_locator = readLocator;
     }
-
-
 }
