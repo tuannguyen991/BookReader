@@ -3,14 +3,16 @@ part of 'package:vocsy_epub_viewer/epub_viewer.dart';
 /// Model for android EpubLocator
 class EpubLocator {
   String? bookId;
+  int? readPage;
   String? href;
   int? created;
   Locations? locations;
 
-  EpubLocator({this.bookId, this.href, this.created, this.locations});
+  EpubLocator({this.bookId, this.readPage, this.href, this.created, this.locations});
 
   EpubLocator.fromJson(Map<String, dynamic> json) {
     bookId = json['bookId'];
+    readPage = json['readPage'];
     href = json['href'];
     created = json['created'];
     locations = json['locations'] != null
@@ -21,6 +23,7 @@ class EpubLocator {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['bookId'] = this.bookId;
+    data['readPage'] = this.readPage;
     data['href'] = this.href;
     data['created'] = this.created;
     if (this.locations != null) {
