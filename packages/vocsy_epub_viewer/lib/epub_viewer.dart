@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,10 +28,10 @@ class VocsyEpub {
       bool allowSharing = false,
       bool enableTts = false}) async {
     Map<String, dynamic> agrs = {
-      "identifier": identifier,
-      "themeColor": Util.getHexFromColor(themeColor),
-      "scrollDirection": Util.getDirection(scrollDirection),
-      "allowSharing": allowSharing,
+      'identifier': identifier,
+      'themeColor': Util.getHexFromColor(themeColor),
+      'scrollDirection': Util.getDirection(scrollDirection),
+      'allowSharing': allowSharing,
       'enableTts': enableTts,
       'nightMode': nightMode
     };
@@ -43,7 +42,7 @@ class VocsyEpub {
   /// Last location is only available for android.
   static void open(String bookPath, {EpubLocator? lastLocation}) async {
     Map<String, dynamic> agrs = {
-      "bookPath": bookPath,
+      'bookPath': bookPath,
       'lastLocation': lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
     };
     _channel.invokeMethod('setChannel');
@@ -60,7 +59,7 @@ class VocsyEpub {
   static Future openAsset(String bookPath, {EpubLocator? lastLocation}) async {
     if (extension(bookPath) == '.epub') {
       Map<String, dynamic> agrs = {
-        "bookPath": (await Util.getFileFromAsset(bookPath)).path,
+        'bookPath': (await Util.getFileFromAsset(bookPath)).path,
         'lastLocation': lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
       };
       _channel.invokeMethod('setChannel');
@@ -76,7 +75,7 @@ class VocsyEpub {
 
   /// Stream to get EpubLocator for android and pageNumber for iOS
   static Stream get locatorStream {
-    print("In stream");
+    print('In stream');
     Stream pageStream = _pageChannel.receiveBroadcastStream().map((value) => value);
 
     return pageStream;

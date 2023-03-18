@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool loading = false;
   Dio dio = Dio();
-  String filePath = "";
+  String filePath = '';
 
   @override
   void initState() {
@@ -33,11 +33,11 @@ class _MyAppState extends State<MyApp> {
       final deviceInfoPlugin = DeviceInfoPlugin();
       final deviceInfo = await deviceInfoPlugin.deviceInfo;
       final allInfo = deviceInfo.data;
-      if (allInfo['version']["release"].toString().contains(".")) {
-        int indexOfFirstDot = allInfo['version']["release"].indexOf(".");
-        firstPart = allInfo['version']["release"].substring(0, indexOfFirstDot);
+      if (allInfo['version']['release'].toString().contains('.')) {
+        int indexOfFirstDot = allInfo['version']['release'].indexOf('.');
+        firstPart = allInfo['version']['release'].substring(0, indexOfFirstDot);
       } else {
-        firstPart = allInfo['version']["release"];
+        firstPart = allInfo['version']['release'];
       }
       int intValue = int.parse(firstPart!);
       if (intValue >= 13) {
@@ -77,13 +77,13 @@ class _MyAppState extends State<MyApp> {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        print("=====filePath======$filePath");
-                        if (filePath == "") {
+                        print('=====filePath======$filePath');
+                        if (filePath == '') {
                           download();
                         } else {
                           VocsyEpub.setConfig(
                             themeColor: Theme.of(context).primaryColor,
-                            identifier: "iosBook",
+                            identifier: 'iosBook',
                             scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
                             allowSharing: true,
                             enableTts: true,
@@ -98,10 +98,10 @@ class _MyAppState extends State<MyApp> {
                           VocsyEpub.open(
                             filePath,
                             lastLocation: EpubLocator.fromJson({
-                              "bookId": "2239",
-                              "href": "/OEBPS/ch06.xhtml",
-                              "created": 1539934158390,
-                              "locations": {"cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"}
+                              'bookId': '2239',
+                              'href': '/OEBPS/ch06.xhtml',
+                              'created': 1539934158390,
+                              'locations': {'cfi': 'epubcfi(/0!/4/4[simple_book]/2/2/6)'}
                             }),
                           );
                         }
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () async {
                         VocsyEpub.setConfig(
                           themeColor: Theme.of(context).primaryColor,
-                          identifier: "iosBook",
+                          identifier: 'iosBook',
                           scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
                           allowSharing: true,
                           enableTts: true,
@@ -125,10 +125,10 @@ class _MyAppState extends State<MyApp> {
                         await VocsyEpub.openAsset(
                           'assets/4.epub',
                           lastLocation: EpubLocator.fromJson({
-                            "bookId": "2239",
-                            "href": "/OEBPS/ch06.xhtml",
-                            "created": 1539934158390,
-                            "locations": {"cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"}
+                            'bookId': '2239',
+                            'href': '/OEBPS/ch06.xhtml',
+                            'created': 1539934158390,
+                            'locations': {'cfi': 'epubcfi(/0!/4/4[simple_book]/2/2/6)'}
                           }),
                         );
                       },
@@ -150,7 +150,7 @@ class _MyAppState extends State<MyApp> {
     if (!File(path).existsSync()) {
       await file.create();
       await dio.download(
-        "https://vocsyinfotech.in/envato/cc/flutter_ebook/uploads/22566_The-Racketeer---John-Grisham.epub",
+        'https://vocsyinfotech.in/envato/cc/flutter_ebook/uploads/22566_The-Racketeer---John-Grisham.epub',
         path,
         deleteOnError: true,
         onReceiveProgress: (receivedBytes, totalBytes) {
