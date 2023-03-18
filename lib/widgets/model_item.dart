@@ -1,6 +1,5 @@
 import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -10,7 +9,6 @@ import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indica
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class BookItem extends StatelessWidget {
   const BookItem({
