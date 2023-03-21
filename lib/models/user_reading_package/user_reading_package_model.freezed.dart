@@ -21,9 +21,8 @@ UserReadingPackageModel _$UserReadingPackageModelFromJson(
 
 /// @nodoc
 mixin _$UserReadingPackageModel {
-  String get readingPackageId => throw _privateConstructorUsedError;
+  ReadingPackageModel get readingPackage => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
-  DateTime? get endDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +36,9 @@ abstract class $UserReadingPackageModelCopyWith<$Res> {
           $Res Function(UserReadingPackageModel) then) =
       _$UserReadingPackageModelCopyWithImpl<$Res, UserReadingPackageModel>;
   @useResult
-  $Res call({String readingPackageId, DateTime? startDate, DateTime? endDate});
+  $Res call({ReadingPackageModel readingPackage, DateTime? startDate});
+
+  $ReadingPackageModelCopyWith<$Res> get readingPackage;
 }
 
 /// @nodoc
@@ -54,24 +55,27 @@ class _$UserReadingPackageModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? readingPackageId = null,
+    Object? readingPackage = null,
     Object? startDate = freezed,
-    Object? endDate = freezed,
   }) {
     return _then(_value.copyWith(
-      readingPackageId: null == readingPackageId
-          ? _value.readingPackageId
-          : readingPackageId // ignore: cast_nullable_to_non_nullable
-              as String,
+      readingPackage: null == readingPackage
+          ? _value.readingPackage
+          : readingPackage // ignore: cast_nullable_to_non_nullable
+              as ReadingPackageModel,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endDate: freezed == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReadingPackageModelCopyWith<$Res> get readingPackage {
+    return $ReadingPackageModelCopyWith<$Res>(_value.readingPackage, (value) {
+      return _then(_value.copyWith(readingPackage: value) as $Val);
+    });
   }
 }
 
@@ -83,7 +87,10 @@ abstract class _$$_UserReadingPackageModelCopyWith<$Res>
       __$$_UserReadingPackageModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String readingPackageId, DateTime? startDate, DateTime? endDate});
+  $Res call({ReadingPackageModel readingPackage, DateTime? startDate});
+
+  @override
+  $ReadingPackageModelCopyWith<$Res> get readingPackage;
 }
 
 /// @nodoc
@@ -98,22 +105,17 @@ class __$$_UserReadingPackageModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? readingPackageId = null,
+    Object? readingPackage = null,
     Object? startDate = freezed,
-    Object? endDate = freezed,
   }) {
     return _then(_$_UserReadingPackageModel(
-      readingPackageId: null == readingPackageId
-          ? _value.readingPackageId
-          : readingPackageId // ignore: cast_nullable_to_non_nullable
-              as String,
+      readingPackage: null == readingPackage
+          ? _value.readingPackage
+          : readingPackage // ignore: cast_nullable_to_non_nullable
+              as ReadingPackageModel,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: freezed == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -123,22 +125,20 @@ class __$$_UserReadingPackageModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserReadingPackageModel implements _UserReadingPackageModel {
   const _$_UserReadingPackageModel(
-      {this.readingPackageId = '', this.startDate, this.endDate});
+      {this.readingPackage = const ReadingPackageModel(), this.startDate});
 
   factory _$_UserReadingPackageModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserReadingPackageModelFromJson(json);
 
   @override
   @JsonKey()
-  final String readingPackageId;
+  final ReadingPackageModel readingPackage;
   @override
   final DateTime? startDate;
-  @override
-  final DateTime? endDate;
 
   @override
   String toString() {
-    return 'UserReadingPackageModel(readingPackageId: $readingPackageId, startDate: $startDate, endDate: $endDate)';
+    return 'UserReadingPackageModel(readingPackage: $readingPackage, startDate: $startDate)';
   }
 
   @override
@@ -146,17 +146,15 @@ class _$_UserReadingPackageModel implements _UserReadingPackageModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserReadingPackageModel &&
-            (identical(other.readingPackageId, readingPackageId) ||
-                other.readingPackageId == readingPackageId) &&
+            (identical(other.readingPackage, readingPackage) ||
+                other.readingPackage == readingPackage) &&
             (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+                other.startDate == startDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, readingPackageId, startDate, endDate);
+  int get hashCode => Object.hash(runtimeType, readingPackage, startDate);
 
   @JsonKey(ignore: true)
   @override
@@ -176,19 +174,16 @@ class _$_UserReadingPackageModel implements _UserReadingPackageModel {
 
 abstract class _UserReadingPackageModel implements UserReadingPackageModel {
   const factory _UserReadingPackageModel(
-      {final String readingPackageId,
-      final DateTime? startDate,
-      final DateTime? endDate}) = _$_UserReadingPackageModel;
+      {final ReadingPackageModel readingPackage,
+      final DateTime? startDate}) = _$_UserReadingPackageModel;
 
   factory _UserReadingPackageModel.fromJson(Map<String, dynamic> json) =
       _$_UserReadingPackageModel.fromJson;
 
   @override
-  String get readingPackageId;
+  ReadingPackageModel get readingPackage;
   @override
   DateTime? get startDate;
-  @override
-  DateTime? get endDate;
   @override
   @JsonKey(ignore: true)
   _$$_UserReadingPackageModelCopyWith<_$_UserReadingPackageModel>

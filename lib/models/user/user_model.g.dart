@@ -18,10 +18,6 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       totalReadingTime: json['totalReadingTime'] as int? ?? 0,
       ranking: $enumDecodeNullable(_$RankingEnumMap, json['ranking']) ??
           Ranking.bronze,
-      currentPackage: json['currentPackage'] == null
-          ? const UserReadingPackageModel()
-          : UserReadingPackageModel.fromJson(
-              json['currentPackage'] as Map<String, dynamic>),
       recentlyHistories: (json['recentlyHistories'] as List<dynamic>?)
               ?.map((e) => UserHistoryModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -39,7 +35,6 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'imageLink': instance.imageLink,
       'totalReadingTime': instance.totalReadingTime,
       'ranking': _$RankingEnumMap[instance.ranking]!,
-      'currentPackage': instance.currentPackage,
       'recentlyHistories': instance.recentlyHistories,
       'totalReadingBooks': instance.totalReadingBooks,
       'id': instance.id,

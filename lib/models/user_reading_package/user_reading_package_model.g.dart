@@ -9,19 +9,18 @@ part of 'user_reading_package_model.dart';
 _$_UserReadingPackageModel _$$_UserReadingPackageModelFromJson(
         Map<String, dynamic> json) =>
     _$_UserReadingPackageModel(
-      readingPackageId: json['readingPackageId'] as String? ?? '',
+      readingPackage: json['readingPackage'] == null
+          ? const ReadingPackageModel()
+          : ReadingPackageModel.fromJson(
+              json['readingPackage'] as Map<String, dynamic>),
       startDate: json['startDate'] == null
           ? null
           : DateTime.parse(json['startDate'] as String),
-      endDate: json['endDate'] == null
-          ? null
-          : DateTime.parse(json['endDate'] as String),
     );
 
 Map<String, dynamic> _$$_UserReadingPackageModelToJson(
         _$_UserReadingPackageModel instance) =>
     <String, dynamic>{
-      'readingPackageId': instance.readingPackageId,
+      'readingPackage': instance.readingPackage,
       'startDate': instance.startDate?.toIso8601String(),
-      'endDate': instance.endDate?.toIso8601String(),
     };

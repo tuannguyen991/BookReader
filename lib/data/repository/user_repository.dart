@@ -1,4 +1,5 @@
 import 'package:demo_book_reader/models/user/user_model.dart';
+import 'package:demo_book_reader/models/user_reading_package/user_reading_package_model.dart';
 
 abstract class UserRepository {
   /// Get ID User
@@ -6,5 +7,8 @@ abstract class UserRepository {
 
   /// Get Information User [UserModel]
   Future<UserModel> getInfor({required String token});
+
+  /// Get Information User [UserReadingPackageModel]
+  Future<UserReadingPackageModel> getUserReadingPackage({required String token});
 }
  

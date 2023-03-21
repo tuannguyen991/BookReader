@@ -11,6 +11,7 @@ class AppColors {
   static const starColor = Colors.yellow;
   static const backgroundColor = Colors.white;
   static const titleColor = Colors.black;
+  static const primary_4 = Color(0xFFCBCCFF);
 
 
   static const a = Color.fromARGB(255, 128, 130, 133);
