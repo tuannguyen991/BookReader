@@ -7,18 +7,18 @@ class OptionContent {
   OptionContent(this.icon, this.title);
 }
 
-const personalInformation = 'Thông tin cá nhân';
-const userReadingPackage = 'Gói đọc sách của tôi';
-const userHistory = 'Lịch sử đọc sách';
-const readingReminder = 'Nhắc nhở đọc sách';
-const feedback = 'Góp ý';
-const setting = 'Cài đặt';
+const personalInformationText = 'Thông tin cá nhân';
+const userReadingPackageText = 'Gói đọc sách của tôi';
+const userHistoryText = 'Lịch sử đọc sách';
+const readingReminderText = 'Nhắc nhở đọc sách';
+const feedbackText = 'Góp ý';
+const settingText = 'Cài đặt';
 
 final List<OptionContent> personalOptionList = [
-  OptionContent(Icons.people, personalInformation),
-  OptionContent(Icons.book, userReadingPackage),
-  OptionContent(Icons.history, userHistory),
-  OptionContent(Icons.people, readingReminder),
-  OptionContent(Icons.timer_outlined, feedback),
-  OptionContent(Icons.settings, setting),
+  OptionContent(Icons.people, personalInformationText),
+  OptionContent(Icons.book, userReadingPackageText),
+  OptionContent(Icons.history, userHistoryText),
+  OptionContent(Icons.people, readingReminderText),
+  OptionContent(Icons.timer_outlined, feedbackText),
+  OptionContent(Icons.settings, settingText),
 ];

@@ -86,12 +86,12 @@ class _TabUserPageState extends State<TabUserPage> {
                           final item = personalOptionList[index];
                           late final VoidCallback onTap;
                           switch (item.title) {
-                            case userReadingPackage:
+                            case userReadingPackageText:
                               onTap = () {
-                                context.navigateTo(const UserReadingPackage());
+                                context.navigateTo(UserReadingPackage(user: user));
                               };
                               break;
-                            case userHistory:
+                            case userHistoryText:
                               onTap = () {
                                 context.navigateTo(UserHistoryPage(
                                   user: user,
