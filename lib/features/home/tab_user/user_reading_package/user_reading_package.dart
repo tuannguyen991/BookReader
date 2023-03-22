@@ -109,39 +109,49 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
                     child: Row(
                       children: [
                         verticalSpace20,
-                        Expanded(
-                          child: RichText(
-                            text: TextSpan(
-                                text: 'Bạn đang sử dụng ',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: fontSize16,
+                        userReadingPackage == null
+                            ? Expanded(
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'Bạn đang sử dụng ',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: fontSize16,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                            text: userReadingPackage
+                                                .readingPackage.name,
+                                            style: TextStyle(
+                                              color: AppColors.primaryColor,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        const TextSpan(
+                                          text: ', thời hạn tới ',
+                                        ),
+                                        TextSpan(
+                                            text: DateFormat('dd/MM/yyyy')
+                                                .format(userReadingPackage
+                                                    .startDate!),
+                                            style: TextStyle(
+                                              color: AppColors.primaryColor,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ]),
                                 ),
-                                children: [
-                                  TextSpan(
-                                      text: userReadingPackage
-                                          .readingPackage.name,
-                                      style: TextStyle(
-                                        color: AppColors.primaryColor,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                  TextSpan(
-                                    text: ', thời hạn tới ',
-                                  ),
-                                  TextSpan(
-                                      text: DateFormat('dd/MM/yyyy').format(
-                                          userReadingPackage.startDate!),
-                                      style: TextStyle(
-                                        color: AppColors.primaryColor,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                ]),
-                          ),
-                        ),
+                              )
+                            : const Expanded(
+                                child: Text(
+                                  'Bạn chưa đăng ký gói đọc sách nào!\nVui lòng đăng ký để trải nghiệm đầy đủ tính năng trên ứng dụng BookReader.',
+                                  style: TextStyle(
+                                      fontSize: fontSize16,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.primary_1),
+                                ),
+                              )
                       ],
                     ),
                   ),
-                  verticalSpace8,
                   ...List.generate(readingPackageList.length, (index) {
                     return ReadingPackage(
                       package: readingPackageList[index],

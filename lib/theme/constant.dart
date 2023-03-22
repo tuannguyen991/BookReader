@@ -27,12 +27,14 @@ const double32 = 32.0;
 const double36 = 36.0;
 const double48 = 48.0;
 const double56 = 56.0;
+const double44 = 44.0;
 const double45 = 45.0;
 const double60 = 60.0;
 const double64 = 64.0;
 const double80 = 80.0;
 const double88 = 88.0;
 const double120 = 120.0;
+const double185 = 185.0;
 
 // font Size
 const fontSize12 = 12.0;

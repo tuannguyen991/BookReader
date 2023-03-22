@@ -1,4 +1,6 @@
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
+import 'package:demo_book_reader/share/enum/button_type.dart';
+import 'package:demo_book_reader/widgets/customer/custom_button.dart';
 import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +18,8 @@ class ReadingPackage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: double12, bottom: double12),
-      padding: EdgeInsets.all(double12),
+      margin: const EdgeInsets.only(top: double12, bottom: double12),
+      padding: const EdgeInsets.all(double12),
       decoration: BoxDecoration(
           color: isUsing ? AppColors.primary_4 : AppColors.backgroundColor,
           borderRadius: BorderRadius.circular(double16),
@@ -50,7 +52,7 @@ class ReadingPackage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
             CustomerText(
-              'Tiết kiệm ${package.discountPercentage}%',
+              package.discountPercentage == 0 ? '': 'Tiết kiệm ${package.discountPercentage}%',
               color: Colors.red,
               fontSize: fontSize14,
             )
@@ -73,27 +75,27 @@ class ReadingPackage extends StatelessWidget {
                       color: AppColors.secondaryColor,
                       fontWeight: FontWeight.normal))
             ])),
-        // register button
         verticalSpace12,
         isUsing ? const CustomerLinearPercentIndicator(percent: 0.8) : Row(),
         isUsing ? verticalSpace12 : Row(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox(
-              width: double120,
-              height: double36,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                  ),
-                  onPressed: () {},
-                  child: CustomerText(
-                    isUsing ? 'Gia hạn' : 'Đăng ký',
-                    color: Colors.white,
-                    fontSize: fontSize16,
-                  )),
-            )
+            CustomButton(text: isUsing ? 'Gia hạn' : 'Đăng ký', size: ButtonSize.compact)
+            // SizedBox(
+            //   width: double120,
+            //   height: double36,
+            //   child: ElevatedButton(
+            //       style: ElevatedButton.styleFrom(
+            //         backgroundColor: AppColors.primaryColor,
+            //       ),
+            //       onPressed: () {},
+            //       child: CustomerText(
+            //         isUsing ? 'Gia hạn' : 'Đăng ký',
+            //         color: Colors.white,
+            //         fontSize: fontSize16,
+            //       )),
+            // )
           ],
         )
       ]),

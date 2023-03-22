@@ -61,12 +61,12 @@ class UserRepositoryImplement implements UserRepository {
       {required String token}) async {
     // TODO: call API
     return UserReadingPackageModel(
-        readingPackage: ReadingPackageModel(
+        readingPackage: const ReadingPackageModel(
             id: '0',
             name: 'Gói Đọc Sách Tháng',
             duration: 1,
             price: 50000,
             discountPercentage: 0),
-        startDate: DateTime(2023));
+        startDate: DateTime(2023, 4, 1));
   }
 }
