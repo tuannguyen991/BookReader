@@ -16,6 +16,7 @@ class UserModel with _$UserModel {
         String imageLink,
     @Default(0) int totalReadingTime,
     @Default(Ranking.bronze) Ranking ranking,
+    UserReadingPackageModel? currentPackage,
     @Default([]) List<UserHistoryModel> recentlyHistories,
     @Default(0) int totalReadingBooks,
     @Default('') String id,

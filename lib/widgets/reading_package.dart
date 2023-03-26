@@ -1,3 +1,4 @@
+import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
 import 'package:demo_book_reader/share/enum/button_type.dart';
 import 'package:demo_book_reader/widgets/customer/custom_button.dart';
@@ -10,18 +11,22 @@ import 'customer/customer_text.dart';
 
 class ReadingPackage extends StatelessWidget {
   final ReadingPackageModel package;
-  final bool isUsing;
+  final DateTime? startDate;
+  final DateTime? endDate;
 
-  const ReadingPackage({Key? key, required this.package, this.isUsing = false})
+  const ReadingPackage(
+      {Key? key, required this.package, this.startDate, this.endDate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: double12, bottom: double12),
+      margin: const EdgeInsets.symmetric(vertical: double12),
       padding: const EdgeInsets.all(double12),
       decoration: BoxDecoration(
-          color: isUsing ? AppColors.primary_4 : AppColors.backgroundColor,
+          color: startDate != null
+              ? AppColors.primary_4
+              : AppColors.backgroundColor,
           borderRadius: BorderRadius.circular(double16),
           boxShadow: [
             BoxShadow(
@@ -52,7 +57,9 @@ class ReadingPackage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
             CustomerText(
-              package.discountPercentage == 0 ? '': 'Tiết kiệm ${package.discountPercentage}%',
+              package.discountPercentage == 0
+                  ? ''
+                  : 'Tiết kiệm ${package.discountPercentage}%',
               color: Colors.red,
               fontSize: fontSize14,
             )
@@ -76,26 +83,27 @@ class ReadingPackage extends StatelessWidget {
                       fontWeight: FontWeight.normal))
             ])),
         verticalSpace12,
-        isUsing ? const CustomerLinearPercentIndicator(percent: 0.8) : Row(),
-        isUsing ? verticalSpace12 : Row(),
+        startDate != null
+            ? Wrap(
+                children: [
+                  CustomerLinearPercentIndicator(
+                      percent: calculateUsagePercentage(startDate!, endDate!),
+                      isUser: true),
+                  verticalSpace8,
+                  CustomerText(
+                      'Còn ${endDate?.difference(DateTime.now()).inDays} ngày',
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold),
+                  verticalSpace12
+                ],
+              )
+            : Wrap(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            CustomButton(text: isUsing ? 'Gia hạn' : 'Đăng ký', size: ButtonSize.compact)
-            // SizedBox(
-            //   width: double120,
-            //   height: double36,
-            //   child: ElevatedButton(
-            //       style: ElevatedButton.styleFrom(
-            //         backgroundColor: AppColors.primaryColor,
-            //       ),
-            //       onPressed: () {},
-            //       child: CustomerText(
-            //         isUsing ? 'Gia hạn' : 'Đăng ký',
-            //         color: Colors.white,
-            //         fontSize: fontSize16,
-            //       )),
-            // )
+            CustomButton(
+                text: startDate != null ? 'Gia hạn' : 'Đăng ký',
+                size: ButtonSize.compact)
           ],
         )
       ]),

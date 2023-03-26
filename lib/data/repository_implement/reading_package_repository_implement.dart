@@ -1,18 +1,33 @@
+import 'dart:convert';
+
 import 'package:demo_book_reader/data/repository/reading_package_repository.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
+import 'package:http/http.dart' as http;
+
+import '../remote/remote.dart';
 
 class ReadingPackageRepositoryImplement implements ReadingPackageRepository {
   @override
   Future<List<ReadingPackageModel>> getAll({required String token}) async {
-    // TODO: call API
-    List<ReadingPackageModel> list = const [
-      ReadingPackageModel(
-          id: '0', name: 'Gói Đọc Sách Tháng', duration: 1, price: 50000, discountPercentage: 0),
-      ReadingPackageModel(
-          id: '1', name: 'Gói Đọc Sách 3 Tháng', duration: 3, price: 150000, discountPercentage: 16),
-      ReadingPackageModel(
-          id: '2', name: 'Gói Đọc Sách Năm', duration: 12, price: 600000, discountPercentage: 25),
-    ];
-    return list;
+    final uri = Uri.https(
+      Remote.authority,
+      Remote.pathReadingPackages,
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+      final list = parsed
+          .map<ReadingPackageModel>(
+              (json) => ReadingPackageModel.fromJson(json))
+          .toList();
+      return list;
+    }
+
+    throw Exception('');
   }
 }

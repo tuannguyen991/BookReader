@@ -7,8 +7,5 @@ abstract class UserRepository {
 
   /// Get Information User [UserModel]
   Future<UserModel> getInfor({required String token});
-
-  /// Get Information User [UserReadingPackageModel]
-  Future<UserReadingPackageModel> getUserReadingPackage({required String token});
 }
  

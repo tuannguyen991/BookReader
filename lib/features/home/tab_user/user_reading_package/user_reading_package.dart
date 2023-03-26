@@ -1,5 +1,4 @@
 import 'package:demo_book_reader/data/repository/reading_package_repository.dart';
-import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/features/home/tab_user/main/util/personal_option_list.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_reading_package/bloc/user_reading_package_bloc.dart';
@@ -23,15 +22,15 @@ class UserReadingPackage extends StatefulWidget {
 }
 
 class _UserReadingPackageState extends State<UserReadingPackage> {
-  final bloc = UserReadingPackageBloc(
-    userRepository: locator<UserRepository>(),
-    readingPackageRepository: locator<ReadingPackageRepository>(),
-  );
+  late UserReadingPackageBloc bloc;
 
   @override
   void initState() {
     super.initState();
-
+    bloc = UserReadingPackageBloc(
+      user: widget.user,
+      readingPackageRepository: locator<ReadingPackageRepository>(),
+    );
     bloc.add(UserReadingPackageLoaded());
   }
 
@@ -90,14 +89,14 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
           ),
           verticalSpace8,
           buildPersonalInfo(),
-          verticalSpace8,
+          verticalSpace16,
           BlocBuilder<UserReadingPackageBloc, UserReadingPackageState>(
             builder: (context, state) {
               if (state.isLoading) {
                 return const CircularProgressIndicator();
               }
-              final userReadingPackage = state.userReadingPackage;
               final readingPackageList = state.readingPackageList;
+              final currentPackage = state.currentPackage;
               return Column(
                 children: [
                   Container(
@@ -109,7 +108,7 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
                     child: Row(
                       children: [
                         verticalSpace20,
-                        userReadingPackage == null
+                        currentPackage != null
                             ? Expanded(
                                 child: RichText(
                                   text: TextSpan(
@@ -120,8 +119,7 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
                                       ),
                                       children: [
                                         TextSpan(
-                                            text: userReadingPackage
-                                                .readingPackage.name,
+                                            text: currentPackage.detail.name,
                                             style: TextStyle(
                                               color: AppColors.primaryColor,
                                               fontWeight: FontWeight.bold,
@@ -131,8 +129,7 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
                                         ),
                                         TextSpan(
                                             text: DateFormat('dd/MM/yyyy')
-                                                .format(userReadingPackage
-                                                    .startDate!),
+                                                .format(currentPackage.endDate),
                                             style: TextStyle(
                                               color: AppColors.primaryColor,
                                               fontWeight: FontWeight.bold,
@@ -152,13 +149,24 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
                       ],
                     ),
                   ),
-                  ...List.generate(readingPackageList.length, (index) {
-                    return ReadingPackage(
-                      package: readingPackageList[index],
-                      isUsing: readingPackageList[index].id ==
-                          userReadingPackage.readingPackage.id,
-                    );
-                  })
+                  currentPackage != null
+                      ? Wrap(
+                          children: [
+                            verticalSpace4,
+                            ReadingPackage(
+                                package: currentPackage.detail,
+                                startDate: currentPackage.startDate,
+                                endDate: currentPackage.endDate)
+                          ],
+                        )
+                      : Wrap(),
+                  verticalSpace4,
+                  ...List.generate(
+                      readingPackageList.length,
+                      (index) => (readingPackageList[index].id !=
+                              currentPackage?.detail.id
+                          ? ReadingPackage(package: readingPackageList[index])
+                          : Wrap()))
                 ],
               );
             },

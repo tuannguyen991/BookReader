@@ -2,9 +2,7 @@ import 'dart:convert';
 
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
-import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
-import 'package:demo_book_reader/models/user_reading_package/user_reading_package_model.dart';
 import 'package:http/http.dart' as http;
 
 class UserRepositoryImplement implements UserRepository {
@@ -54,19 +52,5 @@ class UserRepositoryImplement implements UserRepository {
     }
 
     throw Exception('');
-  }
-
-  @override
-  Future<UserReadingPackageModel> getUserReadingPackage(
-      {required String token}) async {
-    // TODO: call API
-    return UserReadingPackageModel(
-        readingPackage: const ReadingPackageModel(
-            id: '0',
-            name: 'Gói Đọc Sách Tháng',
-            duration: 1,
-            price: 50000,
-            discountPercentage: 0),
-        startDate: DateTime(2023, 4, 1));
   }
 }

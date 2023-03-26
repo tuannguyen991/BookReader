@@ -21,9 +21,10 @@ ReadingPackageModel _$ReadingPackageModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ReadingPackageModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  int get duration => throw _privateConstructorUsedError;
+  String get name =>
+      throw _privateConstructorUsedError; // @Default(Duration()) Duration duration,
   int get price => throw _privateConstructorUsedError;
+  int get currency => throw _privateConstructorUsedError;
   int get discountPercentage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,8 +42,8 @@ abstract class $ReadingPackageModelCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      int duration,
       int price,
+      int currency,
       int discountPercentage});
 }
 
@@ -61,8 +62,8 @@ class _$ReadingPackageModelCopyWithImpl<$Res, $Val extends ReadingPackageModel>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? duration = null,
     Object? price = null,
+    Object? currency = null,
     Object? discountPercentage = null,
   }) {
     return _then(_value.copyWith(
@@ -74,13 +75,13 @@ class _$ReadingPackageModelCopyWithImpl<$Res, $Val extends ReadingPackageModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
               as int,
       discountPercentage: null == discountPercentage
           ? _value.discountPercentage
@@ -101,8 +102,8 @@ abstract class _$$_ReadingPackageModelCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      int duration,
       int price,
+      int currency,
       int discountPercentage});
 }
 
@@ -119,8 +120,8 @@ class __$$_ReadingPackageModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? duration = null,
     Object? price = null,
+    Object? currency = null,
     Object? discountPercentage = null,
   }) {
     return _then(_$_ReadingPackageModel(
@@ -132,13 +133,13 @@ class __$$_ReadingPackageModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
               as int,
       discountPercentage: null == discountPercentage
           ? _value.discountPercentage
@@ -154,8 +155,8 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
   const _$_ReadingPackageModel(
       {this.id = '',
       this.name = '',
-      this.duration = 1,
       this.price = 0,
+      this.currency = 1,
       this.discountPercentage = 0});
 
   factory _$_ReadingPackageModel.fromJson(Map<String, dynamic> json) =>
@@ -167,19 +168,20 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
   @override
   @JsonKey()
   final String name;
-  @override
-  @JsonKey()
-  final int duration;
+// @Default(Duration()) Duration duration,
   @override
   @JsonKey()
   final int price;
+  @override
+  @JsonKey()
+  final int currency;
   @override
   @JsonKey()
   final int discountPercentage;
 
   @override
   String toString() {
-    return 'ReadingPackageModel(id: $id, name: $name, duration: $duration, price: $price, discountPercentage: $discountPercentage)';
+    return 'ReadingPackageModel(id: $id, name: $name, price: $price, currency: $currency, discountPercentage: $discountPercentage)';
   }
 
   @override
@@ -189,9 +191,9 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
             other is _$_ReadingPackageModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
             (identical(other.price, price) || other.price == price) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
             (identical(other.discountPercentage, discountPercentage) ||
                 other.discountPercentage == discountPercentage));
   }
@@ -199,7 +201,7 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, duration, price, discountPercentage);
+      Object.hash(runtimeType, id, name, price, currency, discountPercentage);
 
   @JsonKey(ignore: true)
   @override
@@ -220,8 +222,8 @@ abstract class _ReadingPackageModel implements ReadingPackageModel {
   const factory _ReadingPackageModel(
       {final String id,
       final String name,
-      final int duration,
       final int price,
+      final int currency,
       final int discountPercentage}) = _$_ReadingPackageModel;
 
   factory _ReadingPackageModel.fromJson(Map<String, dynamic> json) =
@@ -231,10 +233,10 @@ abstract class _ReadingPackageModel implements ReadingPackageModel {
   String get id;
   @override
   String get name;
-  @override
-  int get duration;
-  @override
+  @override // @Default(Duration()) Duration duration,
   int get price;
+  @override
+  int get currency;
   @override
   int get discountPercentage;
   @override

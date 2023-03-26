@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserReadingPackageState {
   bool get isLoading => throw _privateConstructorUsedError;
-  UserReadingPackageModel get userReadingPackage =>
-      throw _privateConstructorUsedError;
   List<ReadingPackageModel> get readingPackageList =>
+      throw _privateConstructorUsedError;
+  DetailCurrentPackage? get currentPackage =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,10 +35,8 @@ abstract class $UserReadingPackageStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      UserReadingPackageModel userReadingPackage,
-      List<ReadingPackageModel> readingPackageList});
-
-  $UserReadingPackageModelCopyWith<$Res> get userReadingPackage;
+      List<ReadingPackageModel> readingPackageList,
+      DetailCurrentPackage? currentPackage});
 }
 
 /// @nodoc
@@ -56,32 +54,23 @@ class _$UserReadingPackageStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
-    Object? userReadingPackage = null,
     Object? readingPackageList = null,
+    Object? currentPackage = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      userReadingPackage: null == userReadingPackage
-          ? _value.userReadingPackage
-          : userReadingPackage // ignore: cast_nullable_to_non_nullable
-              as UserReadingPackageModel,
       readingPackageList: null == readingPackageList
           ? _value.readingPackageList
           : readingPackageList // ignore: cast_nullable_to_non_nullable
               as List<ReadingPackageModel>,
+      currentPackage: freezed == currentPackage
+          ? _value.currentPackage
+          : currentPackage // ignore: cast_nullable_to_non_nullable
+              as DetailCurrentPackage?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserReadingPackageModelCopyWith<$Res> get userReadingPackage {
-    return $UserReadingPackageModelCopyWith<$Res>(_value.userReadingPackage,
-        (value) {
-      return _then(_value.copyWith(userReadingPackage: value) as $Val);
-    });
   }
 }
 
@@ -95,11 +84,8 @@ abstract class _$$_UserReadingPackageStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      UserReadingPackageModel userReadingPackage,
-      List<ReadingPackageModel> readingPackageList});
-
-  @override
-  $UserReadingPackageModelCopyWith<$Res> get userReadingPackage;
+      List<ReadingPackageModel> readingPackageList,
+      DetailCurrentPackage? currentPackage});
 }
 
 /// @nodoc
@@ -115,22 +101,22 @@ class __$$_UserReadingPackageStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? userReadingPackage = null,
     Object? readingPackageList = null,
+    Object? currentPackage = freezed,
   }) {
     return _then(_$_UserReadingPackageState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      userReadingPackage: null == userReadingPackage
-          ? _value.userReadingPackage
-          : userReadingPackage // ignore: cast_nullable_to_non_nullable
-              as UserReadingPackageModel,
       readingPackageList: null == readingPackageList
           ? _value._readingPackageList
           : readingPackageList // ignore: cast_nullable_to_non_nullable
               as List<ReadingPackageModel>,
+      currentPackage: freezed == currentPackage
+          ? _value.currentPackage
+          : currentPackage // ignore: cast_nullable_to_non_nullable
+              as DetailCurrentPackage?,
     ));
   }
 }
@@ -140,18 +126,15 @@ class __$$_UserReadingPackageStateCopyWithImpl<$Res>
 class _$_UserReadingPackageState implements _UserReadingPackageState {
   const _$_UserReadingPackageState(
       {this.isLoading = true,
-      this.userReadingPackage = const UserReadingPackageModel(),
       final List<ReadingPackageModel> readingPackageList = const [
         ReadingPackageModel()
-      ]})
+      ],
+      this.currentPackage})
       : _readingPackageList = readingPackageList;
 
   @override
   @JsonKey()
   final bool isLoading;
-  @override
-  @JsonKey()
-  final UserReadingPackageModel userReadingPackage;
   final List<ReadingPackageModel> _readingPackageList;
   @override
   @JsonKey()
@@ -163,8 +146,11 @@ class _$_UserReadingPackageState implements _UserReadingPackageState {
   }
 
   @override
+  final DetailCurrentPackage? currentPackage;
+
+  @override
   String toString() {
-    return 'UserReadingPackageState(isLoading: $isLoading, userReadingPackage: $userReadingPackage, readingPackageList: $readingPackageList)';
+    return 'UserReadingPackageState(isLoading: $isLoading, readingPackageList: $readingPackageList, currentPackage: $currentPackage)';
   }
 
   @override
@@ -174,15 +160,15 @@ class _$_UserReadingPackageState implements _UserReadingPackageState {
             other is _$_UserReadingPackageState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.userReadingPackage, userReadingPackage) ||
-                other.userReadingPackage == userReadingPackage) &&
             const DeepCollectionEquality()
-                .equals(other._readingPackageList, _readingPackageList));
+                .equals(other._readingPackageList, _readingPackageList) &&
+            (identical(other.currentPackage, currentPackage) ||
+                other.currentPackage == currentPackage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, userReadingPackage,
-      const DeepCollectionEquality().hash(_readingPackageList));
+  int get hashCode => Object.hash(runtimeType, isLoading,
+      const DeepCollectionEquality().hash(_readingPackageList), currentPackage);
 
   @JsonKey(ignore: true)
   @override
@@ -195,17 +181,16 @@ class _$_UserReadingPackageState implements _UserReadingPackageState {
 
 abstract class _UserReadingPackageState implements UserReadingPackageState {
   const factory _UserReadingPackageState(
-          {final bool isLoading,
-          final UserReadingPackageModel userReadingPackage,
-          final List<ReadingPackageModel> readingPackageList}) =
-      _$_UserReadingPackageState;
+      {final bool isLoading,
+      final List<ReadingPackageModel> readingPackageList,
+      final DetailCurrentPackage? currentPackage}) = _$_UserReadingPackageState;
 
   @override
   bool get isLoading;
   @override
-  UserReadingPackageModel get userReadingPackage;
-  @override
   List<ReadingPackageModel> get readingPackageList;
+  @override
+  DetailCurrentPackage? get currentPackage;
   @override
   @JsonKey(ignore: true)
   _$$_UserReadingPackageStateCopyWith<_$_UserReadingPackageState>

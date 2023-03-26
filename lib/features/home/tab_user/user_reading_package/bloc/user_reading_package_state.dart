@@ -6,7 +6,8 @@ part of 'user_reading_package_bloc.dart';
 class UserReadingPackageState with _$UserReadingPackageState {
   const factory UserReadingPackageState({
     @Default(true) bool isLoading,
-    @Default(UserReadingPackageModel()) UserReadingPackageModel userReadingPackage,
-    @Default([ReadingPackageModel()]) List<ReadingPackageModel> readingPackageList,
-}) = _UserReadingPackageState;
+    @Default([ReadingPackageModel()])
+        List<ReadingPackageModel> readingPackageList,
+    DetailCurrentPackage? currentPackage,
+  }) = _UserReadingPackageState;
 }
