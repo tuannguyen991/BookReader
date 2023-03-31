@@ -103,7 +103,29 @@ class ReadingPackage extends StatelessWidget {
           children: [
             CustomButton(
                 text: startDate != null ? 'Gia hạn' : 'Đăng ký',
-                size: ButtonSize.compact)
+                size: ButtonSize.compact,
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: 200,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                const Text('Modal BottomSheet'),
+                                ElevatedButton(
+                                  child: const Text('Close BottomSheet'),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                })
           ],
         )
       ]),
