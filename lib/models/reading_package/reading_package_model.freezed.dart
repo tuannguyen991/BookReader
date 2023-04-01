@@ -21,8 +21,7 @@ ReadingPackageModel _$ReadingPackageModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ReadingPackageModel {
   String get id => throw _privateConstructorUsedError;
-  String get name =>
-      throw _privateConstructorUsedError; // @Default(Duration()) Duration duration,
+  String get name => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   int get currency => throw _privateConstructorUsedError;
   int get discountPercentage => throw _privateConstructorUsedError;
@@ -168,7 +167,6 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
   @override
   @JsonKey()
   final String name;
-// @Default(Duration()) Duration duration,
   @override
   @JsonKey()
   final int price;
@@ -233,7 +231,7 @@ abstract class _ReadingPackageModel implements ReadingPackageModel {
   String get id;
   @override
   String get name;
-  @override // @Default(Duration()) Duration duration,
+  @override
   int get price;
   @override
   int get currency;

@@ -2,7 +2,7 @@ class Remote {
   Remote._();
 
   static String authority =
-      '680e-1-52-173-149.ap.ngrok.io';
+      '4718-1-52-173-149.ap.ngrok.io';
 
   static String pathUsers = 'api/v1/users';
 

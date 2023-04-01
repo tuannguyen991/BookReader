@@ -4,12 +4,12 @@ import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatefulWidget {
-  String text;
-  ButtonType? type;
-  ButtonSize? size;
-  VoidCallback onPressed;
+  final String text;
+  final ButtonType? type;
+  final ButtonSize? size;
+  final VoidCallback onPressed;
 
-  CustomButton(
+  const CustomButton(
       {Key? key,
       required this.text,
       this.type = ButtonType.primary,

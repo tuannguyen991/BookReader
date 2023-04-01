@@ -1,15 +1,16 @@
 import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
 import 'package:demo_book_reader/share/enum/button_type.dart';
+import 'package:demo_book_reader/theme/app_colors.dart';
+import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/custom_button.dart';
 import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indicator.dart';
+import 'package:demo_book_reader/widgets/payment_modal.dart';
 import 'package:flutter/material.dart';
 
-import '../theme/app_colors.dart';
-import '../theme/constant.dart';
 import 'customer/customer_text.dart';
 
-class ReadingPackage extends StatelessWidget {
+class ReadingPackage extends StatefulWidget {
   final ReadingPackageModel package;
   final DateTime? startDate;
   final DateTime? endDate;
@@ -19,12 +20,17 @@ class ReadingPackage extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<ReadingPackage> createState() => _ReadingPackageState();
+}
+
+class _ReadingPackageState extends State<ReadingPackage> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: double12),
       padding: const EdgeInsets.all(double12),
       decoration: BoxDecoration(
-          color: startDate != null
+          color: widget.startDate != null
               ? AppColors.primary_4
               : AppColors.backgroundColor,
           borderRadius: BorderRadius.circular(double16),
@@ -51,15 +57,15 @@ class ReadingPackage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomerText(
-              package.name,
+              widget.package.name,
               color: Colors.black,
               fontSize: fontSize16,
               fontWeight: FontWeight.bold,
             ),
             CustomerText(
-              package.discountPercentage == 0
+              widget.package.discountPercentage == 0
                   ? ''
-                  : 'Tiết kiệm ${package.discountPercentage}%',
+                  : 'Tiết kiệm ${widget.package.discountPercentage}%',
               color: Colors.red,
               fontSize: fontSize14,
             )
@@ -69,7 +75,7 @@ class ReadingPackage extends StatelessWidget {
         RichText(
             text: TextSpan(
                 text:
-                    '${(package.price / 100 * (100 - package.discountPercentage)).round()}đ',
+                    '${(widget.package.price / 100 * (100 - widget.package.discountPercentage)).round()}đ',
                 style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: fontSize20,
@@ -83,15 +89,16 @@ class ReadingPackage extends StatelessWidget {
                       fontWeight: FontWeight.normal))
             ])),
         verticalSpace12,
-        startDate != null
+        widget.startDate != null
             ? Wrap(
                 children: [
                   CustomerLinearPercentIndicator(
-                      percent: calculateUsagePercentage(startDate!, endDate!),
+                      percent: calculateUsagePercentage(
+                          widget.startDate!, widget.endDate!),
                       isUser: true),
                   verticalSpace8,
                   CustomerText(
-                      'Còn ${endDate?.difference(DateTime.now()).inDays} ngày',
+                      'Còn ${widget.endDate?.difference(DateTime.now()).inDays} ngày',
                       color: Colors.red,
                       fontWeight: FontWeight.bold),
                   verticalSpace12
@@ -102,28 +109,18 @@ class ReadingPackage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomButton(
-                text: startDate != null ? 'Gia hạn' : 'Đăng ký',
+                text: widget.startDate != null ? 'Gia hạn' : 'Đăng ký',
                 size: ButtonSize.compact,
                 onPressed: () {
                   showModalBottomSheet<void>(
                       context: context,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      )),
                       builder: (BuildContext context) {
-                        return SizedBox(
-                          height: 200,
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                const Text('Modal BottomSheet'),
-                                ElevatedButton(
-                                  child: const Text('Close BottomSheet'),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
+                        return PaymentModal(package: widget.package, endDate: widget.endDate);
                       });
                 })
           ],

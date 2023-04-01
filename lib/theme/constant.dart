@@ -14,6 +14,7 @@ const horizontalSpace4 = SizedBox(width: double4);
 const horizontalSpace8 = SizedBox(width: double8);
 const horizontalSpace16 = SizedBox(width: double16);
 const horizontalSpace24 = SizedBox(width: double24);
+const horizontalSpace32 = SizedBox(width: double32);
 
 // double
 const double4 = 4.0;
@@ -40,6 +41,7 @@ const double185 = 185.0;
 const fontSize12 = 12.0;
 const fontSize14 = 14.0;
 const fontSize16 = 16.0;
+const fontSize18 = 18.0;
 const fontSize20 = 20.0;
 const fontSize32 = 32.0;
 const fontSize56 = 56.0;
