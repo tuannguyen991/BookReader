@@ -24,8 +24,6 @@ class PaymentModal extends StatefulWidget {
 }
 
 class _PaymentModalState extends State<PaymentModal> {
-  DateTime startDate = DateTime.now();
-  late DateTime endDate;
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   int selected = 0;
@@ -36,12 +34,8 @@ class _PaymentModalState extends State<PaymentModal> {
 
   @override
   void initState() {
-    if (widget.endDate != null) {
-      startDate = widget.endDate!.add(const Duration(days: 1));
-    }
-    startDateController.text = formatDateTime(startDate);
-    endDate = startDate.add(widget.package.duration);
-    endDateController.text = formatDateTime(endDate);
+    startDateController.text = formatDateTime(DateTime.now());
+    endDateController.text = formatDateTime(DateTime.now().add(widget.package.duration));
     super.initState();
   }
 
@@ -84,22 +78,7 @@ class _PaymentModalState extends State<PaymentModal> {
                     icon: Icon(Icons.calendar_today),
                     labelText: 'Ngày bắt đầu'),
                 readOnly: true,
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(DateTime.now().year + 1));
-
-                  if (pickedDate != null) {
-                    setState(() {
-                      startDate = pickedDate;
-                      endDate = pickedDate.add(widget.package.duration);
-                      startDateController.text = formatDateTime(startDate);
-                      endDateController.text = formatDateTime(endDate);
-                    });
-                  }
-                },
+                enabled: false
               )),
               Flexible(
                   child: TextField(
@@ -211,7 +190,7 @@ class _PaymentModalState extends State<PaymentModal> {
                   text: 'Thanh toán',
                   size: ButtonSize.compact,
                   onPressed: () =>
-                      widget.callback(widget.package.id, startDate)),
+                      widget.callback(widget.package.id, DateTime.now())),
             ],
           )
         ],
