@@ -5,8 +5,8 @@ import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/custom_button.dart';
 import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indicator.dart';
-import 'package:demo_book_reader/widgets/payment_modal.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'customer/customer_text.dart';
 
@@ -14,9 +14,14 @@ class ReadingPackage extends StatefulWidget {
   final ReadingPackageModel package;
   final DateTime? startDate;
   final DateTime? endDate;
+  final Function callback;
 
   const ReadingPackage(
-      {Key? key, required this.package, this.startDate, this.endDate})
+      {Key? key,
+      required this.package,
+      this.startDate,
+      this.endDate,
+      required this.callback})
       : super(key: key);
 
   @override
@@ -74,8 +79,9 @@ class _ReadingPackageState extends State<ReadingPackage> {
         verticalSpace12,
         RichText(
             text: TextSpan(
-                text:
-                    '${(widget.package.price / 100 * (100 - widget.package.discountPercentage)).round()}đ',
+                text: NumberFormat.simpleCurrency(locale: 'vi').format(
+                    calculatePrice(widget.package.price,
+                        widget.package.discountPercentage)),
                 style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: fontSize20,
@@ -96,35 +102,37 @@ class _ReadingPackageState extends State<ReadingPackage> {
                       percent: calculateUsagePercentage(
                           widget.startDate!, widget.endDate!),
                       isUser: true),
-                  verticalSpace8,
-                  CustomerText(
-                      'Còn ${widget.endDate?.difference(DateTime.now()).inDays} ngày',
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold),
+                  verticalSpace12,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomerText(
+                          'Còn ${widget.endDate?.difference(DateTime.now()).inDays} ngày',
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold),
+                      CustomerText(
+                          DateFormat('dd/MM/yyyy').format(widget.endDate!),
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold),
+                    ],
+                  ),
                   verticalSpace12
                 ],
               )
             : Wrap(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            CustomButton(
-                text: widget.startDate != null ? 'Gia hạn' : 'Đăng ký',
-                size: ButtonSize.compact,
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                      context: context,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      )),
-                      builder: (BuildContext context) {
-                        return PaymentModal(package: widget.package, endDate: widget.endDate);
-                      });
-                })
-          ],
-        )
+        widget.startDate == null
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomButton(
+                      text: 'Đăng ký',
+                      size: ButtonSize.compact,
+                      onPressed: () {
+                        widget.callback(widget.package, widget.endDate);
+                      })
+                ],
+              )
+            : Row()
       ]),
     );
   }

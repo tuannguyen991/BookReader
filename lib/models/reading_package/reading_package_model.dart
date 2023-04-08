@@ -1,3 +1,4 @@
+import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'reading_package_model.freezed.dart';
@@ -9,6 +10,7 @@ class ReadingPackageModel with _$ReadingPackageModel {
   const factory ReadingPackageModel(
       {@Default('') String id,
       @Default('') String name,
+      @Default(Duration(days: 0)) Duration duration,
       @Default(0) int price,
       @Default(1) int currency,
       @Default(0) int discountPercentage}) = _ReadingPackageModel;

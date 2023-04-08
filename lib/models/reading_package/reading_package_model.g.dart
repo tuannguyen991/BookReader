@@ -11,6 +11,9 @@ _$_ReadingPackageModel _$$_ReadingPackageModelFromJson(
     _$_ReadingPackageModel(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
+      duration: json['duration'] == null
+          ? const Duration(days: 0)
+          : parseDuration((json['duration']) as String),
       price: json['price'] as int? ?? 0,
       currency: json['currency'] as int? ?? 1,
       discountPercentage: json['discountPercentage'] as int? ?? 0,
@@ -21,6 +24,7 @@ Map<String, dynamic> _$$_ReadingPackageModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'duration': instance.duration.inMicroseconds,
       'price': instance.price,
       'currency': instance.currency,
       'discountPercentage': instance.discountPercentage,

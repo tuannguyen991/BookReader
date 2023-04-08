@@ -1,3 +1,4 @@
+import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
 import 'package:demo_book_reader/share/enum/button_type.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -9,10 +10,13 @@ import 'package:intl/intl.dart';
 import 'customer/customer_text.dart';
 
 class PaymentModal extends StatefulWidget {
+  final bool? isUsing;
   final ReadingPackageModel package;
   final DateTime? endDate;
+  final Function callback;
 
-  const PaymentModal({Key? key, required this.package, this.endDate})
+  const PaymentModal(
+      {Key? key, required this.package, this.endDate, required this.callback, this.isUsing = false})
       : super(key: key);
 
   @override
@@ -20,6 +24,8 @@ class PaymentModal extends StatefulWidget {
 }
 
 class _PaymentModalState extends State<PaymentModal> {
+  DateTime startDate = DateTime.now();
+  late DateTime endDate;
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   int selected = 0;
@@ -30,14 +36,12 @@ class _PaymentModalState extends State<PaymentModal> {
 
   @override
   void initState() {
-    startDateController.text = widget.endDate != null
-        ? DateFormat('dd-MM-yyyy')
-            .format(widget.endDate!.add(const Duration(days: 1)))
-        : '';
-    endDateController.text = widget.endDate != null
-        ? DateFormat('dd-MM-yyyy')
-            .format(widget.endDate!.add(const Duration(days: 31)))
-        : '';
+    if (widget.endDate != null) {
+      startDate = widget.endDate!.add(const Duration(days: 1));
+    }
+    startDateController.text = formatDateTime(startDate);
+    endDate = startDate.add(widget.package.duration);
+    endDateController.text = formatDateTime(endDate);
     super.initState();
   }
 
@@ -88,14 +92,11 @@ class _PaymentModalState extends State<PaymentModal> {
                       lastDate: DateTime(DateTime.now().year + 1));
 
                   if (pickedDate != null) {
-                    String formattedStartDate =
-                        DateFormat('dd-MM-yyyy').format(pickedDate);
-                    String formattedEndDate = DateFormat('dd-MM-yyyy')
-                        .format(pickedDate.add(Duration(days: 30)));
-
                     setState(() {
-                      startDateController.text = formattedStartDate;
-                      endDateController.text = formattedEndDate;
+                      startDate = pickedDate;
+                      endDate = pickedDate.add(widget.package.duration);
+                      startDateController.text = formatDateTime(startDate);
+                      endDateController.text = formatDateTime(endDate);
                     });
                   }
                 },
@@ -114,12 +115,14 @@ class _PaymentModalState extends State<PaymentModal> {
           ),
           verticalSpace20,
           Container(
-            padding: EdgeInsets.only(right: double20),
+            padding: const EdgeInsets.only(right: double20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 buildText('Tổng tiền'),
-                buildText('${widget.package.price} đ'),
+                buildText(NumberFormat.simpleCurrency(locale: 'vi').format(
+                    calculatePrice(widget.package.price,
+                        widget.package.discountPercentage))),
               ],
             ),
           ),
@@ -165,7 +168,8 @@ class _PaymentModalState extends State<PaymentModal> {
                                     backgroundColor: AppColors.backgroundColor,
                                     child: CircleAvatar(
                                       radius: double56,
-                                      backgroundImage: AssetImage('${data['image']}'),
+                                      backgroundImage:
+                                          AssetImage('${data['image']}'),
                                     ),
                                   ),
                                   horizontalSpace8,
@@ -176,7 +180,12 @@ class _PaymentModalState extends State<PaymentModal> {
                                   ),
                                 ],
                               ),
-                              index == selected ? Icon(Icons.check_circle, color: AppColors.primary_1,): Wrap()
+                              index == selected
+                                  ? const Icon(
+                                      Icons.check_circle,
+                                      color: AppColors.primary_1,
+                                    )
+                                  : Wrap()
                             ],
                           ),
                         )),
@@ -187,10 +196,22 @@ class _PaymentModalState extends State<PaymentModal> {
               itemCount: paymentMethods.length,
             ),
           ),
+          widget.isUsing! ? CustomerText(
+            'Bạn đồng ý đăng ký ${widget.package.name} và huỷ gói đọc sách hiện tại?',
+            fontWeight: FontWeight.w500,
+            fontSize: fontSize18,
+            isEllipsis: false,
+            color: AppColors.primary_1,
+          ): Wrap(),
+          verticalSpace12,
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CustomButton(text: 'Thanh toán', size: ButtonSize.compact, onPressed: () => null),
+              CustomButton(
+                  text: 'Thanh toán',
+                  size: ButtonSize.compact,
+                  onPressed: () =>
+                      widget.callback(widget.package.id, startDate)),
             ],
           )
         ],

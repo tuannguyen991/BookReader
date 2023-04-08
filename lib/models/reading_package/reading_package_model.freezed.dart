@@ -22,6 +22,7 @@ ReadingPackageModel _$ReadingPackageModelFromJson(Map<String, dynamic> json) {
 mixin _$ReadingPackageModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Duration get duration => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   int get currency => throw _privateConstructorUsedError;
   int get discountPercentage => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $ReadingPackageModelCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      Duration duration,
       int price,
       int currency,
       int discountPercentage});
@@ -61,6 +63,7 @@ class _$ReadingPackageModelCopyWithImpl<$Res, $Val extends ReadingPackageModel>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? duration = null,
     Object? price = null,
     Object? currency = null,
     Object? discountPercentage = null,
@@ -74,6 +77,10 @@ class _$ReadingPackageModelCopyWithImpl<$Res, $Val extends ReadingPackageModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -101,6 +108,7 @@ abstract class _$$_ReadingPackageModelCopyWith<$Res>
   $Res call(
       {String id,
       String name,
+      Duration duration,
       int price,
       int currency,
       int discountPercentage});
@@ -119,6 +127,7 @@ class __$$_ReadingPackageModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? duration = null,
     Object? price = null,
     Object? currency = null,
     Object? discountPercentage = null,
@@ -132,6 +141,10 @@ class __$$_ReadingPackageModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -154,6 +167,7 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
   const _$_ReadingPackageModel(
       {this.id = '',
       this.name = '',
+      this.duration = const Duration(days: 0),
       this.price = 0,
       this.currency = 1,
       this.discountPercentage = 0});
@@ -169,6 +183,9 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
   final String name;
   @override
   @JsonKey()
+  final Duration duration;
+  @override
+  @JsonKey()
   final int price;
   @override
   @JsonKey()
@@ -179,7 +196,7 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
 
   @override
   String toString() {
-    return 'ReadingPackageModel(id: $id, name: $name, price: $price, currency: $currency, discountPercentage: $discountPercentage)';
+    return 'ReadingPackageModel(id: $id, name: $name, duration: $duration, price: $price, currency: $currency, discountPercentage: $discountPercentage)';
   }
 
   @override
@@ -189,6 +206,8 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
             other is _$_ReadingPackageModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.currency, currency) ||
                 other.currency == currency) &&
@@ -198,8 +217,8 @@ class _$_ReadingPackageModel implements _ReadingPackageModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, price, currency, discountPercentage);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, duration, price, currency, discountPercentage);
 
   @JsonKey(ignore: true)
   @override
@@ -220,6 +239,7 @@ abstract class _ReadingPackageModel implements ReadingPackageModel {
   const factory _ReadingPackageModel(
       {final String id,
       final String name,
+      final Duration duration,
       final int price,
       final int currency,
       final int discountPercentage}) = _$_ReadingPackageModel;
@@ -231,6 +251,8 @@ abstract class _ReadingPackageModel implements ReadingPackageModel {
   String get id;
   @override
   String get name;
+  @override
+  Duration get duration;
   @override
   int get price;
   @override
