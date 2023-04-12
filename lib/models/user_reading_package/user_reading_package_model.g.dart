@@ -11,10 +11,10 @@ _$_UserReadingPackageModel _$$_UserReadingPackageModelFromJson(
     _$_UserReadingPackageModel(
       readingPackageId: json['readingPackageId'] as String? ?? '',
       startDate: json['startDate'] == null
-          ? null
+          ? const ConstDateTime(2023)
           : DateTime.parse(json['startDate'] as String),
       endDate: json['endDate'] == null
-          ? null
+          ? const ConstDateTime(2023)
           : DateTime.parse(json['endDate'] as String),
     );
 
@@ -22,6 +22,6 @@ Map<String, dynamic> _$$_UserReadingPackageModelToJson(
         _$_UserReadingPackageModel instance) =>
     <String, dynamic>{
       'readingPackageId': instance.readingPackageId,
-      'startDate': instance.startDate?.toIso8601String(),
-      'endDate': instance.endDate?.toIso8601String(),
+      'startDate': instance.startDate.toIso8601String(),
+      'endDate': instance.endDate.toIso8601String(),
     };

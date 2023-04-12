@@ -53,4 +53,34 @@ class UserRepositoryImplement implements UserRepository {
 
     throw Exception('');
   }
+
+  @override
+  Future<UserModel> registerReadingPackage(
+      {required String token,
+      required String readingPackageId,
+      required DateTime startDate}) async {
+    const servicePath = '/reading-package';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'userId': token,
+        'readingPackageId': readingPackageId,
+        'startDate': startDate.toIso8601String()
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final user = UserModel.fromJson(json.decode(response.body));
+      return user;
+    }
+
+    throw Exception('');
+  }
 }

@@ -19,7 +19,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       ranking: $enumDecodeNullable(_$RankingEnumMap, json['ranking']) ??
           Ranking.bronze,
       currentPackage: json['currentPackage'] == null
-          ? const UserReadingPackageModel()
+          ? null
           : UserReadingPackageModel.fromJson(
               json['currentPackage'] as Map<String, dynamic>),
       recentlyHistories: (json['recentlyHistories'] as List<dynamic>?)

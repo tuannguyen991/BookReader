@@ -27,7 +27,7 @@ mixin _$UserModel {
   String get imageLink => throw _privateConstructorUsedError;
   int get totalReadingTime => throw _privateConstructorUsedError;
   Ranking get ranking => throw _privateConstructorUsedError;
-  UserReadingPackageModel get currentPackage =>
+  UserReadingPackageModel? get currentPackage =>
       throw _privateConstructorUsedError;
   List<UserHistoryModel> get recentlyHistories =>
       throw _privateConstructorUsedError;
@@ -53,12 +53,12 @@ abstract class $UserModelCopyWith<$Res> {
       String imageLink,
       int totalReadingTime,
       Ranking ranking,
-      UserReadingPackageModel currentPackage,
+      UserReadingPackageModel? currentPackage,
       List<UserHistoryModel> recentlyHistories,
       int totalReadingBooks,
       String id});
 
-  $UserReadingPackageModelCopyWith<$Res> get currentPackage;
+  $UserReadingPackageModelCopyWith<$Res>? get currentPackage;
 }
 
 /// @nodoc
@@ -81,7 +81,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? imageLink = null,
     Object? totalReadingTime = null,
     Object? ranking = null,
-    Object? currentPackage = null,
+    Object? currentPackage = freezed,
     Object? recentlyHistories = null,
     Object? totalReadingBooks = null,
     Object? id = null,
@@ -115,10 +115,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.ranking
           : ranking // ignore: cast_nullable_to_non_nullable
               as Ranking,
-      currentPackage: null == currentPackage
+      currentPackage: freezed == currentPackage
           ? _value.currentPackage
           : currentPackage // ignore: cast_nullable_to_non_nullable
-              as UserReadingPackageModel,
+              as UserReadingPackageModel?,
       recentlyHistories: null == recentlyHistories
           ? _value.recentlyHistories
           : recentlyHistories // ignore: cast_nullable_to_non_nullable
@@ -136,8 +136,12 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserReadingPackageModelCopyWith<$Res> get currentPackage {
-    return $UserReadingPackageModelCopyWith<$Res>(_value.currentPackage,
+  $UserReadingPackageModelCopyWith<$Res>? get currentPackage {
+    if (_value.currentPackage == null) {
+      return null;
+    }
+
+    return $UserReadingPackageModelCopyWith<$Res>(_value.currentPackage!,
         (value) {
       return _then(_value.copyWith(currentPackage: value) as $Val);
     });
@@ -159,13 +163,13 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String imageLink,
       int totalReadingTime,
       Ranking ranking,
-      UserReadingPackageModel currentPackage,
+      UserReadingPackageModel? currentPackage,
       List<UserHistoryModel> recentlyHistories,
       int totalReadingBooks,
       String id});
 
   @override
-  $UserReadingPackageModelCopyWith<$Res> get currentPackage;
+  $UserReadingPackageModelCopyWith<$Res>? get currentPackage;
 }
 
 /// @nodoc
@@ -186,7 +190,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? imageLink = null,
     Object? totalReadingTime = null,
     Object? ranking = null,
-    Object? currentPackage = null,
+    Object? currentPackage = freezed,
     Object? recentlyHistories = null,
     Object? totalReadingBooks = null,
     Object? id = null,
@@ -220,10 +224,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.ranking
           : ranking // ignore: cast_nullable_to_non_nullable
               as Ranking,
-      currentPackage: null == currentPackage
+      currentPackage: freezed == currentPackage
           ? _value.currentPackage
           : currentPackage // ignore: cast_nullable_to_non_nullable
-              as UserReadingPackageModel,
+              as UserReadingPackageModel?,
       recentlyHistories: null == recentlyHistories
           ? _value._recentlyHistories
           : recentlyHistories // ignore: cast_nullable_to_non_nullable
@@ -252,7 +256,7 @@ class _$_UserModel implements _UserModel {
           'https://www.dropbox.com/s/a97pyp9m32gvqe6/default.jpg?raw=1',
       this.totalReadingTime = 0,
       this.ranking = Ranking.bronze,
-      this.currentPackage = const UserReadingPackageModel(),
+      this.currentPackage,
       final List<UserHistoryModel> recentlyHistories = const [],
       this.totalReadingBooks = 0,
       this.id = ''})
@@ -282,8 +286,7 @@ class _$_UserModel implements _UserModel {
   @JsonKey()
   final Ranking ranking;
   @override
-  @JsonKey()
-  final UserReadingPackageModel currentPackage;
+  final UserReadingPackageModel? currentPackage;
   final List<UserHistoryModel> _recentlyHistories;
   @override
   @JsonKey()
@@ -371,7 +374,7 @@ abstract class _UserModel implements UserModel {
       final String imageLink,
       final int totalReadingTime,
       final Ranking ranking,
-      final UserReadingPackageModel currentPackage,
+      final UserReadingPackageModel? currentPackage,
       final List<UserHistoryModel> recentlyHistories,
       final int totalReadingBooks,
       final String id}) = _$_UserModel;
@@ -394,7 +397,7 @@ abstract class _UserModel implements UserModel {
   @override
   Ranking get ranking;
   @override
-  UserReadingPackageModel get currentPackage;
+  UserReadingPackageModel? get currentPackage;
   @override
   List<UserHistoryModel> get recentlyHistories;
   @override

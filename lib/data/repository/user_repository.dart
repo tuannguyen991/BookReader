@@ -6,5 +6,10 @@ abstract class UserRepository {
 
   /// Get Information User [UserModel]
   Future<UserModel> getInfor({required String token});
+
+  /// Register Reading Package [UserModel]
+  Future<UserModel> registerReadingPackage(
+      {required String token,
+      required String readingPackageId,
+      required DateTime startDate});
 }
- 

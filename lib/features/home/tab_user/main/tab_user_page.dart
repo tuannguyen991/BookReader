@@ -2,8 +2,9 @@ import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
-import 'package:demo_book_reader/features/home/tab_user/bloc/tab_user_bloc.dart';
-import 'package:demo_book_reader/features/home/tab_user/user_history_page.dart';
+import 'package:demo_book_reader/features/home/tab_user/user_history/user_history_page.dart';
+import 'package:demo_book_reader/features/home/tab_user/main/util/personal_option_list.dart';
+import 'package:demo_book_reader/features/home/tab_user/user_reading_package/user_reading_package.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
@@ -16,34 +17,7 @@ import 'package:demo_book_reader/widgets/greeting.dart';
 import 'package:demo_book_reader/widgets/modal_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-final List<Map<String, dynamic>> listModalItem = [
-  {
-    'icon': Icons.timer_rounded,
-    'title': 'Lịch sử đọc sách',
-    'onTap': 1,
-  },
-  {
-    'icon': Icons.people,
-    'title': 'Thông tin cá nhân',
-    'onTap': 2,
-  },
-  {
-    'icon': Icons.timer_rounded,
-    'title': 'Nhắc nhở đọc sách',
-    'onTap': 3,
-  },
-  {
-    'icon': Icons.timer_outlined,
-    'title': 'Góp ý',
-    'onTap': 4,
-  },
-  {
-    'icon': Icons.settings,
-    'title': 'Cài đặt',
-    'onTap': 5,
-  },
-];
+import 'bloc/tab_user_bloc.dart';
 
 class TabUserPage extends StatefulWidget {
   const TabUserPage({Key? key}) : super(key: key);
@@ -107,27 +81,23 @@ class _TabUserPageState extends State<TabUserPage> {
                         verticalSpace32,
                       ],
                       ...List<Widget>.generate(
-                        listModalItem.length,
+                        personalOptionList.length,
                         (index) {
-                          final item = listModalItem[index];
+                          final item = personalOptionList[index];
                           late final VoidCallback onTap;
-                          switch (item['onTap']) {
-                            case 1:
+                          switch (item.title) {
+                            case userReadingPackageText:
+                              onTap = () {
+                                context.navigateTo(UserReadingPackage(user: user));
+                              };
+                              break;
+                            case userHistoryText:
                               onTap = () {
                                 context.navigateTo(UserHistoryPage(
                                   user: user,
                                   readBooks: readBooks,
                                 ));
                               };
-                              break;
-                            case 2:
-                              onTap = () {};
-                              break;
-                            case 3:
-                              onTap = () {};
-                              break;
-                            case 4:
-                              onTap = () {};
                               break;
                             default:
                               onTap = () {};
@@ -137,11 +107,11 @@ class _TabUserPageState extends State<TabUserPage> {
                           return Column(
                             children: [
                               ModalItem(
-                                icon: item['icon'],
-                                title: item['title'],
+                                icon: item.icon,
+                                title: item.title,
                                 onTap: onTap,
                               ),
-                              if (index < listModalItem.length - 1)
+                              if (index < personalOptionList.length - 1)
                                 const Divider(),
                             ],
                           );

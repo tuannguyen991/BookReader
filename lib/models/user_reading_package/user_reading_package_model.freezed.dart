@@ -22,8 +22,8 @@ UserReadingPackageModel _$UserReadingPackageModelFromJson(
 /// @nodoc
 mixin _$UserReadingPackageModel {
   String get readingPackageId => throw _privateConstructorUsedError;
-  DateTime? get startDate => throw _privateConstructorUsedError;
-  DateTime? get endDate => throw _privateConstructorUsedError;
+  DateTime get startDate => throw _privateConstructorUsedError;
+  DateTime get endDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $UserReadingPackageModelCopyWith<$Res> {
           $Res Function(UserReadingPackageModel) then) =
       _$UserReadingPackageModelCopyWithImpl<$Res, UserReadingPackageModel>;
   @useResult
-  $Res call({String readingPackageId, DateTime? startDate, DateTime? endDate});
+  $Res call({String readingPackageId, DateTime startDate, DateTime endDate});
 }
 
 /// @nodoc
@@ -55,22 +55,22 @@ class _$UserReadingPackageModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? readingPackageId = null,
-    Object? startDate = freezed,
-    Object? endDate = freezed,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_value.copyWith(
       readingPackageId: null == readingPackageId
           ? _value.readingPackageId
           : readingPackageId // ignore: cast_nullable_to_non_nullable
               as String,
-      startDate: freezed == startDate
+      startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: freezed == endDate
+              as DateTime,
+      endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -83,7 +83,7 @@ abstract class _$$_UserReadingPackageModelCopyWith<$Res>
       __$$_UserReadingPackageModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String readingPackageId, DateTime? startDate, DateTime? endDate});
+  $Res call({String readingPackageId, DateTime startDate, DateTime endDate});
 }
 
 /// @nodoc
@@ -99,22 +99,22 @@ class __$$_UserReadingPackageModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? readingPackageId = null,
-    Object? startDate = freezed,
-    Object? endDate = freezed,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_$_UserReadingPackageModel(
       readingPackageId: null == readingPackageId
           ? _value.readingPackageId
           : readingPackageId // ignore: cast_nullable_to_non_nullable
               as String,
-      startDate: freezed == startDate
+      startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: freezed == endDate
+              as DateTime,
+      endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ));
   }
 }
@@ -123,7 +123,9 @@ class __$$_UserReadingPackageModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserReadingPackageModel implements _UserReadingPackageModel {
   const _$_UserReadingPackageModel(
-      {this.readingPackageId = '', this.startDate, this.endDate});
+      {this.readingPackageId = '',
+      this.startDate = const ConstDateTime(2023),
+      this.endDate = const ConstDateTime(2023)});
 
   factory _$_UserReadingPackageModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserReadingPackageModelFromJson(json);
@@ -132,9 +134,11 @@ class _$_UserReadingPackageModel implements _UserReadingPackageModel {
   @JsonKey()
   final String readingPackageId;
   @override
-  final DateTime? startDate;
+  @JsonKey()
+  final DateTime startDate;
   @override
-  final DateTime? endDate;
+  @JsonKey()
+  final DateTime endDate;
 
   @override
   String toString() {
@@ -177,8 +181,8 @@ class _$_UserReadingPackageModel implements _UserReadingPackageModel {
 abstract class _UserReadingPackageModel implements UserReadingPackageModel {
   const factory _UserReadingPackageModel(
       {final String readingPackageId,
-      final DateTime? startDate,
-      final DateTime? endDate}) = _$_UserReadingPackageModel;
+      final DateTime startDate,
+      final DateTime endDate}) = _$_UserReadingPackageModel;
 
   factory _UserReadingPackageModel.fromJson(Map<String, dynamic> json) =
       _$_UserReadingPackageModel.fromJson;
@@ -186,9 +190,9 @@ abstract class _UserReadingPackageModel implements UserReadingPackageModel {
   @override
   String get readingPackageId;
   @override
-  DateTime? get startDate;
+  DateTime get startDate;
   @override
-  DateTime? get endDate;
+  DateTime get endDate;
   @override
   @JsonKey(ignore: true)
   _$$_UserReadingPackageModelCopyWith<_$_UserReadingPackageModel>

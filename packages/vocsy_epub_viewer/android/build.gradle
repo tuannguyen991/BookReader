@@ -24,7 +24,6 @@ rootProject.allprojects {
 
 apply plugin: 'checkstyle'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.android.library'
 
 android {
@@ -68,6 +67,10 @@ android {
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 }
 
