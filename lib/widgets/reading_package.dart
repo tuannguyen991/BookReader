@@ -84,7 +84,7 @@ class _ReadingPackageState extends State<ReadingPackage> {
                         widget.package.discountPercentage)),
                 style: TextStyle(
                   color: AppColors.primaryColor,
-                  fontSize: fontSize20,
+                  fontSize: fontSize16,
                   fontWeight: FontWeight.bold,
                 ),
                 children: [

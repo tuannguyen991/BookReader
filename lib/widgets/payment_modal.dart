@@ -42,7 +42,7 @@ class _PaymentModalState extends State<PaymentModal> {
   Widget buildText(String text) => CustomerText(
         text,
         fontWeight: FontWeight.bold,
-        fontSize: fontSize18,
+        fontSize: fontSize16,
       );
 
   @override
@@ -60,7 +60,7 @@ class _PaymentModalState extends State<PaymentModal> {
               CustomerText(
                 (widget.endDate != null ? 'Gia hạn ' : 'Đăng ký ') +
                     widget.package.name,
-                fontSize: fontSize20,
+                fontSize: fontSize18,
                 fontWeight: FontWeight.bold,
               ),
               CloseButton(
@@ -68,7 +68,6 @@ class _PaymentModalState extends State<PaymentModal> {
               )
             ],
           ),
-          verticalSpace12,
           Row(
             children: [
               Flexible(
@@ -110,75 +109,67 @@ class _PaymentModalState extends State<PaymentModal> {
             'Chọn phương thức thanh toán',
           ),
           verticalSpace12,
-          SizedBox(
-            height: 150,
-            child: ListView.builder(
-              itemBuilder: (builder, index) {
-                Map data = paymentMethods[index];
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                        onTap: () => setState(() {
-                              selected = index;
-                            }),
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(double8),
-                          decoration: BoxDecoration(
-                            color: index == selected
-                                ? AppColors.primary_4
-                                : AppColors.backgroundColor,
-                            borderRadius: BorderRadius.circular(double16),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: double20,
-                                    backgroundColor: AppColors.backgroundColor,
-                                    child: CircleAvatar(
-                                      radius: double56,
-                                      backgroundImage:
-                                          AssetImage('${data['image']}'),
-                                    ),
-                                  ),
-                                  horizontalSpace8,
-                                  CustomerText(
-                                    '${data['name']}',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: fontSize16,
-                                  ),
-                                ],
-                              ),
-                              index == selected
-                                  ? const Icon(
-                                      Icons.check_circle,
-                                      color: AppColors.primary_1,
-                                    )
-                                  : Wrap()
-                            ],
-                          ),
-                        )),
-                    verticalSpace12
-                  ],
-                );
-              },
-              itemCount: paymentMethods.length,
-            ),
-          ),
+        ...List<Widget>.generate(paymentMethods.length, (index) {
+          Map data = paymentMethods[index];
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                  onTap: () => setState(() {
+                    selected = index;
+                  }),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.only(top: double4, bottom: double4, left: double8, right: double8),
+                    decoration: BoxDecoration(
+                      color: index == selected
+                          ? AppColors.primary_4
+                          : AppColors.backgroundColor,
+                      borderRadius: BorderRadius.circular(double16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: double16,
+                              backgroundImage:
+                              AssetImage('${data['image']}'),
+                            ),
+                            horizontalSpace8,
+                            CustomerText(
+                              '${data['name']}',
+                              fontWeight: FontWeight.bold,
+                              fontSize: fontSize14,
+                            ),
+                          ],
+                        ),
+                        index == selected
+                            ? const Icon(
+                          Icons.check_circle,
+                          color: AppColors.primary_1,
+                          size: double16,
+                        )
+                            : Wrap()
+                      ],
+                    ),
+                  )),
+              verticalSpace12
+            ],
+          );
+        }),
           widget.isUsing! ? CustomerText(
             'Bạn đồng ý đăng ký ${widget.package.name} và huỷ gói đọc sách hiện tại?',
             fontWeight: FontWeight.w500,
-            fontSize: fontSize18,
+            fontSize: fontSize16,
             isEllipsis: false,
             color: AppColors.primary_1,
           ): Wrap(),
