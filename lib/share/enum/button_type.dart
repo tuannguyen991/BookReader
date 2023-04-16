@@ -38,5 +38,5 @@ Map<ButtonType, ButtonColor> colorVariants = {
 Map<ButtonSize, ButtonDimension> dimensionVariants = {
   ButtonSize.compact: ButtonDimension(double120, double36),
   ButtonSize.small: ButtonDimension(double185, double44),
-  ButtonSize.normal: ButtonDimension(double.infinity, double.infinity),
+  ButtonSize.normal: ButtonDimension(double.infinity, double36),
 };

@@ -45,21 +45,21 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
   }
 
   showPaymentModal(ReadingPackageModel package, DateTime? endDate) {
-    showModalBottomSheet<void>(
-        context: context,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        )),
-        builder: (BuildContext context) {
-          return PaymentModal(
-            isUsing: widget.user.currentPackage != null,
-            package: package,
-            endDate: endDate,
-            callback: sendRequest,
-          );
-        });
+    Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentModal(isUsing: widget.user.currentPackage != null, package: package, endDate: endDate,)));
+    // showModalBottomSheet<void>(
+    //     context: context,
+    //     shape: const RoundedRectangleBorder(
+    //         borderRadius: BorderRadius.only(
+    //       topLeft: Radius.circular(20),
+    //       topRight: Radius.circular(20),
+    //     )),
+    //     builder: (BuildContext context) {
+    //       return PaymentModal(
+    //         isUsing: widget.user.currentPackage != null,
+    //         package: package,
+    //         endDate: endDate,
+    //       );
+    //     });
   }
 
   @override
@@ -67,6 +67,13 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
     return BlocProvider.value(
       value: bloc,
       child: Scaffold(
+        appBar: AppBar(
+          title: const CustomerText(
+            userReadingPackageText,
+            fontSize: fontSize20,
+            fontWeight: FontWeight.w500,
+          )
+        ),
         body: buildBody(),
       ),
     );
@@ -102,20 +109,7 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              BackButton(
-                color: AppColors.secondaryColor,
-              ),
-              horizontalSpace8,
-              const CustomerText(
-                userReadingPackageText,
-                fontSize: fontSize20,
-                fontWeight: FontWeight.w500,
-              ),
-            ],
-          ),
-          verticalSpace8,
+          Row(),
           buildPersonalInfo(),
           verticalSpace16,
           BlocBuilder<UserReadingPackageBloc, UserReadingPackageState>(
