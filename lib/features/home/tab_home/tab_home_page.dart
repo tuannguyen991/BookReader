@@ -24,7 +24,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:demo_book_reader/features/home/tab_home/bloc/tab_home_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class TabHomePage extends StatefulWidget {
   const TabHomePage({Key? key}) : super(key: key);
@@ -89,6 +88,10 @@ class _TabHomePageState extends State<TabHomePage> {
                         return const CircularProgressIndicator();
                       }
                       final lastBook = state.lastBook;
+                      if (lastBook == null) {
+                        return RecommendBookBox(
+                            book: state.recommendedBooks.first);
+                      }
                       return ReadingBookBox(lastBook: lastBook);
                     },
                   ),
@@ -291,6 +294,64 @@ class ReadingBookBox extends StatelessWidget {
           ),
           verticalSpace8,
           BookItem(bookItem: lastBook),
+        ],
+      ),
+    );
+  }
+}
+class RecommendBookBox extends StatelessWidget {
+  const RecommendBookBox({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
+
+  final BookModel book;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(double8),
+      decoration: CustomerBoxDecoration.buildBoxDecoration(
+        color: AppColors.backgroundColor,
+        borderRadius: double16,
+        isShadow: true,
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(double12),
+            decoration: CustomerBoxDecoration.buildBoxDecoration(
+              color: AppColors.secondaryBackgroundColor,
+              borderRadius: double16,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: CustomerRichText(
+                    text:
+                        'Sách có thể bạn muốn đọc',
+                    subText: '',
+                        // DateFormat('dd/MM/yyyy').format(lastBook.lastRead!),
+                    color: AppColors.secondaryColor,
+                    subColor: AppColors.titleColor,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.navigateTo(BookDetailPage(
+                      bookItem: UserBookModel.fromBookModel(book),
+                    ));
+                  },
+                  child: CustomerText(
+                    'Đọc ngay',
+                    color: AppColors.primaryColor,
+                    fontSize: fontSize16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          verticalSpace8,
+          BookItem(bookItem: UserBookModel.fromBookModel(book)),
         ],
       ),
     );

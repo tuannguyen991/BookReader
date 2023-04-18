@@ -248,8 +248,7 @@ class _$_UserModel implements _UserModel {
       this.lastName = '',
       this.email = '',
       this.birthDate,
-      this.imageLink =
-          'https://www.dropbox.com/s/a97pyp9m32gvqe6/default.jpg?raw=1',
+      this.imageLink = '',
       this.totalReadingTime = 0,
       this.ranking = Ranking.bronze,
       this.currentPackage = const UserReadingPackageModel(),

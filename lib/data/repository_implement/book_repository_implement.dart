@@ -6,6 +6,7 @@ import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class BookRepositoryImplement implements BookRepository {
   @override
@@ -85,14 +86,105 @@ class BookRepositoryImplement implements BookRepository {
 
   @override
   Future<bool> getIsFavorite(
-      {required String token, required UserBookModel bookItem}) async {
-    return false;
+      {required String token, required String bookId}) async {
+    var servicePath = '/favorite/$token/$bookId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final result = response.body.toLowerCase() == 'true';
+
+      return result;
+    }
+
+    throw Exception('');
   }
 
   @override
-  Future<UserBookModel> getLastBook({required String token}) async {
+  Future<void> createFavorite(
+      {required String token, required String bookId}) async {
+    var servicePath = '/favorite-books';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: '{"userId":"$token", "bookId":"$bookId"}',
+    );
+
+    if (response.statusCode == 204) {
+      return;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<void> deleteFavorite(
+      {required String token, required String bookId}) async {
+    var servicePath = '/favorite-books/$token/$bookId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.delete(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 204) {
+      return;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<UserBookModel?> getLastBook({required String token}) async {
     final userBooks = await getReadBook(token: token);
+    if (userBooks.isEmpty) return null;
     return userBooks.last;
+  }
+
+  Future<void> addUserHistory({
+    required String token,
+    required Duration time,
+  }) async {
+    var servicePath = '/history';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    var date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    var timeFormat = time.toString().split('.').first.padLeft(8, '0');
+
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: '{"userId":"$token", "date":"$date", "readingTime": "$timeFormat"}',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw Exception('');
   }
 
   @override
@@ -206,5 +298,36 @@ class BookRepositoryImplement implements BookRepository {
   Future<List<BookModel>> getUploadBooks({required String token}) {
     // TODO: implement getUploadBooks
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> createReading({
+    required String token,
+    required String bookId,
+    required String href,
+    required String locations,
+    required int readPage,
+  }) async {
+    var servicePath = '/reading-books';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    locations = locations.replaceAll('"', '\\"');
+
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body:
+          '{"userId":"$token", "bookId":"$bookId", "numberOfReadPages":$readPage, "lastLocator":"$locations", "href":"$href"}',
+    );
+
+    if (response.statusCode == 204) {
+      return;
+    }
+
+    throw Exception('');
   }
 }

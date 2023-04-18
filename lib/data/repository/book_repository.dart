@@ -6,11 +6,24 @@ abstract class BookRepository {
 
   Future<List<BookModel>> getTopBook({required String token});
 
-  Future<UserBookModel> getLastBook({required String token});
+  Future<UserBookModel?> getLastBook({required String token});
 
-  Future<List<BookModel>> getSameCategoryBook({required String token, required UserBookModel bookItem});
+  Future<List<BookModel>> getSameCategoryBook(
+      {required String token, required UserBookModel bookItem});
 
-  Future<bool> getIsFavorite({required String token, required UserBookModel bookItem});
+  Future<bool> getIsFavorite({required String token, required String bookId});
+
+  Future<void> createReading({
+    required String token,
+    required String bookId,
+    required String href,
+    required String locations,
+    required int readPage,
+  });
+
+  Future<void> createFavorite({required String token, required String bookId});
+
+  Future<void> deleteFavorite({required String token, required String bookId});
 
   Future<List<UserBookModel>> getReadBook({required String token});
 
@@ -20,9 +33,13 @@ abstract class BookRepository {
 
   Future<List<String>> getHistorySearch({required String token});
 
-  Future<List<BookModel>> getBooksByName({required String token, required String name});
+  Future<void> addUserHistory({required String token, required Duration time});
 
-  Future<void> addUploadBook({required String token, required BookModel bookItem});
+  Future<List<BookModel>> getBooksByName(
+      {required String token, required String name});
+
+  Future<void> addUploadBook(
+      {required String token, required BookModel bookItem});
 
   Future<void> deleteHistory({required String token, required String name});
 }

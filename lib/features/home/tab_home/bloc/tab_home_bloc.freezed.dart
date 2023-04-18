@@ -20,7 +20,7 @@ mixin _$TabHomeState {
   List<BookModel> get recommendedBooks => throw _privateConstructorUsedError; //
   BookModel get bookItem => throw _privateConstructorUsedError; //
   UserModel get user => throw _privateConstructorUsedError; //
-  UserBookModel get lastBook => throw _privateConstructorUsedError; //
+  UserBookModel? get lastBook => throw _privateConstructorUsedError; //
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,12 +38,12 @@ abstract class $TabHomeStateCopyWith<$Res> {
       {List<BookModel> recommendedBooks,
       BookModel bookItem,
       UserModel user,
-      UserBookModel lastBook,
+      UserBookModel? lastBook,
       bool isLoading});
 
   $BookModelCopyWith<$Res> get bookItem;
   $UserModelCopyWith<$Res> get user;
-  $UserBookModelCopyWith<$Res> get lastBook;
+  $UserBookModelCopyWith<$Res>? get lastBook;
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$TabHomeStateCopyWithImpl<$Res, $Val extends TabHomeState>
     Object? recommendedBooks = null,
     Object? bookItem = null,
     Object? user = null,
-    Object? lastBook = null,
+    Object? lastBook = freezed,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
@@ -78,10 +78,10 @@ class _$TabHomeStateCopyWithImpl<$Res, $Val extends TabHomeState>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      lastBook: null == lastBook
+      lastBook: freezed == lastBook
           ? _value.lastBook
           : lastBook // ignore: cast_nullable_to_non_nullable
-              as UserBookModel,
+              as UserBookModel?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,12 @@ class _$TabHomeStateCopyWithImpl<$Res, $Val extends TabHomeState>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserBookModelCopyWith<$Res> get lastBook {
-    return $UserBookModelCopyWith<$Res>(_value.lastBook, (value) {
+  $UserBookModelCopyWith<$Res>? get lastBook {
+    if (_value.lastBook == null) {
+      return null;
+    }
+
+    return $UserBookModelCopyWith<$Res>(_value.lastBook!, (value) {
       return _then(_value.copyWith(lastBook: value) as $Val);
     });
   }
@@ -126,7 +130,7 @@ abstract class _$$_TabHomeStateCopyWith<$Res>
       {List<BookModel> recommendedBooks,
       BookModel bookItem,
       UserModel user,
-      UserBookModel lastBook,
+      UserBookModel? lastBook,
       bool isLoading});
 
   @override
@@ -134,7 +138,7 @@ abstract class _$$_TabHomeStateCopyWith<$Res>
   @override
   $UserModelCopyWith<$Res> get user;
   @override
-  $UserBookModelCopyWith<$Res> get lastBook;
+  $UserBookModelCopyWith<$Res>? get lastBook;
 }
 
 /// @nodoc
@@ -151,7 +155,7 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
     Object? recommendedBooks = null,
     Object? bookItem = null,
     Object? user = null,
-    Object? lastBook = null,
+    Object? lastBook = freezed,
     Object? isLoading = null,
   }) {
     return _then(_$_TabHomeState(
@@ -167,10 +171,10 @@ class __$$_TabHomeStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      lastBook: null == lastBook
+      lastBook: freezed == lastBook
           ? _value.lastBook
           : lastBook // ignore: cast_nullable_to_non_nullable
-              as UserBookModel,
+              as UserBookModel?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -186,7 +190,7 @@ class _$_TabHomeState implements _TabHomeState {
       {final List<BookModel> recommendedBooks = const [],
       this.bookItem = const BookModel(),
       this.user = const UserModel(),
-      this.lastBook = const UserBookModel(),
+      this.lastBook,
       this.isLoading = true})
       : _recommendedBooks = recommendedBooks;
 
@@ -213,8 +217,7 @@ class _$_TabHomeState implements _TabHomeState {
   final UserModel user;
 //
   @override
-  @JsonKey()
-  final UserBookModel lastBook;
+  final UserBookModel? lastBook;
 //
   @override
   @JsonKey()
@@ -262,7 +265,7 @@ abstract class _TabHomeState implements TabHomeState {
       {final List<BookModel> recommendedBooks,
       final BookModel bookItem,
       final UserModel user,
-      final UserBookModel lastBook,
+      final UserBookModel? lastBook,
       final bool isLoading}) = _$_TabHomeState;
 
   @override
@@ -274,7 +277,7 @@ abstract class _TabHomeState implements TabHomeState {
   @override //
   UserModel get user;
   @override //
-  UserBookModel get lastBook;
+  UserBookModel? get lastBook;
   @override //
   bool get isLoading;
   @override

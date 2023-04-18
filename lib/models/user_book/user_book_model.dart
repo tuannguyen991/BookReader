@@ -17,6 +17,10 @@ class UserBookModel with _$UserBookModel {
           double rating,
       @Default('No title')
           String title,
+      @Default('')
+          String lastLocator,
+      @Default('')
+          String href,
       String? subTitle,
       @Default(0)
           int numberOfPages,

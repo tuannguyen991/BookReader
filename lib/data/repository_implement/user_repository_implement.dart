@@ -2,8 +2,11 @@ import 'dart:convert';
 
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
+import 'package:demo_book_reader/models/user/update_user/update_user_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../../models/user/create_user/create_user_model.dart';
 
 class UserRepositoryImplement implements UserRepository {
   @override
@@ -24,16 +27,17 @@ class UserRepositoryImplement implements UserRepository {
       final user = UserModel.fromJson(json.decode(response.body));
       return user;
     }
+    if (response.statusCode == 404) {
+      const user = UserModel();
+      return user;
+    }
 
     throw Exception('');
   }
 
   @override
-  Future<String> login({
-    required String username,
-    required String password,
-  }) async {
-    const servicePath = '/verify';
+  Future<void> createUser({required CreateUserModel user}) async {
+    const servicePath = '';
 
     final uri = Uri.https(
       Remote.authority,
@@ -43,12 +47,57 @@ class UserRepositoryImplement implements UserRepository {
     final response = await http.post(
       uri,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'username': username, 'password': password}),
+      body: jsonEncode(user.toJson()),
     );
 
     if (response.statusCode == 200) {
       final id = json.decode(response.body);
       return id;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<void> updateUser({
+    required String token,
+    required UpdateUserModel user,
+  }) async {
+    var servicePath = '/$token';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.put(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(user.toJson()),
+    );
+
+    if (response.statusCode == 204) {
+      return;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<void> uploadImage(
+      {required String userId, required String path}) async {
+    const servicePath = 'image';
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse(
+        'https://${Remote.authority}/${Remote.pathUsers}/$userId/$servicePath',
+      ),
+    );
+    request.files.add(await http.MultipartFile.fromPath('file', path));
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      return;
     }
 
     throw Exception('');

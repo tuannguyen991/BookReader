@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
@@ -30,9 +31,13 @@ class BookDetailPage extends StatefulWidget {
 class _BookDetailPageState extends State<BookDetailPage> {
   final _bloc = BookDetailBloc(bookRepository: locator<BookRepository>());
 
+  late DateTime _startTime;
+
   @override
   void initState() {
     super.initState();
+
+    _startTime = DateTime.now();
 
     _bloc.add(BookDetailLoaded(bookItem: widget.bookItem));
   }
@@ -90,7 +95,11 @@ class _BookDetailPageState extends State<BookDetailPage> {
                             isGridView: true,
                           ),
                           onTap: () {
-                            context.navigateTo(
+                            final endTime = DateTime.now();
+                            final duration = endTime.difference(_startTime);
+                            _bloc.add(BookDetailHistory(time: duration));
+
+                            context.navigateOff(
                               BookDetailPage(
                                 bookItem: UserBookModel.fromBookModel(bookItem),
                               ),
@@ -109,13 +118,25 @@ class _BookDetailPageState extends State<BookDetailPage> {
           alignment: Alignment.bottomCenter,
           child: BottomButton(bookItem: bookItem),
         ),
-        const Positioned(
+        Positioned(
           top: 0.0,
           left: 0.0,
           right: 0.0,
-          child: CustomerAppBar(
-              // bookItem: widget.bookItem,
-              ),
+          child: AppBar(
+            leading: GestureDetector(
+              onTap: () {
+                final endTime = DateTime.now();
+                final duration = endTime.difference(_startTime);
+                _bloc.add(BookDetailHistory(time: duration));
+
+                context.off();
+              },
+              child: const Icon(Icons.arrow_back),
+            ),
+            foregroundColor: AppColors.secondaryColor,
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+          ),
         ),
       ],
     );
@@ -162,8 +183,13 @@ class BottomButton extends StatelessWidget {
                           ? EpubLocator.fromJson(
                               jsonDecode(state.locatorString!))
                           : null;
+                      // var locator = EpubLocator.fromJson(jsonDecode(
+                      //     '{"bookId":"3a0a34f5-8fa3-e3fd-07b6-cb825dc6868b","href":"/OEBPS/@public@vhost@g@gutenberg@html@files@768@768-h@768-h-1.htm.html","locations":{"cfi":"epubcfi(/0!/4/88/1:0)"},"readPage":47}'
+                      // ));
+                      
+
                       await VocsyEpub.openAsset(
-                        'assets/epub/0X1PxwEACAAJ.epub',
+                        'assets/epub/${bookItem.bookId}.epub',
                         lastLocation: locator,
                       );
                     },
@@ -186,9 +212,9 @@ class BottomButton extends StatelessWidget {
                     color: AppColors.primaryColor,
                   ),
                   onPressed: () {
-                    // context.read<BookDetailBloc>().add(
-                    //       BookDetailFavoriteChange(bookItem: bookItem),
-                    //     );
+                    context.read<BookDetailBloc>().add(
+                          BookDetailFavoriteChange(bookId: bookItem.bookId),
+                        );
                   },
                 ),
               ),
@@ -215,8 +241,8 @@ class ImageBackground extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.3,
-      child: Image.network(
-        bookItem.imageLink,
+      child: CachedNetworkImage(
+        imageUrl: bookItem.imageLink,
         fit: BoxFit.cover,
         color: const Color.fromRGBO(255, 255, 255, 0.075),
         colorBlendMode: BlendMode.modulate,

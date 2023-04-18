@@ -25,6 +25,8 @@ mixin _$UserBookModel {
   DateTime? get lastRead => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get lastLocator => throw _privateConstructorUsedError;
+  String get href => throw _privateConstructorUsedError;
   String? get subTitle => throw _privateConstructorUsedError;
   int get numberOfPages => throw _privateConstructorUsedError;
   String get epubLink => throw _privateConstructorUsedError;
@@ -52,6 +54,8 @@ abstract class $UserBookModelCopyWith<$Res> {
       DateTime? lastRead,
       double rating,
       String title,
+      String lastLocator,
+      String href,
       String? subTitle,
       int numberOfPages,
       String epubLink,
@@ -80,6 +84,8 @@ class _$UserBookModelCopyWithImpl<$Res, $Val extends UserBookModel>
     Object? lastRead = freezed,
     Object? rating = null,
     Object? title = null,
+    Object? lastLocator = null,
+    Object? href = null,
     Object? subTitle = freezed,
     Object? numberOfPages = null,
     Object? epubLink = null,
@@ -109,6 +115,14 @@ class _$UserBookModelCopyWithImpl<$Res, $Val extends UserBookModel>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastLocator: null == lastLocator
+          ? _value.lastLocator
+          : lastLocator // ignore: cast_nullable_to_non_nullable
+              as String,
+      href: null == href
+          ? _value.href
+          : href // ignore: cast_nullable_to_non_nullable
               as String,
       subTitle: freezed == subTitle
           ? _value.subTitle
@@ -160,6 +174,8 @@ abstract class _$$_UserBookModelCopyWith<$Res>
       DateTime? lastRead,
       double rating,
       String title,
+      String lastLocator,
+      String href,
       String? subTitle,
       int numberOfPages,
       String epubLink,
@@ -186,6 +202,8 @@ class __$$_UserBookModelCopyWithImpl<$Res>
     Object? lastRead = freezed,
     Object? rating = null,
     Object? title = null,
+    Object? lastLocator = null,
+    Object? href = null,
     Object? subTitle = freezed,
     Object? numberOfPages = null,
     Object? epubLink = null,
@@ -215,6 +233,14 @@ class __$$_UserBookModelCopyWithImpl<$Res>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastLocator: null == lastLocator
+          ? _value.lastLocator
+          : lastLocator // ignore: cast_nullable_to_non_nullable
+              as String,
+      href: null == href
+          ? _value.href
+          : href // ignore: cast_nullable_to_non_nullable
               as String,
       subTitle: freezed == subTitle
           ? _value.subTitle
@@ -261,6 +287,8 @@ class _$_UserBookModel implements _UserBookModel {
       this.lastRead,
       this.rating = 0,
       this.title = 'No title',
+      this.lastLocator = '',
+      this.href = '',
       this.subTitle,
       this.numberOfPages = 0,
       this.epubLink = '',
@@ -290,6 +318,12 @@ class _$_UserBookModel implements _UserBookModel {
   @override
   @JsonKey()
   final String title;
+  @override
+  @JsonKey()
+  final String lastLocator;
+  @override
+  @JsonKey()
+  final String href;
   @override
   final String? subTitle;
   @override
@@ -327,7 +361,7 @@ class _$_UserBookModel implements _UserBookModel {
 
   @override
   String toString() {
-    return 'UserBookModel(bookId: $bookId, numberOfReadPages: $numberOfReadPages, lastRead: $lastRead, rating: $rating, title: $title, subTitle: $subTitle, numberOfPages: $numberOfPages, epubLink: $epubLink, imageLink: $imageLink, averageRating: $averageRating, description: $description, authors: $authors, categories: $categories)';
+    return 'UserBookModel(bookId: $bookId, numberOfReadPages: $numberOfReadPages, lastRead: $lastRead, rating: $rating, title: $title, lastLocator: $lastLocator, href: $href, subTitle: $subTitle, numberOfPages: $numberOfPages, epubLink: $epubLink, imageLink: $imageLink, averageRating: $averageRating, description: $description, authors: $authors, categories: $categories)';
   }
 
   @override
@@ -342,6 +376,9 @@ class _$_UserBookModel implements _UserBookModel {
                 other.lastRead == lastRead) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.lastLocator, lastLocator) ||
+                other.lastLocator == lastLocator) &&
+            (identical(other.href, href) || other.href == href) &&
             (identical(other.subTitle, subTitle) ||
                 other.subTitle == subTitle) &&
             (identical(other.numberOfPages, numberOfPages) ||
@@ -368,6 +405,8 @@ class _$_UserBookModel implements _UserBookModel {
       lastRead,
       rating,
       title,
+      lastLocator,
+      href,
       subTitle,
       numberOfPages,
       epubLink,
@@ -398,6 +437,8 @@ abstract class _UserBookModel implements UserBookModel {
       final DateTime? lastRead,
       final double rating,
       final String title,
+      final String lastLocator,
+      final String href,
       final String? subTitle,
       final int numberOfPages,
       final String epubLink,
@@ -420,6 +461,10 @@ abstract class _UserBookModel implements UserBookModel {
   double get rating;
   @override
   String get title;
+  @override
+  String get lastLocator;
+  @override
+  String get href;
   @override
   String? get subTitle;
   @override

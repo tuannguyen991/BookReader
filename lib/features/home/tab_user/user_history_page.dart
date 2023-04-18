@@ -1,6 +1,5 @@
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/models/user_history/user_history_model.dart';
@@ -34,7 +33,6 @@ class UserHistoryPage extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    var x = user;
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(double16),

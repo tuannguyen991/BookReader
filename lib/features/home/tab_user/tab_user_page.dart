@@ -3,6 +3,7 @@ import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/home/tab_user/bloc/tab_user_bloc.dart';
+import 'package:demo_book_reader/features/home/tab_user/update_infor/update_infor.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_history_page.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -121,7 +122,9 @@ class _TabUserPageState extends State<TabUserPage> {
                               };
                               break;
                             case 2:
-                              onTap = () {};
+                              onTap = () {
+                                context.navigateTo(const UpdateInforPage());
+                              };
                               break;
                             case 3:
                               onTap = () {};

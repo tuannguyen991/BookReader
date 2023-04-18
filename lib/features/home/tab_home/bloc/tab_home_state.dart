@@ -12,7 +12,7 @@ class TabHomeState with _$TabHomeState {
     //
     @Default(UserModel()) UserModel user,
     //
-    @Default(UserBookModel()) UserBookModel lastBook,
+    UserBookModel? lastBook,
     //
     @Default(true) bool isLoading,
   }) = _TabHomeState;

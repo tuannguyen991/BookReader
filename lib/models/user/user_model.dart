@@ -12,7 +12,7 @@ class UserModel with _$UserModel {
     @Default('') String lastName,
     @Default('') String email,
     DateTime? birthDate,
-    @Default('https://www.dropbox.com/s/a97pyp9m32gvqe6/default.jpg?raw=1')
+    @Default('')
         String imageLink,
     @Default(0) int totalReadingTime,
     @Default(Ranking.bronze) Ranking ranking,

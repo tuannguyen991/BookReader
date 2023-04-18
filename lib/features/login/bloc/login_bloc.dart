@@ -15,31 +15,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required UserRepository userRepository})
       : _userRepository = userRepository,
         super(const LoginState()) {
-    on<Login>(_onLogin);
-    on<LoginChangeObscure>(_onObscure);
+    on<LoginLoaded>(_onLoaded);
   }
 
   final UserRepository _userRepository;
 
-  FutureOr<void> _onLogin(Login event, Emitter<LoginState> emit) async {
-    try {
-      
-      String id = await _userRepository.login(
-        username: event.username,
-        password: event.password,
-      );
+  FutureOr<void> _onLoaded(
+    LoginLoaded event,
+    Emitter<LoginState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final phone = prefs.getString('phone');
 
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('token', id);
-      event.onSuccess();
-
-    } catch (e) {
-      event.onFailed();
-    }
-  }
-
-  FutureOr<void> _onObscure(
-      LoginChangeObscure event, Emitter<LoginState> emit) {
-    emit(state.copyWith(isObscure: !state.isObscure));
+    emit(state.copyWith(phone: phone ?? ''));
   }
 }
