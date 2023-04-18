@@ -8,7 +8,7 @@ import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indica
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'customer/customer_text.dart';
+import '../../../../../widgets/customer/customer_text.dart';
 
 class ReadingPackage extends StatefulWidget {
   final ReadingPackageModel package;

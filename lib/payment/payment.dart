@@ -2,9 +2,10 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:sprintf/sprintf.dart';
+
 import 'create_order_response.dart';
 import 'util.dart' as utils;
-import 'package:sprintf/sprintf.dart';
 
 class ZaloPayConfig {
   static const String appId = "2553";

@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:demo_book_reader/payment.dart';
+import 'package:demo_book_reader/payment/payment.dart';
 import 'package:intl/intl.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:crypto/crypto.dart';
