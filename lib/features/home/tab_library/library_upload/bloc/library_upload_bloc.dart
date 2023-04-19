@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/category_repository.dart';
-import 'package:demo_book_reader/data/repository_fake/book_repository_fake.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';

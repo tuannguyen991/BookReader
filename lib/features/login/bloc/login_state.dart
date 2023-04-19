@@ -5,6 +5,6 @@ part of 'login_bloc.dart';
 )
 class LoginState with _$LoginState {
   const factory LoginState({
-    @Default(true) bool isObscure,
+    @Default('') String phone,
   }) = _LoginState;
 }

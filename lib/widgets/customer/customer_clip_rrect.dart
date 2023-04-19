@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -22,8 +23,8 @@ class CustomerClipRRect extends StatelessWidget {
               image,
               fit: BoxFit.cover,
             )
-          : Image.network(
-              image,
+          : CachedNetworkImage(
+              imageUrl: image,
               fit: BoxFit.cover,
             ),
     );

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginState {
-  bool get isObscure => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginStateCopyWith<LoginState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({bool isObscure});
+  $Res call({String phone});
 }
 
 /// @nodoc
@@ -45,13 +45,13 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isObscure = null,
+    Object? phone = null,
   }) {
     return _then(_value.copyWith(
-      isObscure: null == isObscure
-          ? _value.isObscure
-          : isObscure // ignore: cast_nullable_to_non_nullable
-              as bool,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -64,7 +64,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
       __$$_LoginStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isObscure});
+  $Res call({String phone});
 }
 
 /// @nodoc
@@ -78,13 +78,13 @@ class __$$_LoginStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isObscure = null,
+    Object? phone = null,
   }) {
     return _then(_$_LoginState(
-      isObscure: null == isObscure
-          ? _value.isObscure
-          : isObscure // ignore: cast_nullable_to_non_nullable
-              as bool,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -92,15 +92,15 @@ class __$$_LoginStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoginState implements _LoginState {
-  const _$_LoginState({this.isObscure = true});
+  const _$_LoginState({this.phone = ''});
 
   @override
   @JsonKey()
-  final bool isObscure;
+  final String phone;
 
   @override
   String toString() {
-    return 'LoginState(isObscure: $isObscure)';
+    return 'LoginState(phone: $phone)';
   }
 
   @override
@@ -108,12 +108,11 @@ class _$_LoginState implements _LoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginState &&
-            (identical(other.isObscure, isObscure) ||
-                other.isObscure == isObscure));
+            (identical(other.phone, phone) || other.phone == phone));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isObscure);
+  int get hashCode => Object.hash(runtimeType, phone);
 
   @JsonKey(ignore: true)
   @override
@@ -123,10 +122,10 @@ class _$_LoginState implements _LoginState {
 }
 
 abstract class _LoginState implements LoginState {
-  const factory _LoginState({final bool isObscure}) = _$_LoginState;
+  const factory _LoginState({final String phone}) = _$_LoginState;
 
   @override
-  bool get isObscure;
+  String get phone;
   @override
   @JsonKey(ignore: true)
   _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
