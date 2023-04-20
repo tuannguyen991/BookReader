@@ -38,7 +38,6 @@ class UserHistoryPage extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    var x = user;
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(double16),

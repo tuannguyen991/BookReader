@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/reading_package_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
@@ -72,6 +74,12 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
   }
 
   Widget buildPersonalInfo() {
+    String? imageLink;
+    if (widget.user.imageLink != '') {
+      imageLink =
+          'https://${Remote.authority}/${Remote.pathUsers}/images/${widget.user.imageLink}';
+    }
+
     return Column(
       children: [
         CircleAvatar(
@@ -79,7 +87,13 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
           backgroundColor: AppColors.backgroundColor,
           child: CircleAvatar(
             radius: double56,
-            backgroundImage: NetworkImage(widget.user.imageLink),
+            backgroundImage: (imageLink == null)
+                ? const AssetImage(
+                    'assets/image/default.jpeg',
+                  )
+                : CachedNetworkImageProvider(
+                    Uri.encodeFull(imageLink),
+                  ) as ImageProvider<Object>,
           ),
         ),
         verticalSpace8,

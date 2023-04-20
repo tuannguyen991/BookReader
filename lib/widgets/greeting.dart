@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/share/enum/ranking.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -17,6 +19,11 @@ class Greeting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? imageLink;
+    if (user.imageLink != '') {
+      imageLink =
+          'https://${Remote.authority}/${Remote.pathUsers}/images/${user.imageLink}';
+    }
     return Column(
       //// note: use CrossAxisAlignment.stretch has the potential to damage the structure of CircleAvatar
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +42,13 @@ class Greeting extends StatelessWidget {
                           backgroundColor: AppColors.backgroundColor,
                           child: CircleAvatar(
                             radius: double56,
-                            backgroundImage: NetworkImage(user.imageLink),
+                            backgroundImage: (imageLink == null)
+                                ? const AssetImage(
+                                    'assets/image/default.jpeg',
+                                  )
+                                : CachedNetworkImageProvider(
+                                    Uri.encodeFull(imageLink),
+                                  ) as ImageProvider<Object>,
                           ),
                         ),
                         Positioned(

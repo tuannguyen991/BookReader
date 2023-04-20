@@ -13,8 +13,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       birthDate: json['birthDate'] == null
           ? null
           : DateTime.parse(json['birthDate'] as String),
-      imageLink: json['imageLink'] as String? ??
-          'https://www.dropbox.com/s/a97pyp9m32gvqe6/default.jpg?raw=1',
+      imageLink: json['imageLink'] as String? ?? '',
       totalReadingTime: json['totalReadingTime'] as int? ?? 0,
       ranking: $enumDecodeNullable(_$RankingEnumMap, json['ranking']) ??
           Ranking.bronze,

@@ -2,8 +2,10 @@ import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
-import 'package:demo_book_reader/features/home/tab_user/user_history/user_history_page.dart';
+import 'package:demo_book_reader/features/home/tab_user/main/bloc/tab_user_bloc.dart';
 import 'package:demo_book_reader/features/home/tab_user/main/util/personal_option_list.dart';
+import 'package:demo_book_reader/features/home/tab_user/update_infor/update_infor.dart';
+import 'package:demo_book_reader/features/home/tab_user/user_history/user_history_page.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_reading_package/user_reading_package.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -17,7 +19,6 @@ import 'package:demo_book_reader/widgets/greeting.dart';
 import 'package:demo_book_reader/widgets/modal_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'bloc/tab_user_bloc.dart';
 
 class TabUserPage extends StatefulWidget {
   const TabUserPage({Key? key}) : super(key: key);
@@ -98,6 +99,13 @@ class _TabUserPageState extends State<TabUserPage> {
                                   user: user,
                                   readBooks: readBooks,
                                 ));
+                              };
+                              break;
+                            case personalInformationText:
+                              onTap = () {
+                                context.navigateTo(
+                                  const UpdateInforPage(),
+                                );
                               };
                               break;
                             default:

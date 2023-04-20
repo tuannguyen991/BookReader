@@ -3,11 +3,8 @@ import 'dart:convert';
 
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
-import 'package:demo_book_reader/data/repository/author_repository.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
-import 'package:demo_book_reader/data/repository/category_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
-import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
@@ -41,8 +38,29 @@ class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
 
+    // final test = prefs.getString('user');
+    // if (test != null) {
+    //   var response = prefs.getString('recommendedBooks')!;
+
+    //   final parsed = jsonDecode(response).cast<Map<String, dynamic>>();
+
+    //   final books =
+    //       parsed.map<BookModel>((json) => BookModel.fromJson(json)).toList();
+
+    //   final user = UserModel.fromJson(json.decode(prefs.getString('user')!));
+    //   emit(state.copyWith(
+    //     recommendedBooks: books,
+    //     bookItem: books[0],
+    //     user: user,
+    //     lastBook: await _bookRepository.getLastBook(token: token),
+    //     isLoading: false,
+    //   ));
+    //   return;
+    // }
+
     /// get RecommendedBooks
     final list = await _bookRepository.getRecommendedBook(token: token);
+    await prefs.setString('recommendedBooks', json.encode(list));
     final item = list[0];
 
     /// get Information of Last book which User read
@@ -50,8 +68,7 @@ class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
 
     /// Infomation User
     final user = await _userRepository.getInfor(token: token); // get
-
-    prefs.setString('user', json.encode(user.toJson()));
+    await prefs.setString('user', json.encode(user.toJson()));
 
     emit(state.copyWith(
       recommendedBooks: list,

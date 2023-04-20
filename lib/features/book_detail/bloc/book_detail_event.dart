@@ -10,13 +10,21 @@ class BookDetailLoaded extends BookDetailEvent {
 }
 
 class BookDetailFavoriteChange extends BookDetailEvent {
-  final BookModel bookItem;
+  final String bookId;
 
-  BookDetailFavoriteChange({required this.bookItem});
+  BookDetailFavoriteChange({required this.bookId});
+}
+
+class BookDetailHistory extends BookDetailEvent {
+  final Duration time;
+
+  BookDetailHistory({required this.time});
 }
 
 class BookDetailSaveLocator extends BookDetailEvent {
   final String locatorString;
 
-  BookDetailSaveLocator({required this.locatorString});
+  BookDetailSaveLocator({
+    required this.locatorString
+  });
 }
