@@ -79,7 +79,7 @@ class _TabUserPageState extends State<TabUserPage> {
                         Greeting(user: user, isUserTab: true),
                         verticalSpace16,
                         UserBox(user: user),
-                        verticalSpace32,
+                        verticalSpace16,
                       ],
                       ...List<Widget>.generate(
                         personalOptionList.length,
@@ -89,9 +89,8 @@ class _TabUserPageState extends State<TabUserPage> {
                           switch (item.title) {
                             case userReadingPackageText:
                               onTap = () {
-                                context.navigateTo(
-                                  UserReadingPackage(user: user),
-                                );
+                                context
+                                    .navigateTo(UserReadingPackage(user: user));
                               };
                               break;
                             case userHistoryText:
@@ -222,7 +221,7 @@ class UserBoxItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(double8),
+      padding: const EdgeInsets.all(double4),
       child: Row(
         children: [
           CircleAvatar(
@@ -232,7 +231,7 @@ class UserBoxItem extends StatelessWidget {
               color: AppColors.primaryColor,
             ),
           ),
-          horizontalSpace8,
+          horizontalSpace4,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

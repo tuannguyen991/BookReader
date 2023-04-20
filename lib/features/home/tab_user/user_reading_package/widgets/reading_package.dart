@@ -8,7 +8,7 @@ import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indica
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'customer/customer_text.dart';
+import '../../../../../widgets/customer/customer_text.dart';
 
 class ReadingPackage extends StatefulWidget {
   final ReadingPackageModel package;
@@ -84,7 +84,7 @@ class _ReadingPackageState extends State<ReadingPackage> {
                         widget.package.discountPercentage)),
                 style: TextStyle(
                   color: AppColors.primaryColor,
-                  fontSize: fontSize20,
+                  fontSize: fontSize16,
                   fontWeight: FontWeight.bold,
                 ),
                 children: [

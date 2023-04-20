@@ -24,6 +24,18 @@ class CustomButton extends StatefulWidget {
 class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
+    if (widget.size == ButtonSize.normal) {
+      return ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: colorVariants[widget.type]?.backgroundColor,
+          ),
+          onPressed: widget.onPressed,
+          child: CustomerText(
+            widget.text,
+            color: colorVariants[widget.type]?.textColor,
+            fontSize: fontSize16,
+          ));
+    }
     return SizedBox(
       width: dimensionVariants[widget.size]?.width,
       height: dimensionVariants[widget.size]?.height,
