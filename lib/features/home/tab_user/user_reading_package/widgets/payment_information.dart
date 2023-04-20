@@ -1,10 +1,11 @@
+import 'package:demo_book_reader/features/home/tab_user/user_reading_package/widgets/confirm_payment.dart';
 import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
 import 'package:demo_book_reader/payment/payment.dart';
 import 'package:demo_book_reader/share/enum/button_type.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
-import 'package:demo_book_reader/features/home/tab_user/user_reading_package/widgets/confirm_payment.dart';
+import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
 import 'package:demo_book_reader/widgets/customer/custom_button.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
@@ -71,8 +72,9 @@ class _PaymentModalState extends State<PaymentModal> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-              '${widget.endDate != null ? 'Gia hạn ' : 'Đăng ký '}gói đọc'),
+          title: CustomAppBarTitle(
+              text:
+                  '${widget.endDate != null ? 'Gia hạn ' : 'Đăng ký '}gói đọc'),
         ),
         body: Container(
           padding: const EdgeInsets.all(double12),
@@ -104,7 +106,8 @@ class _PaymentModalState extends State<PaymentModal> {
                       child: TextField(
                     controller: endDateController,
                     decoration: const InputDecoration(
-                        icon: Icon(Icons.calendar_today), //icon of text field
+                        icon: Icon(Icons.calendar_today),
+                        //icon of text field
                         labelText: 'Ngày hết hạn' //label text of field
                         ),
                     readOnly: true,

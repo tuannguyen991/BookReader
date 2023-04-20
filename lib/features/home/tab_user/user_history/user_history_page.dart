@@ -1,12 +1,13 @@
 import 'package:demo_book_reader/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/features/home/tab_user/main/util/personal_option_list.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/models/user_history/user_history_model.dart';
 import 'package:demo_book_reader/share/enum/ranking.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
 import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indicator.dart';
 import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
@@ -29,6 +30,9 @@ class UserHistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const CustomAppBarTitle(text: userHistoryText),
+      ),
       body: _buildBody(),
     );
   }
@@ -41,20 +45,6 @@ class UserHistoryPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                BackButton(
-                  color: AppColors.secondaryColor,
-                ),
-                horizontalSpace8,
-                const CustomerText(
-                  'Lịch sử đọc sách',
-                  fontSize: fontSize20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ],
-            ),
-            verticalSpace16,
             UserBox(user: user),
             verticalSpace32,
             const CustomerText(
@@ -284,6 +274,7 @@ List<UserHistoryModel> getChartData() {
 
 class ReadingTime {
   ReadingTime(this.time, this.date);
+
   final double time;
   final DateTime date;
 }

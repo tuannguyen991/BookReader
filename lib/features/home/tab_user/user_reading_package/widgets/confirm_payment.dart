@@ -1,7 +1,7 @@
-import 'package:demo_book_reader/features/home/tab_user/user_reading_package/user_reading_package.dart';
 import 'package:demo_book_reader/share/enum/button_type.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
 import 'package:demo_book_reader/widgets/customer/custom_button.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Xác nhận thanh toán'),
+        title: const CustomAppBarTitle(text: 'Xác nhận thanh toán'),
       ),
       body: Container(
         padding: const EdgeInsets.all(double20),

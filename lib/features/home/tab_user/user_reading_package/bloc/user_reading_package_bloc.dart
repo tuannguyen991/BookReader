@@ -17,9 +17,11 @@ part 'user_reading_package_state.dart';
 
 class UserReadingPackageBloc
     extends Bloc<UserReadingPackageEvent, UserReadingPackageState> {
-  UserReadingPackageBloc(
-      {required this.user, required this.readingPackageRepository, required this.userRepository,})
-      : super(const UserReadingPackageState()) {
+  UserReadingPackageBloc({
+    required this.user,
+    required this.readingPackageRepository,
+    required this.userRepository,
+  }) : super(const UserReadingPackageState()) {
     on<UserReadingPackageLoaded>(_onLoaded);
     on<UserReadingPackageRequested>(_onRequested);
   }
@@ -36,16 +38,14 @@ class UserReadingPackageBloc
     final token = prefs.getString('token')!;
 
     final readingPackageList =
-    await readingPackageRepository.getAll(token: token);
+        await readingPackageRepository.getAll(token: token);
     readingPackageList.sort((a, b) => a.price.compareTo(b.price));
 
-    UserModel updatedUser = await userRepository
-        .getInfor(
+    UserModel updatedUser = await userRepository.getInfor(
       token: user.id,
     );
 
-    if (updatedUser.currentPackage != null)
-    {
+    if (updatedUser.currentPackage != null) {
       final matchedPackage = readingPackageList.firstWhere((element) =>
           element.id == updatedUser.currentPackage!.readingPackageId);
       final currentPackage = DetailCurrentPackage(
@@ -62,15 +62,15 @@ class UserReadingPackageBloc
     }
   }
 
-FutureOr<void> _onRequested(UserReadingPackageRequested event,
-    Emitter<UserReadingPackageState> emit) async {
-  try {
-    UserModel updatedDate = await userRepository.registerReadingPackage(
-        token: user.id,
-        readingPackageId: event.readingPackageId,
-        startDate: event.startDate
-    );
-  } catch (e) {
-    print(e);
+  FutureOr<void> _onRequested(UserReadingPackageRequested event,
+      Emitter<UserReadingPackageState> emit) async {
+    try {
+      UserModel updatedDate = await userRepository.registerReadingPackage(
+          token: user.id,
+          readingPackageId: event.readingPackageId,
+          startDate: event.startDate);
+    } catch (e) {
+      print(e);
+    }
   }
-}}
+}

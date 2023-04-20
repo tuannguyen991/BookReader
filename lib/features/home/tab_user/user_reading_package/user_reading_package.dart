@@ -7,6 +7,7 @@ import 'package:demo_book_reader/models/reading_package/reading_package_model.da
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_reading_package/widgets/payment_information.dart';
@@ -61,11 +62,10 @@ class _UserReadingPackageState extends State<UserReadingPackage> {
       value: bloc,
       child: Scaffold(
         appBar: AppBar(
-            title: const CustomerText(
-          userReadingPackageText,
-          fontSize: fontSize20,
-          fontWeight: FontWeight.w500,
-        )),
+          title: const CustomAppBarTitle(
+            text: userReadingPackageText,
+          ),
+        ),
         body: buildBody(),
       ),
     );
