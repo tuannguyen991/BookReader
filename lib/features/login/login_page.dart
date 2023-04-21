@@ -307,7 +307,9 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
             // ignore: prefer_const_constructors
             SizedBox(height: double16),
             ElevatedButton(
-              onPressed: () => _verifySMSCode(context),
+              onPressed: () async {
+                await _verifySMSCode(context);
+              },
               child: const Text('Xác thức mã SMS'),
             ),
           ],

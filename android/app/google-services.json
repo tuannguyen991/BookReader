@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "32869603153-h9f8tchj958naede8hs4p5tgovsc39to.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "asia.tmtco.demo_book_rader.demo_book_reader",
+            "certificate_hash": "5dbaaaa3e161a9a07d36e44bf1daab88d3278390"
+          }
+        },
+        {
           "client_id": "32869603153-nnate7u6nlfhgrsrllkit6rh2809pdfh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -129,7 +129,8 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                       break;
                   }
                 });
-                showDialog(
+                if (payResult == 'Thanh toán thất bại') {
+                  showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
@@ -150,6 +151,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         ],
                       );
                     });
+                }
               });
             }),
       ),
