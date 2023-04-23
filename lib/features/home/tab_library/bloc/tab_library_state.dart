@@ -2,7 +2,7 @@ part of 'tab_library_bloc.dart';
 
 @Freezed(
   fromJson: false,
-) 
+)
 class TabLibraryState with _$TabLibraryState {
   const factory TabLibraryState({
     @Default(true) bool isLoading,

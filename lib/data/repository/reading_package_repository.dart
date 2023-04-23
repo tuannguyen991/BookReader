@@ -4,4 +4,3 @@ abstract class ReadingPackageRepository {
   /// Get Reading Package Information [ReadingPackageModel]
   Future<List<ReadingPackageModel>> getAll({required String token});
 }
- 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomerText extends StatelessWidget {
-  const CustomerText(this.text, {
+  const CustomerText(
+    this.text, {
     Key? key,
     this.fontSize,
     this.color,

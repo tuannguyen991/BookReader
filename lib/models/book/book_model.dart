@@ -12,7 +12,8 @@ class BookModel with _$BookModel {
     String? subTitle,
     @Default(0) int numberOfPages,
     @Default('') String epubLink,
-    @Default('https://www.dropbox.com/s/jcaex2p7zxcj8vf/default.jpg?raw=1') String imageLink,
+    @Default('https://www.dropbox.com/s/jcaex2p7zxcj8vf/default.jpg?raw=1')
+        String imageLink,
     @Default(0) double averageRating,
     @Default('No description') String description,
     @Default([]) List<AuthorModel> authors,

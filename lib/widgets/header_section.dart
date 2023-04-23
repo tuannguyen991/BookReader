@@ -1,4 +1,3 @@
-
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:flutter/material.dart';

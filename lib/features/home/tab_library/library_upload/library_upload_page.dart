@@ -107,10 +107,10 @@ class _LibraryUploadPageState extends State<LibraryUploadPage> {
                           const CustomerAlertDialog(isUpload: true),
                     );
                     context.read<LibraryUploadBloc>().add(LibraryUploadSave(
-                      title: _titleController.text,
-                      author: _authorController.text,
-                      description: _descriptionController.text,
-                    ));
+                          title: _titleController.text,
+                          author: _authorController.text,
+                          description: _descriptionController.text,
+                        ));
                   },
                   child: const Text('Hoàn tất'),
                 );

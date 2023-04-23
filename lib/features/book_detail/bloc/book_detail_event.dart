@@ -24,7 +24,5 @@ class BookDetailHistory extends BookDetailEvent {
 class BookDetailSaveLocator extends BookDetailEvent {
   final String locatorString;
 
-  BookDetailSaveLocator({
-    required this.locatorString
-  });
+  BookDetailSaveLocator({required this.locatorString});
 }

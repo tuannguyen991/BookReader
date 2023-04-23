@@ -18,7 +18,10 @@ Future<void> setupLocator() async {
   locator.registerFactory<UserRepository>(() => UserRepositoryImplement());
   locator.registerFactory<BookRepository>(() => BookRepositoryImplement());
   locator.registerFactory<AuthorRepository>(() => AuthorRepositoryImplement());
-  locator.registerFactory<CategoryRepository>(() => CategoryRepositoryImplement());
-  locator.registerFactory<ReadingPackageRepository>(() => ReadingPackageRepositoryImplement());
-  locator.registerFactory<PaymentRepository>(() => PaymentRepositoryImplement());
+  locator
+      .registerFactory<CategoryRepository>(() => CategoryRepositoryImplement());
+  locator.registerFactory<ReadingPackageRepository>(
+      () => ReadingPackageRepositoryImplement());
+  locator
+      .registerFactory<PaymentRepository>(() => PaymentRepositoryImplement());
 }

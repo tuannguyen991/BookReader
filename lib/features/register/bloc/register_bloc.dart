@@ -34,13 +34,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         firstName: event.firstName,
         lastName: event.lastName,
         email: event.email,
-        birthDate: event.birthday == '' ? DateFormat('yyyy-MM-dd').format(DateTime.now()) : event.birthday,
+        birthDate: event.birthday == ''
+            ? DateFormat('yyyy-MM-dd').format(DateTime.now())
+            : event.birthday,
       );
 
       await _userRepository.createUser(user: user);
 
       if (event.imagePath != null) {
-        await _userRepository.uploadImage(userId: user.id, path: event.imagePath!);
+        await _userRepository.uploadImage(
+            userId: user.id, path: event.imagePath!);
       }
 
       prefs.setString('token', id);

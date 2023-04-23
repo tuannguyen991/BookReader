@@ -4,16 +4,9 @@ import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:flutter/material.dart';
 
-enum ButtonType {
-  primary,
-  secondary
-}
+enum ButtonType { primary, secondary }
 
-enum ButtonSize {
-  normal,
-  small,
-  compact
-}
+enum ButtonSize { normal, small, compact }
 
 class ButtonColor {
   final Color backgroundColor;

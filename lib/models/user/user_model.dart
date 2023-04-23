@@ -12,8 +12,7 @@ class UserModel with _$UserModel {
     @Default('') String lastName,
     @Default('') String email,
     DateTime? birthDate,
-    @Default('')
-        String imageLink,
+    @Default('') String imageLink,
     @Default(0) int totalReadingTime,
     @Default(Ranking.bronze) Ranking ranking,
     UserReadingPackageModel? currentPackage,

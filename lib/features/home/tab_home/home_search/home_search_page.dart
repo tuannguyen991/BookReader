@@ -296,11 +296,14 @@ class MySearchDelegate extends SearchDelegate {
                   if (item is BookModel) {
                     return InkWell(
                       onTap: () {
-                        context.navigateTo(BookDetailPage(bookItem: UserBookModel.fromBookModel(item)));
+                        context.navigateTo(BookDetailPage(
+                            bookItem: UserBookModel.fromBookModel(item)));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: double16),
-                        child: BookItem(bookItem: UserBookModel.fromBookModel(item), isLibrary: true),
+                        child: BookItem(
+                            bookItem: UserBookModel.fromBookModel(item),
+                            isLibrary: true),
                       ),
                     );
                   }

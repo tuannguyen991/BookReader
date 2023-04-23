@@ -9,7 +9,6 @@ import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class ReadingPackage extends StatefulWidget {
   final ReadingPackageModel package;
   final DateTime? startDate;

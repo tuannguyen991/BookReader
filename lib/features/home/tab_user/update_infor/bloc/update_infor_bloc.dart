@@ -42,8 +42,7 @@ class UpdateInforBloc extends Bloc<UpdateInforEvent, UpdateInforState> {
       await _userRepository.updateUser(token: id, user: user);
 
       if (event.imagePath != null) {
-        await _userRepository.uploadImage(
-            userId: id, path: event.imagePath!);
+        await _userRepository.uploadImage(userId: id, path: event.imagePath!);
       }
 
       prefs.setString('token', id);

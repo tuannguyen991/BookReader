@@ -164,7 +164,7 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
                 //   books = state.uploadBooks;
                 // }
                 final isGridShow = state.isGridShow;
-      
+
                 if (isGridShow) {
                   return GridView.count(
                     padding: EdgeInsets.zero,
@@ -193,17 +193,18 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
                     ),
                   );
                 }
-      
+
                 return Column(
                   children: List<Widget>.generate(
                     books.length,
                     (index) => Padding(
                       padding: const EdgeInsets.only(bottom: double8),
                       child: InkWell(
-                        child: BookItem(bookItem: books[index], isLibrary: true),
+                        child:
+                            BookItem(bookItem: books[index], isLibrary: true),
                         onTap: () {
-                          context
-                              .navigateTo(BookDetailPage(bookItem: books[index]));
+                          context.navigateTo(
+                              BookDetailPage(bookItem: books[index]));
                         },
                       ),
                     ),
@@ -211,7 +212,6 @@ class _TabLibraryPageState extends State<TabLibraryPage> {
                 );
               },
             ),
-     
           ],
         ),
       ),

@@ -35,7 +35,7 @@ class ModalItem extends StatelessWidget {
                 title,
                 style: const TextStyle(fontSize: fontSize16),
               ),
-              if (isUserTab) ... [
+              if (isUserTab) ...[
                 const Spacer(),
                 Icon(
                   Icons.arrow_forward,

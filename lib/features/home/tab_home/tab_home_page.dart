@@ -299,6 +299,7 @@ class ReadingBookBox extends StatelessWidget {
     );
   }
 }
+
 class RecommendBookBox extends StatelessWidget {
   const RecommendBookBox({
     Key? key,
@@ -327,10 +328,9 @@ class RecommendBookBox extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomerRichText(
-                    text:
-                        'Sách có thể bạn muốn đọc',
+                    text: 'Sách có thể bạn muốn đọc',
                     subText: '',
-                        // DateFormat('dd/MM/yyyy').format(lastBook.lastRead!),
+                    // DateFormat('dd/MM/yyyy').format(lastBook.lastRead!),
                     color: AppColors.secondaryColor,
                     subColor: AppColors.titleColor,
                   ),

@@ -80,8 +80,7 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
     emit(state.copyWith(isLoading: true));
 
     if (event.name == '') {
-      emit(state.copyWith(
-          listRecommendedByName: [], isLoading: false));
+      emit(state.copyWith(listRecommendedByName: [], isLoading: false));
       return;
     }
 

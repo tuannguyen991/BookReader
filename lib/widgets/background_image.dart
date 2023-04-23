@@ -15,7 +15,8 @@ class BackgroundImage extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: CachedNetworkImage(
-        imageUrl: 'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
+        imageUrl:
+            'https://cdn.pixabay.com/photo/2016/08/24/16/20/books-1617327_960_720.jpg',
         fit: BoxFit.fill,
         color: AppColors.primaryColor.withOpacity(1),
         colorBlendMode: BlendMode.modulate,
