@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/reading_package_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
-import 'package:demo_book_reader/features/home/tab_user/user_reading_package/util/detail_current_package_type.dart';
+import 'package:demo_book_reader/models/user_reading_package/detail_current_package_type.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

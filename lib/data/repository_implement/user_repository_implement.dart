@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
+import 'package:demo_book_reader/models/user/create_user/create_user_model.dart';
 import 'package:demo_book_reader/models/user/update_user/update_user_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:http/http.dart' as http;
-
-import '../../models/user/create_user/create_user_model.dart';
 
 class UserRepositoryImplement implements UserRepository {
   @override

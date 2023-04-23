@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
-import 'package:demo_book_reader/share/enum/ranking.dart';
+import 'package:demo_book_reader/share/extensions/ranking_extension.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';

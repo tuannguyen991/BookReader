@@ -1,7 +1,7 @@
-import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
+import 'package:demo_book_reader/share/functions/util_func.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';

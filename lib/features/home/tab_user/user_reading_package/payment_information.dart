@@ -1,8 +1,10 @@
-import 'package:demo_book_reader/features/home/tab_user/user_reading_package/widgets/confirm_payment.dart';
-import 'package:demo_book_reader/helper/utils/func.dart';
+import 'package:demo_book_reader/data/repository/payment_repository.dart';
+import 'package:demo_book_reader/di/locator.dart';
+import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
+import 'package:demo_book_reader/features/home/tab_user/user_reading_package/confirm_payment.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
-import 'package:demo_book_reader/payment/payment.dart';
 import 'package:demo_book_reader/share/enum/button_type.dart';
+import 'package:demo_book_reader/share/functions/util_func.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
@@ -47,6 +49,7 @@ class _PaymentModalState extends State<PaymentModal> {
   String payResult = '';
   double price = 0;
   bool showResult = false;
+  final PaymentRepository paymentRepository = locator<PaymentRepository>();
 
   @override
   void initState() {
@@ -221,7 +224,7 @@ class _PaymentModalState extends State<PaymentModal> {
                         );
                       });
 
-                  var result = await createOrder(amount);
+                  var result = await paymentRepository.createOrder(amount);
                   if (result != null) {
                     Navigator.pop(context);
                     zpTransToken = result.zptranstoken;
@@ -230,14 +233,11 @@ class _PaymentModalState extends State<PaymentModal> {
                       zpTransToken = result.zptranstoken;
                       showResult = true;
                     });
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ConfirmPayment(
-                                  amount: price.toInt(),
-                                  zpToken: zpTransToken,
-                                  callback: sendRequest,
-                                )));
+                    context.navigateTo(ConfirmPayment(
+                      amount: price.toInt(),
+                      zpToken: zpTransToken,
+                      callback: sendRequest,
+                    ));
                   }
                 }
               }),

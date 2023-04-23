@@ -1,4 +1,4 @@
-import 'package:demo_book_reader/helper/navigator_helper.dart';
+import 'package:demo_book_reader/share/functions/navigator_helper.dart';
 import 'package:flutter/material.dart';
 
 

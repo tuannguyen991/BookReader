@@ -1,14 +1,14 @@
-import 'package:demo_book_reader/helper/utils/func.dart';
 import 'package:demo_book_reader/models/reading_package/reading_package_model.dart';
 import 'package:demo_book_reader/share/enum/button_type.dart';
+import 'package:demo_book_reader/share/functions/util_func.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/custom_button.dart';
 import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indicator.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../widgets/customer/customer_text.dart';
 
 class ReadingPackage extends StatefulWidget {
   final ReadingPackageModel package;

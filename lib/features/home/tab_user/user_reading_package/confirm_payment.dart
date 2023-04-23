@@ -131,26 +131,27 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                 });
                 if (payResult == 'Thanh toán thất bại') {
                   showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: CustomerText(payResult),
-                        icon: const Icon(Icons.warning),
-                        iconColor: Colors.red,
-                        actionsAlignment: MainAxisAlignment.center,
-                        actions: [
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              textStyle: Theme.of(context).textTheme.labelLarge,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: CustomerText(payResult),
+                          icon: const Icon(Icons.warning),
+                          iconColor: Colors.red,
+                          actionsAlignment: MainAxisAlignment.center,
+                          actions: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                textStyle:
+                                    Theme.of(context).textTheme.labelLarge,
+                              ),
+                              child: const CustomerText('Đóng'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
                             ),
-                            child: const CustomerText('Đóng'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    });
+                          ],
+                        );
+                      });
                 }
               });
             }),

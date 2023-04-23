@@ -1,10 +1,10 @@
-import 'package:demo_book_reader/extensions/build_context_extensions.dart';
+import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_user/main/util/personal_option_list.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/models/user_history/user_history_model.dart';
-import 'package:demo_book_reader/share/enum/ranking.dart';
+import 'package:demo_book_reader/share/extensions/ranking_extension.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
