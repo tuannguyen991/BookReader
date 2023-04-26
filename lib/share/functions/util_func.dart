@@ -17,6 +17,9 @@ String limitCharacters({required List<dynamic> list, required int limit}) {
 }
 
 double calculateUsagePercentage(DateTime startDate, DateTime endDate) {
+  if (startDate.compareTo(endDate) == 0 || (startDate.compareTo(DateTime.now()) > 0)){
+    return 0;
+  }
   int total = endDate.difference(startDate).inMilliseconds;
   int used = DateTime.now().difference(startDate).inMilliseconds;
   return (used / total);
