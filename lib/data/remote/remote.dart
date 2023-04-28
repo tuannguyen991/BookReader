@@ -5,6 +5,8 @@ class Remote {
 
   static String pathUsers = 'api/v1/users';
 
+  static String pathHighLight = 'api/v1/highlights';
+
   static String pathAuthors = 'api/v1/authors';
 
   static String pathCategories = 'api/v1/categories';

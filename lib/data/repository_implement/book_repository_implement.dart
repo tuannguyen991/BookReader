@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/high_light/high_light_model.dart';
+import 'package:demo_book_reader/models/high_light/high_light_notification/high_light_notification_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 
 import 'package:http/http.dart' as http;
@@ -160,6 +162,7 @@ class BookRepositoryImplement implements BookRepository {
     return userBooks.last;
   }
 
+  @override
   Future<void> addUserHistory({
     required String token,
     required Duration time,
@@ -329,5 +332,145 @@ class BookRepositoryImplement implements BookRepository {
     }
 
     throw Exception('');
+  }
+
+  @override
+  Future<void> createHighLight({
+    required String token,
+    required String bookId,
+    required String content,
+    required int date,
+    required String type,
+    required int pageNumber,
+    required String pageId,
+    required String rangy,
+    required String? note,
+    required String uuid,
+  }) async {
+    var servicePath = '';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathHighLight}$servicePath',
+    );
+
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body:
+          '{"userId":"$token", "bookId":"$bookId", "date":$date, "pageNumber":$pageNumber, "content":"$content", "type":"$type", "pageId":"$pageId", "rangy":"$rangy", "note":"$note", "uuid":"$uuid"}',
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<void> updateHighLight({
+    required String token,
+    required int date,
+    required String type,
+    required String rangy,
+    required String? note,
+    required String uuid,
+  }) async {
+    var servicePath = '/$uuid';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathHighLight}$servicePath',
+    );
+
+    final response = await http.put(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body:
+          '{"userId":"$token", "date":$date, "type":"$type", "rangy":"$rangy", "note":"$note"}',
+    );
+
+    if (response.statusCode == 204) {
+      return;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<void> deleteHighLight({
+    required String token,
+    required String uuid,
+  }) async {
+    var servicePath = '';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathHighLight}$servicePath',
+    );
+
+    final response = await http.delete(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: '{"userId":"$token", "id":"$uuid"}',
+    );
+
+    if (response.statusCode == 204) {
+      return;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<String> getHighLights({
+    required String token,
+    required String bookId,
+  }) async {
+    var servicePath = '/$token/$bookId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathHighLight}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      // final highLights =
+      //     parsed.map<HighLightModel>((json) => BookModel.fromJson(json)).toList();
+      return response.body;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<HighLightNotificationModel> getHighLightNotification({
+    required String token,
+  }) async {
+    var servicePath = '/$token';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathHighLight}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return HighLightNotificationModel.fromJson(json.decode(response.body));
+    }
+
+    return const HighLightNotificationModel();
   }
 }
