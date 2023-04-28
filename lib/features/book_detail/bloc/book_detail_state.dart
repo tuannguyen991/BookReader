@@ -4,10 +4,12 @@ part of 'book_detail_bloc.dart';
   fromJson: false,
 )
 class BookDetailState with _$BookDetailState {
-  const factory BookDetailState(
-      {@Default([]) List<BookModel> sameCategoryBooks,
-      @Default(true) isLoading,
-      @Default(false) isFavorite,
-      @Default(null) String? locatorString,
-      @Default('') String bookId}) = _BookDetailState;
+  const factory BookDetailState({
+    @Default([]) List<BookModel> sameCategoryBooks,
+    @Default('') String highLights,
+    @Default(true) isLoading,
+    @Default(false) isFavorite,
+    @Default(null) String? locatorString,
+    @Default('') String bookId,
+  }) = _BookDetailState;
 }

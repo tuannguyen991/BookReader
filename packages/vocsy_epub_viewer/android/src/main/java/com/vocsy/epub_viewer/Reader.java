@@ -42,11 +42,13 @@ public class Reader extends AppCompatActivity
     public MethodChannel.Result result;
     private EventChannel eventChannel;
     private EventChannel.EventSink pageEventSink;
+    private EventChannel eventHighLightChannel;
+    private EventChannel.EventSink highLightEventSink;
     private BinaryMessenger messenger;
     private ReadLocator read_locator;
     private static final String PAGE_CHANNEL = "sage";
 
-    Reader(Context context, BinaryMessenger messenger, ReaderConfig config, EventChannel.EventSink sink) {
+    Reader(Context context, BinaryMessenger messenger, ReaderConfig config, EventChannel.EventSink sink, EventChannel.EventSink highLightSink) {
         this.context = context;
         readerConfig = config;
 
@@ -58,14 +60,17 @@ public class Reader extends AppCompatActivity
                 .setReadLocatorListener(this)
                 .setOnClosedListener(this);
         pageEventSink = sink;
+        highLightEventSink = highLightSink;
     }
 
-    public void open(String bookPath, String lastLocation) {
+    public void open(String bookPath, String lastLocation, String highLights) {
         final String path = bookPath;
         final String location = lastLocation;
+        final String highLightsString = highLights;
         new Thread(new Runnable() {
             @Override
             public void run() {
+                folioReader.deleteHighLights();
                 try {
                     Log.i("SavedLocation", "-> savedLocation -> " + location);
                     if (location != null && !location.isEmpty()) {
@@ -76,6 +81,33 @@ public class Reader extends AppCompatActivity
                             .openBook(path);
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+
+                ArrayList<HighLight> highlightList = null;
+                ObjectMapper objectMapper = new ObjectMapper();
+                try {
+                    highlightList = objectMapper.readValue(
+                            highLightsString,
+                            new TypeReference<List<HighlightData>>() {
+                            });
+                    if (highlightList == null)
+                        {
+                            Log.i("Reader", "nul nul nul");
+                        }
+                        Log.i("Reader", "nul nul test");
+                    
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (highlightList != null) {
+                    Log.i("Reader", "nul nul test test");
+                    folioReader.saveReceivedHighLights(highlightList, new OnSaveHighlight() {
+                        @Override
+                        public void onFinished() {
+                            //You can do anything on successful saving highlight list
+                        }
+                    });
                 }
             }
         }).start();
@@ -131,14 +163,15 @@ public class Reader extends AppCompatActivity
                     e.printStackTrace();
                 }
 
-                if (highlightList == null) {
-                    folioReader.saveReceivedHighLights(highlightList, new OnSaveHighlight() {
-                        @Override
-                        public void onFinished() {
-                            //You can do anything on successful saving highlight list
-                        }
-                    });
-                }
+                // if (highlightList != null) {
+                //     Log.i("Reader", "nul nul test test");
+                //     folioReader.saveReceivedHighLights(highlightList, new OnSaveHighlight() {
+                //         @Override
+                //         public void onFinished() {
+                //             //You can do anything on successful saving highlight list
+                //         }
+                //     });
+                // }
             }
         }).start();
     }
@@ -185,7 +218,23 @@ public class Reader extends AppCompatActivity
 
     @Override
     public void onHighlight(HighLight highlight, HighLight.HighLightAction type) {
+        String enumString;
+        switch (type){
+            case NEW:
+                enumString = "0";
+                break;
+            case MODIFY:
+                enumString = "1";
+                break;
+            case DELETE:
+            default:
+                enumString = "2";
+                break;
+        }
 
+        if (highLightEventSink != null) {
+            highLightEventSink.success(enumString + highlight.toString());
+        }
     }
 
     @Override

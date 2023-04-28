@@ -22,6 +22,8 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     on<BookDetailFavoriteChange>(_onFavoriteChange);
     on<BookDetailSaveLocator>(_onSaveLocator);
     on<BookDetailHistory>(_onHistory);
+    on<BookDetailHighLight>(_onHighLight);
+    on<BookDetailGetHighLights>(_onGetHighLights);
   }
 
   final BookRepository _bookRepository;
@@ -53,9 +55,15 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
       bookId: event.bookItem.bookId,
     );
 
+    final highLights = await _bookRepository.getHighLights(
+      token: token,
+      bookId: event.bookItem.bookId,
+    );
+
     emit(state.copyWith(
       sameCategoryBooks: list,
       isFavorite: isFavorite,
+      highLights: highLights,
       isLoading: false,
       locatorString: locator,
       bookId: event.bookItem.bookId,
@@ -109,5 +117,78 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
       readPage: readPage,
       locations: locations,
     );
+  }
+
+  FutureOr<void> _onHighLight(
+    BookDetailHighLight event,
+    Emitter<BookDetailState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token')!;
+
+    final enumString = event.highLight[0];
+
+    final highLight = event.highLight.substring(14).replaceAll('\n', '');
+
+    Map<String, dynamic> jsonMap = json.decode(highLight);
+
+    var bookId = jsonMap['bookId'];
+    var content = jsonMap['content'];
+    var date = jsonMap['date'];
+    var type = jsonMap['type'];
+    var pageNumber = jsonMap['pageNumber'];
+    var pageId = jsonMap['pageId'];
+    var rangy = jsonMap['rangy'];
+    var note = jsonMap['note'];
+    var uuid = jsonMap['uuid'];
+
+    switch (enumString) {
+      case '0':
+        await _bookRepository.createHighLight(
+          token: token,
+          bookId: bookId,
+          content: content,
+          date: date,
+          type: type,
+          note: note,
+          pageId: pageId,
+          pageNumber: pageNumber,
+          rangy: rangy,
+          uuid: uuid,
+        );
+        break;
+      case '1':
+        await _bookRepository.updateHighLight(
+          token: token,
+          date: date,
+          type: type,
+          note: note,
+          rangy: rangy,
+          uuid: uuid,
+        );
+        break;
+      case '2':
+      default:
+        await _bookRepository.deleteHighLight(
+          token: token,
+          uuid: uuid,
+        );
+        break;
+    }
+  }
+
+  Future<void> _onGetHighLights(
+    BookDetailGetHighLights event,
+    Emitter<BookDetailState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token')!;
+
+    final highLights = await _bookRepository.getHighLights(
+      token: token,
+      bookId: state.bookId,
+    );
+
+    emit(state.copyWith(highLights: highLights));
   }
 }

@@ -172,10 +172,17 @@ class BottomButton extends StatelessWidget {
                         enableTts: true,
                         nightMode: false,
                       );
+
                       // get current locator
                       VocsyEpub.locatorStream.listen((locator) {
                         context.read<BookDetailBloc>().add(
                               BookDetailSaveLocator(locatorString: locator),
+                            );
+                      });
+
+                      VocsyEpub.highLightStream.listen((highlight) {
+                        context.read<BookDetailBloc>().add(
+                              BookDetailHighLight(highLight: highlight),
                             );
                       });
 
@@ -184,9 +191,12 @@ class BottomButton extends StatelessWidget {
                               jsonDecode(state.locatorString!))
                           : null;
 
+                      var highLights = state.highLights;
+
                       await VocsyEpub.openAsset(
                         'assets/epub/${bookItem.bookId}.epub',
                         lastLocation: locator,
+                        highLights: highLights,
                       );
                     },
                     child: CustomerText(

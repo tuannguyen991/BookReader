@@ -26,3 +26,13 @@ class BookDetailSaveLocator extends BookDetailEvent {
 
   BookDetailSaveLocator({required this.locatorString});
 }
+
+class BookDetailHighLight extends BookDetailEvent {
+  final String highLight;
+
+  BookDetailHighLight({required this.highLight});
+}
+
+class BookDetailGetHighLights extends BookDetailEvent {
+  BookDetailGetHighLights();
+}

@@ -34,6 +34,8 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
     static BinaryMessenger messenger;
     static private EventChannel eventChannel;
     static private EventChannel.EventSink sink;
+    static private EventChannel eventHighLightChannel;
+    static private EventChannel.EventSink highLightSink;
     private static final String channelName = "vocsy_epub_viewer";
 
     /**
@@ -61,6 +63,23 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
             }
         });
 
+        new EventChannel(messenger, "highLight").setStreamHandler(new EventChannel.StreamHandler() {
+
+            @Override
+            public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+                highLightSink = eventSink;
+                if (highLightSink == null) {
+                    Log.i("empty", "Sink is empty");
+                }
+            }
+
+            @Override
+            public void onCancel(Object o) {
+
+            }
+        });
+
 
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "vocsy_epub_viewer");
         channel.setMethodCallHandler(new EpubViewerPlugin());
@@ -78,6 +97,22 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
 
                 sink = eventSink;
                 if (sink == null) {
+                    Log.i("empty", "Sink is empty");
+                }
+            }
+
+            @Override
+            public void onCancel(Object o) {
+
+            }
+        });
+        new EventChannel(messenger, "highLight").setStreamHandler(new EventChannel.StreamHandler() {
+
+            @Override
+            public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+                highLightSink = eventSink;
+                if (highLightSink == null) {
                     Log.i("empty", "Sink is empty");
                 }
             }
@@ -135,14 +170,18 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
             Map<String, Object> arguments = (Map<String, Object>) call.arguments;
             String bookPath = arguments.get("bookPath").toString();
             String lastLocation = arguments.get("lastLocation").toString();
+            String highLights = arguments.get("highLights").toString();
 
             Log.i("opening", "In open function");
 
             if (sink == null) {
                 Log.i("sink status", "sink is empty");
             }
-            reader = new Reader(context, messenger, config, sink);
-            reader.open(bookPath, lastLocation);
+            if (highLightSink == null) {
+                Log.i("sink status", "sink is empty");
+            }
+            reader = new Reader(context, messenger, config, sink, highLightSink);
+            reader.open(bookPath, lastLocation, highLights);
 
         } else if (call.method.equals("close")) {
             reader.close();
@@ -154,6 +193,20 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
                 public void onListen(Object o, EventChannel.EventSink eventSink) {
 
                     sink = eventSink;
+                }
+
+                @Override
+                public void onCancel(Object o) {
+
+                }
+            });
+            eventHighLightChannel = new EventChannel(messenger, "highLight");
+            eventHighLightChannel.setStreamHandler(new EventChannel.StreamHandler() {
+
+                @Override
+                public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+                    highLightSink = eventSink;
                 }
 
                 @Override
