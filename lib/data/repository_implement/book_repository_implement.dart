@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
-import 'package:demo_book_reader/models/high_light/high_light_model.dart';
 import 'package:demo_book_reader/models/high_light/high_light_notification/high_light_notification_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 

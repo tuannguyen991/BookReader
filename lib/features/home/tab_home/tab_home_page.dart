@@ -3,6 +3,7 @@ import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
+import 'package:demo_book_reader/features/home/tab_home/bloc/tab_home_bloc.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
@@ -11,18 +12,16 @@ import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/backdrop.dart';
 import 'package:demo_book_reader/widgets/background_image.dart';
-import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
-import 'package:demo_book_reader/widgets/customer/customer_text.dart';
-import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
 import 'package:demo_book_reader/widgets/customer/customer_clip_rrect.dart';
+import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/greeting.dart';
+import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/search_bar.dart';
 import 'package:demo_book_reader/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:demo_book_reader/features/home/tab_home/bloc/tab_home_bloc.dart';
 import 'package:intl/intl.dart';
 
 class TabHomePage extends StatefulWidget {

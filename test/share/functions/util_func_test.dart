@@ -48,7 +48,9 @@ void main() {
       expect(usagePercentage, equals(0.0));
     });
 
-    test('should return 0.0 when start date is in the future and end date is in the future', () {
+    test(
+        'should return 0.0 when start date is in the future and end date is in the future',
+        () {
       var startDate = DateTime.now().add(const Duration(days: 1));
       var endDate = DateTime.now().add(const Duration(days: 2));
       var usagePercentage = calculateUsagePercentage(startDate, endDate);
