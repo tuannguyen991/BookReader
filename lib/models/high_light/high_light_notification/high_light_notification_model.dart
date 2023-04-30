@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'high_light_notification_model.freezed.dart';
 part 'high_light_notification_model.g.dart';
 

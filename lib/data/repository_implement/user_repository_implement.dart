@@ -8,6 +8,9 @@ import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class UserRepositoryImplement implements UserRepository {
+  final http.Client _client;
+  UserRepositoryImplement(this._client);
+
   @override
   Future<UserModel> getInfor({required String token}) async {
     var servicePath = '/$token';
@@ -17,14 +20,13 @@ class UserRepositoryImplement implements UserRepository {
       '${Remote.pathUsers}$servicePath',
     );
 
-    final response = await http.get(
+    final response = await _client.get(
       uri,
       headers: {'Content-Type': 'application/json'},
     );
 
     if (response.statusCode == 200) {
-      final user = UserModel.fromJson(json.decode(response.body));
-      return user;
+      return UserModel.fromJson(json.decode(response.body));
     }
     if (response.statusCode == 404) {
       const user = UserModel();

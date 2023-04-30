@@ -11,11 +11,14 @@ import 'package:demo_book_reader/data/repository_implement/payment_repository_im
 import 'package:demo_book_reader/data/repository_implement/reading_package_repository_implement.dart';
 import 'package:demo_book_reader/data/repository_implement/user_repository_implement.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 
 final locator = GetIt.instance;
 
 Future<void> setupLocator() async {
-  locator.registerFactory<UserRepository>(() => UserRepositoryImplement());
+  final client = http.Client();
+  locator
+      .registerFactory<UserRepository>(() => UserRepositoryImplement(client));
   locator.registerFactory<BookRepository>(() => BookRepositoryImplement());
   locator.registerFactory<AuthorRepository>(() => AuthorRepositoryImplement());
   locator

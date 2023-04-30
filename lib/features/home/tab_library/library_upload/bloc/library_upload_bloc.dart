@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/category_repository.dart';
@@ -10,9 +11,9 @@ import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+part 'library_upload_bloc.freezed.dart';
 part 'library_upload_event.dart';
 part 'library_upload_state.dart';
-part 'library_upload_bloc.freezed.dart';
 
 class LibraryUploadBloc extends Bloc<LibraryUploadEvent, LibraryUploadState> {
   LibraryUploadBloc({

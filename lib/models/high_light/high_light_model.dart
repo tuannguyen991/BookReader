@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'high_light_model.freezed.dart';
 part 'high_light_model.g.dart';
 

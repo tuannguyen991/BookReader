@@ -2,7 +2,6 @@ import 'package:demo_book_reader/share/functions/util_func.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'reading_package_model.freezed.dart';
-
 part 'reading_package_model.g.dart';
 
 @freezed

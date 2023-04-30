@@ -168,6 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 verticalSpace32,
                 IntlPhoneField(
+                  key: const ValueKey('phoneNumber'),
                   decoration: const InputDecoration(
                     labelText: 'Số điện thoại',
                   ),
@@ -298,6 +299,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              key: const ValueKey('smsCode'),
               controller: _smsCodeController,
               decoration: const InputDecoration(
                 labelText: 'Mã SMS',

@@ -9,9 +9,9 @@ import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+part 'tab_library_bloc.freezed.dart';
 part 'tab_library_event.dart';
 part 'tab_library_state.dart';
-part 'tab_library_bloc.freezed.dart';
 
 class TabLibraryBloc extends Bloc<TabLibraryEvent, TabLibraryState> {
   TabLibraryBloc({

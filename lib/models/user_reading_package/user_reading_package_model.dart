@@ -2,7 +2,6 @@ import 'package:const_date_time/const_date_time.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_reading_package_model.freezed.dart';
-
 part 'user_reading_package_model.g.dart';
 
 @freezed
