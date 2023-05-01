@@ -176,7 +176,9 @@ class _LoginPageState extends State<LoginPage> {
                   initialValue:
                       _phoneNumberController.text.replaceFirst('+84', '0'),
                   onChanged: (phone) {
-                    phone.number = phone.number.replaceFirst('0', '');
+                    if (phone.number.startsWith('0')) {
+                      phone.number = phone.number.replaceFirst('0', '');
+                    }
                     _phoneNumberController.text = phone.completeNumber;
                   },
                   disableLengthCheck: true,
