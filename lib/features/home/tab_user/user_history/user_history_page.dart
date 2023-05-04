@@ -9,7 +9,6 @@ import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
-import 'package:demo_book_reader/widgets/customer/customer_linear_percent_indicator.dart';
 import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
@@ -156,11 +155,13 @@ class _MySfCartesianChartState extends State<MySfCartesianChart> {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-      primaryXAxis: NumericAxis(
+      primaryXAxis: DateTimeAxis(
         majorGridLines: const MajorGridLines(width: 0),
+        labelFormat: '{value}',
       ),
       primaryYAxis: NumericAxis(
         majorGridLines: const MajorGridLines(width: 0),
+        labelFormat: '{value} phút',
       ),
       onMarkerRender: (MarkerRenderArgs args) {
         args.markerHeight = 0;
@@ -168,13 +169,13 @@ class _MySfCartesianChartState extends State<MySfCartesianChart> {
       },
       trackballBehavior: _trackballBehavior,
       series: <ChartSeries>[
-        SplineSeries<UserHistoryModel, double>(
+        SplineSeries<UserHistoryModel, DateTime>(
+          dataLabelSettings: const DataLabelSettings(isVisible: true),
           color: AppColors.primaryColor,
           splineType: SplineType.natural,
           name: 'Reading Time',
           dataSource: _chartData,
-          xValueMapper: (UserHistoryModel data, _) =>
-              double.parse(DateFormat('dd').format(data.date!)),
+          xValueMapper: (UserHistoryModel data, _) => data.date!,
           yValueMapper: (UserHistoryModel data, _) => data.readingTime,
           enableTooltip: true,
           markerSettings: const MarkerSettings(
@@ -215,36 +216,27 @@ class UserBox extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CustomerText(
-                      'GOLD',
+                    CustomerText(
+                      user.ranking.name,
                       fontWeight: FontWeight.w500,
                     ),
                     horizontalSpace8,
-                    CustomerText(
-                      'Tháng 12/2022',
-                      color: AppColors.secondaryColor,
-                    ),
                   ],
                 ),
                 verticalSpace8,
                 CustomerRichText(
                   text:
-                      'Chúc mừng ${user.lastName} ${user.firstName} đã đạt được HẠNG VÀNG tháng 12 nhờ đọc ',
-                  subText: '2000 phút',
+                      'Chúc mừng ${user.lastName} ${user.firstName} đã đạt được ',
+                  subText: user.ranking.name,
                   color: AppColors.titleColor,
                   subColor: AppColors.primaryColor,
                 ),
-                verticalSpace4,
-                const CustomerLinearPercentIndicator(
-                  percent: 0.3,
-                  isUser: true,
-                ),
-                verticalSpace4,
-                CustomerText(
-                  'Đọc thêm 450 phút nữa để thăng hạng nhé',
-                  color: AppColors.primaryColor,
-                  isEllipsis: false,
-                  fontSize: fontSize12,
+                verticalSpace20,
+                CustomerRichText(
+                  text: 'Bạn đã đọc sách được ',
+                  subText: '${user.totalReadingTime} phút',
+                  color: AppColors.titleColor,
+                  subColor: AppColors.primaryColor,
                 ),
               ],
             ),
@@ -253,22 +245,6 @@ class UserBox extends StatelessWidget {
       ),
     );
   }
-}
-
-List<UserHistoryModel> getChartData() {
-  final List<UserHistoryModel> chartData = [
-    UserHistoryModel(readingTime: 90, date: DateTime(2022, 12, 12)),
-    UserHistoryModel(readingTime: 70, date: DateTime(2022, 12, 13)),
-    UserHistoryModel(readingTime: 60, date: DateTime(2022, 12, 14)),
-    UserHistoryModel(readingTime: 90, date: DateTime(2022, 12, 15)),
-    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 16)),
-    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 17)),
-    UserHistoryModel(readingTime: 60, date: DateTime(2022, 12, 18)),
-    UserHistoryModel(readingTime: 90, date: DateTime(2022, 12, 19)),
-    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 20)),
-    UserHistoryModel(readingTime: 20, date: DateTime(2022, 12, 21)),
-  ];
-  return chartData;
 }
 
 class ReadingTime {

@@ -11,4 +11,15 @@ extension RankingExtension on Ranking {
         return 'assets/image/ranking/gold.png';
     }
   }
+  
+  String get name {
+    switch (this) {
+      case Ranking.bronze:
+        return 'HẠNG ĐỒNG';
+      case Ranking.silver:
+        return 'HẠNG BẠC';
+      default:
+        return 'HẠNG VÀNG';
+    }
+  }
 }
