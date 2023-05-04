@@ -36,3 +36,10 @@ class BookDetailHighLight extends BookDetailEvent {
 class BookDetailGetHighLights extends BookDetailEvent {
   BookDetailGetHighLights();
 }
+
+class BookDetailReading extends BookDetailEvent {
+  final Function onSuccess;
+  final Function onFailed;
+
+  BookDetailReading({required this.onSuccess, required this.onFailed});
+}

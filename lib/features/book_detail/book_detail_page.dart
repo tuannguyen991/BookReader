@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
+import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/features/book_detail/bloc/book_detail_bloc.dart';
+import 'package:demo_book_reader/features/home/tab_user/user_reading_package/user_reading_package.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -29,7 +31,9 @@ class BookDetailPage extends StatefulWidget {
 }
 
 class _BookDetailPageState extends State<BookDetailPage> {
-  final _bloc = BookDetailBloc(bookRepository: locator<BookRepository>());
+  final _bloc = BookDetailBloc(
+      bookRepository: locator<BookRepository>(),
+      userRepository: locator<UserRepository>());
 
   late DateTime _startTime;
 
@@ -116,7 +120,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
         ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: BottomButton(bookItem: bookItem),
+          child: BottomButton(bookItem: bookItem, bloc: _bloc),
         ),
         Positioned(
           top: 0.0,
@@ -148,10 +152,13 @@ class BottomButton extends StatelessWidget {
     Key? key,
     // required this.isRead,
     required this.bookItem,
+    required this.bloc,
   }) : super(key: key);
 
   // final bool isRead;
   final UserBookModel bookItem;
+  final BookDetailBloc bloc;
+
   @override
   Widget build(BuildContext context) {
     final isRead = bookItem.numberOfReadPages != 0;
@@ -164,40 +171,67 @@ class BottomButton extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                     onPressed: () async {
-                      VocsyEpub.setConfig(
-                        themeColor: AppColors.primaryColor,
-                        identifier: 'iosBook',
-                        scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-                        allowSharing: true,
-                        enableTts: true,
-                        nightMode: false,
-                      );
-
-                      // get current locator
-                      VocsyEpub.locatorStream.listen((locator) {
-                        context.read<BookDetailBloc>().add(
-                              BookDetailSaveLocator(locatorString: locator),
+                      bloc.add(BookDetailReading(
+                          onSuccess: () async {
+                            VocsyEpub.setConfig(
+                              themeColor: AppColors.primaryColor,
+                              identifier: 'iosBook',
+                              scrollDirection:
+                                  EpubScrollDirection.ALLDIRECTIONS,
+                              allowSharing: true,
+                              enableTts: true,
+                              nightMode: false,
                             );
-                      });
 
-                      VocsyEpub.highLightStream.listen((highlight) {
-                        context.read<BookDetailBloc>().add(
-                              BookDetailHighLight(highLight: highlight),
+                            // get current locator
+                            VocsyEpub.locatorStream.listen((locator) {
+                              context.read<BookDetailBloc>().add(
+                                    BookDetailSaveLocator(
+                                        locatorString: locator),
+                                  );
+                            });
+
+                            VocsyEpub.highLightStream.listen((highlight) {
+                              context.read<BookDetailBloc>().add(
+                                    BookDetailHighLight(highLight: highlight),
+                                  );
+                            });
+
+                            var locator = state.locatorString != null
+                                ? EpubLocator.fromJson(
+                                    jsonDecode(state.locatorString!))
+                                : null;
+
+                            var highLights = state.highLights;
+
+                            await VocsyEpub.openAsset(
+                              'assets/epub/${bookItem.bookId}.epub',
+                              lastLocation: locator,
+                              highLights: highLights,
                             );
-                      });
-
-                      var locator = state.locatorString != null
-                          ? EpubLocator.fromJson(
-                              jsonDecode(state.locatorString!))
-                          : null;
-
-                      var highLights = state.highLights;
-
-                      await VocsyEpub.openAsset(
-                        'assets/epub/${bookItem.bookId}.epub',
-                        lastLocation: locator,
-                        highLights: highLights,
-                      );
+                          },
+                          onFailed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  // title: const Text('AlertDialog Title'),
+                                  content: const Text(
+                                      'Vui lòng đăng ký để trải nghiệm đầy đủ tính năng trên ứng dụng BookReader'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () => context.off(),
+                                      child: const Text('Đóng'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        context.off();
+                                        context.navigateTo(UserReadingPackage(
+                                            user: state.user));
+                                      },
+                                      child: const Text('Đăng ký'),
+                                    ),
+                                  ],
+                                ),
+                              )));
                     },
                     child: CustomerText(
                       isRead ? 'Đọc tiếp' : 'Đọc sách ngay',
