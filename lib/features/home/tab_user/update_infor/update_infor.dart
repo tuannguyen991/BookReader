@@ -50,6 +50,7 @@ class _UpdateInforPageState extends State<UpdateInforPage> {
   }
 
   Widget _buildBody() {
+    bool isValid = true;
     return Builder(
       builder: (context) {
         return SafeArea(
@@ -130,7 +131,6 @@ class _UpdateInforPageState extends State<UpdateInforPage> {
                       ),
                     ),
                     TextField(
-                      // initialValue: '',
                       controller: _firstNameController,
                       decoration: const InputDecoration(
                         labelText: 'Tên',
@@ -144,8 +144,10 @@ class _UpdateInforPageState extends State<UpdateInforPage> {
                         if (value != null && value != '')
                         // ignore: curly_braces_in_flow_control_structures
                         if (!(value.contains('@') && value.contains('.'))) {
+                          isValid = false;
                           return 'Vui lòng nhập đúng định dạng email';
                         }
+                        isValid = true;
                         return null;
                       },
                       decoration: const InputDecoration(
@@ -181,6 +183,28 @@ class _UpdateInforPageState extends State<UpdateInforPage> {
                     verticalSpace32,
                     ElevatedButton(
                       onPressed: () {
+                        if (!isValid) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Thông tin sai định dạng'),
+                                content: const Text(
+                                    'Vui lòng nhập lại theo đúng định dạng'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      context.off();
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          return;
+                        }
+
                         context.read<UpdateInforBloc>().add(
                               UpdateInfor(
                                 firstName: _firstNameController.text,

@@ -44,6 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _buildBody() {
+    bool isValid = true;
     return Builder(
       builder: (context) {
         const percent = 0.2;
@@ -149,8 +150,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     if (value != null && value != '')
                     // ignore: curly_braces_in_flow_control_structures
                     if (!(value.contains('@') && value.contains('.'))) {
+                      isValid = false;
                       return 'Vui lòng nhập đúng định dạng email';
                     }
+                    isValid = true;
                     return null;
                   },
                   decoration: const InputDecoration(
@@ -186,6 +189,28 @@ class _RegisterPageState extends State<RegisterPage> {
                 verticalSpace32,
                 ElevatedButton(
                   onPressed: () {
+                    if (!isValid) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Thông tin sai định dạng'),
+                            content: const Text(
+                                'Vui lòng nhập lại theo đúng định dạng'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  context.off();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      return;
+                    }
+                    
                     context.read<RegisterBloc>().add(
                           Register(
                             firstName: _firstNameController.text,
