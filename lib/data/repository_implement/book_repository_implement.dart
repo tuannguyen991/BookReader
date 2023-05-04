@@ -270,6 +270,30 @@ class BookRepositoryImplement implements BookRepository {
   }
 
   @override
+  Future<UserBookModel> getUserBook(
+      {required String token, required UserBookModel bookItem}) async {
+    var servicePath = '/library-book/$token/${bookItem.bookId}';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return UserBookModel.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 404) {
+      return bookItem;
+    }
+
+    throw Exception('');
+  }
+
+  @override
   Future<List<BookModel>> getTopBook({required String token}) async {
     const servicePath = '';
 

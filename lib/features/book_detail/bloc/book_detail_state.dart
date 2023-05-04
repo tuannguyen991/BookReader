@@ -7,6 +7,7 @@ class BookDetailState with _$BookDetailState {
   const factory BookDetailState({
     @Default(UserModel()) UserModel user,
     @Default([]) List<BookModel> sameCategoryBooks,
+    @Default(UserBookModel()) UserBookModel bookItem,
     @Default('') String highLights,
     @Default(true) isLoading,
     @Default(false) isFavorite,

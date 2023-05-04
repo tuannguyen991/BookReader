@@ -68,7 +68,11 @@ class _BookDetailPageState extends State<BookDetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BookItem(bookItem: bookItem, isBookDetail: true),
+              BlocBuilder<BookDetailBloc, BookDetailState>(
+                builder: (context, state) {
+                  return BookItem(bookItem: state.bookItem, isBookDetail: true);
+                },
+              ),
               verticalSpace16,
               CustomerReadMoreText(text: bookItem.description),
               HeaderSection(
@@ -120,7 +124,11 @@ class _BookDetailPageState extends State<BookDetailPage> {
         ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: BottomButton(bookItem: bookItem, bloc: _bloc),
+          child: BlocBuilder<BookDetailBloc, BookDetailState>(
+            builder: (context, state) {
+              return BottomButton(bookItem: state.bookItem, bloc: _bloc);
+            },
+          ),
         ),
         Positioned(
           top: 0.0,

@@ -12,6 +12,9 @@ abstract class BookRepository {
   Future<List<BookModel>> getSameCategoryBook(
       {required String token, required UserBookModel bookItem});
 
+  Future<UserBookModel> getUserBook(
+      {required String token, required UserBookModel bookItem});
+
   Future<bool> getIsFavorite({required String token, required String bookId});
 
   Future<void> createReading({

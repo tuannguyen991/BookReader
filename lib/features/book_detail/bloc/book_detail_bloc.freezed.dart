@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BookDetailState {
   UserModel get user => throw _privateConstructorUsedError;
   List<BookModel> get sameCategoryBooks => throw _privateConstructorUsedError;
+  UserBookModel get bookItem => throw _privateConstructorUsedError;
   String get highLights => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
   dynamic get isFavorite => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $BookDetailStateCopyWith<$Res> {
   $Res call(
       {UserModel user,
       List<BookModel> sameCategoryBooks,
+      UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
       dynamic isFavorite,
@@ -45,6 +47,7 @@ abstract class $BookDetailStateCopyWith<$Res> {
       String bookId});
 
   $UserModelCopyWith<$Res> get user;
+  $UserBookModelCopyWith<$Res> get bookItem;
 }
 
 /// @nodoc
@@ -62,6 +65,7 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
   $Res call({
     Object? user = null,
     Object? sameCategoryBooks = null,
+    Object? bookItem = null,
     Object? highLights = null,
     Object? isLoading = freezed,
     Object? isFavorite = freezed,
@@ -77,6 +81,10 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
           ? _value.sameCategoryBooks
           : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
+      bookItem: null == bookItem
+          ? _value.bookItem
+          : bookItem // ignore: cast_nullable_to_non_nullable
+              as UserBookModel,
       highLights: null == highLights
           ? _value.highLights
           : highLights // ignore: cast_nullable_to_non_nullable
@@ -107,6 +115,14 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserBookModelCopyWith<$Res> get bookItem {
+    return $UserBookModelCopyWith<$Res>(_value.bookItem, (value) {
+      return _then(_value.copyWith(bookItem: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -120,6 +136,7 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
   $Res call(
       {UserModel user,
       List<BookModel> sameCategoryBooks,
+      UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
       dynamic isFavorite,
@@ -128,6 +145,8 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
 
   @override
   $UserModelCopyWith<$Res> get user;
+  @override
+  $UserBookModelCopyWith<$Res> get bookItem;
 }
 
 /// @nodoc
@@ -143,6 +162,7 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
     Object? sameCategoryBooks = null,
+    Object? bookItem = null,
     Object? highLights = null,
     Object? isLoading = freezed,
     Object? isFavorite = freezed,
@@ -158,6 +178,10 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
           ? _value._sameCategoryBooks
           : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
               as List<BookModel>,
+      bookItem: null == bookItem
+          ? _value.bookItem
+          : bookItem // ignore: cast_nullable_to_non_nullable
+              as UserBookModel,
       highLights: null == highLights
           ? _value.highLights
           : highLights // ignore: cast_nullable_to_non_nullable
@@ -182,6 +206,7 @@ class _$_BookDetailState implements _BookDetailState {
   const _$_BookDetailState(
       {this.user = const UserModel(),
       final List<BookModel> sameCategoryBooks = const [],
+      this.bookItem = const UserBookModel(),
       this.highLights = '',
       this.isLoading = true,
       this.isFavorite = false,
@@ -204,6 +229,9 @@ class _$_BookDetailState implements _BookDetailState {
 
   @override
   @JsonKey()
+  final UserBookModel bookItem;
+  @override
+  @JsonKey()
   final String highLights;
   @override
   @JsonKey()
@@ -220,7 +248,7 @@ class _$_BookDetailState implements _BookDetailState {
 
   @override
   String toString() {
-    return 'BookDetailState(user: $user, sameCategoryBooks: $sameCategoryBooks, highLights: $highLights, isLoading: $isLoading, isFavorite: $isFavorite, locatorString: $locatorString, bookId: $bookId)';
+    return 'BookDetailState(user: $user, sameCategoryBooks: $sameCategoryBooks, bookItem: $bookItem, highLights: $highLights, isLoading: $isLoading, isFavorite: $isFavorite, locatorString: $locatorString, bookId: $bookId)';
   }
 
   @override
@@ -231,6 +259,8 @@ class _$_BookDetailState implements _BookDetailState {
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
                 .equals(other._sameCategoryBooks, _sameCategoryBooks) &&
+            (identical(other.bookItem, bookItem) ||
+                other.bookItem == bookItem) &&
             (identical(other.highLights, highLights) ||
                 other.highLights == highLights) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
@@ -246,6 +276,7 @@ class _$_BookDetailState implements _BookDetailState {
       runtimeType,
       user,
       const DeepCollectionEquality().hash(_sameCategoryBooks),
+      bookItem,
       highLights,
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(isFavorite),
@@ -263,6 +294,7 @@ abstract class _BookDetailState implements BookDetailState {
   const factory _BookDetailState(
       {final UserModel user,
       final List<BookModel> sameCategoryBooks,
+      final UserBookModel bookItem,
       final String highLights,
       final dynamic isLoading,
       final dynamic isFavorite,
@@ -273,6 +305,8 @@ abstract class _BookDetailState implements BookDetailState {
   UserModel get user;
   @override
   List<BookModel> get sameCategoryBooks;
+  @override
+  UserBookModel get bookItem;
   @override
   String get highLights;
   @override

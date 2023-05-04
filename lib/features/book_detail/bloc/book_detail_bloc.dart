@@ -46,29 +46,34 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
 
+    UserBookModel bookItem = await _bookRepository.getUserBook(
+      token: token,
+      bookItem: event.bookItem,
+    );
+
     final user = await _userRepository.getInfor(token: token);
 
     String? locator;
 
-    if (event.bookItem.lastLocator != '') {
+    if (bookItem.lastLocator != '') {
       locator =
-          '{"bookId":"${event.bookItem.bookId}","href":"${event.bookItem.href}","locations":${event.bookItem.lastLocator},"readPage":0}';
+          '{"bookId":"${bookItem.bookId}","href":"${bookItem.href}","locations":${bookItem.lastLocator},"readPage":0}';
     }
 
     // get sameCategoryBook
     final list = await _bookRepository.getSameCategoryBook(
       token: token,
-      bookItem: event.bookItem,
+      bookItem: bookItem,
     );
 
     final isFavorite = await _bookRepository.getIsFavorite(
       token: token,
-      bookId: event.bookItem.bookId,
+      bookId: bookItem.bookId,
     );
 
     final highLights = await _bookRepository.getHighLights(
       token: token,
-      bookId: event.bookItem.bookId,
+      bookId: bookItem.bookId,
     );
 
     emit(state.copyWith(
@@ -76,9 +81,10 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
       sameCategoryBooks: list,
       isFavorite: isFavorite,
       highLights: highLights,
+      bookItem: bookItem,
       isLoading: false,
       locatorString: locator,
-      bookId: event.bookItem.bookId,
+      bookId: bookItem.bookId,
     ));
   }
 
