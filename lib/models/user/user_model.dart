@@ -2,6 +2,7 @@ import 'package:demo_book_reader/models/user_history/user_history_model.dart';
 import 'package:demo_book_reader/models/user_reading_package/user_reading_package_model.dart';
 import 'package:demo_book_reader/share/enum/ranking.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 

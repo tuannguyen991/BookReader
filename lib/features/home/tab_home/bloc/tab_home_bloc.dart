@@ -11,9 +11,9 @@ import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+part 'tab_home_bloc.freezed.dart';
 part 'tab_home_event.dart';
 part 'tab_home_state.dart';
-part 'tab_home_bloc.freezed.dart';
 
 class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
   TabHomeBloc({

@@ -1,6 +1,7 @@
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'book_model.freezed.dart';
 part 'book_model.g.dart';
 

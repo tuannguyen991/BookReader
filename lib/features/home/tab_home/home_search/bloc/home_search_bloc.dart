@@ -12,9 +12,9 @@ import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+part 'home_search_bloc.freezed.dart';
 part 'home_search_event.dart';
 part 'home_search_state.dart';
-part 'home_search_bloc.freezed.dart';
 
 class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
   HomeSearchBloc({

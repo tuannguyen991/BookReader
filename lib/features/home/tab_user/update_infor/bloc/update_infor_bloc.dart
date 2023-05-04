@@ -10,9 +10,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+part 'update_infor_bloc.freezed.dart';
 part 'update_infor_event.dart';
 part 'update_infor_state.dart';
-part 'update_infor_bloc.freezed.dart';
 
 class UpdateInforBloc extends Bloc<UpdateInforEvent, UpdateInforState> {
   UpdateInforBloc({required UserRepository userRepository})
