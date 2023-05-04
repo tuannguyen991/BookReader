@@ -8,7 +8,6 @@ import 'package:demo_book_reader/features/home/tab_user/main/tab_user_page.dart'
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startTimer() {
-    const time = Duration(seconds: 2);
+    const time = Duration(seconds: 10);
     _timer = Timer.periodic(time, _showNotification);
   }
 
@@ -86,7 +85,6 @@ class _HomePageState extends State<HomePage> {
     const platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
 
-    DateFormat dateFormat = DateFormat('dd-MM-yyyy HH:mm:ss');
     // create the notification
     await flutterLocalNotificationsPlugin.show(
       0,
