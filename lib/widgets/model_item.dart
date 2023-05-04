@@ -33,6 +33,16 @@ class BookItem extends StatelessWidget {
     late final int maxLines;
     late final double fontSize;
 
+    late final double percent;
+
+    if (bookItem.numberOfReadPages < 0) {
+      percent = 0;
+    } else if (bookItem.numberOfReadPages > bookItem.numberOfPages) {
+      percent = 1;
+    } else {
+      percent = bookItem.numberOfReadPages / bookItem.numberOfPages;
+    }
+
     if (isLibrary && isGridView) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,8 +58,7 @@ class BookItem extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: CustomerLinearPercentIndicator(
-                        percent:
-                            bookItem.numberOfReadPages / bookItem.numberOfPages,
+                        percent: percent,
                         isLibrary: true,
                       ),
                     ),
