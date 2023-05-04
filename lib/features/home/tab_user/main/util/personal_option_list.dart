@@ -18,7 +18,7 @@ final List<OptionContent> personalOptionList = [
   OptionContent(Icons.people, personalInformationText),
   OptionContent(Icons.book, userReadingPackageText),
   OptionContent(Icons.history, userHistoryText),
-  OptionContent(Icons.people, readingReminderText),
-  OptionContent(Icons.timer_outlined, feedbackText),
-  OptionContent(Icons.settings, settingText),
+  // OptionContent(Icons.people, readingReminderText),
+  // OptionContent(Icons.timer_outlined, feedbackText),
+  // OptionContent(Icons.settings, settingText),
 ];

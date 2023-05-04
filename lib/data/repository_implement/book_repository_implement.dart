@@ -320,6 +320,62 @@ class BookRepositoryImplement implements BookRepository {
   }
 
   @override
+  Future<List<UserBookModel>> getBookByCategory(
+      {required String categoryId}) async {
+    var servicePath = '/by-category/$categoryId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathBooks}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final books = parsed
+          .map<UserBookModel>(
+              (json) => UserBookModel.fromBookModel(BookModel.fromJson(json)))
+          .toList();
+      return books;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<List<UserBookModel>> getBookByAuthor(
+      {required String authorId}) async {
+    var servicePath = '/by-author/$authorId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathBooks}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final books = parsed
+          .map<UserBookModel>(
+              (json) => UserBookModel.fromBookModel(BookModel.fromJson(json)))
+          .toList();
+      return books;
+    }
+
+    throw Exception('');
+  }
+
+  @override
   Future<List<BookModel>> getUploadBooks({required String token}) {
     // TODO: implement getUploadBooks
     throw UnimplementedError();

@@ -2,7 +2,9 @@ import 'package:demo_book_reader/data/repository/author_repository.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/category_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
+import 'package:demo_book_reader/features/author_detail/author_detail_page.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
+import 'package:demo_book_reader/features/category_detail/category_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_home/home_search/bloc/home_search_bloc.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
@@ -74,27 +76,28 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                   ),
                 ],
               ),
-              HeaderSection(
-                title: 'Lịch sử tìm kiếm',
-                subtitle: 'Xóa lịch sử',
-                onPressed: () {},
-              ),
-              BlocBuilder<HomeSearchBloc, HomeSearchState>(
-                builder: (context, state) {
-                  final history = state.history;
-                  return Wrap(
-                    spacing: double16,
-                    children: List<Widget>.generate(
-                      history.length,
-                      (index) => CustomerChip(label: history[index]),
-                    ).toList(),
-                  );
-                },
-              ),
-              HeaderSection(
+              // HeaderSection(
+              //   title: 'Lịch sử tìm kiếm',
+              //   subtitle: 'Xóa lịch sử',
+              //   onPressed: () {},
+              // ),
+              // BlocBuilder<HomeSearchBloc, HomeSearchState>(
+              //   builder: (context, state) {
+              //     final history = state.history;
+              //     return Wrap(
+              //       spacing: double16,
+              //       children: List<Widget>.generate(
+              //         history.length,
+              //         (index) => CustomerChip(label: history[index]),
+              //       ).toList(),
+              //     );
+              //   },
+              // ),
+              verticalSpace16,
+              const HeaderSection(
                 title: 'Danh mục sách',
-                subtitle: 'Xem tất cả',
-                onPressed: () {},
+                // subtitle: 'Xem tất cả',
+                // onPressed: () {},
               ),
               BlocBuilder<HomeSearchBloc, HomeSearchState>(
                 builder: (context, state) {
@@ -166,7 +169,10 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                         (index) => Padding(
                           padding: const EdgeInsets.only(right: double8),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              context.navigateTo(
+                                  AuthorDetailPage(author: listAuthor[index]));
+                            },
                             child: AuthorItem(authorItem: listAuthor[index]),
                           ),
                         ),
@@ -221,7 +227,9 @@ class CustomerCard extends StatelessWidget {
       margin: const EdgeInsets.only(right: double8),
       child: Card(
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.navigateTo(CategoryDetailPage(category: categoryItem));
+          },
           child: Padding(
             padding: const EdgeInsets.only(
               left: double8,
@@ -331,7 +339,9 @@ class MySearchDelegate extends SearchDelegate {
                   }
                   if (item is AuthorModel) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.navigateTo(AuthorDetailPage(author: item));
+                      },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: double16),
                         child: AuthorItem(authorItem: item, isSearch: true),
@@ -339,7 +349,9 @@ class MySearchDelegate extends SearchDelegate {
                     );
                   }
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.navigateTo(CategoryDetailPage(category: item));
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: double16),
                       child: CategoryItem(categoryItem: item, isSearch: true),

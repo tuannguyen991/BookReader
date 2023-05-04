@@ -7,6 +7,10 @@ abstract class BookRepository {
 
   Future<List<BookModel>> getTopBook({required String token});
 
+  Future<List<UserBookModel>> getBookByCategory({required String categoryId});
+
+  Future<List<UserBookModel>> getBookByAuthor({required String authorId});
+
   Future<UserBookModel?> getLastBook({required String token});
 
   Future<List<BookModel>> getSameCategoryBook(

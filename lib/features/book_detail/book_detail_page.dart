@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
@@ -13,6 +12,7 @@ import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_readmore.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/header_section.dart';
+import 'package:demo_book_reader/widgets/image_background.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +61,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
 
     return Stack(
       children: <Widget>[
-        ImageBackground(context: context, bookItem: bookItem),
+        ImageBackground(context: context, imageLink: bookItem.imageLink),
         Padding(
           padding: const EdgeInsets.only(
               top: double88, left: double16, right: double16),
@@ -284,46 +284,6 @@ class BottomButton extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class ImageBackground extends StatelessWidget {
-  const ImageBackground({
-    Key? key,
-    required this.context,
-    required this.bookItem,
-  }) : super(key: key);
-
-  final BuildContext context;
-  final UserBookModel bookItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.3,
-      child: CachedNetworkImage(
-        imageUrl: bookItem.imageLink,
-        fit: BoxFit.cover,
-        color: const Color.fromRGBO(255, 255, 255, 0.075),
-        colorBlendMode: BlendMode.modulate,
-      ),
-    );
-  }
-}
-
-class CustomerAppBar extends StatelessWidget {
-  const CustomerAppBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      foregroundColor: AppColors.secondaryColor,
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
     );
   }
 }
