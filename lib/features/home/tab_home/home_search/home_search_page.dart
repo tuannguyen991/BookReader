@@ -11,6 +11,7 @@ import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
+import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/header_section.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/search_bar.dart';
@@ -278,9 +279,30 @@ class MySearchDelegate extends SearchDelegate {
       bloc: bloc,
       builder: (context, state) {
         if (state.isLoading) {
-          return const CircularProgressIndicator();
+          return Padding(
+            padding: const EdgeInsets.only(top: double24),
+            child: Row(
+              children: const [
+                Spacer(),
+                CircularProgressIndicator(),
+                Spacer(),
+              ],
+            ),
+          );
         }
         final listRecommendedByName = state.listRecommendedByName;
+        if (listRecommendedByName.isEmpty && query != '') {
+          return Padding(
+            padding: const EdgeInsets.only(top: double24),
+            child: Row(
+              children: const [
+                Spacer(),
+                CustomerText('Không có kết quả phù hợp'),
+                Spacer(),
+              ],
+            ),
+          );
+        }
         return SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(
