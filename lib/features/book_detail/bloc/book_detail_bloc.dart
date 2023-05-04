@@ -13,9 +13,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'book_detail_bloc.freezed.dart';
-
 part 'book_detail_event.dart';
-
 part 'book_detail_state.dart';
 
 class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {

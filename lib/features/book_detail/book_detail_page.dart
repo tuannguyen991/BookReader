@@ -62,7 +62,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
     return Stack(
       children: <Widget>[
         ImageBackground(context: context, bookItem: bookItem),
-        SingleChildScrollView(
+        Padding(
           padding: const EdgeInsets.only(
               top: double88, left: double16, right: double16),
           child: Column(
@@ -74,51 +74,65 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 },
               ),
               verticalSpace16,
-              CustomerReadMoreText(text: bookItem.description),
-              HeaderSection(
-                title: 'Cùng danh mục',
-                subtitle: 'Xem tất cả',
-                onPressed: () {},
-              ),
-              BlocBuilder<BookDetailBloc, BookDetailState>(
-                builder: (context, state) {
-                  if (state.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return GridView.count(
-                    padding: EdgeInsets.zero,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    childAspectRatio: 2.5,
-                    children: List.generate(
-                      state.sameCategoryBooks.length,
-                      (index) {
-                        final bookItem = state.sameCategoryBooks[index];
-                        return InkWell(
-                          child: BookItem(
-                            bookItem: UserBookModel.fromBookModel(bookItem),
-                            isGridView: true,
-                          ),
-                          onTap: () {
-                            final endTime = DateTime.now();
-                            final duration = endTime.difference(_startTime);
-                            _bloc.add(BookDetailHistory(time: duration));
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(bottom: double80),
+                  child: Column(
+                    children: [
+                      CustomerReadMoreText(text: bookItem.description),
+                      HeaderSection(
+                        title: 'Cùng danh mục',
+                        subtitle: 'Xem tất cả',
+                        onPressed: () {},
+                      ),
+                      BlocBuilder<BookDetailBloc, BookDetailState>(
+                        builder: (context, state) {
+                          if (state.isLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          return GridView.count(
+                            padding: EdgeInsets.zero,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            crossAxisCount: 2,
+                            childAspectRatio: 2.5,
+                            children: List.generate(
+                              state.sameCategoryBooks.length,
+                              (index) {
+                                final bookItem = state.sameCategoryBooks[index];
+                                return InkWell(
+                                  child: BookItem(
+                                    bookItem:
+                                        UserBookModel.fromBookModel(bookItem),
+                                    isGridView: true,
+                                  ),
+                                  onTap: () {
+                                    final endTime = DateTime.now();
+                                    final duration =
+                                        endTime.difference(_startTime);
+                                    _bloc
+                                        .add(BookDetailHistory(time: duration));
 
-                            context.navigateOff(
-                              BookDetailPage(
-                                bookItem: UserBookModel.fromBookModel(bookItem),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
+                                    context.navigateOff(
+                                      BookDetailPage(
+                                        bookItem: UserBookModel.fromBookModel(
+                                            bookItem),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

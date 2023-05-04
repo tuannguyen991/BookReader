@@ -101,6 +101,7 @@ class _TabHomePageState extends State<TabHomePage> {
                     fontWeight: FontWeight.w500,
                   ),
                   const RecommendedCarousel(),
+                  verticalSpace8
                 ],
               ),
             ),
@@ -140,7 +141,7 @@ class RecommendedCarousel extends StatelessWidget {
         final item = state.bookItem;
 
         /// limit number of authors
-        final String authors = limitCharacters(list: item.authors, limit: 32);
+        final String authors = limitCharacters(list: item.authors, limit: 20);
 
         return Container(
           padding: const EdgeInsets.only(
