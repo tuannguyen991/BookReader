@@ -172,7 +172,7 @@ class BookItem extends StatelessWidget {
                 // verticalSpace4,
                 // ask toward until meet ancestor has fixed size
                 CustomerLinearPercentIndicator(
-                  percent: bookItem.numberOfReadPages / bookItem.numberOfPages,
+                  percent: percent,
                 ),
               ],
               // if (isHistory)
