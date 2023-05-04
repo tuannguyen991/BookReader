@@ -5,18 +5,25 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
+import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/models/book/book_model.dart';
+import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'book_detail_bloc.freezed.dart';
+
 part 'book_detail_event.dart';
+
 part 'book_detail_state.dart';
 
 class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
-  BookDetailBloc({required BookRepository bookRepository})
+  BookDetailBloc(
+      {required BookRepository bookRepository,
+      required UserRepository userRepository})
       : _bookRepository = bookRepository,
+        _userRepository = userRepository,
         super(const BookDetailState()) {
     on<BookDetailLoaded>(_onLoaded);
     on<BookDetailFavoriteChange>(_onFavoriteChange);
@@ -24,9 +31,11 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     on<BookDetailHistory>(_onHistory);
     on<BookDetailHighLight>(_onHighLight);
     on<BookDetailGetHighLights>(_onGetHighLights);
+    on<BookDetailReading>(_onReading);
   }
 
   final BookRepository _bookRepository;
+  final UserRepository _userRepository;
 
   Future<FutureOr<void>> _onLoaded(
     BookDetailLoaded event,
@@ -36,6 +45,8 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
 
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
+
+    final user = await _userRepository.getInfor(token: token);
 
     String? locator;
 
@@ -61,6 +72,7 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     );
 
     emit(state.copyWith(
+      user: user,
       sameCategoryBooks: list,
       isFavorite: isFavorite,
       highLights: highLights,
@@ -190,5 +202,22 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     );
 
     emit(state.copyWith(highLights: highLights));
+  }
+
+  Future<void> _onReading(
+    BookDetailReading event,
+    Emitter<BookDetailState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token')!;
+
+    final user = await _userRepository.getInfor(token: token);
+    emit(state.copyWith(user: user));
+
+    if (user.currentPackage != null) {
+      event.onSuccess();
+    } else {
+      event.onFailed();
+    }
   }
 }

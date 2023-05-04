@@ -129,7 +129,8 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                       break;
                   }
                 });
-                if (payResult == 'Thanh toán thất bại') {
+                if ((payResult == 'Thanh toán thất bại') ||
+                    (payResult == 'User Huỷ Thanh Toán')) {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {

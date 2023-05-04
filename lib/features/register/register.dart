@@ -210,7 +210,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       );
                       return;
                     }
-                    
+
                     context.read<RegisterBloc>().add(
                           Register(
                             firstName: _firstNameController.text,
