@@ -48,6 +48,17 @@ class TabLibraryBloc extends Bloc<TabLibraryEvent, TabLibraryState> {
 
   FutureOr<void> _onChangeIndexChoice(
       TabLibraryChangeIndexChoice event, Emitter<TabLibraryState> emit) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token')!;
+
+    if (event.index == 0) {
+      final readBooks = await _bookRepository.getReadBook(token: token);
+      emit(state.copyWith(readBooks: readBooks));
+    } else {
+      final favoriteBooks = await _bookRepository.getFavoriteBook(token: token);
+      emit(state.copyWith(favoriteBooks: favoriteBooks));
+    }
+
     emit(state.copyWith(indexChoice: event.index));
   }
 
