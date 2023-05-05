@@ -51,11 +51,11 @@ class _HomePageState extends State<HomePage> {
         await _bookRepository.getHighLightNotification(token: token);
 
     if (highLight.bookName == '') {
-      title = 'Nhắc nhở đọc sách';
-      body = 'Bạn hãy vào ứng dụng và sử dụng chức năng đọc sách đi nào!!!';
+      title = 'Tới giờ đọc sách rồi!';
+      body = 'Truy cập BookReader và đọc sách thôi nào!!!';
     } else {
-      title = highLight.bookName;
-      body = 'Ôn lại ghi chú với nội dung: "${highLight.content}" đi nào!!!';
+      title = 'Sách: ${highLight.bookName}';
+      body = 'Highlight: "${highLight.content}"';
     }
 
     // Initialize the local notifications plugin
