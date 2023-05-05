@@ -33,7 +33,7 @@ class BookItem extends StatelessWidget {
     late final int maxLines;
     late final double fontSize;
 
-    late final double percent;
+    double percent;
 
     if (bookItem.numberOfReadPages < 0) {
       percent = 0;
@@ -41,6 +41,7 @@ class BookItem extends StatelessWidget {
       percent = 1;
     } else {
       percent = bookItem.numberOfReadPages / bookItem.numberOfPages;
+      if (percent < 0.01) percent = 0.01;
     }
 
     if (isLibrary && isGridView) {
