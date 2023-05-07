@@ -11,8 +11,7 @@ part 'author_detail_bloc.freezed.dart';
 part 'author_detail_event.dart';
 part 'author_detail_state.dart';
 
-class AuthorDetailBloc
-    extends Bloc<AuthorDetailEvent, AuthorDetailState> {
+class AuthorDetailBloc extends Bloc<AuthorDetailEvent, AuthorDetailState> {
   AuthorDetailBloc({
     required BookRepository bookRepository,
   })  : _bookRepository = bookRepository,

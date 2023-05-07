@@ -71,8 +71,8 @@ abstract class _$$_AuthorDetailStateCopyWith<$Res>
 class __$$_AuthorDetailStateCopyWithImpl<$Res>
     extends _$AuthorDetailStateCopyWithImpl<$Res, _$_AuthorDetailState>
     implements _$$_AuthorDetailStateCopyWith<$Res> {
-  __$$_AuthorDetailStateCopyWithImpl(_$_AuthorDetailState _value,
-      $Res Function(_$_AuthorDetailState) _then)
+  __$$_AuthorDetailStateCopyWithImpl(
+      _$_AuthorDetailState _value, $Res Function(_$_AuthorDetailState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')

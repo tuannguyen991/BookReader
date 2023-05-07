@@ -82,7 +82,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.1"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.github.tuannguyen991:vocsy_epub_viewer_android_folioreader-4:bd1ca0d505'
+    implementation 'com.github.tuannguyen991:vocsy_epub_viewer_android_folioreader-4:d8ad32c16f'
 
     implementation "com.fasterxml.jackson.core:jackson-core:$versions.jackson"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$versions.jackson"
