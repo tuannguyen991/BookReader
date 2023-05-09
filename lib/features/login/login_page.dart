@@ -184,7 +184,44 @@ class _LoginPageState extends State<LoginPage> {
                   disableLengthCheck: true,
                   flagsButtonPadding: const EdgeInsets.only(right: double16),
                 ),
-                verticalSpace32,
+                verticalSpace12,
+                Row(
+                  children: [
+                    const Spacer(),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: fontSize16),
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text(
+                              'Bạn có muốn bỏ qua đăng nhập không',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  context.off();
+                                },
+                                child: const Text('Quay lại'),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  context.off();
+                                  context.navigateOff(const HomePage());
+                                },
+                                child: const Text('Đồng ý'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: const Text('Bỏ qua đăng nhập'),
+                    ),
+                  ],
+                ),
+                verticalSpace16,
                 ElevatedButton(
                   onPressed: () async {
                     await _signInWithPhoneNumber(context);

@@ -21,6 +21,7 @@ mixin _$BookDetailState {
   UserBookModel get bookItem => throw _privateConstructorUsedError;
   String get highLights => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
+  bool get isLogin => throw _privateConstructorUsedError;
   dynamic get isFavorite => throw _privateConstructorUsedError;
   String? get locatorString => throw _privateConstructorUsedError;
   String get bookId => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $BookDetailStateCopyWith<$Res> {
       UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
+      bool isLogin,
       dynamic isFavorite,
       String? locatorString,
       String bookId});
@@ -68,6 +70,7 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
     Object? bookItem = null,
     Object? highLights = null,
     Object? isLoading = freezed,
+    Object? isLogin = null,
     Object? isFavorite = freezed,
     Object? locatorString = freezed,
     Object? bookId = null,
@@ -93,6 +96,10 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      isLogin: null == isLogin
+          ? _value.isLogin
+          : isLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFavorite: freezed == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -139,6 +146,7 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
       UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
+      bool isLogin,
       dynamic isFavorite,
       String? locatorString,
       String bookId});
@@ -165,6 +173,7 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
     Object? bookItem = null,
     Object? highLights = null,
     Object? isLoading = freezed,
+    Object? isLogin = null,
     Object? isFavorite = freezed,
     Object? locatorString = freezed,
     Object? bookId = null,
@@ -187,6 +196,10 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
           : highLights // ignore: cast_nullable_to_non_nullable
               as String,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isLogin: null == isLogin
+          ? _value.isLogin
+          : isLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFavorite: freezed == isFavorite ? _value.isFavorite! : isFavorite,
       locatorString: freezed == locatorString
           ? _value.locatorString
@@ -209,6 +222,7 @@ class _$_BookDetailState implements _BookDetailState {
       this.bookItem = const UserBookModel(),
       this.highLights = '',
       this.isLoading = true,
+      this.isLogin = true,
       this.isFavorite = false,
       this.locatorString = null,
       this.bookId = ''})
@@ -238,6 +252,9 @@ class _$_BookDetailState implements _BookDetailState {
   final dynamic isLoading;
   @override
   @JsonKey()
+  final bool isLogin;
+  @override
+  @JsonKey()
   final dynamic isFavorite;
   @override
   @JsonKey()
@@ -248,7 +265,7 @@ class _$_BookDetailState implements _BookDetailState {
 
   @override
   String toString() {
-    return 'BookDetailState(user: $user, sameCategoryBooks: $sameCategoryBooks, bookItem: $bookItem, highLights: $highLights, isLoading: $isLoading, isFavorite: $isFavorite, locatorString: $locatorString, bookId: $bookId)';
+    return 'BookDetailState(user: $user, sameCategoryBooks: $sameCategoryBooks, bookItem: $bookItem, highLights: $highLights, isLoading: $isLoading, isLogin: $isLogin, isFavorite: $isFavorite, locatorString: $locatorString, bookId: $bookId)';
   }
 
   @override
@@ -264,6 +281,7 @@ class _$_BookDetailState implements _BookDetailState {
             (identical(other.highLights, highLights) ||
                 other.highLights == highLights) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            (identical(other.isLogin, isLogin) || other.isLogin == isLogin) &&
             const DeepCollectionEquality()
                 .equals(other.isFavorite, isFavorite) &&
             (identical(other.locatorString, locatorString) ||
@@ -279,6 +297,7 @@ class _$_BookDetailState implements _BookDetailState {
       bookItem,
       highLights,
       const DeepCollectionEquality().hash(isLoading),
+      isLogin,
       const DeepCollectionEquality().hash(isFavorite),
       locatorString,
       bookId);
@@ -297,6 +316,7 @@ abstract class _BookDetailState implements BookDetailState {
       final UserBookModel bookItem,
       final String highLights,
       final dynamic isLoading,
+      final bool isLogin,
       final dynamic isFavorite,
       final String? locatorString,
       final String bookId}) = _$_BookDetailState;
@@ -311,6 +331,8 @@ abstract class _BookDetailState implements BookDetailState {
   String get highLights;
   @override
   dynamic get isLoading;
+  @override
+  bool get isLogin;
   @override
   dynamic get isFavorite;
   @override

@@ -41,18 +41,21 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
     emit(state.copyWith(isLoading: true));
 
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token')!;
+    final token = prefs.getString('token');
 
-    final listHistory = await _bookRepository.getHistorySearch(token: token);
+    final listHistory =
+        await _bookRepository.getHistorySearch(token: token.toString());
     emit(state.copyWith(history: listHistory));
 
-    final listCategory = await _categoryRepository.getCategories(token: token);
+    final listCategory =
+        await _categoryRepository.getCategories(token: token.toString());
     emit(state.copyWith(listCategory: listCategory));
 
-    final listBook = await _bookRepository.getTopBook(token: token);
+    final listBook = await _bookRepository.getTopBook(token: token.toString());
     emit(state.copyWith(listBook: listBook));
 
-    final listAuthor = await _authorRepository.getAuthors(token: token);
+    final listAuthor =
+        await _authorRepository.getAuthors(token: token.toString());
     emit(state.copyWith(listAuthor: listAuthor));
 
     emit(state.copyWith(isLoading: false));
@@ -63,9 +66,9 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
     Emitter<HomeSearchState> emit,
   ) async {
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token')!;
+    final token = prefs.getString('token');
 
-    _bookRepository.deleteHistory(token: token, name: event.name);
+    _bookRepository.deleteHistory(token: token.toString(), name: event.name);
 
     add(HomeSearchLoaded());
   }
@@ -75,7 +78,7 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
     Emitter<HomeSearchState> emit,
   ) async {
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token')!;
+    final token = prefs.getString('token');
 
     emit(state.copyWith(isLoading: true));
 
@@ -85,11 +88,12 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
     }
 
     final listRecommendedByName = [
-      ...await _bookRepository.getBooksByName(token: token, name: event.name),
+      ...await _bookRepository.getBooksByName(
+          token: token.toString(), name: event.name),
       ...await _authorRepository.getAuthorsByName(
-          token: token, name: event.name),
+          token: token.toString(), name: event.name),
       ...await _categoryRepository.getCategoriesByName(
-          token: token, name: event.name),
+          token: token.toString(), name: event.name),
     ];
 
     emit(state.copyWith(

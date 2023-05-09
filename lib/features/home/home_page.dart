@@ -5,6 +5,8 @@ import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/features/home/tab_home/tab_home_page.dart';
 import 'package:demo_book_reader/features/home/tab_library/tab_library_page.dart';
 import 'package:demo_book_reader/features/home/tab_user/main/tab_user_page.dart';
+import 'package:demo_book_reader/features/login/login_page.dart';
+import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -45,7 +47,11 @@ class _HomePageState extends State<HomePage> {
     String body;
 
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token')!;
+    final token = prefs.getString('token');
+
+    if (token == null) {
+      return;
+    }
 
     var highLight =
         await _bookRepository.getHighLightNotification(token: token);
@@ -115,9 +121,44 @@ class _HomePageState extends State<HomePage> {
             label: 'Người dùng',
           ),
         ],
-        onTap: (index) => setState(
-          () => _index = index,
-        ),
+        onTap: (index) async {
+          if (index != 0) {
+            final prefs = await SharedPreferences.getInstance();
+
+            if (prefs.getString('token') == null) {
+              // ignore: use_build_context_synchronously
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text(
+                    'Bạn chưa đăng nhập',
+                  ),
+                  content: const Text(
+                      'Để trải nghiệm trọn vẹn các chức năng, vui lòng đăng nhập'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        context.off();
+                      },
+                      child: const Text('Quay lại'),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        context.off();
+                        context.navigateOff(const LoginPage());
+                      },
+                      child: const Text('Đăng nhập'),
+                    ),
+                  ],
+                ),
+              );
+              return;
+            }
+          }
+          setState(
+            () => _index = index,
+          );
+        },
         currentIndex: _index,
       ),
     );

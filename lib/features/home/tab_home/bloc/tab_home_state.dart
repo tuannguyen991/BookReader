@@ -15,5 +15,7 @@ class TabHomeState with _$TabHomeState {
     UserBookModel? lastBook,
     //
     @Default(true) bool isLoading,
+    //
+    @Default(true) bool isLogin,
   }) = _TabHomeState;
 }

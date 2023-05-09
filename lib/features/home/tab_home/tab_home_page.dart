@@ -56,58 +56,125 @@ class _TabHomePageState extends State<TabHomePage> {
 
   Widget _buildBody() {
     const percent = 0.35; // percent distance from Top_Screen to Back_Drop
-    return Stack(
-      children: [
-        BackgroundImage(context: context),
-        Backdrop(context: context, percent: percent),
-        SingleChildScrollView(
-          child: SafeArea(
-            child: Container(
-              padding: const EdgeInsets.only(
-                top: double16,
-                left: double16,
-                right: double16,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BlocBuilder<TabHomeBloc, TabHomeState>(
-                    builder: (context, state) {
-                      return Greeting(user: state.user);
-                    },
-                  ),
-                  verticalSpace32,
-                  const SearchBar(isTextInput: false),
-                  verticalSpace16,
+    return BlocBuilder<TabHomeBloc, TabHomeState>(
+      builder: (context, state) {
+        if (!state.isLogin) {
+          return Stack(
+            children: [
+              BackgroundImage(context: context),
+              Backdrop(context: context, percent: percent),
+              SingleChildScrollView(
+                child: SafeArea(
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                      top: double16,
+                      left: double16,
+                      right: double16,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                children: const [
+                                  CustomerText(
+                                    'Xin chào, Khách',
+                                    isCenter: true,
+                                    color: AppColors.backgroundColor,
+                                  ),
+                                  verticalSpace8,
+                                  CustomerText(
+                                    'Hôm nay bạn muốn đọc gì?',
+                                    isCenter: true,
+                                    color: AppColors.backgroundColor,
+                                    fontSize: double24,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        verticalSpace32,
+                        const SearchBar(isTextInput: false),
+                        verticalSpace16,
 
-                  /// Reading Box
-                  BlocBuilder<TabHomeBloc, TabHomeState>(
-                    builder: (context, state) {
-                      if (state.isLoading) {
-                        return const CircularProgressIndicator();
-                      }
-                      final lastBook = state.lastBook;
-                      if (lastBook == null) {
-                        return RecommendBookBox(
-                            book: state.recommendedBooks.first);
-                      }
-                      return ReadingBookBox(lastBook: lastBook);
-                    },
+                        /// Reading Box
+                        RecommendBookBox(book: state.recommendedBooks.first),
+                        verticalSpace16,
+                        const CustomerText(
+                          'Gợi ý sách cho bạn',
+                          fontSize: fontSize16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        const RecommendedCarousel(),
+                        verticalSpace8
+                      ],
+                    ),
                   ),
-                  verticalSpace16,
-                  const CustomerText(
-                    'Gợi ý sách cho bạn',
-                    fontSize: fontSize16,
-                    fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          );
+        }
+        return Stack(
+          children: [
+            BackgroundImage(context: context),
+            Backdrop(context: context, percent: percent),
+            SingleChildScrollView(
+              child: SafeArea(
+                child: Container(
+                  padding: const EdgeInsets.only(
+                    top: double16,
+                    left: double16,
+                    right: double16,
                   ),
-                  const RecommendedCarousel(),
-                  verticalSpace8
-                ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BlocBuilder<TabHomeBloc, TabHomeState>(
+                        builder: (context, state) {
+                          return Greeting(user: state.user);
+                        },
+                      ),
+                      verticalSpace32,
+                      const SearchBar(isTextInput: false),
+                      verticalSpace16,
+
+                      /// Reading Box
+                      BlocBuilder<TabHomeBloc, TabHomeState>(
+                        builder: (context, state) {
+                          if (state.isLoading) {
+                            return const CircularProgressIndicator();
+                          }
+                          final lastBook = state.lastBook;
+                          if (lastBook == null) {
+                            return RecommendBookBox(
+                                book: state.recommendedBooks.first);
+                          }
+                          return ReadingBookBox(lastBook: lastBook);
+                        },
+                      ),
+                      verticalSpace16,
+                      const CustomerText(
+                        'Gợi ý sách cho bạn',
+                        fontSize: fontSize16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      const RecommendedCarousel(),
+                      verticalSpace8
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }

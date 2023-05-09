@@ -36,7 +36,24 @@ class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
     emit(state.copyWith(isLoading: true));
 
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token')!;
+    final token = prefs.getString('token');
+
+    /// get RecommendedBooks
+    final list =
+        await _bookRepository.getRecommendedBook(token: token.toString());
+    await prefs.setString('recommendedBooks', json.encode(list));
+    final item = list[0];
+
+    if (token == null) {
+      emit(state.copyWith(
+        isLogin: false,
+        recommendedBooks: list,
+        bookItem: item,
+        isLoading: false,
+      ));
+
+      return;
+    }
 
     // final test = prefs.getString('user');
     // if (test != null) {
@@ -57,11 +74,6 @@ class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
     //   ));
     //   return;
     // }
-
-    /// get RecommendedBooks
-    final list = await _bookRepository.getRecommendedBook(token: token);
-    await prefs.setString('recommendedBooks', json.encode(list));
-    final item = list[0];
 
     /// get Information of Last book which User read
     final lastBook = await _bookRepository.getLastBook(token: token);

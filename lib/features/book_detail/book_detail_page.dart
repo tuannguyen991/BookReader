@@ -5,6 +5,7 @@ import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/features/book_detail/bloc/book_detail_bloc.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_reading_package/user_reading_package.dart';
+import 'package:demo_book_reader/features/login/login_page.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -110,16 +111,19 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                     isGridView: true,
                                   ),
                                   onTap: () {
-                                    final endTime = DateTime.now();
-                                    final duration =
-                                        endTime.difference(_startTime);
-                                    _bloc
-                                        .add(BookDetailHistory(time: duration));
+                                    if (state.isLogin) {
+                                      final endTime = DateTime.now();
+                                      final duration =
+                                          endTime.difference(_startTime);
+                                      _bloc.add(
+                                          BookDetailHistory(time: duration));
+                                    }
 
                                     context.navigateOff(
                                       BookDetailPage(
                                         bookItem: UserBookModel.fromBookModel(
-                                            bookItem),
+                                          bookItem,
+                                        ),
                                       ),
                                     );
                                   },
@@ -193,6 +197,34 @@ class BottomButton extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                     onPressed: () async {
+                      if (!state.isLogin) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text(
+                              'Bạn chưa đăng nhập',
+                            ),
+                            content: const Text(
+                                'Để trải nghiệm trọn vẹn các chức năng, vui lòng đăng nhập'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  context.off();
+                                },
+                                child: const Text('Quay lại'),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  context.off();
+                                  context.navigateOff(const LoginPage());
+                                },
+                                child: const Text('Đăng nhập'),
+                              ),
+                            ],
+                          ),
+                        );
+                        return;
+                      }
                       bloc.add(BookDetailReading(
                           onSuccess: () async {
                             VocsyEpub.setConfig(
@@ -274,6 +306,34 @@ class BottomButton extends StatelessWidget {
                     color: AppColors.primaryColor,
                   ),
                   onPressed: () {
+                    if (!state.isLogin) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text(
+                            'Bạn chưa đăng nhập',
+                          ),
+                          content: const Text(
+                              'Để trải nghiệm trọn vẹn các chức năng, vui lòng đăng nhập'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                context.off();
+                              },
+                              child: const Text('Quay lại'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                context.off();
+                                context.navigateOff(const LoginPage());
+                              },
+                              child: const Text('Đăng nhập'),
+                            ),
+                          ],
+                        ),
+                      );
+                      return;
+                    }
                     context.read<BookDetailBloc>().add(
                           BookDetailFavoriteChange(bookId: bookItem.bookId),
                         );

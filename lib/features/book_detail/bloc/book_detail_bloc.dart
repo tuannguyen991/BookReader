@@ -42,48 +42,57 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     emit(state.copyWith(isLoading: true, isFavorite: false));
 
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token')!;
-
-    UserBookModel bookItem = await _bookRepository.getUserBook(
-      token: token,
-      bookItem: event.bookItem,
-    );
-
-    final user = await _userRepository.getInfor(token: token);
-
-    String? locator;
-
-    if (bookItem.lastLocator != '') {
-      locator =
-          '{"bookId":"${bookItem.bookId}","href":"${bookItem.href}","locations":${bookItem.lastLocator},"readPage":0}';
-    }
+    final token = prefs.getString('token');
 
     // get sameCategoryBook
     final list = await _bookRepository.getSameCategoryBook(
-      token: token,
-      bookItem: bookItem,
+      token: token.toString(),
+      bookItem: event.bookItem,
     );
 
-    final isFavorite = await _bookRepository.getIsFavorite(
-      token: token,
-      bookId: bookItem.bookId,
-    );
+    if (token == null) {
+      emit(state.copyWith(
+        bookItem: event.bookItem,
+        sameCategoryBooks: list,
+        isLogin: false,
+        isLoading: false,
+      ));
+    } else {
+      UserBookModel bookItem = await _bookRepository.getUserBook(
+        token: token,
+        bookItem: event.bookItem,
+      );
 
-    final highLights = await _bookRepository.getHighLights(
-      token: token,
-      bookId: bookItem.bookId,
-    );
+      final user = await _userRepository.getInfor(token: token);
 
-    emit(state.copyWith(
-      user: user,
-      sameCategoryBooks: list,
-      isFavorite: isFavorite,
-      highLights: highLights,
-      bookItem: bookItem,
-      isLoading: false,
-      locatorString: locator,
-      bookId: bookItem.bookId,
-    ));
+      String? locator;
+
+      if (bookItem.lastLocator != '') {
+        locator =
+            '{"bookId":"${bookItem.bookId}","href":"${bookItem.href}","locations":${bookItem.lastLocator},"readPage":0}';
+      }
+
+      final isFavorite = await _bookRepository.getIsFavorite(
+        token: token,
+        bookId: bookItem.bookId,
+      );
+
+      final highLights = await _bookRepository.getHighLights(
+        token: token,
+        bookId: bookItem.bookId,
+      );
+
+      emit(state.copyWith(
+        user: user,
+        sameCategoryBooks: list,
+        isFavorite: isFavorite,
+        highLights: highLights,
+        bookItem: bookItem,
+        isLoading: false,
+        locatorString: locator,
+        bookId: bookItem.bookId,
+      ));
+    }
   }
 
   Future<FutureOr<void>> _onFavoriteChange(

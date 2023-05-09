@@ -10,6 +10,7 @@ class BookDetailState with _$BookDetailState {
     @Default(UserBookModel()) UserBookModel bookItem,
     @Default('') String highLights,
     @Default(true) isLoading,
+    @Default(true) bool isLogin,
     @Default(false) isFavorite,
     @Default(null) String? locatorString,
     @Default('') String bookId,
