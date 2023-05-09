@@ -156,6 +156,8 @@ class _MySfCartesianChartState extends State<MySfCartesianChart> {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       primaryXAxis: DateTimeAxis(
+        intervalType: DateTimeIntervalType.days,
+        dateFormat: DateFormat('dd/MM'),
         majorGridLines: const MajorGridLines(width: 0),
         labelFormat: '{value}',
       ),
@@ -170,9 +172,9 @@ class _MySfCartesianChartState extends State<MySfCartesianChart> {
       trackballBehavior: _trackballBehavior,
       series: <ChartSeries>[
         SplineSeries<UserHistoryModel, DateTime>(
-          dataLabelSettings: const DataLabelSettings(isVisible: true),
+          dataLabelSettings: const DataLabelSettings(isVisible: false),
           color: AppColors.primaryColor,
-          splineType: SplineType.natural,
+          splineType: SplineType.clamped,
           name: 'Reading Time',
           dataSource: _chartData,
           xValueMapper: (UserHistoryModel data, _) => data.date!,
@@ -207,9 +209,10 @@ class UserBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
-            flex: 4,
+            flex: 3,
             child: Image.asset(user.ranking.image),
           ),
+          horizontalSpace8,
           Flexible(
             flex: 9,
             child: Column(
@@ -231,12 +234,16 @@ class UserBox extends StatelessWidget {
                   color: AppColors.titleColor,
                   subColor: AppColors.primaryColor,
                 ),
-                verticalSpace20,
-                CustomerRichText(
-                  text: 'Bạn đã đọc sách được ',
-                  subText: '${user.totalReadingTime} phút',
-                  color: AppColors.titleColor,
-                  subColor: AppColors.primaryColor,
+                verticalSpace8,
+                Row(
+                  children: [
+                    CustomerRichText(
+                      text: 'Bạn đã đọc sách được ',
+                      subText: '${user.totalReadingTime} phút',
+                      color: AppColors.titleColor,
+                      subColor: AppColors.primaryColor,
+                    ),
+                  ],
                 ),
               ],
             ),
