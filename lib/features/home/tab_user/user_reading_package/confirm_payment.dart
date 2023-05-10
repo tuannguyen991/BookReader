@@ -114,7 +114,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                 setState(() {
                   switch (event) {
                     case FlutterZaloPayStatus.cancelled:
-                      payResult = 'User Huỷ Thanh Toán';
+                      payResult = 'Người dùng huỷ thanh toán';
                       break;
                     case FlutterZaloPayStatus.success:
                       payResult = 'Thanh toán thành công';
@@ -130,12 +130,12 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                   }
                 });
                 if ((payResult == 'Thanh toán thất bại') ||
-                    (payResult == 'User Huỷ Thanh Toán')) {
+                    (payResult == 'Người dùng huỷ thanh toán')) {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: CustomerText(payResult),
+                          title: CustomerText(payResult, isEllipsis: false,),
                           icon: const Icon(Icons.warning),
                           iconColor: Colors.red,
                           actionsAlignment: MainAxisAlignment.center,

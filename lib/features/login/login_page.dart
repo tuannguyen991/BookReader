@@ -197,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: const Text(
-                              'Bạn có muốn bỏ qua đăng nhập không',
+                              'Bạn có muốn bỏ qua đăng nhập không?',
                             ),
                             actions: [
                               TextButton(

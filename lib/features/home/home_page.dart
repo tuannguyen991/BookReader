@@ -134,7 +134,8 @@ class _HomePageState extends State<HomePage> {
                     'Bạn chưa đăng nhập',
                   ),
                   content: const Text(
-                      'Để trải nghiệm trọn vẹn các chức năng, vui lòng đăng nhập'),
+                    'Vui lòng Đăng nhập để sử dụng đầy đủ tính năng',
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () {
