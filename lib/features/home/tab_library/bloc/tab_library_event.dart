@@ -16,3 +16,9 @@ class TabLibraryChangeModelShow extends TabLibraryEvent {
 
   TabLibraryChangeModelShow({required this.isGrid});
 }
+
+class TabLibrarySavePdf extends TabLibraryEvent {
+  final String filePath;
+
+  TabLibrarySavePdf({required this.filePath});
+}

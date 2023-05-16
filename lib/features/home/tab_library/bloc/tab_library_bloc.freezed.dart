@@ -20,7 +20,7 @@ mixin _$TabLibraryState {
   int get indexChoice => throw _privateConstructorUsedError;
   List<UserBookModel> get favoriteBooks => throw _privateConstructorUsedError;
   List<UserBookModel> get readBooks => throw _privateConstructorUsedError;
-  List<BookModel> get uploadBooks => throw _privateConstructorUsedError;
+  List<String> get pdfBooks => throw _privateConstructorUsedError;
   bool get isGridShow => throw _privateConstructorUsedError; // just test
   String get url => throw _privateConstructorUsedError;
 
@@ -40,7 +40,7 @@ abstract class $TabLibraryStateCopyWith<$Res> {
       int indexChoice,
       List<UserBookModel> favoriteBooks,
       List<UserBookModel> readBooks,
-      List<BookModel> uploadBooks,
+      List<String> pdfBooks,
       bool isGridShow,
       String url});
 }
@@ -62,7 +62,7 @@ class _$TabLibraryStateCopyWithImpl<$Res, $Val extends TabLibraryState>
     Object? indexChoice = null,
     Object? favoriteBooks = null,
     Object? readBooks = null,
-    Object? uploadBooks = null,
+    Object? pdfBooks = null,
     Object? isGridShow = null,
     Object? url = null,
   }) {
@@ -83,10 +83,10 @@ class _$TabLibraryStateCopyWithImpl<$Res, $Val extends TabLibraryState>
           ? _value.readBooks
           : readBooks // ignore: cast_nullable_to_non_nullable
               as List<UserBookModel>,
-      uploadBooks: null == uploadBooks
-          ? _value.uploadBooks
-          : uploadBooks // ignore: cast_nullable_to_non_nullable
-              as List<BookModel>,
+      pdfBooks: null == pdfBooks
+          ? _value.pdfBooks
+          : pdfBooks // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       isGridShow: null == isGridShow
           ? _value.isGridShow
           : isGridShow // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$$_TabLibraryStateCopyWith<$Res>
       int indexChoice,
       List<UserBookModel> favoriteBooks,
       List<UserBookModel> readBooks,
-      List<BookModel> uploadBooks,
+      List<String> pdfBooks,
       bool isGridShow,
       String url});
 }
@@ -132,7 +132,7 @@ class __$$_TabLibraryStateCopyWithImpl<$Res>
     Object? indexChoice = null,
     Object? favoriteBooks = null,
     Object? readBooks = null,
-    Object? uploadBooks = null,
+    Object? pdfBooks = null,
     Object? isGridShow = null,
     Object? url = null,
   }) {
@@ -153,10 +153,10 @@ class __$$_TabLibraryStateCopyWithImpl<$Res>
           ? _value._readBooks
           : readBooks // ignore: cast_nullable_to_non_nullable
               as List<UserBookModel>,
-      uploadBooks: null == uploadBooks
-          ? _value._uploadBooks
-          : uploadBooks // ignore: cast_nullable_to_non_nullable
-              as List<BookModel>,
+      pdfBooks: null == pdfBooks
+          ? _value._pdfBooks
+          : pdfBooks // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       isGridShow: null == isGridShow
           ? _value.isGridShow
           : isGridShow // ignore: cast_nullable_to_non_nullable
@@ -177,12 +177,12 @@ class _$_TabLibraryState implements _TabLibraryState {
       this.indexChoice = 0,
       final List<UserBookModel> favoriteBooks = const [],
       final List<UserBookModel> readBooks = const [],
-      final List<BookModel> uploadBooks = const [],
+      final List<String> pdfBooks = const [],
       this.isGridShow = false,
       this.url = ''})
       : _favoriteBooks = favoriteBooks,
         _readBooks = readBooks,
-        _uploadBooks = uploadBooks;
+        _pdfBooks = pdfBooks;
 
   @override
   @JsonKey()
@@ -208,13 +208,13 @@ class _$_TabLibraryState implements _TabLibraryState {
     return EqualUnmodifiableListView(_readBooks);
   }
 
-  final List<BookModel> _uploadBooks;
+  final List<String> _pdfBooks;
   @override
   @JsonKey()
-  List<BookModel> get uploadBooks {
-    if (_uploadBooks is EqualUnmodifiableListView) return _uploadBooks;
+  List<String> get pdfBooks {
+    if (_pdfBooks is EqualUnmodifiableListView) return _pdfBooks;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_uploadBooks);
+    return EqualUnmodifiableListView(_pdfBooks);
   }
 
   @override
@@ -227,7 +227,7 @@ class _$_TabLibraryState implements _TabLibraryState {
 
   @override
   String toString() {
-    return 'TabLibraryState(isLoading: $isLoading, indexChoice: $indexChoice, favoriteBooks: $favoriteBooks, readBooks: $readBooks, uploadBooks: $uploadBooks, isGridShow: $isGridShow, url: $url)';
+    return 'TabLibraryState(isLoading: $isLoading, indexChoice: $indexChoice, favoriteBooks: $favoriteBooks, readBooks: $readBooks, pdfBooks: $pdfBooks, isGridShow: $isGridShow, url: $url)';
   }
 
   @override
@@ -243,8 +243,7 @@ class _$_TabLibraryState implements _TabLibraryState {
                 .equals(other._favoriteBooks, _favoriteBooks) &&
             const DeepCollectionEquality()
                 .equals(other._readBooks, _readBooks) &&
-            const DeepCollectionEquality()
-                .equals(other._uploadBooks, _uploadBooks) &&
+            const DeepCollectionEquality().equals(other._pdfBooks, _pdfBooks) &&
             (identical(other.isGridShow, isGridShow) ||
                 other.isGridShow == isGridShow) &&
             (identical(other.url, url) || other.url == url));
@@ -257,7 +256,7 @@ class _$_TabLibraryState implements _TabLibraryState {
       indexChoice,
       const DeepCollectionEquality().hash(_favoriteBooks),
       const DeepCollectionEquality().hash(_readBooks),
-      const DeepCollectionEquality().hash(_uploadBooks),
+      const DeepCollectionEquality().hash(_pdfBooks),
       isGridShow,
       url);
 
@@ -274,7 +273,7 @@ abstract class _TabLibraryState implements TabLibraryState {
       final int indexChoice,
       final List<UserBookModel> favoriteBooks,
       final List<UserBookModel> readBooks,
-      final List<BookModel> uploadBooks,
+      final List<String> pdfBooks,
       final bool isGridShow,
       final String url}) = _$_TabLibraryState;
 
@@ -287,7 +286,7 @@ abstract class _TabLibraryState implements TabLibraryState {
   @override
   List<UserBookModel> get readBooks;
   @override
-  List<BookModel> get uploadBooks;
+  List<String> get pdfBooks;
   @override
   bool get isGridShow;
   @override // just test

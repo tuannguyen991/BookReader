@@ -54,6 +54,9 @@ dependencies:
   flutter_zalopay_sdk: ^0.1.13
   sprintf: ^7.0.0
   flutter_local_notifications: ^13.0.0
+  syncfusion_flutter_pdfviewer: ^21.1.35
+  syncfusion_flutter_pdf: ^21.1.35
+  path: ^1.8.2
   
 dev_dependencies:
   flutter_test:
