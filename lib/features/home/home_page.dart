@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startTimer() {
-    const time = Duration(seconds: 10);
+    const time = Duration(minutes: 1);
     _timer = Timer.periodic(time, _showNotification);
   }
 
