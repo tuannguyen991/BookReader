@@ -106,7 +106,7 @@ class _ReadingPackageState extends State<ReadingPackage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomerText(
-                          'Còn ${widget.endDate?.difference(DateTime.now()).inDays} ngày',
+                          'Còn ${widget.endDate!.difference(DateTime.now()).inDays + 1} ngày',
                           color: Colors.red,
                           fontWeight: FontWeight.bold),
                       CustomerText(
