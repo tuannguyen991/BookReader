@@ -20,13 +20,8 @@ UserBookModel _$UserBookModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserBookModel {
-  String get bookId => throw _privateConstructorUsedError;
-  int get numberOfReadPages => throw _privateConstructorUsedError;
-  DateTime? get lastRead => throw _privateConstructorUsedError;
-  double get rating => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get lastLocator => throw _privateConstructorUsedError;
-  String get href => throw _privateConstructorUsedError;
   String? get subTitle => throw _privateConstructorUsedError;
   int get numberOfPages => throw _privateConstructorUsedError;
   String get epubLink => throw _privateConstructorUsedError;
@@ -35,6 +30,7 @@ mixin _$UserBookModel {
   String get description => throw _privateConstructorUsedError;
   List<AuthorModel> get authors => throw _privateConstructorUsedError;
   List<CategoryModel> get categories => throw _privateConstructorUsedError;
+  UserLibraryModel? get userLibrary => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,13 +45,8 @@ abstract class $UserBookModelCopyWith<$Res> {
       _$UserBookModelCopyWithImpl<$Res, UserBookModel>;
   @useResult
   $Res call(
-      {String bookId,
-      int numberOfReadPages,
-      DateTime? lastRead,
-      double rating,
+      {String id,
       String title,
-      String lastLocator,
-      String href,
       String? subTitle,
       int numberOfPages,
       String epubLink,
@@ -63,7 +54,10 @@ abstract class $UserBookModelCopyWith<$Res> {
       double averageRating,
       String description,
       List<AuthorModel> authors,
-      List<CategoryModel> categories});
+      List<CategoryModel> categories,
+      UserLibraryModel? userLibrary});
+
+  $UserLibraryModelCopyWith<$Res>? get userLibrary;
 }
 
 /// @nodoc
@@ -79,13 +73,8 @@ class _$UserBookModelCopyWithImpl<$Res, $Val extends UserBookModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookId = null,
-    Object? numberOfReadPages = null,
-    Object? lastRead = freezed,
-    Object? rating = null,
+    Object? id = null,
     Object? title = null,
-    Object? lastLocator = null,
-    Object? href = null,
     Object? subTitle = freezed,
     Object? numberOfPages = null,
     Object? epubLink = null,
@@ -94,35 +83,16 @@ class _$UserBookModelCopyWithImpl<$Res, $Val extends UserBookModel>
     Object? description = null,
     Object? authors = null,
     Object? categories = null,
+    Object? userLibrary = freezed,
   }) {
     return _then(_value.copyWith(
-      bookId: null == bookId
-          ? _value.bookId
-          : bookId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      numberOfReadPages: null == numberOfReadPages
-          ? _value.numberOfReadPages
-          : numberOfReadPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastRead: freezed == lastRead
-          ? _value.lastRead
-          : lastRead // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastLocator: null == lastLocator
-          ? _value.lastLocator
-          : lastLocator // ignore: cast_nullable_to_non_nullable
-              as String,
-      href: null == href
-          ? _value.href
-          : href // ignore: cast_nullable_to_non_nullable
               as String,
       subTitle: freezed == subTitle
           ? _value.subTitle
@@ -156,7 +126,23 @@ class _$UserBookModelCopyWithImpl<$Res, $Val extends UserBookModel>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
+      userLibrary: freezed == userLibrary
+          ? _value.userLibrary
+          : userLibrary // ignore: cast_nullable_to_non_nullable
+              as UserLibraryModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserLibraryModelCopyWith<$Res>? get userLibrary {
+    if (_value.userLibrary == null) {
+      return null;
+    }
+
+    return $UserLibraryModelCopyWith<$Res>(_value.userLibrary!, (value) {
+      return _then(_value.copyWith(userLibrary: value) as $Val);
+    });
   }
 }
 
@@ -169,13 +155,8 @@ abstract class _$$_UserBookModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String bookId,
-      int numberOfReadPages,
-      DateTime? lastRead,
-      double rating,
+      {String id,
       String title,
-      String lastLocator,
-      String href,
       String? subTitle,
       int numberOfPages,
       String epubLink,
@@ -183,7 +164,11 @@ abstract class _$$_UserBookModelCopyWith<$Res>
       double averageRating,
       String description,
       List<AuthorModel> authors,
-      List<CategoryModel> categories});
+      List<CategoryModel> categories,
+      UserLibraryModel? userLibrary});
+
+  @override
+  $UserLibraryModelCopyWith<$Res>? get userLibrary;
 }
 
 /// @nodoc
@@ -197,13 +182,8 @@ class __$$_UserBookModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookId = null,
-    Object? numberOfReadPages = null,
-    Object? lastRead = freezed,
-    Object? rating = null,
+    Object? id = null,
     Object? title = null,
-    Object? lastLocator = null,
-    Object? href = null,
     Object? subTitle = freezed,
     Object? numberOfPages = null,
     Object? epubLink = null,
@@ -212,35 +192,16 @@ class __$$_UserBookModelCopyWithImpl<$Res>
     Object? description = null,
     Object? authors = null,
     Object? categories = null,
+    Object? userLibrary = freezed,
   }) {
     return _then(_$_UserBookModel(
-      bookId: null == bookId
-          ? _value.bookId
-          : bookId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      numberOfReadPages: null == numberOfReadPages
-          ? _value.numberOfReadPages
-          : numberOfReadPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastRead: freezed == lastRead
-          ? _value.lastRead
-          : lastRead // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastLocator: null == lastLocator
-          ? _value.lastLocator
-          : lastLocator // ignore: cast_nullable_to_non_nullable
-              as String,
-      href: null == href
-          ? _value.href
-          : href // ignore: cast_nullable_to_non_nullable
               as String,
       subTitle: freezed == subTitle
           ? _value.subTitle
@@ -274,6 +235,10 @@ class __$$_UserBookModelCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<CategoryModel>,
+      userLibrary: freezed == userLibrary
+          ? _value.userLibrary
+          : userLibrary // ignore: cast_nullable_to_non_nullable
+              as UserLibraryModel?,
     ));
   }
 }
@@ -282,13 +247,8 @@ class __$$_UserBookModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserBookModel implements _UserBookModel {
   const _$_UserBookModel(
-      {this.bookId = '',
-      this.numberOfReadPages = 0,
-      this.lastRead,
-      this.rating = 0,
+      {this.id = '',
       this.title = 'No title',
-      this.lastLocator = '',
-      this.href = '',
       this.subTitle,
       this.numberOfPages = 0,
       this.epubLink = '',
@@ -297,7 +257,8 @@ class _$_UserBookModel implements _UserBookModel {
       this.averageRating = 0,
       this.description = 'No description',
       final List<AuthorModel> authors = const [],
-      final List<CategoryModel> categories = const []})
+      final List<CategoryModel> categories = const [],
+      this.userLibrary})
       : _authors = authors,
         _categories = categories;
 
@@ -306,24 +267,10 @@ class _$_UserBookModel implements _UserBookModel {
 
   @override
   @JsonKey()
-  final String bookId;
-  @override
-  @JsonKey()
-  final int numberOfReadPages;
-  @override
-  final DateTime? lastRead;
-  @override
-  @JsonKey()
-  final double rating;
+  final String id;
   @override
   @JsonKey()
   final String title;
-  @override
-  @JsonKey()
-  final String lastLocator;
-  @override
-  @JsonKey()
-  final String href;
   @override
   final String? subTitle;
   @override
@@ -360,8 +307,11 @@ class _$_UserBookModel implements _UserBookModel {
   }
 
   @override
+  final UserLibraryModel? userLibrary;
+
+  @override
   String toString() {
-    return 'UserBookModel(bookId: $bookId, numberOfReadPages: $numberOfReadPages, lastRead: $lastRead, rating: $rating, title: $title, lastLocator: $lastLocator, href: $href, subTitle: $subTitle, numberOfPages: $numberOfPages, epubLink: $epubLink, imageLink: $imageLink, averageRating: $averageRating, description: $description, authors: $authors, categories: $categories)';
+    return 'UserBookModel(id: $id, title: $title, subTitle: $subTitle, numberOfPages: $numberOfPages, epubLink: $epubLink, imageLink: $imageLink, averageRating: $averageRating, description: $description, authors: $authors, categories: $categories, userLibrary: $userLibrary)';
   }
 
   @override
@@ -369,16 +319,8 @@ class _$_UserBookModel implements _UserBookModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserBookModel &&
-            (identical(other.bookId, bookId) || other.bookId == bookId) &&
-            (identical(other.numberOfReadPages, numberOfReadPages) ||
-                other.numberOfReadPages == numberOfReadPages) &&
-            (identical(other.lastRead, lastRead) ||
-                other.lastRead == lastRead) &&
-            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.lastLocator, lastLocator) ||
-                other.lastLocator == lastLocator) &&
-            (identical(other.href, href) || other.href == href) &&
             (identical(other.subTitle, subTitle) ||
                 other.subTitle == subTitle) &&
             (identical(other.numberOfPages, numberOfPages) ||
@@ -393,20 +335,17 @@ class _$_UserBookModel implements _UserBookModel {
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._authors, _authors) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            (identical(other.userLibrary, userLibrary) ||
+                other.userLibrary == userLibrary));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      bookId,
-      numberOfReadPages,
-      lastRead,
-      rating,
+      id,
       title,
-      lastLocator,
-      href,
       subTitle,
       numberOfPages,
       epubLink,
@@ -414,7 +353,8 @@ class _$_UserBookModel implements _UserBookModel {
       averageRating,
       description,
       const DeepCollectionEquality().hash(_authors),
-      const DeepCollectionEquality().hash(_categories));
+      const DeepCollectionEquality().hash(_categories),
+      userLibrary);
 
   @JsonKey(ignore: true)
   @override
@@ -432,13 +372,8 @@ class _$_UserBookModel implements _UserBookModel {
 
 abstract class _UserBookModel implements UserBookModel {
   const factory _UserBookModel(
-      {final String bookId,
-      final int numberOfReadPages,
-      final DateTime? lastRead,
-      final double rating,
+      {final String id,
       final String title,
-      final String lastLocator,
-      final String href,
       final String? subTitle,
       final int numberOfPages,
       final String epubLink,
@@ -446,25 +381,16 @@ abstract class _UserBookModel implements UserBookModel {
       final double averageRating,
       final String description,
       final List<AuthorModel> authors,
-      final List<CategoryModel> categories}) = _$_UserBookModel;
+      final List<CategoryModel> categories,
+      final UserLibraryModel? userLibrary}) = _$_UserBookModel;
 
   factory _UserBookModel.fromJson(Map<String, dynamic> json) =
       _$_UserBookModel.fromJson;
 
   @override
-  String get bookId;
-  @override
-  int get numberOfReadPages;
-  @override
-  DateTime? get lastRead;
-  @override
-  double get rating;
+  String get id;
   @override
   String get title;
-  @override
-  String get lastLocator;
-  @override
-  String get href;
   @override
   String? get subTitle;
   @override
@@ -481,6 +407,8 @@ abstract class _UserBookModel implements UserBookModel {
   List<AuthorModel> get authors;
   @override
   List<CategoryModel> get categories;
+  @override
+  UserLibraryModel? get userLibrary;
   @override
   @JsonKey(ignore: true)
   _$$_UserBookModelCopyWith<_$_UserBookModel> get copyWith =>

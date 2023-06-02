@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
 enum Ranking {
-  @JsonValue(1)
+  @JsonValue(0)
   gold,
-  @JsonValue(2)
+  @JsonValue(1)
   silver,
-  @JsonValue(3)
+  @JsonValue(2)
   bronze
 }

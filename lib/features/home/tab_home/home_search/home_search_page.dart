@@ -7,7 +7,6 @@ import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/features/category_detail/category_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_home/home_search/bloc/home_search_bloc.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
@@ -139,13 +138,10 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                         final bookItem = listBook[index];
                         return InkWell(
                           onTap: () {
-                            context.navigateTo(BookDetailPage(
-                                bookItem:
-                                    UserBookModel.fromBookModel(bookItem)));
+                            context
+                                .navigateTo(BookDetailPage(bookItem: bookItem));
                           },
-                          child: BookItem(
-                              bookItem: UserBookModel.fromBookModel(bookItem),
-                              isGridView: true),
+                          child: BookItem(bookItem: bookItem, isGridView: true),
                         );
                       },
                     ),
@@ -323,17 +319,14 @@ class MySearchDelegate extends SearchDelegate {
                 listRecommendedByName.length,
                 (index) {
                   final item = listRecommendedByName[index];
-                  if (item is BookModel) {
+                  if (item is UserBookModel) {
                     return InkWell(
                       onTap: () {
-                        context.navigateTo(BookDetailPage(
-                            bookItem: UserBookModel.fromBookModel(item)));
+                        context.navigateTo(BookDetailPage(bookItem: item));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: double16),
-                        child: BookItem(
-                            bookItem: UserBookModel.fromBookModel(item),
-                            isLibrary: true),
+                        child: BookItem(bookItem: item, isLibrary: true),
                       ),
                     );
                   }

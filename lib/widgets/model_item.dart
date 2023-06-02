@@ -32,16 +32,27 @@ class BookItem extends StatelessWidget {
     late final SizedBox sizedBox;
     late final int maxLines;
     late final double fontSize;
+    late final bool isRead;
 
     double percent;
 
-    if (bookItem.numberOfReadPages < 0) {
+    if (bookItem.userLibrary == null) {
+      isRead = false;
       percent = 0;
-    } else if (bookItem.numberOfReadPages > bookItem.numberOfPages) {
-      percent = 1;
     } else {
-      percent = bookItem.numberOfReadPages / bookItem.numberOfPages;
-      if (percent < 0.01) percent = 0.01;
+      if (bookItem.userLibrary!.numberOfReadPages <= 0) {
+        percent = 0;
+        isRead = false;
+      } else if (bookItem.userLibrary!.numberOfReadPages >
+          bookItem.numberOfPages) {
+        percent = 1;
+        isRead = true;
+      } else {
+        isRead = true;
+        percent =
+            bookItem.userLibrary!.numberOfReadPages / bookItem.numberOfPages;
+        if (percent < 0.01) percent = 0.01;
+      }
     }
 
     if (isLibrary && isGridView) {
@@ -53,7 +64,7 @@ class BookItem extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 CustomerClipRRect(image: bookItem.imageLink),
-                if (bookItem.numberOfReadPages != 0)
+                if (isRead)
                   Padding(
                     padding: const EdgeInsets.only(bottom: double8),
                     child: Align(
@@ -82,7 +93,7 @@ class BookItem extends StatelessWidget {
                   bookItem.authors.first.name,
                   color: AppColors.secondaryColor,
                 ),
-                StarRating(rating: bookItem.averageRating),
+                // StarRating(rating: bookItem.averageRating),
               ],
             ),
           ),
@@ -148,9 +159,9 @@ class BookItem extends StatelessWidget {
                   color: AppColors.secondaryColor,
                 );
               }),
-              verticalSpace4,
-              if (!isGridView && !isHistory)
-                StarRating(rating: bookItem.averageRating),
+              // verticalSpace4,
+              // if (!isGridView && !isHistory)
+              //   StarRating(rating: bookItem.averageRating),
               verticalSpace4,
               if (isBookDetail)
                 Row(
@@ -169,7 +180,7 @@ class BookItem extends StatelessWidget {
                 ),
               if (!isGridView &&
                   !isHistory &&
-                  (bookItem.numberOfReadPages != 0)) ...[
+                  (isRead)) ...[
                 // verticalSpace4,
                 // ask toward until meet ancestor has fixed size
                 CustomerLinearPercentIndicator(

@@ -61,7 +61,7 @@ class UpdateInforBloc extends Bloc<UpdateInforEvent, UpdateInforState> {
     final token = prefs.getString('token')!;
 
     // get Information of User
-    final user = await _userRepository.getInfor(token: token);
+    final user = await _userRepository.getInforWithCurrentPackage(token: token);
 
     emit(state.copyWith(
       user: user,

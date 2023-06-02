@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'category_detail_bloc.freezed.dart';
 part 'category_detail_event.dart';
@@ -26,7 +27,11 @@ class CategoryDetailBloc
     CategoryDetailLoaded event,
     Emitter<CategoryDetailState> emit,
   ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
     final books = await _bookRepository.getBookByCategory(
+      token: token ?? 'null',
       categoryId: event.categoryId,
     );
 

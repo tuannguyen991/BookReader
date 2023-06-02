@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BookDetailState {
   UserModel get user => throw _privateConstructorUsedError;
-  List<BookModel> get sameCategoryBooks => throw _privateConstructorUsedError;
+  List<UserBookModel> get sameCategoryBooks =>
+      throw _privateConstructorUsedError;
   UserBookModel get bookItem => throw _privateConstructorUsedError;
   String get highLights => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
@@ -39,7 +40,7 @@ abstract class $BookDetailStateCopyWith<$Res> {
   @useResult
   $Res call(
       {UserModel user,
-      List<BookModel> sameCategoryBooks,
+      List<UserBookModel> sameCategoryBooks,
       UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
@@ -83,7 +84,7 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
       sameCategoryBooks: null == sameCategoryBooks
           ? _value.sameCategoryBooks
           : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
-              as List<BookModel>,
+              as List<UserBookModel>,
       bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
@@ -142,7 +143,7 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
   @useResult
   $Res call(
       {UserModel user,
-      List<BookModel> sameCategoryBooks,
+      List<UserBookModel> sameCategoryBooks,
       UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
@@ -186,7 +187,7 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
       sameCategoryBooks: null == sameCategoryBooks
           ? _value._sameCategoryBooks
           : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
-              as List<BookModel>,
+              as List<UserBookModel>,
       bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
@@ -218,7 +219,7 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
 class _$_BookDetailState implements _BookDetailState {
   const _$_BookDetailState(
       {this.user = const UserModel(),
-      final List<BookModel> sameCategoryBooks = const [],
+      final List<UserBookModel> sameCategoryBooks = const [],
       this.bookItem = const UserBookModel(),
       this.highLights = '',
       this.isLoading = true,
@@ -231,10 +232,10 @@ class _$_BookDetailState implements _BookDetailState {
   @override
   @JsonKey()
   final UserModel user;
-  final List<BookModel> _sameCategoryBooks;
+  final List<UserBookModel> _sameCategoryBooks;
   @override
   @JsonKey()
-  List<BookModel> get sameCategoryBooks {
+  List<UserBookModel> get sameCategoryBooks {
     if (_sameCategoryBooks is EqualUnmodifiableListView)
       return _sameCategoryBooks;
     // ignore: implicit_dynamic_type
@@ -312,7 +313,7 @@ class _$_BookDetailState implements _BookDetailState {
 abstract class _BookDetailState implements BookDetailState {
   const factory _BookDetailState(
       {final UserModel user,
-      final List<BookModel> sameCategoryBooks,
+      final List<UserBookModel> sameCategoryBooks,
       final UserBookModel bookItem,
       final String highLights,
       final dynamic isLoading,
@@ -324,7 +325,7 @@ abstract class _BookDetailState implements BookDetailState {
   @override
   UserModel get user;
   @override
-  List<BookModel> get sameCategoryBooks;
+  List<UserBookModel> get sameCategoryBooks;
   @override
   UserBookModel get bookItem;
   @override

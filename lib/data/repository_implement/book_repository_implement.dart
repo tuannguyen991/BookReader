@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/high_light/high_light_notification/high_light_notification_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:http/http.dart' as http;
@@ -10,22 +9,9 @@ import 'package:intl/intl.dart';
 
 class BookRepositoryImplement implements BookRepository {
   @override
-  Future<void> addUploadBook(
-      {required String token, required BookModel bookItem}) {
-    // TODO: implement addUploadBook
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> deleteHistory({required String token, required String name}) {
-    // TODO: implement deleteHistory
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<BookModel>> getBooksByName(
+  Future<List<UserBookModel>> getBooksByName(
       {required String token, required String name}) async {
-    const servicePath = '';
+    var servicePath = '/by-name/$token';
 
     final uri = Uri.https(
       Remote.authority,
@@ -41,8 +27,9 @@ class BookRepositoryImplement implements BookRepository {
     if (response.statusCode == 200) {
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
 
-      final books =
-          parsed.map<BookModel>((json) => BookModel.fromJson(json)).toList();
+      final books = parsed
+          .map<UserBookModel>((json) => UserBookModel.fromJson(json))
+          .toList();
       return books;
     }
 
@@ -82,30 +69,6 @@ class BookRepositoryImplement implements BookRepository {
       'J. K. Rowling',
       'Stronger',
     ];
-  }
-
-  @override
-  Future<bool> getIsFavorite(
-      {required String token, required String bookId}) async {
-    var servicePath = '/favorite/$token/$bookId';
-
-    final uri = Uri.https(
-      Remote.authority,
-      '${Remote.pathUsers}$servicePath',
-    );
-
-    final response = await http.get(
-      uri,
-      headers: {'Content-Type': 'application/json'},
-    );
-
-    if (response.statusCode == 200) {
-      final result = response.body.toLowerCase() == 'true';
-
-      return result;
-    }
-
-    throw Exception('');
   }
 
   @override
@@ -151,13 +114,6 @@ class BookRepositoryImplement implements BookRepository {
     }
 
     throw Exception('');
-  }
-
-  @override
-  Future<UserBookModel?> getLastBook({required String token}) async {
-    final userBooks = await getReadBook(token: token);
-    if (userBooks.isEmpty) return null;
-    return userBooks.last;
   }
 
   @override
@@ -215,64 +171,9 @@ class BookRepositoryImplement implements BookRepository {
   }
 
   @override
-  Future<List<BookModel>> getRecommendedBook({required String token}) async {
-    const servicePath = '';
-
-    final uri = Uri.https(
-      Remote.authority,
-      '${Remote.pathBooks}$servicePath',
-      {'MaxResultCount': '3'},
-    );
-
-    final response = await http.get(
-      uri,
-      headers: {'Content-Type': 'application/json'},
-    );
-
-    if (response.statusCode == 200) {
-      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-
-      final books =
-          parsed.map<BookModel>((json) => BookModel.fromJson(json)).toList();
-      return books;
-    }
-
-    throw Exception('');
-  }
-
-  @override
-  Future<List<BookModel>> getSameCategoryBook(
-      {required String token, required UserBookModel bookItem}) async {
-    var servicePath = '/by-category/${bookItem.categories.first.id}';
-
-    final uri = Uri.https(
-      Remote.authority,
-      '${Remote.pathBooks}$servicePath',
-    );
-
-    final response = await http.get(
-      uri,
-      headers: {'Content-Type': 'application/json'},
-    );
-
-    if (response.statusCode == 200) {
-      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-
-      final books = parsed
-          .map<BookModel>((json) => BookModel.fromJson(json))
-          .toList() as List<BookModel>;
-
-      books.removeWhere((element) => element.id == bookItem.bookId);
-      return books;
-    }
-
-    throw Exception('');
-  }
-
-  @override
   Future<UserBookModel> getUserBook(
       {required String token, required UserBookModel bookItem}) async {
-    var servicePath = '/library-book/$token/${bookItem.bookId}';
+    var servicePath = '/library-book/$token/${bookItem.id}';
 
     final uri = Uri.https(
       Remote.authority,
@@ -294,35 +195,8 @@ class BookRepositoryImplement implements BookRepository {
   }
 
   @override
-  Future<List<BookModel>> getTopBook({required String token}) async {
-    const servicePath = '';
-
-    final uri = Uri.https(
-      Remote.authority,
-      '${Remote.pathBooks}$servicePath',
-      {'MaxResultCount': '6'},
-    );
-
-    final response = await http.get(
-      uri,
-      headers: {'Content-Type': 'application/json'},
-    );
-
-    if (response.statusCode == 200) {
-      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-
-      final books =
-          parsed.map<BookModel>((json) => BookModel.fromJson(json)).toList();
-      return books;
-    }
-
-    throw Exception('');
-  }
-
-  @override
-  Future<List<UserBookModel>> getBookByCategory(
-      {required String categoryId}) async {
-    var servicePath = '/by-category/$categoryId';
+  Future<List<UserBookModel>> getTopBook({required String token}) async {
+    var servicePath = '/top-books/$token';
 
     final uri = Uri.https(
       Remote.authority,
@@ -338,8 +212,7 @@ class BookRepositoryImplement implements BookRepository {
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
 
       final books = parsed
-          .map<UserBookModel>(
-              (json) => UserBookModel.fromBookModel(BookModel.fromJson(json)))
+          .map<UserBookModel>((json) => UserBookModel.fromJson(json))
           .toList();
       return books;
     }
@@ -348,9 +221,11 @@ class BookRepositoryImplement implements BookRepository {
   }
 
   @override
-  Future<List<UserBookModel>> getBookByAuthor(
-      {required String authorId}) async {
-    var servicePath = '/by-author/$authorId';
+  Future<List<UserBookModel>> getBookByCategory({
+    required String token,
+    required String categoryId,
+  }) async {
+    var servicePath = '/by-category/$token/$categoryId';
 
     final uri = Uri.https(
       Remote.authority,
@@ -366,8 +241,7 @@ class BookRepositoryImplement implements BookRepository {
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
 
       final books = parsed
-          .map<UserBookModel>(
-              (json) => UserBookModel.fromBookModel(BookModel.fromJson(json)))
+          .map<UserBookModel>((json) => UserBookModel.fromJson(json))
           .toList();
       return books;
     }
@@ -376,9 +250,32 @@ class BookRepositoryImplement implements BookRepository {
   }
 
   @override
-  Future<List<BookModel>> getUploadBooks({required String token}) {
-    // TODO: implement getUploadBooks
-    throw UnimplementedError();
+  Future<List<UserBookModel>> getBookByAuthor({
+    required String token,
+    required String authorId,
+  }) async {
+    var servicePath = '/by-author/$token/$authorId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathBooks}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final books = parsed
+          .map<UserBookModel>((json) => UserBookModel.fromJson(json))
+          .toList();
+      return books;
+    }
+
+    throw Exception('');
   }
 
   @override
@@ -519,10 +416,6 @@ class BookRepositoryImplement implements BookRepository {
     );
 
     if (response.statusCode == 200) {
-      // final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-
-      // final highLights =
-      //     parsed.map<HighLightModel>((json) => BookModel.fromJson(json)).toList();
       return response.body;
     }
 

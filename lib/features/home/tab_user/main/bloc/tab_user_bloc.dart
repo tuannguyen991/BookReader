@@ -40,7 +40,7 @@ class TabUserBloc extends Bloc<TabUserEvent, TabUserState> {
     emit(state.copyWith(readBooks: readBooks));
 
     // get Information of User
-    final user = await _userRepository.getInfor(token: token);
+    final user = await _userRepository.getInforWithCurrentPackage(token: token);
 
     emit(state.copyWith(
       user: user,

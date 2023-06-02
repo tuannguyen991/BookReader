@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 class AuthorRepositoryImplement implements AuthorRepository {
   @override
   Future<List<AuthorModel>> getAuthorsByName({
-    required String token,
     required String name,
   }) async {
     const servicePath = '';
@@ -37,7 +36,7 @@ class AuthorRepositoryImplement implements AuthorRepository {
   }
 
   @override
-  Future<List<AuthorModel>> getAuthors({required String token}) async {
+  Future<List<AuthorModel>> getAuthors() async {
     const servicePath = '';
 
     final uri = Uri.https(

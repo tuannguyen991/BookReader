@@ -19,7 +19,7 @@ mixin _$HomeSearchState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<String> get history => throw _privateConstructorUsedError;
   List<CategoryModel> get listCategory => throw _privateConstructorUsedError;
-  List<BookModel> get listBook => throw _privateConstructorUsedError;
+  List<UserBookModel> get listBook => throw _privateConstructorUsedError;
   List<AuthorModel> get listAuthor => throw _privateConstructorUsedError;
   List<dynamic> get listRecommendedByName => throw _privateConstructorUsedError;
 
@@ -38,7 +38,7 @@ abstract class $HomeSearchStateCopyWith<$Res> {
       {bool isLoading,
       List<String> history,
       List<CategoryModel> listCategory,
-      List<BookModel> listBook,
+      List<UserBookModel> listBook,
       List<AuthorModel> listAuthor,
       List<dynamic> listRecommendedByName});
 }
@@ -79,7 +79,7 @@ class _$HomeSearchStateCopyWithImpl<$Res, $Val extends HomeSearchState>
       listBook: null == listBook
           ? _value.listBook
           : listBook // ignore: cast_nullable_to_non_nullable
-              as List<BookModel>,
+              as List<UserBookModel>,
       listAuthor: null == listAuthor
           ? _value.listAuthor
           : listAuthor // ignore: cast_nullable_to_non_nullable
@@ -104,7 +104,7 @@ abstract class _$$_HomeSearchStateCopyWith<$Res>
       {bool isLoading,
       List<String> history,
       List<CategoryModel> listCategory,
-      List<BookModel> listBook,
+      List<UserBookModel> listBook,
       List<AuthorModel> listAuthor,
       List<dynamic> listRecommendedByName});
 }
@@ -143,7 +143,7 @@ class __$$_HomeSearchStateCopyWithImpl<$Res>
       listBook: null == listBook
           ? _value._listBook
           : listBook // ignore: cast_nullable_to_non_nullable
-              as List<BookModel>,
+              as List<UserBookModel>,
       listAuthor: null == listAuthor
           ? _value._listAuthor
           : listAuthor // ignore: cast_nullable_to_non_nullable
@@ -163,7 +163,7 @@ class _$_HomeSearchState implements _HomeSearchState {
       {this.isLoading = true,
       final List<String> history = const [],
       final List<CategoryModel> listCategory = const [],
-      final List<BookModel> listBook = const [],
+      final List<UserBookModel> listBook = const [],
       final List<AuthorModel> listAuthor = const [],
       final List<dynamic> listRecommendedByName = const []})
       : _history = history,
@@ -193,10 +193,10 @@ class _$_HomeSearchState implements _HomeSearchState {
     return EqualUnmodifiableListView(_listCategory);
   }
 
-  final List<BookModel> _listBook;
+  final List<UserBookModel> _listBook;
   @override
   @JsonKey()
-  List<BookModel> get listBook {
+  List<UserBookModel> get listBook {
     if (_listBook is EqualUnmodifiableListView) return _listBook;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_listBook);
@@ -265,7 +265,7 @@ abstract class _HomeSearchState implements HomeSearchState {
       {final bool isLoading,
       final List<String> history,
       final List<CategoryModel> listCategory,
-      final List<BookModel> listBook,
+      final List<UserBookModel> listBook,
       final List<AuthorModel> listAuthor,
       final List<dynamic> listRecommendedByName}) = _$_HomeSearchState;
 
@@ -276,7 +276,7 @@ abstract class _HomeSearchState implements HomeSearchState {
   @override
   List<CategoryModel> get listCategory;
   @override
-  List<BookModel> get listBook;
+  List<UserBookModel> get listBook;
   @override
   List<AuthorModel> get listAuthor;
   @override

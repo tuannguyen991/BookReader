@@ -8,15 +8,8 @@ part of 'user_book_model.dart';
 
 _$_UserBookModel _$$_UserBookModelFromJson(Map<String, dynamic> json) =>
     _$_UserBookModel(
-      bookId: json['bookId'] as String? ?? '',
-      numberOfReadPages: json['numberOfReadPages'] as int? ?? 0,
-      lastRead: json['lastRead'] == null
-          ? null
-          : DateTime.parse(json['lastRead'] as String),
-      rating: (json['rating'] as num?)?.toDouble() ?? 0,
+      id: json['id'] as String? ?? '',
       title: json['title'] as String? ?? 'No title',
-      lastLocator: json['lastLocator'] as String? ?? '',
-      href: json['href'] as String? ?? '',
       subTitle: json['subTitle'] as String?,
       numberOfPages: json['numberOfPages'] as int? ?? 0,
       epubLink: json['epubLink'] as String? ?? '',
@@ -32,17 +25,16 @@ _$_UserBookModel _$$_UserBookModelFromJson(Map<String, dynamic> json) =>
               ?.map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      userLibrary: json['userLibrary'] == null
+          ? null
+          : UserLibraryModel.fromJson(
+              json['userLibrary'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserBookModelToJson(_$_UserBookModel instance) =>
     <String, dynamic>{
-      'bookId': instance.bookId,
-      'numberOfReadPages': instance.numberOfReadPages,
-      'lastRead': instance.lastRead?.toIso8601String(),
-      'rating': instance.rating,
+      'id': instance.id,
       'title': instance.title,
-      'lastLocator': instance.lastLocator,
-      'href': instance.href,
       'subTitle': instance.subTitle,
       'numberOfPages': instance.numberOfPages,
       'epubLink': instance.epubLink,
@@ -51,4 +43,5 @@ Map<String, dynamic> _$$_UserBookModelToJson(_$_UserBookModel instance) =>
       'description': instance.description,
       'authors': instance.authors,
       'categories': instance.categories,
+      'userLibrary': instance.userLibrary,
     };

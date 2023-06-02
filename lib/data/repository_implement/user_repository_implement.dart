@@ -37,6 +37,31 @@ class UserRepositoryImplement implements UserRepository {
   }
 
   @override
+  Future<UserModel> getInforWithCurrentPackage({required String token}) async {
+    var servicePath = '/current-package/$token';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await _client.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return UserModel.fromJson(json.decode(response.body));
+    }
+    if (response.statusCode == 404) {
+      const user = UserModel();
+      return user;
+    }
+
+    throw Exception('');
+  }
+
+  @override
   Future<void> createUser({required CreateUserModel user}) async {
     const servicePath = '';
 

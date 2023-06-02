@@ -41,7 +41,7 @@ class UserReadingPackageBloc
         await readingPackageRepository.getAll(token: token);
     readingPackageList.sort((a, b) => a.price.compareTo(b.price));
 
-    UserModel updatedUser = await userRepository.getInfor(
+    UserModel updatedUser = await userRepository.getInforWithCurrentPackage(
       token: user.id,
     );
 

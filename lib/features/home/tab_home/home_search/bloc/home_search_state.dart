@@ -8,7 +8,7 @@ class HomeSearchState with _$HomeSearchState {
     @Default(true) bool isLoading,
     @Default([]) List<String> history,
     @Default([]) List<CategoryModel> listCategory,
-    @Default([]) List<BookModel> listBook,
+    @Default([]) List<UserBookModel> listBook,
     @Default([]) List<AuthorModel> listAuthor,
     @Default([]) List<dynamic> listRecommendedByName,
   }) = _HomeSearchState;

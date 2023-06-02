@@ -4,7 +4,6 @@ import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/features/book_detail/book_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_home/bloc/tab_home_bloc.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/share/functions/util_func.dart';
@@ -19,7 +18,6 @@ import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/greeting.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
 import 'package:demo_book_reader/widgets/search_bar.dart';
-import 'package:demo_book_reader/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +31,6 @@ class TabHomePage extends StatefulWidget {
 
 class _TabHomePageState extends State<TabHomePage> {
   final _bloc = TabHomeBloc(
-    bookRepository: locator<BookRepository>(),
     userRepository: locator<UserRepository>(),
   );
 
@@ -152,11 +149,12 @@ class _TabHomePageState extends State<TabHomePage> {
                             return const CircularProgressIndicator();
                           }
                           final lastBook = state.lastBook;
-                          if (lastBook == null) {
-                            return RecommendBookBox(
-                                book: state.recommendedBooks.first);
+                          if (lastBook.userLibrary != null) {
+                            if (lastBook.userLibrary!.isReading) {
+                              return ReadingBookBox(lastBook: lastBook);
+                            }
                           }
-                          return ReadingBookBox(lastBook: lastBook);
+                          return RecommendBookBox(book: lastBook);
                         },
                       ),
                       verticalSpace16,
@@ -230,9 +228,6 @@ class RecommendedCarousel extends StatelessWidget {
                     '$authors - ',
                     color: AppColors.secondaryColor,
                   ),
-                  StarRating(
-                    rating: item.averageRating,
-                  ),
                 ],
               ),
               CustomerText(
@@ -242,14 +237,9 @@ class RecommendedCarousel extends StatelessWidget {
               ),
               Row(
                 children: [
-                  // const Icon(
-                  //   Icons.remove_red_eye_outlined,
-                  //   size: 16,
-                  // ),
                   horizontalSpace8,
                   Expanded(
                     child: CustomerText(
-                      // '${'item.view'} lượt xem',
                       ' ',
                       color: AppColors.secondaryColor,
                     ),
@@ -262,8 +252,7 @@ class RecommendedCarousel extends StatelessWidget {
                     ),
                     onPressed: () {
                       context.navigateTo(
-                        BookDetailPage(
-                            bookItem: UserBookModel.fromBookModel(item)),
+                        BookDetailPage(bookItem: item),
                       );
                     },
                   )
@@ -338,8 +327,8 @@ class ReadingBookBox extends StatelessWidget {
                   child: CustomerRichText(
                     text:
                         'Bạn đang đọc dở quyển sách này tại lần cuối truy cập ngày ',
-                    subText:
-                        DateFormat('dd/MM/yyyy').format(lastBook.lastRead!),
+                    subText: DateFormat('dd/MM/yyyy')
+                        .format(lastBook.userLibrary!.lastRead!),
                     color: AppColors.secondaryColor,
                     subColor: AppColors.titleColor,
                   ),
@@ -373,7 +362,7 @@ class RecommendBookBox extends StatelessWidget {
     required this.book,
   }) : super(key: key);
 
-  final BookModel book;
+  final UserBookModel book;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -405,7 +394,7 @@ class RecommendBookBox extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     context.navigateTo(BookDetailPage(
-                      bookItem: UserBookModel.fromBookModel(book),
+                      bookItem: book,
                     ));
                   },
                   child: CustomerText(
@@ -418,7 +407,7 @@ class RecommendBookBox extends StatelessWidget {
             ),
           ),
           verticalSpace8,
-          BookItem(bookItem: UserBookModel.fromBookModel(book)),
+          BookItem(bookItem: book),
         ],
       ),
     );

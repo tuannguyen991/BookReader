@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
+import 'package:demo_book_reader/features/author_detail/author_detail_page.dart';
 import 'package:demo_book_reader/features/book_detail/bloc/book_detail_bloc.dart';
+import 'package:demo_book_reader/features/category_detail/category_detail_page.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_reading_package/user_reading_package.dart';
 import 'package:demo_book_reader/features/login/login_page.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
@@ -79,56 +81,91 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: double80),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomerReadMoreText(text: bookItem.description),
-                      HeaderSection(
-                        title: 'Cùng danh mục',
-                        subtitle: 'Xem tất cả',
-                        onPressed: () {},
+                      verticalSpace12,
+                      const HeaderSection(
+                        title: 'Tác giả',
                       ),
+                      verticalSpace12,
                       BlocBuilder<BookDetailBloc, BookDetailState>(
                         builder: (context, state) {
-                          if (state.isLoading) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          }
-                          return GridView.count(
-                            padding: EdgeInsets.zero,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            crossAxisCount: 2,
-                            childAspectRatio: 2.5,
-                            children: List.generate(
-                              state.sameCategoryBooks.length,
-                              (index) {
-                                final bookItem = state.sameCategoryBooks[index];
-                                return InkWell(
-                                  child: BookItem(
-                                    bookItem:
-                                        UserBookModel.fromBookModel(bookItem),
-                                    isGridView: true,
-                                  ),
-                                  onTap: () {
-                                    if (state.isLogin) {
-                                      final endTime = DateTime.now();
-                                      final duration =
-                                          endTime.difference(_startTime);
-                                      _bloc.add(
-                                          BookDetailHistory(time: duration));
-                                    }
+                          final authors = widget.bookItem.authors;
 
-                                    context.navigateOff(
-                                      BookDetailPage(
-                                        bookItem: UserBookModel.fromBookModel(
-                                          bookItem,
+                          return SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: List<Widget>.generate(
+                                authors.length,
+                                (index) => Padding(
+                                  padding:
+                                      const EdgeInsets.only(right: double8),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (state.isLogin) {
+                                        final endTime = DateTime.now();
+                                        final duration =
+                                            endTime.difference(_startTime);
+                                        _bloc.add(
+                                            BookDetailHistory(time: duration));
+                                      }
+
+                                      context.navigateTo(
+                                        AuthorDetailPage(
+                                          author: authors[index],
                                         ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
+                                      );
+                                    },
+                                    child:
+                                        AuthorItem(authorItem: authors[index]),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      verticalSpace12,
+                      const HeaderSection(
+                        title: 'Thể loại',
+                      ),
+                      verticalSpace12,
+                      BlocBuilder<BookDetailBloc, BookDetailState>(
+                        builder: (context, state) {
+                          final categories = widget.bookItem.categories;
+
+                          return SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: List<Widget>.generate(
+                                categories.length,
+                                (index) => Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: double24),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (state.isLogin) {
+                                        final endTime = DateTime.now();
+                                        final duration =
+                                            endTime.difference(_startTime);
+                                        _bloc.add(
+                                            BookDetailHistory(time: duration));
+                                      }
+
+                                      context.navigateTo(
+                                        CategoryDetailPage(
+                                          category: categories[index],
+                                        ),
+                                      );
+                                    },
+                                    child: CategoryItem(
+                                        categoryItem: categories[index]),
+                                  ),
+                                ),
+                              ),
                             ),
                           );
                         },
@@ -187,7 +224,16 @@ class BottomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isRead = bookItem.numberOfReadPages != 0;
+    late final bool isRead;
+    if (bookItem.userLibrary != null) {
+      if (bookItem.userLibrary!.isReading == true) {
+        isRead = true;
+      } else {
+        isRead = false;
+      }
+    } else {
+      isRead = false;
+    }
     return BlocBuilder<BookDetailBloc, BookDetailState>(
       builder: (context, state) {
         return Container(
@@ -260,7 +306,7 @@ class BottomButton extends StatelessWidget {
                             var highLights = state.highLights;
 
                             await VocsyEpub.openAsset(
-                              'assets/epub/${bookItem.bookId}.epub',
+                              'assets/epub/${bookItem.id}.epub',
                               lastLocation: locator,
                               highLights: highLights,
                             );
@@ -277,7 +323,7 @@ class BottomButton extends StatelessWidget {
                                       child: const Text('Đóng'),
                                     ),
                                     TextButton(
-                                      onPressed: () {
+                                      onPressed: () async {
                                         context.off();
                                         context.navigateTo(UserReadingPackage(
                                             user: state.user));
@@ -337,7 +383,7 @@ class BottomButton extends StatelessWidget {
                       return;
                     }
                     context.read<BookDetailBloc>().add(
-                          BookDetailFavoriteChange(bookId: bookItem.bookId),
+                          BookDetailFavoriteChange(bookId: bookItem.id),
                         );
                   },
                 ),

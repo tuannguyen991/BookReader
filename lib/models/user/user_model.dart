@@ -1,3 +1,4 @@
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:demo_book_reader/models/user_history/user_history_model.dart';
 import 'package:demo_book_reader/models/user_reading_package/user_reading_package_model.dart';
 import 'package:demo_book_reader/share/enum/ranking.dart';
@@ -20,6 +21,8 @@ class UserModel with _$UserModel {
     @Default([]) List<UserHistoryModel> recentlyHistories,
     @Default(0) int totalReadingBooks,
     @Default('') String id,
+    @Default([]) List<UserBookModel> recommendBooks,
+    @Default(UserBookModel()) UserBookModel lastBook,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) =>

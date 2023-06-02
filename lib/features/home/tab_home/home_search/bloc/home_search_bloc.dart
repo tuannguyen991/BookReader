@@ -7,8 +7,8 @@ import 'package:demo_book_reader/data/repository/author_repository.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/category_repository.dart';
 import 'package:demo_book_reader/models/author/author_model.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/category/category_model.dart';
+import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -47,15 +47,13 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
         await _bookRepository.getHistorySearch(token: token.toString());
     emit(state.copyWith(history: listHistory));
 
-    final listCategory =
-        await _categoryRepository.getCategories(token: token.toString());
+    final listCategory = await _categoryRepository.getCategories();
     emit(state.copyWith(listCategory: listCategory));
 
-    final listBook = await _bookRepository.getTopBook(token: token.toString());
+    final listBook = await _bookRepository.getTopBook(token: token ?? 'null');
     emit(state.copyWith(listBook: listBook));
 
-    final listAuthor =
-        await _authorRepository.getAuthors(token: token.toString());
+    final listAuthor = await _authorRepository.getAuthors();
     emit(state.copyWith(listAuthor: listAuthor));
 
     emit(state.copyWith(isLoading: false));
@@ -65,11 +63,6 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
     HomeSearchDeleteHistoryItem event,
     Emitter<HomeSearchState> emit,
   ) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
-
-    _bookRepository.deleteHistory(token: token.toString(), name: event.name);
-
     add(HomeSearchLoaded());
   }
 
@@ -89,11 +82,11 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
 
     final listRecommendedByName = [
       ...await _bookRepository.getBooksByName(
-          token: token.toString(), name: event.name),
-      ...await _authorRepository.getAuthorsByName(
-          token: token.toString(), name: event.name),
-      ...await _categoryRepository.getCategoriesByName(
-          token: token.toString(), name: event.name),
+        token: token ?? 'null',
+        name: event.name,
+      ),
+      ...await _authorRepository.getAuthorsByName(name: event.name),
+      ...await _categoryRepository.getCategoriesByName(name: event.name),
     ];
 
     emit(state.copyWith(

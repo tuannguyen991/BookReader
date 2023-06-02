@@ -27,6 +27,13 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
           const [],
       totalReadingBooks: json['totalReadingBooks'] as int? ?? 0,
       id: json['id'] as String? ?? '',
+      recommendBooks: (json['recommendBooks'] as List<dynamic>?)
+              ?.map((e) => UserBookModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      lastBook: json['lastBook'] == null
+          ? const UserBookModel()
+          : UserBookModel.fromJson(json['lastBook'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -42,10 +49,12 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'recentlyHistories': instance.recentlyHistories,
       'totalReadingBooks': instance.totalReadingBooks,
       'id': instance.id,
+      'recommendBooks': instance.recommendBooks,
+      'lastBook': instance.lastBook,
     };
 
 const _$RankingEnumMap = {
-  Ranking.gold: 1,
-  Ranking.silver: 2,
-  Ranking.bronze: 3,
+  Ranking.gold: 0,
+  Ranking.silver: 1,
+  Ranking.bronze: 2,
 };

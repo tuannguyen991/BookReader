@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 class CategoryRepositoryImplement implements CategoryRepository {
   @override
   Future<List<CategoryModel>> getCategoriesByName({
-    required String token,
     required String name,
   }) async {
     const servicePath = '';
@@ -37,7 +36,7 @@ class CategoryRepositoryImplement implements CategoryRepository {
   }
 
   @override
-  Future<List<CategoryModel>> getCategories({required String token}) async {
+  Future<List<CategoryModel>> getCategories() async {
     const servicePath = '';
 
     final uri = Uri.https(

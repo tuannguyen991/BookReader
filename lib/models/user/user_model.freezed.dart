@@ -33,6 +33,8 @@ mixin _$UserModel {
       throw _privateConstructorUsedError;
   int get totalReadingBooks => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  List<UserBookModel> get recommendBooks => throw _privateConstructorUsedError;
+  UserBookModel get lastBook => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,9 +58,12 @@ abstract class $UserModelCopyWith<$Res> {
       UserReadingPackageModel? currentPackage,
       List<UserHistoryModel> recentlyHistories,
       int totalReadingBooks,
-      String id});
+      String id,
+      List<UserBookModel> recommendBooks,
+      UserBookModel lastBook});
 
   $UserReadingPackageModelCopyWith<$Res>? get currentPackage;
+  $UserBookModelCopyWith<$Res> get lastBook;
 }
 
 /// @nodoc
@@ -85,6 +90,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? recentlyHistories = null,
     Object? totalReadingBooks = null,
     Object? id = null,
+    Object? recommendBooks = null,
+    Object? lastBook = null,
   }) {
     return _then(_value.copyWith(
       firstName: null == firstName
@@ -131,6 +138,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      recommendBooks: null == recommendBooks
+          ? _value.recommendBooks
+          : recommendBooks // ignore: cast_nullable_to_non_nullable
+              as List<UserBookModel>,
+      lastBook: null == lastBook
+          ? _value.lastBook
+          : lastBook // ignore: cast_nullable_to_non_nullable
+              as UserBookModel,
     ) as $Val);
   }
 
@@ -144,6 +159,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     return $UserReadingPackageModelCopyWith<$Res>(_value.currentPackage!,
         (value) {
       return _then(_value.copyWith(currentPackage: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserBookModelCopyWith<$Res> get lastBook {
+    return $UserBookModelCopyWith<$Res>(_value.lastBook, (value) {
+      return _then(_value.copyWith(lastBook: value) as $Val);
     });
   }
 }
@@ -166,10 +189,14 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       UserReadingPackageModel? currentPackage,
       List<UserHistoryModel> recentlyHistories,
       int totalReadingBooks,
-      String id});
+      String id,
+      List<UserBookModel> recommendBooks,
+      UserBookModel lastBook});
 
   @override
   $UserReadingPackageModelCopyWith<$Res>? get currentPackage;
+  @override
+  $UserBookModelCopyWith<$Res> get lastBook;
 }
 
 /// @nodoc
@@ -194,6 +221,8 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? recentlyHistories = null,
     Object? totalReadingBooks = null,
     Object? id = null,
+    Object? recommendBooks = null,
+    Object? lastBook = null,
   }) {
     return _then(_$_UserModel(
       firstName: null == firstName
@@ -240,6 +269,14 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      recommendBooks: null == recommendBooks
+          ? _value._recommendBooks
+          : recommendBooks // ignore: cast_nullable_to_non_nullable
+              as List<UserBookModel>,
+      lastBook: null == lastBook
+          ? _value.lastBook
+          : lastBook // ignore: cast_nullable_to_non_nullable
+              as UserBookModel,
     ));
   }
 }
@@ -258,8 +295,11 @@ class _$_UserModel implements _UserModel {
       this.currentPackage,
       final List<UserHistoryModel> recentlyHistories = const [],
       this.totalReadingBooks = 0,
-      this.id = ''})
-      : _recentlyHistories = recentlyHistories;
+      this.id = '',
+      final List<UserBookModel> recommendBooks = const [],
+      this.lastBook = const UserBookModel()})
+      : _recentlyHistories = recentlyHistories,
+        _recommendBooks = recommendBooks;
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -302,10 +342,22 @@ class _$_UserModel implements _UserModel {
   @override
   @JsonKey()
   final String id;
+  final List<UserBookModel> _recommendBooks;
+  @override
+  @JsonKey()
+  List<UserBookModel> get recommendBooks {
+    if (_recommendBooks is EqualUnmodifiableListView) return _recommendBooks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_recommendBooks);
+  }
+
+  @override
+  @JsonKey()
+  final UserBookModel lastBook;
 
   @override
   String toString() {
-    return 'UserModel(firstName: $firstName, lastName: $lastName, email: $email, birthDate: $birthDate, imageLink: $imageLink, totalReadingTime: $totalReadingTime, ranking: $ranking, currentPackage: $currentPackage, recentlyHistories: $recentlyHistories, totalReadingBooks: $totalReadingBooks, id: $id)';
+    return 'UserModel(firstName: $firstName, lastName: $lastName, email: $email, birthDate: $birthDate, imageLink: $imageLink, totalReadingTime: $totalReadingTime, ranking: $ranking, currentPackage: $currentPackage, recentlyHistories: $recentlyHistories, totalReadingBooks: $totalReadingBooks, id: $id, recommendBooks: $recommendBooks, lastBook: $lastBook)';
   }
 
   @override
@@ -331,7 +383,11 @@ class _$_UserModel implements _UserModel {
                 .equals(other._recentlyHistories, _recentlyHistories) &&
             (identical(other.totalReadingBooks, totalReadingBooks) ||
                 other.totalReadingBooks == totalReadingBooks) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other._recommendBooks, _recommendBooks) &&
+            (identical(other.lastBook, lastBook) ||
+                other.lastBook == lastBook));
   }
 
   @JsonKey(ignore: true)
@@ -348,7 +404,9 @@ class _$_UserModel implements _UserModel {
       currentPackage,
       const DeepCollectionEquality().hash(_recentlyHistories),
       totalReadingBooks,
-      id);
+      id,
+      const DeepCollectionEquality().hash(_recommendBooks),
+      lastBook);
 
   @JsonKey(ignore: true)
   @override
@@ -376,7 +434,9 @@ abstract class _UserModel implements UserModel {
       final UserReadingPackageModel? currentPackage,
       final List<UserHistoryModel> recentlyHistories,
       final int totalReadingBooks,
-      final String id}) = _$_UserModel;
+      final String id,
+      final List<UserBookModel> recommendBooks,
+      final UserBookModel lastBook}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -403,6 +463,10 @@ abstract class _UserModel implements UserModel {
   int get totalReadingBooks;
   @override
   String get id;
+  @override
+  List<UserBookModel> get recommendBooks;
+  @override
+  UserBookModel get lastBook;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

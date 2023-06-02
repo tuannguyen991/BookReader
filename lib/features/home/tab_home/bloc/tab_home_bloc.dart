@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,16 +16,13 @@ part 'tab_home_state.dart';
 
 class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
   TabHomeBloc({
-    required BookRepository bookRepository,
     required UserRepository userRepository,
-  })  : _bookRepository = bookRepository,
-        _userRepository = userRepository,
+  })  : _userRepository = userRepository,
         super(const TabHomeState()) {
     on<TabHomeLoaded>(_onLoaded);
     on<TabHomeIndexCarouselChange>(_onIndexCarouselChange);
   }
 
-  final BookRepository _bookRepository;
   final UserRepository _userRepository;
 
   FutureOr<void> _onLoaded(
@@ -38,49 +34,14 @@ class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
+    /// Infomation User
+    final user = await _userRepository.getInfor(token: token ?? 'null'); // get
+
     /// get RecommendedBooks
-    final list =
-        await _bookRepository.getRecommendedBook(token: token.toString());
-    await prefs.setString('recommendedBooks', json.encode(list));
+    final list = user.recommendBooks;
     final item = list[0];
 
-    if (token == null) {
-      emit(state.copyWith(
-        isLogin: false,
-        recommendedBooks: list,
-        bookItem: item,
-        isLoading: false,
-      ));
-
-      return;
-    }
-
-    // final test = prefs.getString('user');
-    // if (test != null) {
-    //   var response = prefs.getString('recommendedBooks')!;
-
-    //   final parsed = jsonDecode(response).cast<Map<String, dynamic>>();
-
-    //   final books =
-    //       parsed.map<BookModel>((json) => BookModel.fromJson(json)).toList();
-
-    //   final user = UserModel.fromJson(json.decode(prefs.getString('user')!));
-    //   emit(state.copyWith(
-    //     recommendedBooks: books,
-    //     bookItem: books[0],
-    //     user: user,
-    //     lastBook: await _bookRepository.getLastBook(token: token),
-    //     isLoading: false,
-    //   ));
-    //   return;
-    // }
-
-    /// get Information of Last book which User read
-    final lastBook = await _bookRepository.getLastBook(token: token);
-
-    /// Infomation User
-    final user = await _userRepository.getInfor(token: token); // get
-    await prefs.setString('user', json.encode(user.toJson()));
+    final lastBook = user.lastBook;
 
     emit(state.copyWith(
       recommendedBooks: list,

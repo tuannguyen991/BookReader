@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/book_repository.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -44,53 +43,50 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
-    // get sameCategoryBook
-    final list = await _bookRepository.getSameCategoryBook(
-      token: token.toString(),
-      bookItem: event.bookItem,
-    );
+    var bookItem = event.bookItem;
 
     if (token == null) {
       emit(state.copyWith(
         bookItem: event.bookItem,
-        sameCategoryBooks: list,
         isLogin: false,
         isLoading: false,
       ));
     } else {
-      UserBookModel bookItem = await _bookRepository.getUserBook(
-        token: token,
-        bookItem: event.bookItem,
-      );
-
-      final user = await _userRepository.getInfor(token: token);
+      final user = await _userRepository.getInforWithCurrentPackage(token: token);
 
       String? locator;
 
-      if (bookItem.lastLocator != '') {
-        locator =
-            '{"bookId":"${bookItem.bookId}","href":"${bookItem.href}","locations":${bookItem.lastLocator},"readPage":0}';
+      bool isFavorite = false;
+
+      late String highLights;
+
+      if (bookItem.userLibrary == null) {
+        highLights = '[]';
+      } else {
+        isFavorite = bookItem.userLibrary!.isFavorite;
+        if (bookItem.userLibrary!.lastLocator != '') {
+          locator =
+              '{"bookId":"${bookItem.id}","href":"${bookItem.userLibrary!.href}","locations":${bookItem.userLibrary!.lastLocator},"readPage":0}';
+        }
+        if (bookItem.userLibrary!.isReading) {
+          highLights = await _bookRepository.getHighLights(
+            token: token,
+            bookId: bookItem.id,
+          );
+        } else {
+          highLights = '[]';
+        }
       }
 
-      final isFavorite = await _bookRepository.getIsFavorite(
-        token: token,
-        bookId: bookItem.bookId,
-      );
-
-      final highLights = await _bookRepository.getHighLights(
-        token: token,
-        bookId: bookItem.bookId,
-      );
+      emit(state.copyWith(bookItem: bookItem));
 
       emit(state.copyWith(
         user: user,
-        sameCategoryBooks: list,
         isFavorite: isFavorite,
         highLights: highLights,
-        bookItem: bookItem,
         isLoading: false,
         locatorString: locator,
-        bookId: bookItem.bookId,
+        bookId: bookItem.id,
       ));
     }
   }
@@ -224,7 +220,7 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
 
-    final user = await _userRepository.getInfor(token: token);
+    final user = await _userRepository.getInforWithCurrentPackage(token: token);
     emit(state.copyWith(user: user));
 
     if (user.currentPackage != null) {

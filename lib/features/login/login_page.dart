@@ -274,7 +274,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
         prefs.setString('token', user.uid);
 
         var userRepository = locator<UserRepository>();
-        final userInfor = await userRepository.getInfor(token: user.uid); // get
+        final userInfor = await userRepository.getInforWithCurrentPackage(token: user.uid); // get
 
         if (userInfor.id == '') {
           // ignore: use_build_context_synchronously

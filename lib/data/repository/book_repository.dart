@@ -1,25 +1,21 @@
-import 'package:demo_book_reader/models/book/book_model.dart';
 import 'package:demo_book_reader/models/high_light/high_light_notification/high_light_notification_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
 
 abstract class BookRepository {
-  Future<List<BookModel>> getRecommendedBook({required String token});
+  Future<List<UserBookModel>> getBookByCategory({
+    required String token,
+    required String categoryId,
+  });
 
-  Future<List<BookModel>> getTopBook({required String token});
+  Future<List<UserBookModel>> getTopBook({required String token});
 
-  Future<List<UserBookModel>> getBookByCategory({required String categoryId});
-
-  Future<List<UserBookModel>> getBookByAuthor({required String authorId});
-
-  Future<UserBookModel?> getLastBook({required String token});
-
-  Future<List<BookModel>> getSameCategoryBook(
-      {required String token, required UserBookModel bookItem});
+  Future<List<UserBookModel>> getBookByAuthor({
+    required String token,
+    required String authorId,
+  });
 
   Future<UserBookModel> getUserBook(
       {required String token, required UserBookModel bookItem});
-
-  Future<bool> getIsFavorite({required String token, required String bookId});
 
   Future<void> createReading({
     required String token,
@@ -37,19 +33,12 @@ abstract class BookRepository {
 
   Future<List<UserBookModel>> getFavoriteBook({required String token});
 
-  Future<List<BookModel>> getUploadBooks({required String token});
-
   Future<List<String>> getHistorySearch({required String token});
 
   Future<void> addUserHistory({required String token, required Duration time});
 
-  Future<List<BookModel>> getBooksByName(
+  Future<List<UserBookModel>> getBooksByName(
       {required String token, required String name});
-
-  Future<void> addUploadBook(
-      {required String token, required BookModel bookItem});
-
-  Future<void> deleteHistory({required String token, required String name});
 
   Future<void> createHighLight({
     required String token,
