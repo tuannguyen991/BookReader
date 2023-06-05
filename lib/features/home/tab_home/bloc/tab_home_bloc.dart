@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/models/user_book/user_book_model.dart';
+import 'package:demo_book_reader/share/functions/notification_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,6 +32,8 @@ class TabHomeBloc extends Bloc<TabHomeEvent, TabHomeState> {
 
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
+
+    scheduleFunctionExecution();
 
     /// Infomation User
     final user = await _userRepository.getInfor(token: token ?? 'null'); // get
