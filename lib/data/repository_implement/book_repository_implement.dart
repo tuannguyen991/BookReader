@@ -128,7 +128,7 @@ class BookRepositoryImplement implements BookRepository {
       '${Remote.pathUsers}$servicePath',
     );
 
-    var date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    var date = DateFormat('yyyy-MM-ddTHH:mm').format(DateTime.now());
     var timeFormat = time.toString().split('.').first.padLeft(8, '0');
 
     final response = await http.post(

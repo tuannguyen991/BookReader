@@ -17,8 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BookDetailState {
   UserModel get user => throw _privateConstructorUsedError;
-  List<UserBookModel> get sameCategoryBooks =>
-      throw _privateConstructorUsedError;
   UserBookModel get bookItem => throw _privateConstructorUsedError;
   String get highLights => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
@@ -40,7 +38,6 @@ abstract class $BookDetailStateCopyWith<$Res> {
   @useResult
   $Res call(
       {UserModel user,
-      List<UserBookModel> sameCategoryBooks,
       UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
@@ -67,7 +64,6 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
   @override
   $Res call({
     Object? user = null,
-    Object? sameCategoryBooks = null,
     Object? bookItem = null,
     Object? highLights = null,
     Object? isLoading = freezed,
@@ -81,10 +77,6 @@ class _$BookDetailStateCopyWithImpl<$Res, $Val extends BookDetailState>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      sameCategoryBooks: null == sameCategoryBooks
-          ? _value.sameCategoryBooks
-          : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
-              as List<UserBookModel>,
       bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
@@ -143,7 +135,6 @@ abstract class _$$_BookDetailStateCopyWith<$Res>
   @useResult
   $Res call(
       {UserModel user,
-      List<UserBookModel> sameCategoryBooks,
       UserBookModel bookItem,
       String highLights,
       dynamic isLoading,
@@ -170,7 +161,6 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? sameCategoryBooks = null,
     Object? bookItem = null,
     Object? highLights = null,
     Object? isLoading = freezed,
@@ -184,10 +174,6 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      sameCategoryBooks: null == sameCategoryBooks
-          ? _value._sameCategoryBooks
-          : sameCategoryBooks // ignore: cast_nullable_to_non_nullable
-              as List<UserBookModel>,
       bookItem: null == bookItem
           ? _value.bookItem
           : bookItem // ignore: cast_nullable_to_non_nullable
@@ -219,29 +205,17 @@ class __$$_BookDetailStateCopyWithImpl<$Res>
 class _$_BookDetailState implements _BookDetailState {
   const _$_BookDetailState(
       {this.user = const UserModel(),
-      final List<UserBookModel> sameCategoryBooks = const [],
       this.bookItem = const UserBookModel(),
       this.highLights = '',
       this.isLoading = true,
       this.isLogin = true,
       this.isFavorite = false,
       this.locatorString = null,
-      this.bookId = ''})
-      : _sameCategoryBooks = sameCategoryBooks;
+      this.bookId = ''});
 
   @override
   @JsonKey()
   final UserModel user;
-  final List<UserBookModel> _sameCategoryBooks;
-  @override
-  @JsonKey()
-  List<UserBookModel> get sameCategoryBooks {
-    if (_sameCategoryBooks is EqualUnmodifiableListView)
-      return _sameCategoryBooks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sameCategoryBooks);
-  }
-
   @override
   @JsonKey()
   final UserBookModel bookItem;
@@ -266,7 +240,7 @@ class _$_BookDetailState implements _BookDetailState {
 
   @override
   String toString() {
-    return 'BookDetailState(user: $user, sameCategoryBooks: $sameCategoryBooks, bookItem: $bookItem, highLights: $highLights, isLoading: $isLoading, isLogin: $isLogin, isFavorite: $isFavorite, locatorString: $locatorString, bookId: $bookId)';
+    return 'BookDetailState(user: $user, bookItem: $bookItem, highLights: $highLights, isLoading: $isLoading, isLogin: $isLogin, isFavorite: $isFavorite, locatorString: $locatorString, bookId: $bookId)';
   }
 
   @override
@@ -275,8 +249,6 @@ class _$_BookDetailState implements _BookDetailState {
         (other.runtimeType == runtimeType &&
             other is _$_BookDetailState &&
             (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality()
-                .equals(other._sameCategoryBooks, _sameCategoryBooks) &&
             (identical(other.bookItem, bookItem) ||
                 other.bookItem == bookItem) &&
             (identical(other.highLights, highLights) ||
@@ -294,7 +266,6 @@ class _$_BookDetailState implements _BookDetailState {
   int get hashCode => Object.hash(
       runtimeType,
       user,
-      const DeepCollectionEquality().hash(_sameCategoryBooks),
       bookItem,
       highLights,
       const DeepCollectionEquality().hash(isLoading),
@@ -313,7 +284,6 @@ class _$_BookDetailState implements _BookDetailState {
 abstract class _BookDetailState implements BookDetailState {
   const factory _BookDetailState(
       {final UserModel user,
-      final List<UserBookModel> sameCategoryBooks,
       final UserBookModel bookItem,
       final String highLights,
       final dynamic isLoading,
@@ -324,8 +294,6 @@ abstract class _BookDetailState implements BookDetailState {
 
   @override
   UserModel get user;
-  @override
-  List<UserBookModel> get sameCategoryBooks;
   @override
   UserBookModel get bookItem;
   @override

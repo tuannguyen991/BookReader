@@ -60,6 +60,24 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
         )),
       ) as _i4.Future<_i2.UserModel>);
   @override
+  _i4.Future<_i2.UserModel> getInforWithCurrentPackage(
+          {required String? token}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getInforWithCurrentPackage,
+          [],
+          {#token: token},
+        ),
+        returnValue: _i4.Future<_i2.UserModel>.value(_FakeUserModel_0(
+          this,
+          Invocation.method(
+            #getInforWithCurrentPackage,
+            [],
+            {#token: token},
+          ),
+        )),
+      ) as _i4.Future<_i2.UserModel>);
+  @override
   _i4.Future<_i2.UserModel> registerReadingPackage({
     required String? token,
     required String? readingPackageId,

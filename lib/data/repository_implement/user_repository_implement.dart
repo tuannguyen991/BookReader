@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:demo_book_reader/data/remote/remote.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
+import 'package:demo_book_reader/models/reminder/reminder_model.dart';
 import 'package:demo_book_reader/models/user/create_user/create_user_model.dart';
 import 'package:demo_book_reader/models/user/update_user/update_user_model.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class UserRepositoryImplement implements UserRepository {
@@ -154,6 +156,128 @@ class UserRepositoryImplement implements UserRepository {
     if (response.statusCode == 200) {
       final user = UserModel.fromJson(json.decode(response.body));
       return user;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<List<ReminderModel>> createReminder({
+    required String token,
+    required TimeOfDay time,
+  }) async {
+    const servicePath = '/reminder';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    var timeString =
+        '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: '{"userId":"$token", "time":"$timeString"}',
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final reminders = parsed
+          .map<ReminderModel>((json) => ReminderModel.fromJson(json))
+          .toList();
+      return reminders;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<List<ReminderModel>> deleteReminder({
+    required String token,
+    required String reminderId,
+  }) async {
+    var servicePath = '/reminder/$token/$reminderId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.delete(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final reminders = parsed
+          .map<ReminderModel>((json) => ReminderModel.fromJson(json))
+          .toList();
+      return reminders;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<List<ReminderModel>> getReminder({required String token}) async {
+    var servicePath = '/reminder/$token';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    final response = await http.get(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final reminders = parsed
+          .map<ReminderModel>((json) => ReminderModel.fromJson(json))
+          .toList();
+      return reminders;
+    }
+
+    throw Exception('');
+  }
+
+  @override
+  Future<List<ReminderModel>> updateReminder({
+    required String token,
+    required String reminderId,
+    required TimeOfDay time,
+  }) async {
+    var servicePath = '/reminder/$token/$reminderId';
+
+    final uri = Uri.https(
+      Remote.authority,
+      '${Remote.pathUsers}$servicePath',
+    );
+
+    var timeString =
+        '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+
+    final response = await http.put(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: '{"time":"$timeString"}',
+    );
+
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final reminders = parsed
+          .map<ReminderModel>((json) => ReminderModel.fromJson(json))
+          .toList();
+      return reminders;
     }
 
     throw Exception('');
