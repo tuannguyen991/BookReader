@@ -6,6 +6,7 @@ import 'package:demo_book_reader/features/home/tab_user/main/util/personal_optio
 import 'package:demo_book_reader/features/home/tab_user/update_infor/update_infor.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_history/user_history_page.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_reading_package/user_reading_package.dart';
+import 'package:demo_book_reader/features/home/tab_user/user_reminder/user_reminder.dart';
 import 'package:demo_book_reader/models/user/user_model.dart';
 import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
@@ -105,6 +106,13 @@ class _TabUserPageState extends State<TabUserPage> {
                               onTap = () {
                                 context.navigateTo(
                                   const UpdateInforPage(),
+                                );
+                              };
+                              break;
+                            case readingReminderText:
+                              onTap = () {
+                                context.navigateTo(
+                                  UserReminder(userId: user.id),
                                 );
                               };
                               break;
