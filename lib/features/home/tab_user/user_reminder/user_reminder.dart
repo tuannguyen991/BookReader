@@ -2,11 +2,15 @@ import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/di/locator.dart';
 import 'package:demo_book_reader/features/home/tab_user/main/util/personal_option_list.dart';
 import 'package:demo_book_reader/features/home/tab_user/user_reminder/bloc/user_reminder_bloc.dart';
+import 'package:demo_book_reader/models/reminder/reminder_model.dart';
+import 'package:demo_book_reader/share/extensions/build_context_extensions.dart';
 import 'package:demo_book_reader/theme/app_colors.dart';
 import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/custom_appbar.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
 class UserReminder extends StatefulWidget {
   const UserReminder({super.key, required this.userId});
@@ -20,6 +24,7 @@ class UserReminder extends StatefulWidget {
 class _UserReminderState extends State<UserReminder> {
   late UserReminderBloc bloc;
   bool light = true;
+  DateTime dateTime = DateTime.now();
 
   @override
   void initState() {
@@ -30,60 +35,110 @@ class _UserReminderState extends State<UserReminder> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const CustomAppBarTitle(text: readingReminderText),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add_circle_rounded),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')));
-            },
-          )
-        ],
+    return BlocProvider.value(
+      value: bloc,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const CustomAppBarTitle(text: readingReminderText),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(double16),
+                      topRight: Radius.circular(double16),
+                    ),
+                  ),
+                  builder: (BuildContext context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(double16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const CustomerText(
+                            'Chọn thời gian',
+                            fontSize: fontSize20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          verticalSpace16,
+                          TimePickerSpinner(
+                            spacing: double16,
+                            minutesInterval: 10,
+                            is24HourMode: false,
+                            normalTextStyle: const TextStyle(
+                                fontSize: fontSize16, color: Colors.black),
+                            highlightedTextStyle: const TextStyle(
+                                fontSize: fontSize16,
+                                color: AppColors.primary_1,
+                                fontWeight: FontWeight.bold),
+                            onTimeChange: (time) {
+                              setState(() {
+                                dateTime = time;
+                              });
+                            },
+                          ),
+                          verticalSpace16,
+                          ElevatedButton(
+                              onPressed: () {
+                                context.off();
+                                context.read<UserReminderBloc>().add(
+                                    UserReminderNewRequested(
+                                        time: dateTime
+                                            .toString()
+                                            .substring(11, 16)));
+                              },
+                              child: const CustomerText(
+                                'Xác nhận',
+                                fontSize: fontSize16,
+                                fontWeight: FontWeight.w500,
+                              ))
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            )
+          ],
+        ),
+        body: buildBody(),
       ),
-      body: buildBody(),
     );
   }
 
   Widget buildBody() {
     return SafeArea(
         child: Padding(
-      padding: const EdgeInsets.all(double16),
-      // child: BlocBuilder<UserReminderBloc, UserReminderState>(
-      //   builder: (context, state) {
-      //     if (state.isLoading) {
-      //       return const CircularProgressIndicator();
-      //     }
-      //     final reminderList = state.userReminderList;
-      //     return Column(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         ...List.generate(reminderList.length,
-      //                 (index) => buildReminderLine(reminderList[index]))
-      //       ],
-      //     );
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [buildReminderLine()],
-      ),
-    ));
+            padding: const EdgeInsets.all(double16),
+            child: BlocBuilder<UserReminderBloc, UserReminderState>(
+                builder: (context, state) {
+              if (state.isLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              final reminderList = state.userReminderList;
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ...List.generate(reminderList.length,
+                      (index) => buildReminderLine(reminderList[index]))
+                ],
+              );
+            })));
   }
 
-  Widget buildReminderLine() {
+  Widget buildReminderLine(ReminderModel reminderModel) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: double16),
-          child: CustomerText(
-            '00:00',
-            color: Colors.black,
-            fontSize: fontSize20,
-            fontWeight: FontWeight.bold,
-          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: double16),
+          child: CustomerText(reminderModel.time.format(context),
+              color: Colors.black, fontSize: fontSize20),
         ),
         Row(
           children: [
