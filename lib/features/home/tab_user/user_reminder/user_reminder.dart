@@ -45,72 +45,7 @@ class _UserReminderState extends State<UserReminder> {
                 builder: (context, state) => IconButton(
                       icon: const Icon(Icons.add),
                       onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          enableDrag: false,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(double16),
-                              topRight: Radius.circular(double16),
-                            ),
-                          ),
-                          builder: (BuildContext context) {
-                            return BlocProvider.value(
-                              value: bloc,
-                              child: Builder(
-                                builder: (context) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(double16),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const CustomerText(
-                                          'Chọn thời gian',
-                                          fontSize: fontSize20,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        verticalSpace16,
-                                        TimePickerSpinner(
-                                          spacing: double16,
-                                          minutesInterval: 10,
-                                          is24HourMode: false,
-                                          normalTextStyle: const TextStyle(
-                                              fontSize: fontSize16,
-                                              color: Colors.black),
-                                          highlightedTextStyle: const TextStyle(
-                                              fontSize: fontSize16,
-                                              color: AppColors.primary_1,
-                                              fontWeight: FontWeight.bold),
-                                          onTimeChange: (time) {
-                                            setState(() {
-                                              dateTime = time;
-                                            });
-                                          },
-                                        ),
-                                        verticalSpace16,
-                                        ElevatedButton(
-                                            onPressed: () {
-                                              context.off();
-                                              context
-                                                  .read<UserReminderBloc>()
-                                                  .add(UserReminderNewRequested(
-                                                      time: dateTime));
-                                            },
-                                            child: const CustomerText(
-                                              'Xác nhận',
-                                              fontSize: fontSize16,
-                                              fontWeight: FontWeight.w500,
-                                            ))
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        );
+                        showTimePickerModalBottomSheet(context);
                       },
                     ))
           ],
@@ -187,15 +122,12 @@ class _UserReminderState extends State<UserReminder> {
                                   value: 1,
                                   child: const CustomerText('Chỉnh sửa giờ'),
                                   onTap: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return const SizedBox(
-                                          height: 200.0,
-                                          child: Center(child: Text('ModalBottomSheet')),
-                                        );
-                                      },
-                                    );
+                                    // TODO: will check for new Flutter fix-bug release
+                                    // Pull Request: https://github.com/flutter/flutter/pull/127446
+                                    showTimePickerModalBottomSheet(
+                                        context,
+                                        reminderModel.id,
+                                        reminderModel.isActive);
                                   }),
                               PopupMenuItem(
                                 value: 2,
@@ -229,6 +161,79 @@ class _UserReminderState extends State<UserReminder> {
       shadowColor: Colors.grey[60],
       padding:
           const EdgeInsets.symmetric(vertical: double8, horizontal: double4),
+    );
+  }
+
+  showTimePickerModalBottomSheet(BuildContext context,
+      [String? reminderId, bool? isActive]) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(double16),
+          topRight: Radius.circular(double16),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return BlocProvider.value(
+          value: bloc,
+          child: Builder(
+            builder: (context) {
+              return Padding(
+                padding: const EdgeInsets.all(double16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const CustomerText(
+                      'Chọn thời gian',
+                      fontSize: fontSize20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    verticalSpace16,
+                    TimePickerSpinner(
+                      spacing: double16,
+                      minutesInterval: 10,
+                      is24HourMode: false,
+                      normalTextStyle: const TextStyle(
+                          fontSize: fontSize16, color: Colors.black),
+                      highlightedTextStyle: const TextStyle(
+                          fontSize: fontSize16,
+                          color: AppColors.primary_1,
+                          fontWeight: FontWeight.bold),
+                      onTimeChange: (time) {
+                        setState(() {
+                          dateTime = time;
+                        });
+                      },
+                    ),
+                    verticalSpace16,
+                    ElevatedButton(
+                        onPressed: () {
+                          context.off();
+                          reminderId == null
+                              ? context
+                                  .read<UserReminderBloc>()
+                                  .add(UserReminderNewRequested(time: dateTime))
+                              : context.read<UserReminderBloc>().add(
+                                  UserReminderUpdateRequested(
+                                      reminderId: reminderId,
+                                      isActive: isActive!,
+                                      time: TimeOfDay.fromDateTime(dateTime)));
+                        },
+                        child: const CustomerText(
+                          'Xác nhận',
+                          fontSize: fontSize16,
+                          fontWeight: FontWeight.w500,
+                        ))
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
