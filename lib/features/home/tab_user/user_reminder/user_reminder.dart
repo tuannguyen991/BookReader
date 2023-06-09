@@ -41,68 +41,78 @@ class _UserReminderState extends State<UserReminder> {
         appBar: AppBar(
           title: const CustomAppBarTitle(text: readingReminderText),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(double16),
-                      topRight: Radius.circular(double16),
-                    ),
-                  ),
-                  builder: (BuildContext context) {
-                    return Padding(
-                      padding: const EdgeInsets.all(double16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const CustomerText(
-                            'Chọn thời gian',
-                            fontSize: fontSize20,
-                            fontWeight: FontWeight.w500,
+            BlocBuilder<UserReminderBloc, UserReminderState>(
+                builder: (context, state) => IconButton(
+                      icon: const Icon(Icons.add),
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          enableDrag: false,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(double16),
+                              topRight: Radius.circular(double16),
+                            ),
                           ),
-                          verticalSpace16,
-                          TimePickerSpinner(
-                            spacing: double16,
-                            minutesInterval: 10,
-                            is24HourMode: false,
-                            normalTextStyle: const TextStyle(
-                                fontSize: fontSize16, color: Colors.black),
-                            highlightedTextStyle: const TextStyle(
-                                fontSize: fontSize16,
-                                color: AppColors.primary_1,
-                                fontWeight: FontWeight.bold),
-                            onTimeChange: (time) {
-                              setState(() {
-                                dateTime = time;
-                              });
-                            },
-                          ),
-                          verticalSpace16,
-                          ElevatedButton(
-                              onPressed: () {
-                                context.off();
-                                context.read<UserReminderBloc>().add(
-                                    UserReminderNewRequested(
-                                        time: dateTime
-                                            .toString()
-                                            .substring(11, 16)));
-                              },
-                              child: const CustomerText(
-                                'Xác nhận',
-                                fontSize: fontSize16,
-                                fontWeight: FontWeight.w500,
-                              ))
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-            )
+                          builder: (BuildContext context) {
+                            return BlocProvider.value(
+                              value: bloc,
+                              child: Builder(
+                                builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(double16),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const CustomerText(
+                                          'Chọn thời gian',
+                                          fontSize: fontSize20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        verticalSpace16,
+                                        TimePickerSpinner(
+                                          spacing: double16,
+                                          minutesInterval: 10,
+                                          is24HourMode: false,
+                                          normalTextStyle: const TextStyle(
+                                              fontSize: fontSize16,
+                                              color: Colors.black),
+                                          highlightedTextStyle: const TextStyle(
+                                              fontSize: fontSize16,
+                                              color: AppColors.primary_1,
+                                              fontWeight: FontWeight.bold),
+                                          onTimeChange: (time) {
+                                            setState(() {
+                                              dateTime = time;
+                                            });
+                                          },
+                                        ),
+                                        verticalSpace16,
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              context.off();
+                                              context
+                                                  .read<UserReminderBloc>()
+                                                  .add(UserReminderNewRequested(
+                                                      time: dateTime));
+                                            },
+                                            child: const CustomerText(
+                                              'Xác nhận',
+                                              fontSize: fontSize16,
+                                              fontWeight: FontWeight.w500,
+                                            ))
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ))
           ],
         ),
         body: buildBody(),

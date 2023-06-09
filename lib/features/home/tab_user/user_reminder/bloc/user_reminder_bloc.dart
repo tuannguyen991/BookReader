@@ -38,9 +38,8 @@ class UserReminderBloc extends Bloc<UserReminderEvent, UserReminderState> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
 
-    await userRepository.createReminder(
-        token: token, time: const TimeOfDay(hour: 10, minute: 0));
-    final reminderList = await userRepository.getReminder(token: token);
+    final reminderList = await userRepository.createReminder(
+        token: token, time: TimeOfDay.fromDateTime(event.time));
     emit(state.copyWith(isLoading: false, userReminderList: reminderList));
   }
 }
