@@ -112,7 +112,7 @@ class _TabUserPageState extends State<TabUserPage> {
                             case readingReminderText:
                               onTap = () {
                                 context.navigateTo(
-                                  UserReminder(userId: user.id),
+                                  UserReminder(),
                                 );
                               };
                               break;

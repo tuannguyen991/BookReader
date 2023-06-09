@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:demo_book_reader/data/repository/user_repository.dart';
 import 'package:demo_book_reader/models/reminder/reminder_model.dart';
+import 'package:demo_book_reader/share/functions/notification_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +39,8 @@ class UserReminderBloc extends Bloc<UserReminderEvent, UserReminderState> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
 
+    scheduleFunctionExecution();
+
     final reminderList = await userRepository.createReminder(
         token: token, time: TimeOfDay.fromDateTime(event.time));
     emit(state.copyWith(isLoading: false, userReminderList: reminderList));
@@ -47,6 +50,8 @@ class UserReminderBloc extends Bloc<UserReminderEvent, UserReminderState> {
       Emitter<UserReminderState> emit) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
+
+    scheduleFunctionExecution();
 
     final reminderList = await userRepository.deleteReminder(
         token: token, reminderId: event.reminderId);
@@ -59,6 +64,8 @@ class UserReminderBloc extends Bloc<UserReminderEvent, UserReminderState> {
 
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token')!;
+
+    scheduleFunctionExecution();
 
     final reminderList = await userRepository.updateReminder(
         token: token,

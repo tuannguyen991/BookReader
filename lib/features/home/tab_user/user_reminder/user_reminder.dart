@@ -13,9 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
 class UserReminder extends StatefulWidget {
-  const UserReminder({super.key, required this.userId});
-
-  final String userId;
+  const UserReminder({super.key});
 
   @override
   State<UserReminder> createState() => _UserReminderState();
@@ -194,7 +192,7 @@ class _UserReminderState extends State<UserReminder> {
                     verticalSpace16,
                     TimePickerSpinner(
                       spacing: double16,
-                      minutesInterval: 10,
+                      minutesInterval: 1,
                       is24HourMode: false,
                       normalTextStyle: const TextStyle(
                           fontSize: fontSize16, color: Colors.black),
