@@ -12,6 +12,7 @@ class ReminderModel with _$ReminderModel {
   const factory ReminderModel({
     @Default('') String id,
     @Default(false) bool isDefault,
+    @Default(true) bool isActive,
     @Default(TimeOfDay(hour: 0, minute: 0))
     @TimestampConverter()
         TimeOfDay time,

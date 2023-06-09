@@ -22,6 +22,7 @@ ReminderModel _$ReminderModelFromJson(Map<String, dynamic> json) {
 mixin _$ReminderModel {
   String get id => throw _privateConstructorUsedError;
   bool get isDefault => throw _privateConstructorUsedError;
+  bool get isActive => throw _privateConstructorUsedError;
   @TimestampConverter()
   TimeOfDay get time => throw _privateConstructorUsedError;
 
@@ -37,7 +38,11 @@ abstract class $ReminderModelCopyWith<$Res> {
           ReminderModel value, $Res Function(ReminderModel) then) =
       _$ReminderModelCopyWithImpl<$Res, ReminderModel>;
   @useResult
-  $Res call({String id, bool isDefault, @TimestampConverter() TimeOfDay time});
+  $Res call(
+      {String id,
+      bool isDefault,
+      bool isActive,
+      @TimestampConverter() TimeOfDay time});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$ReminderModelCopyWithImpl<$Res, $Val extends ReminderModel>
   $Res call({
     Object? id = null,
     Object? isDefault = null,
+    Object? isActive = null,
     Object? time = null,
   }) {
     return _then(_value.copyWith(
@@ -65,6 +71,10 @@ class _$ReminderModelCopyWithImpl<$Res, $Val extends ReminderModel>
       isDefault: null == isDefault
           ? _value.isDefault
           : isDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
       time: null == time
           ? _value.time
@@ -82,7 +92,11 @@ abstract class _$$_ReminderModelCopyWith<$Res>
       __$$_ReminderModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, bool isDefault, @TimestampConverter() TimeOfDay time});
+  $Res call(
+      {String id,
+      bool isDefault,
+      bool isActive,
+      @TimestampConverter() TimeOfDay time});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$_ReminderModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? isDefault = null,
+    Object? isActive = null,
     Object? time = null,
   }) {
     return _then(_$_ReminderModel(
@@ -108,6 +123,10 @@ class __$$_ReminderModelCopyWithImpl<$Res>
       isDefault: null == isDefault
           ? _value.isDefault
           : isDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
       time: null == time
           ? _value.time
@@ -123,6 +142,7 @@ class _$_ReminderModel extends _ReminderModel {
   const _$_ReminderModel(
       {this.id = '',
       this.isDefault = false,
+      this.isActive = true,
       @TimestampConverter() this.time = const TimeOfDay(hour: 0, minute: 0)})
       : super._();
 
@@ -137,12 +157,15 @@ class _$_ReminderModel extends _ReminderModel {
   final bool isDefault;
   @override
   @JsonKey()
+  final bool isActive;
+  @override
+  @JsonKey()
   @TimestampConverter()
   final TimeOfDay time;
 
   @override
   String toString() {
-    return 'ReminderModel(id: $id, isDefault: $isDefault, time: $time)';
+    return 'ReminderModel(id: $id, isDefault: $isDefault, isActive: $isActive, time: $time)';
   }
 
   @override
@@ -153,12 +176,14 @@ class _$_ReminderModel extends _ReminderModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.isDefault, isDefault) ||
                 other.isDefault == isDefault) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
             (identical(other.time, time) || other.time == time));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, isDefault, time);
+  int get hashCode => Object.hash(runtimeType, id, isDefault, isActive, time);
 
   @JsonKey(ignore: true)
   @override
@@ -178,6 +203,7 @@ abstract class _ReminderModel extends ReminderModel {
   const factory _ReminderModel(
       {final String id,
       final bool isDefault,
+      final bool isActive,
       @TimestampConverter() final TimeOfDay time}) = _$_ReminderModel;
   const _ReminderModel._() : super._();
 
@@ -188,6 +214,8 @@ abstract class _ReminderModel extends ReminderModel {
   String get id;
   @override
   bool get isDefault;
+  @override
+  bool get isActive;
   @override
   @TimestampConverter()
   TimeOfDay get time;

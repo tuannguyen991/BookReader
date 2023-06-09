@@ -44,5 +44,6 @@ abstract class UserRepository {
     required String token,
     required String reminderId,
     required TimeOfDay time,
+    required bool isActive,
   });
 }

@@ -254,6 +254,7 @@ class UserRepositoryImplement implements UserRepository {
     required String token,
     required String reminderId,
     required TimeOfDay time,
+    required bool isActive,
   }) async {
     var servicePath = '/reminder/$token/$reminderId';
 
@@ -268,7 +269,7 @@ class UserRepositoryImplement implements UserRepository {
     final response = await http.put(
       uri,
       headers: {'Content-Type': 'application/json'},
-      body: '{"time":"$timeString"}',
+      body: '{"time":"$timeString", "isActive":"$isActive"}',
     );
 
     if (response.statusCode == 200) {
