@@ -413,7 +413,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
       child: RawMaterialButton(
         onPressed: () async {
           _checkAndCloseContextMenu();
-          await Clipboard.setData(ClipboardData(text: selectedText));
+          await Clipboard.setData(ClipboardData(text: selectedText!));
           _drawAnnotation(annotationType);
         },
         child: Text(

@@ -15,7 +15,7 @@ import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/header_section.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
-import 'package:demo_book_reader/widgets/search_bar.dart';
+import 'package:demo_book_reader/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -71,7 +71,7 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                   ),
                   horizontalSpace8,
                   Flexible(
-                    child: SearchBar(isTextInput: true, bloc: _bloc),
+                    child: CustomSearchBar(isTextInput: true, bloc: _bloc),
                   ),
                 ],
               ),
@@ -283,10 +283,10 @@ class MySearchDelegate extends SearchDelegate {
       bloc: bloc,
       builder: (context, state) {
         if (state.isLoading) {
-          return Padding(
-            padding: const EdgeInsets.only(top: double24),
+          return const Padding(
+            padding: EdgeInsets.only(top: double24),
             child: Row(
-              children: const [
+              children: [
                 Spacer(),
                 CircularProgressIndicator(),
                 Spacer(),
@@ -296,10 +296,10 @@ class MySearchDelegate extends SearchDelegate {
         }
         final listRecommendedByName = state.listRecommendedByName;
         if (listRecommendedByName.isEmpty && query != '') {
-          return Padding(
-            padding: const EdgeInsets.only(top: double24),
+          return const Padding(
+            padding: EdgeInsets.only(top: double24),
             child: Row(
-              children: const [
+              children: [
                 Spacer(),
                 CustomerText('Không có kết quả phù hợp'),
                 Spacer(),

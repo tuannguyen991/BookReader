@@ -6,8 +6,8 @@ import 'package:demo_book_reader/theme/constant.dart';
 import 'package:demo_book_reader/widgets/customer/customer_box_decoration.dart';
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({
+class CustomSearchBar extends StatelessWidget {
+  const CustomSearchBar({
     Key? key,
     this.isTextInput = true,
     this.bloc,

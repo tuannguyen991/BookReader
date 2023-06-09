@@ -17,6 +17,7 @@ const horizontalSpace24 = SizedBox(width: double24);
 const horizontalSpace32 = SizedBox(width: double32);
 
 // double
+const double2 = 2.0;
 const double4 = 4.0;
 const double8 = 8.0;
 const double12 = 12.0;

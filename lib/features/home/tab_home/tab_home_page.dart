@@ -17,7 +17,7 @@ import 'package:demo_book_reader/widgets/customer/customer_rich_text.dart';
 import 'package:demo_book_reader/widgets/customer/customer_text.dart';
 import 'package:demo_book_reader/widgets/greeting.dart';
 import 'package:demo_book_reader/widgets/model_item.dart';
-import 'package:demo_book_reader/widgets/search_bar.dart';
+import 'package:demo_book_reader/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -76,8 +76,8 @@ class _TabHomePageState extends State<TabHomePage> {
                           children: [
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
-                              child: Column(
-                                children: const [
+                              child: const Column(
+                                children: [
                                   CustomerText(
                                     'Xin chào, Khách',
                                     isCenter: true,
@@ -97,7 +97,7 @@ class _TabHomePageState extends State<TabHomePage> {
                           ],
                         ),
                         verticalSpace32,
-                        const SearchBar(isTextInput: false),
+                        const CustomSearchBar(isTextInput: false),
                         verticalSpace16,
 
                         /// Reading Box
@@ -139,7 +139,7 @@ class _TabHomePageState extends State<TabHomePage> {
                         },
                       ),
                       verticalSpace32,
-                      const SearchBar(isTextInput: false),
+                      const CustomSearchBar(isTextInput: false),
                       verticalSpace16,
 
                       /// Reading Box

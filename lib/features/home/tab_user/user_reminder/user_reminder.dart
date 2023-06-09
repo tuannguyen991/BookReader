@@ -122,58 +122,113 @@ class _UserReminderState extends State<UserReminder> {
 
   Widget buildBody() {
     return SafeArea(
-        child: Padding(
-            padding: const EdgeInsets.all(double16),
-            child: BlocBuilder<UserReminderBloc, UserReminderState>(
-                builder: (context, state) {
-              if (state.isLoading) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              final reminderList = state.userReminderList;
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ...List.generate(reminderList.length,
-                      (index) => buildReminderLine(reminderList[index]))
-                ],
-              );
-            })));
+        child: SingleChildScrollView(
+      child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: double16),
+          child: BlocBuilder<UserReminderBloc, UserReminderState>(
+              builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            final reminderList = state.userReminderList;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ...List.generate(reminderList.length,
+                    (index) => buildReminderLine(reminderList[index]))
+              ],
+            );
+          })),
+    ));
   }
 
   Widget buildReminderLine(ReminderModel reminderModel) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: double16),
-          child: CustomerText(reminderModel.time.format(context),
-              color: Colors.black, fontSize: fontSize20),
-        ),
-        Row(
-          children: [
-            Switch(
-              activeColor: AppColors.primaryColor,
-              value: light,
-              onChanged: (bool value) {
-                setState(() {
-                  light = value;
-                });
-              },
-            ),
-            PopupMenuButton(
-                icon: const Icon(Icons.more_vert),
-                itemBuilder: (BuildContext context) {
-                  return const [
-                    PopupMenuItem(
-                        value: 1, child: CustomerText('Chỉnh sửa giờ')),
-                    PopupMenuItem(
-                        value: 2, child: CustomerText('Xoá nhắc nhở')),
-                  ];
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: double16),
+      decoration: BoxDecoration(
+        color: reminderModel.isDefault
+            ? AppColors.primary_4
+            : AppColors.backgroundColor,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: double16),
+            child: CustomerText(reminderModel.time.format(context),
+                color: Colors.black, fontSize: fontSize20),
+          ),
+          reminderModel.isDefault
+              ? buildChip('Mặc định')
+              : BlocBuilder<UserReminderBloc, UserReminderState>(
+                  builder: (context, state) {
+                  return Row(
+                    children: [
+                      Switch(
+                        activeColor: AppColors.primaryColor,
+                        value: reminderModel.isActive,
+                        onChanged: (bool value) {
+                          setState(() {
+                            light = value;
+                          });
+                          context.read<UserReminderBloc>().add(
+                              UserReminderUpdateRequested(
+                                  reminderId: reminderModel.id,
+                                  time: reminderModel.time,
+                                  isActive: light));
+                        },
+                      ),
+                      PopupMenuButton(
+                          icon: const Icon(Icons.more_vert),
+                          itemBuilder: (BuildContext context) {
+                            return [
+                              PopupMenuItem(
+                                  value: 1,
+                                  child: const CustomerText('Chỉnh sửa giờ'),
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return const SizedBox(
+                                          height: 200.0,
+                                          child: Center(child: Text('ModalBottomSheet')),
+                                        );
+                                      },
+                                    );
+                                  }),
+                              PopupMenuItem(
+                                value: 2,
+                                child: const CustomerText('Xoá nhắc nhở'),
+                                onTap: () {
+                                  context.read<UserReminderBloc>().add(
+                                      UserReminderDeleteRequested(
+                                          reminderId: reminderModel.id));
+                                },
+                              ),
+                            ];
+                          })
+                    ],
+                  );
                 })
-          ],
-        )
-      ],
+        ],
+      ),
+    );
+  }
+
+  Widget buildChip(String label) {
+    return Chip(
+      label: Text(
+        label,
+        style: const TextStyle(
+          color: AppColors.white,
+        ),
+      ),
+      backgroundColor: AppColors.primary_1,
+      elevation: 6.0,
+      shadowColor: Colors.grey[60],
+      padding:
+          const EdgeInsets.symmetric(vertical: double8, horizontal: double4),
     );
   }
 }
